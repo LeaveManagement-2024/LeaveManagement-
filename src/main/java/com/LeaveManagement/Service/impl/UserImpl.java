@@ -76,6 +76,7 @@ public class UserImpl implements UserService {
         user.setDescription(userDTO.getDescription());
 
         userRepo.save(user);
+
         return user.getUsername();
     }
 
