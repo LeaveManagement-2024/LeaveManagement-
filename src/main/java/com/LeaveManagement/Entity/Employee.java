@@ -24,7 +24,7 @@ public class Employee {
     private LocalDate hireDate;
     private String workLocation;
     private String image;
-    private int remainingLeaveDays; // Added field to track remaining leave days
+
 
     @ManyToOne
     @JoinColumn(name = "managerId")
@@ -37,6 +37,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "IdGrade")
     private Grades grade;
+
 
     @ManyToOne
     @JoinColumn(name = "IdPost")
@@ -166,13 +167,9 @@ public class Employee {
         this.image = image;
     }
 
-    public int getRemainingLeaveDays() {
-        return remainingLeaveDays;
-    }
 
-    public void setRemainingLeaveDays(int remainingLeaveDays) {
-        this.remainingLeaveDays = remainingLeaveDays;
-    }
+
+
 
     public Employee getManager() {
         return manager;
@@ -224,7 +221,7 @@ public class Employee {
                 ", hireDate=" + hireDate +
                 ", workLocation='" + workLocation + '\'' +
                 ", image='" + image + '\'' +
-                ", remainingLeaveDays=" + remainingLeaveDays +
+
                 ", manager=" + manager +
                 ", profile=" + profile +
                 ", grade=" + grade +
