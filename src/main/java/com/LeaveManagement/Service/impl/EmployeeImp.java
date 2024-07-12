@@ -51,7 +51,8 @@ public class EmployeeImp implements EmployeeService {
         employeesToUpdate.setAddressFr(employee.getAddressFr());
         employeesToUpdate.setAddressAr(employee.getAddressAr());
         employeesToUpdate.setHireDate(employee.getHireDate());
-        employeesToUpdate.setWorkLocation(employee.getWorkLocation());
+        employeesToUpdate.setWorkLocationFr(employee.getWorkLocationFr());
+        employeesToUpdate.setWorkLocationAr(employee.getWorkLocationAr());
         employeesToUpdate.setImage(employee.getImage());
     }
 

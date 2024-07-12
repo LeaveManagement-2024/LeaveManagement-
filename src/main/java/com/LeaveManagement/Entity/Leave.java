@@ -16,11 +16,19 @@ public class Leave {
     private Date visaDate;
 
     @ManyToOne
+    @JoinColumn(name = "employeeId")
     private Employees employee;
 
     @ManyToOne
+    @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;
 
     @ManyToOne
+    @JoinColumn(name = "leaveTypeId")
+    private LeaveType leaveType;
+
+    @ManyToOne
+    @JoinColumn(name = "replacementId")
     private Employees replacement;
 
+}

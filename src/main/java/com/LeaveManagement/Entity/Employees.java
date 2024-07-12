@@ -3,8 +3,10 @@ package com.LeaveManagement.Entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idE")
@@ -25,12 +27,13 @@ public class Employees {
     private String addressFr;
     private String addressAr;
     private LocalDate hireDate;
-    private String workLocation;
+    private String workLocationFr;
+    private String workLocationAr;
     private String image;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "managerId", referencedColumnName = "idE")
+    @JoinColumn(name = "managerId")
     private Employees manager;
     @ManyToOne
     @JoinColumn(name = "IdProfile")
@@ -51,8 +54,7 @@ public class Employees {
     @OneToMany(mappedBy = "employee")
     private List<Leave> leaves;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Absence> absences;
+
 
 
     public Employees() {
@@ -60,7 +62,7 @@ public class Employees {
 
     public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
                      String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
-                     String workLocation, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
+                     String workLocationfr,String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -74,12 +76,17 @@ public class Employees {
         this.addressFr = addressFr;
         this.addressAr = addressAr;
         this.hireDate = hireDate;
-        this.workLocation = workLocation;
+        this.workLocationFr = workLocationfr;
+        this.workLocationAr = workLocationAr;
         this.image = image;
         this.manager = manager;
         this.profile = profile;
         this.grade = grade;
         this.post = post;
+    }
+
+    public Employees(Long idE) {
+        this.idE = idE;
     }
 
     public Long getIdE() {
@@ -186,12 +193,20 @@ public class Employees {
         this.hireDate = hireDate;
     }
 
-    public String getWorkLocation() {
-        return workLocation;
+    public String getWorkLocationFr() {
+        return workLocationFr;
     }
 
-    public void setWorkLocation(String workLocation) {
-        this.workLocation = workLocation;
+    public void setWorkLocationFr(String workLocationFr) {
+        this.workLocationFr = workLocationFr;
+    }
+
+    public String getWorkLocationAr() {
+        return workLocationAr;
+    }
+
+    public void setWorkLocationAr(String workLocationAr) {
+        this.workLocationAr = workLocationAr;
     }
 
     public String getImage() {
@@ -201,10 +216,6 @@ public class Employees {
     public void setImage(String image) {
         this.image = image;
     }
-
-
-
-
 
     public Employees getManager() {
         return manager;
@@ -238,9 +249,27 @@ public class Employees {
         this.post = post;
     }
 
+    public List<AnnualLeaveLine> getAnnualLeaveLines() {
+        return annualLeaveLines;
+    }
+
+    public void setAnnualLeaveLines(List<AnnualLeaveLine> annualLeaveLines) {
+        this.annualLeaveLines = annualLeaveLines;
+    }
+
+    public List<Leave> getLeaves() {
+        return leaves;
+    }
+
+    public void setLeaves(List<Leave> leaves) {
+        this.leaves = leaves;
+    }
+
+
+
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Employees{" +
                 "idE=" + idE +
                 ", firstNameFr='" + firstNameFr + '\'' +
                 ", firstNameAr='" + firstNameAr + '\'' +
@@ -254,13 +283,16 @@ public class Employees {
                 ", addressFr='" + addressFr + '\'' +
                 ", addressAr='" + addressAr + '\'' +
                 ", hireDate=" + hireDate +
-                ", workLocation='" + workLocation + '\'' +
+                ", workLocationFr='" + workLocationFr + '\'' +
+                ", workLocationAr='" + workLocationAr + '\'' +
                 ", image='" + image + '\'' +
-
                 ", manager=" + manager +
                 ", profile=" + profile +
                 ", grade=" + grade +
                 ", post=" + post +
+                ", annualLeaveLines=" + annualLeaveLines +
+                ", leaves=" + leaves +
+
                 '}';
     }
 }

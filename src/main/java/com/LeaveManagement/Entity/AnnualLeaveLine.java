@@ -1,7 +1,7 @@
 package com.LeaveManagement.Entity;
 
 import jakarta.persistence.*;
-
+@Entity
 public class AnnualLeaveLine {
     @Id
     private Long employeeId;
@@ -12,8 +12,10 @@ public class AnnualLeaveLine {
     private int remainingDays;
 
     @ManyToOne
-    private Employee employee;
+    @JoinColumn(name = "idE")
+    private Employees employee;
 
     @ManyToOne
+    @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;
 }
