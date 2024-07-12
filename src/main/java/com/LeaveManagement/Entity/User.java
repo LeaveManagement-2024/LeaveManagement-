@@ -62,7 +62,6 @@ public class User {
         this.tele = tele;
         this.job = job;
         this.description = description;
-
         this.projects = projects;
     }
 

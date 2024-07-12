@@ -49,6 +49,33 @@ public class Employees {
     //private Set<LeaveRequest> leaveRequests;
 
 
+    public Employees() {
+    }
+
+    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
+                     String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
+                     String workLocation, String image, Employees manager, Profilee profile, Grades grade, Posts post) {
+        this.idE = idE;
+        this.firstNameFr = firstNameFr;
+        this.firstNameAr = firstNameAr;
+        this.lastNameFr = lastNameFr;
+        this.lastNameAr = lastNameAr;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.ppr = ppr;
+        this.cin = cin;
+        this.addressFr = addressFr;
+        this.addressAr = addressAr;
+        this.hireDate = hireDate;
+        this.workLocation = workLocation;
+        this.image = image;
+        this.manager = manager;
+        this.profile = profile;
+        this.grade = grade;
+        this.post = post;
+    }
+
     public Long getIdE() {
         return idE;
     }

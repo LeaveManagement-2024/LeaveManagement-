@@ -13,6 +13,9 @@ public class Grades {
     private String gradeNameEn;
     private String gradeNameAr;
 
+    public Grades() {
+    }
+
     public Long getIdGrade() {
         return IdGrade;
     }
@@ -23,6 +26,12 @@ public class Grades {
 
     public String getGradeNameEn() {
         return gradeNameEn;
+    }
+
+    public Grades(Long idGrade, String gradeNameEn, String gradeNameAr) {
+        IdGrade = idGrade;
+        this.gradeNameEn = gradeNameEn;
+        this.gradeNameAr = gradeNameAr;
     }
 
     public void setGradeNameEn(String gradeNameEn) {

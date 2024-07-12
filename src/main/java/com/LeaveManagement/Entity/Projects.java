@@ -39,6 +39,10 @@ public class Projects {
     public Projects() {
     }
 
+    public Projects(int id) {
+        Id = id;
+    }
+
     public int getId() {
         return Id;
     }
