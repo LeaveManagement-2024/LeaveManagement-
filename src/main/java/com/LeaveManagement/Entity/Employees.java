@@ -1,11 +1,16 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-public class Employee {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idE")
+public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +31,9 @@ public class Employee {
     private String image;
 
 
-    @ManyToOne
-    @JoinColumn(name = "managerId")
-    private Employee manager;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "managerId", referencedColumnName = "idE")
+    private Employees manager;
     @ManyToOne
     @JoinColumn(name = "IdProfile")
     private Profilee profile;
@@ -171,11 +175,11 @@ public class Employee {
 
 
 
-    public Employee getManager() {
+    public Employees getManager() {
         return manager;
     }
 
-    public void setManager(Employee manager) {
+    public void setManager(Employees manager) {
         this.manager = manager;
     }
 

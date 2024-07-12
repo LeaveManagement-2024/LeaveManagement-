@@ -1,10 +1,18 @@
 package com.LeaveManagement.Service;
 
-import com.LeaveManagement.Dto.UserDTO;
-import com.LeaveManagement.Entity.Employee;
+import com.LeaveManagement.Entity.Employees;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 
 public interface EmployeeService {
-    String addEmployee(Employee employee);
+
+    Long addEmployee(Employees employee);
+    public List<Employees> getAllEmployees();
+    public Employees GetEmployeeById(Long  id);
+    void updateEmployee(Long id, Employees employee);
+    void deleteEmployee(Long id);
 
 
 }
