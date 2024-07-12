@@ -1,8 +1,6 @@
 package com.LeaveManagement.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -36,7 +34,7 @@ public class Employees {
     private Employees manager;
     @ManyToOne
     @JoinColumn(name = "IdProfile")
-    private Profilee profile;
+    private Profiles profile;
 
     @ManyToOne
     @JoinColumn(name = "IdGrade")
@@ -183,11 +181,11 @@ public class Employees {
         this.manager = manager;
     }
 
-    public Profilee getProfile() {
+    public Profiles getProfile() {
         return profile;
     }
 
-    public void setProfile(Profilee profile) {
+    public void setProfile(Profiles profile) {
         this.profile = profile;
     }
 

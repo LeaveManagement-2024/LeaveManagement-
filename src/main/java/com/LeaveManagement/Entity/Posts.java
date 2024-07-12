@@ -14,8 +14,7 @@ public class Posts {
     private String postNameFr;
     private String postNameAr;
 
-    public Long getIdPost() {
-        return IdPost;
+    public Long getIdPost() {return IdPost;
     }
 
     public void setIdPost(Long idPost) {
