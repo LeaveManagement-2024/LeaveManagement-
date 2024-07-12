@@ -45,8 +45,14 @@ public class Employees {
     @JoinColumn(name = "IdPost")
     private Posts post;
 
-    //@OneToMany(mappedBy = "employee")
-    //private Set<LeaveRequest> leaveRequests;
+    @OneToMany(mappedBy = "employee")
+    private List<AnnualLeaveLine> annualLeaveLines;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Leave> leaves;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Absence> absences;
 
 
     public Employees() {
