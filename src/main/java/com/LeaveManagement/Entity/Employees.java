@@ -54,7 +54,7 @@ public class Employees {
 
     public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
                      String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
-                     String workLocation, String image, Employees manager, Profilee profile, Grades grade, Posts post) {
+                     String workLocation, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
