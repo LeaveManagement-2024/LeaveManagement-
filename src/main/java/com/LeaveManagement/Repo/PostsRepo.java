@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @EnableJpaRepositories
 @Repository
-public interface PostsRepo extends JpaRepository<Posts,Double> {
+public interface PostsRepo extends JpaRepository<Posts,Long> {
 }

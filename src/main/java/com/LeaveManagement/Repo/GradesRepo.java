@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @EnableJpaRepositories
 @Repository
-public interface GradesRepo extends JpaRepository<Grades,Double> {
+public interface GradesRepo extends JpaRepository<Grades,Long> {
 }
