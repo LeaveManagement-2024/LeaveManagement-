@@ -13,11 +13,5 @@ public interface GradeService {
     void updateGrades(Long id, Grades grades);
     void deleteGrades(Long id);
 
-    interface ProfileService {
-        Long addProfile(Profiles profile);
-        public List<Profiles> getAllProfile();
-        public Profiles GetProfileById(Long  id);
-        void updateProfile(Long id, Profiles profile);
-        void deleteProfile(Long id);
-    }
+
 }

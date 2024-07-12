@@ -6,12 +6,22 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Profiles")
 public class Profiles {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long IdProfile;
-
     private String profileName;
+
+    public Profiles() {
+    }
+
+    public Profiles(Long idProfile, String profileName) {
+        IdProfile = idProfile;
+        this.profileName = profileName;
+    }
+
+    public Profiles(Long idProfile) {
+        IdProfile = idProfile;
+    }
 
     public Long getIdProfile() {
         return IdProfile;

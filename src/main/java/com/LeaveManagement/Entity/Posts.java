@@ -10,9 +10,21 @@ public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long IdPost;
-
     private String postNameFr;
     private String postNameAr;
+
+    public Posts() {
+    }
+
+    public Posts(Long idPost, String postNameFr, String postNameAr) {
+        IdPost = idPost;
+        this.postNameFr = postNameFr;
+        this.postNameAr = postNameAr;
+    }
+
+    public Posts(Long idPost) {
+        IdPost = idPost;
+    }
 
     public Long getIdPost() {
         return IdPost;

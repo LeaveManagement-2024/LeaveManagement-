@@ -1,20 +1,15 @@
 package com.LeaveManagement.Service.impl;
-
 import com.LeaveManagement.Entity.Profiles;
-
 import com.LeaveManagement.Repo.ProfileRepo;
-import com.LeaveManagement.Service.GradeService;
+import com.LeaveManagement.Service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-public class ProfileImpl implements GradeService.ProfileService {
+public class ProfileImpl implements ProfileService {
     @Autowired
     private ProfileRepo profileRepo;
-
-
 
     @Override
     public Long addProfile(Profiles profile) {
