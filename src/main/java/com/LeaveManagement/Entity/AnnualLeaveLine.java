@@ -2,6 +2,7 @@ package com.LeaveManagement.Entity;
 
 import jakarta.persistence.*;
 @Entity
+@IdClass(AnnualLeaveLineId.class)
 public class AnnualLeaveLine {
     @Id
     private Long employeeId;

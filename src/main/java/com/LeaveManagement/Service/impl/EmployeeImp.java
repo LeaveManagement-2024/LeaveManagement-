@@ -54,6 +54,7 @@ public class EmployeeImp implements EmployeeService {
         employeesToUpdate.setWorkLocationFr(employee.getWorkLocationFr());
         employeesToUpdate.setWorkLocationAr(employee.getWorkLocationAr());
         employeesToUpdate.setImage(employee.getImage());
+        employeeRep.save(employeesToUpdate);
     }
 
     @Override

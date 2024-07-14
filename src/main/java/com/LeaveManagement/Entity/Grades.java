@@ -9,14 +9,14 @@ public class Grades {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long IdGrade;
-    private String gradeNameEn;
+    private String gradeNameFr;
     private String gradeNameAr;
 
     public Grades() {
     }
     public Grades(Long idGrade, String gradeNameEn, String gradeNameAr) {
         IdGrade = idGrade;
-        this.gradeNameEn = gradeNameEn;
+        this.gradeNameFr = gradeNameEn;
         this.gradeNameAr = gradeNameAr;
     }
 
@@ -32,12 +32,12 @@ public class Grades {
         IdGrade = idGrade;
     }
 
-    public String getGradeNameEn() {
-        return gradeNameEn;
+    public String getGradeNameFr() {
+        return gradeNameFr;
     }
 
-    public void setGradeNameEn(String gradeNameEn) {
-        this.gradeNameEn = gradeNameEn;
+    public void setGradeNameFr(String gradeNameEn) {
+        this.gradeNameFr = gradeNameEn;
     }
 
     public String getGradeNameAr() {

@@ -15,21 +15,36 @@ public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idE;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String firstNameFr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String firstNameAr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String lastNameFr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String lastNameAr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String email;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String password;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String phone;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String ppr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String cin;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String addressFr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String addressAr;
     private LocalDate hireDate;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String workLocationFr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String workLocationAr;
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String image;
+
 
 
     @ManyToOne(fetch = FetchType.LAZY)

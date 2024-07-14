@@ -35,12 +35,16 @@ public class GradesImp implements GradeService {
     }
 
     @Override
-    public void updateGrades(Long id, Grades grades) {
-        Grades gradesToUpdate = gradesRepo.findById(id).orElseThrow(()->new IllegalArgumentException("Grade not found"));
+    public void updateGrades(Long id, Grades grade) {
+        Grades gradeToUpdate = gradesRepo.findById(id).orElseThrow(()->new IllegalArgumentException("Grade not found"));
+        gradeToUpdate.setGradeNameFr(grade.getGradeNameFr());
+        gradeToUpdate.setGradeNameAr(grade.getGradeNameAr());
+        gradesRepo.save(gradeToUpdate);
     }
 
     @Override
     public void deleteGrades(Long id) {
+        gradesRepo.deleteById(id);
 
     }
 }
