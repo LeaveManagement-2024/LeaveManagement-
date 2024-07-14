@@ -6,3 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnnualLeaveLineRepo extends JpaRepository<AnnualLeaveLine, AnnualLeaveLineId> {
 }
+
