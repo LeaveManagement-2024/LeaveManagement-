@@ -33,10 +33,13 @@ public class ProfileImpl implements ProfileService {
     @Override
     public void updateProfile(Long id, Profiles profile) {
         Profiles profileToUpdate = profileRepo.findById(id).orElseThrow(()->new IllegalArgumentException("Profile not found"));
+        profileToUpdate.setProfileName(profile.getProfileName());
+        profileRepo.save(profileToUpdate);
     }
 
     @Override
     public void deleteProfile(Long id) {
+        profileRepo.deleteById(id);
 
     }
 }
