@@ -9,7 +9,9 @@ public class AnnualLeave {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long annualLeaveId;
     private int year;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String label;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String status;
 
     @OneToMany(mappedBy = "annualLeave")

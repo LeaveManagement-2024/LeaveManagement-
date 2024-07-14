@@ -8,6 +8,7 @@ public class LeaveType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long leaveTypeId;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
 
     @OneToMany(mappedBy = "leaveType")
