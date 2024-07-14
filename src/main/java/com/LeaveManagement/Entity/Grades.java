@@ -9,7 +9,9 @@ public class Grades {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long IdGrade;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String gradeNameFr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String gradeNameAr;
 
     public Grades() {

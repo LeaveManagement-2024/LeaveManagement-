@@ -10,7 +10,9 @@ public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long IdPost;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String postNameFr;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String postNameAr;
 
     public Posts() {
