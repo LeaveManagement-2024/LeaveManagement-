@@ -11,10 +11,11 @@ public class PublicHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
     private Date startDate;
     private Date endDate;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String description;
 
     public PublicHoliday() {}
