@@ -9,6 +9,6 @@ public interface PostsService {
     Long addPosts(Posts posts);
     public List<Posts> getAllPosts();
     public Posts GetPostsById(Long  id);
-    void updatePosts(Long id, Posts posts);
+    void updatePosts(Long id, Posts post);
     void deletePosts(Long id);
 }
