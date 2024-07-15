@@ -1,6 +1,7 @@
 package com.LeaveManagement.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -62,10 +63,10 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "IdPost")
     private Posts post;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee")
     private List<AnnualLeaveLine> annualLeaveLines;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee")
     private List<Leave> leaves;
 

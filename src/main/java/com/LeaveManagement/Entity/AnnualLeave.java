@@ -1,5 +1,6 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class AnnualLeave {
     private String label;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String status;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "annualLeave")
     private List<AnnualLeaveLine> annualLeaveLines;
     @OneToMany(mappedBy = "annualLeave")

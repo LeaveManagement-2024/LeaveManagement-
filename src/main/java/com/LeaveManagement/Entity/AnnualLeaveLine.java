@@ -1,5 +1,6 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 @Entity
 @IdClass(AnnualLeaveLineId.class)
@@ -11,11 +12,11 @@ public class AnnualLeaveLine {
 
     private int declaredDays;
     private int remainingDays;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "idE")
     private Employees employee;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;

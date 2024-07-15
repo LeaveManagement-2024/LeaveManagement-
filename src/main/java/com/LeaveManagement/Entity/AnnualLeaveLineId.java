@@ -10,4 +10,7 @@ public class AnnualLeaveLineId implements Serializable {
         this.idE = idE;
         this.annualLeaveId = annualLeaveId;
     }
+
+    public AnnualLeaveLineId() {
+    }
 }

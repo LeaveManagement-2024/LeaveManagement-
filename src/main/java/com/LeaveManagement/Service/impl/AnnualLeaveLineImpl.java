@@ -7,6 +7,7 @@ import com.LeaveManagement.Service.AnnualLeaveLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
@@ -14,8 +15,9 @@ public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
     private AnnualLeaveLineRepo annualLeaveLineRepo;
 
     @Override
-    public void addAnnualLeaveLine(AnnualLeaveLine annualLeaveLine) {
+    public Optional<AnnualLeaveLine> addAnnualLeaveLine(AnnualLeaveLine annualLeaveLine) {
         annualLeaveLineRepo.save(annualLeaveLine);
+        return annualLeaveLineRepo.findById(new AnnualLeaveLineId(annualLeaveLine.getIdE(),annualLeaveLine.getAnnualLeaveId()));
     }
 
     @Override
