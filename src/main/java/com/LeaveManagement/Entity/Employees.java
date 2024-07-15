@@ -77,7 +77,7 @@ public class Employees {
 
     public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
                      String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
-                     String workLocationfr,String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
+                     String workLocationFr,String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -91,7 +91,7 @@ public class Employees {
         this.addressFr = addressFr;
         this.addressAr = addressAr;
         this.hireDate = hireDate;
-        this.workLocationFr = workLocationfr;
+        this.workLocationFr = workLocationFr;
         this.workLocationAr = workLocationAr;
         this.image = image;
         this.manager = manager;
