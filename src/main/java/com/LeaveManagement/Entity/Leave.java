@@ -1,5 +1,6 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -15,15 +16,15 @@ public class Leave {
     @Column(columnDefinition = "NVARCHAR(255)")
     private String supervisorVisa;
     private Date visaDate;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "idE")
     private Employees employee;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "leaveTypeId")
     private LeaveType leaveType;
