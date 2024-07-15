@@ -16,9 +16,9 @@ public class Grades {
 
     public Grades() {
     }
-    public Grades(Long idGrade, String gradeNameEn, String gradeNameAr) {
+    public Grades(Long idGrade, String gradeNameFr, String gradeNameAr) {
         IdGrade = idGrade;
-        this.gradeNameFr = gradeNameEn;
+        this.gradeNameFr = gradeNameFr;
         this.gradeNameAr = gradeNameAr;
     }
 

@@ -17,30 +17,30 @@ public class GradesController {
     @Autowired
     private GradesImp gradesImp;
 
-    @PostMapping(path = "/saveGrades")
+    @PostMapping(path = "/save")
     public  Long saveGrades(@RequestBody Grades grades){
 
         Long id =gradesService.addGrade(grades);
         return id;
 
     }
-    @GetMapping(path="/getGrades")
+    @GetMapping(path="/getAll")
     public List<Grades> getAllGrades(){
         return  gradesService.getAllGrades();
     }
 
-    @GetMapping(path="/getGradeById/{Id}")
+    @GetMapping(path="/getById/{Id}")
     public Grades getGradesById(@PathVariable Long Id){
         return gradesService.GetGradesById(Id);
     }
 
-    @PutMapping(path = "/updateGrade/{id}")
+    @PutMapping(path = "/update/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody Grades grades) {
        gradesService.updateGrades(id,grades);
         return ResponseEntity.ok("Grade updated successfully");
     }
 
-    @DeleteMapping(path = "/deleteGrade/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<String> deleteGrades(@PathVariable Long id) {
        gradesService.deleteGrades(id);
         return ResponseEntity.ok("Grade deleted successfully");

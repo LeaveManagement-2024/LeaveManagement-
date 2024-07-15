@@ -16,33 +16,33 @@ public class ProfileController {
     @Autowired
     private ProfileImpl profileImpl;
 
-    @PostMapping(path = "/saveProfile")
+    @PostMapping(path = "/save")
     public Long saveProfile(@RequestBody Profiles profilee){
 
         Long id =profileService.addProfile(profilee);
         return id;
     }
 
-    @GetMapping(path="/getProfiles")
+    @GetMapping(path="/getAll")
     public List<Profiles> getAllProfile(){
 
         return  profileService.getAllProfile();
     }
 
-    @GetMapping(path="/getProfileById/{Id}")
+    @GetMapping(path="/getById/{Id}")
     public Profiles getProfileById(@PathVariable Long Id){
 
         return profileService.GetProfileById(Id);
     }
 
-    @PutMapping(path = "/updateProfile/{id}")
+    @PutMapping(path = "/update/{id}")
     public ResponseEntity<String> updateProfile(@PathVariable Long id, @RequestBody Profiles profile) {
 
         profileService.updateProfile(id,profile);
         return ResponseEntity.ok("Profile updated successfully");
     }
 
-    @DeleteMapping(path = "/deleteProfile/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<String> deleteProfile(@PathVariable Long id) {
 
         profileService.deleteProfile(id);

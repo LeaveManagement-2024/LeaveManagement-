@@ -58,6 +58,9 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "IdGrade")
     private Grades grade;
+    @ManyToOne
+    @JoinColumn(name = "IdFiliere")
+    private Filiere filiere;
 
 
     @ManyToOne
@@ -76,9 +79,7 @@ public class Employees {
     public Employees() {
     }
 
-    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
-                     String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
-                     String workLocationFr,String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
+    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Filiere filiere, Posts post, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -98,11 +99,10 @@ public class Employees {
         this.manager = manager;
         this.profile = profile;
         this.grade = grade;
+        this.filiere = filiere;
         this.post = post;
-    }
-
-    public Employees(Long idE) {
-        this.idE = idE;
+        this.annualLeaveLines = annualLeaveLines;
+        this.leaves = leaves;
     }
 
     public Long getIdE() {
@@ -257,6 +257,14 @@ public class Employees {
         this.grade = grade;
     }
 
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
+    }
+
     public Posts getPost() {
         return post;
     }
@@ -281,8 +289,6 @@ public class Employees {
         this.leaves = leaves;
     }
 
-
-
     @Override
     public String toString() {
         return "Employees{" +
@@ -305,10 +311,10 @@ public class Employees {
                 ", manager=" + manager +
                 ", profile=" + profile +
                 ", grade=" + grade +
+                ", filiere=" + filiere +
                 ", post=" + post +
                 ", annualLeaveLines=" + annualLeaveLines +
                 ", leaves=" + leaves +
-
                 '}';
     }
 }

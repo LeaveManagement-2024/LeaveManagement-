@@ -16,29 +16,29 @@ public class PostsController {
     @Autowired
     private PostsImpl postsImp;
 
-    @PostMapping(path = "/savePosts")
+    @PostMapping(path = "/save")
     public  Long savePosts(@RequestBody Posts posts){
 
         Long id =postsService.addPosts(posts);
         return id;
 
     }
-    @GetMapping(path="/getPosts")
+    @GetMapping(path="/getAll")
     public List<Posts> getAllPosts(){
         return  postsService.getAllPosts();
     }
 
-    @GetMapping(path="/getPostById/{Id}")
+    @GetMapping(path="/getById/{Id}")
     public Posts getPostsById(@PathVariable Long Id){
         return postsService.GetPostsById(Id);
     }
-    @PutMapping(path = "/updatePost/{id}")
+    @PutMapping(path = "/update/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody Posts posts) {
         postsService.updatePosts(id,posts);
         return ResponseEntity.ok("Post updated successfully");
     }
 
-    @DeleteMapping(path = "/deletePost/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<String> deletePosts(@PathVariable Long id) {
        postsService.deletePosts(id);
         return ResponseEntity.ok("Post deleted successfully");
