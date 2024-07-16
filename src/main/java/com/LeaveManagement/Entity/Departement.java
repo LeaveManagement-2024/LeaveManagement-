@@ -1,8 +1,11 @@
 package com.LeaveManagement.Entity;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
+@Entity
 public class Departement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long IdDepartement;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String departementNameFr;

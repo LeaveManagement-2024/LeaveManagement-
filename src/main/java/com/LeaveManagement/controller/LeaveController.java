@@ -1,5 +1,6 @@
 package com.LeaveManagement.controller;
 
+import com.LeaveManagement.Dto.LeaveDTO;
 import com.LeaveManagement.Entity.Leave;
 import com.LeaveManagement.Service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class LeaveController {
     private LeaveService leaveService;
 
     @PostMapping(path = "/save")
-    public Long saveLeave(@RequestBody Leave leave) {
-        Long id = leaveService.addLeave(leave);
+    public Long saveLeave(@RequestBody LeaveDTO leaveDTO) {
+        Long id = leaveService.addLeave(leaveDTO);
         return id;
     }
 
@@ -33,8 +34,8 @@ public class LeaveController {
     }
 
     @PutMapping(path = "/update/{id}")
-    public ResponseEntity<String> updateLeave(@PathVariable Long id, @RequestBody Leave leave) {
-        leaveService.updateLeave(id, leave);
+    public ResponseEntity<String> updateLeave(@PathVariable Long id, @RequestBody LeaveDTO leaveDTO) {
+        leaveService.updateLeave(id, leaveDTO);
         return ResponseEntity.ok("Leave updated successfully");
     }
 

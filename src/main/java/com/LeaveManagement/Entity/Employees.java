@@ -1,11 +1,8 @@
 package com.LeaveManagement.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -46,11 +43,10 @@ public class Employees {
     @Column(columnDefinition = "NVARCHAR(MAX)")
     private String image;
 
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "managerId")
     private Employees manager;
+
     @ManyToOne
     @JoinColumn(name = "IdProfile")
     private Profiles profile;
@@ -58,28 +54,23 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "IdGrade")
     private Grades grade;
-    @ManyToOne
-    @JoinColumn(name = "IdFiliere")
-    private Filiere filiere;
-
 
     @ManyToOne
     @JoinColumn(name = "IdPost")
     private Posts post;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "employee")
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<AnnualLeaveLine> annualLeaveLines;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "employee")
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<Leave> leaves;
-
-
-
 
     public Employees() {
     }
 
-    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Filiere filiere, Posts post, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
+    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
+                     String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
+                     String workLocationFr,String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -99,12 +90,14 @@ public class Employees {
         this.manager = manager;
         this.profile = profile;
         this.grade = grade;
-        this.filiere = filiere;
         this.post = post;
-        this.annualLeaveLines = annualLeaveLines;
-        this.leaves = leaves;
     }
 
+    public Employees(Long idE) {
+        this.idE = idE;
+    }
+
+    // Getters and setters
     public Long getIdE() {
         return idE;
     }
@@ -257,14 +250,6 @@ public class Employees {
         this.grade = grade;
     }
 
-    public Filiere getFiliere() {
-        return filiere;
-    }
-
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
-    }
-
     public Posts getPost() {
         return post;
     }
@@ -311,7 +296,6 @@ public class Employees {
                 ", manager=" + manager +
                 ", profile=" + profile +
                 ", grade=" + grade +
-                ", filiere=" + filiere +
                 ", post=" + post +
                 ", annualLeaveLines=" + annualLeaveLines +
                 ", leaves=" + leaves +

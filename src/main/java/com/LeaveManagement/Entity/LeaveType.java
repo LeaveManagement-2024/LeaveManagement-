@@ -1,4 +1,5 @@
 package com.LeaveManagement.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -11,7 +12,7 @@ public class LeaveType {
     private Long leaveTypeId;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "leaveType")
     private List<Leave> leaves;
 

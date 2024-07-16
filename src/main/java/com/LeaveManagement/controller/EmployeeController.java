@@ -1,5 +1,6 @@
 package com.LeaveManagement.controller;
 
+import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Service.EmployeeService;
 import com.LeaveManagement.Service.impl.EmployeeImp;
@@ -20,9 +21,9 @@ public class EmployeeController {
     private EmployeeImp employeeImp;
 
     @PostMapping(path = "/save")
-    public  Long saveEmployee(@RequestBody Employees employees){
+    public  Long saveEmployee(@RequestBody EmployeesDTO employeesDTO){
 
-        Long id =employeeService.addEmployee(employees);
+        Long id =employeeService.addEmployee(employeesDTO);
         return id;
 
     }
@@ -36,8 +37,8 @@ public class EmployeeController {
         return employeeService.GetEmployeeById(Id);
     }
     @PutMapping(path = "/update/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody Employees employee) {
-        employeeService.updateEmployee(id,employee);
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody EmployeesDTO employeeDTO) {
+        employeeService.updateEmployee(id,employeeDTO);
         return ResponseEntity.ok("Employee updated successfully");
     }
 

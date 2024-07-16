@@ -1,7 +1,7 @@
 package com.LeaveManagement.Entity;
 
 import jakarta.persistence.*;
-
+@Entity
 public class Filiere {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

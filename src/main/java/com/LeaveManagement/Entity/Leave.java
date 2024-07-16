@@ -1,6 +1,7 @@
 package com.LeaveManagement.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,22 +17,32 @@ public class Leave {
     @Column(columnDefinition = "NVARCHAR(255)")
     private String supervisorVisa;
     private Date visaDate;
+
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "idE")
+    @JoinColumn(name = "employee_id")
     private Employees employee;
+
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;
-    @JsonBackReference
+
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "leaveTypeId")
     private LeaveType leaveType;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "replacementId")
     private Employees replacement;
+
+    // Removed duplicate 'idE' column mapping
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "lmanagerId")
+    private Employees lmanager;
 
     public Leave() {
     }
@@ -41,7 +52,7 @@ public class Leave {
     }
 
     public Leave(Long leaveId, Date startDate, Date endDate, String supervisorVisa, Date visaDate, Employees employee,
-                 AnnualLeave annualLeave, LeaveType leaveType, Employees replacement) {
+                 AnnualLeave annualLeave, LeaveType leaveType, Employees replacement, Employees lmanager) {
         this.leaveId = leaveId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -51,6 +62,7 @@ public class Leave {
         this.annualLeave = annualLeave;
         this.leaveType = leaveType;
         this.replacement = replacement;
+        this.lmanager = lmanager;
     }
 
     public Long getLeaveId() {
@@ -124,6 +136,12 @@ public class Leave {
     public void setReplacement(Employees replacement) {
         this.replacement = replacement;
     }
+
+    public Employees getLmanager() {
+        return lmanager;
+    }
+
+    public void setLmanager(Employees lmanager) {
+        this.lmanager = lmanager;
+    }
 }
-
-
