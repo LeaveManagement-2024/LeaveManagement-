@@ -53,7 +53,7 @@ public class EmployeeImp implements EmployeeService {
         employee.setPost(post);
         employee.setProfile(profile);
         employee.setManager(manager);
-
+        employee.setFiliere(filiere);
         employeeRep.save(employee);
         return  employee.getIdE();
     }
@@ -94,7 +94,7 @@ public class EmployeeImp implements EmployeeService {
         employeesToUpdate.setProfile(profile);
         employeesToUpdate.setGrade(grade);
         employeesToUpdate.setPost(post);
-
+    employeesToUpdate.setFiliere(filiere);
         employeeRep.save(employeesToUpdate);
     }
 

@@ -58,6 +58,9 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "IdPost")
     private Posts post;
+    @ManyToOne
+    @JoinColumn(name= "IdFiliere")
+    private Filiere filiere;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<AnnualLeaveLine> annualLeaveLines;
@@ -68,9 +71,9 @@ public class Employees {
     public Employees() {
     }
 
-    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email,
-                     String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate,
-                     String workLocationFr,String workLocationAr, String image, Employees manager, Profiles profile, Grades grade, Posts post) {
+    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone,
+                     String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr,
+                     String image, Employees manager, Profiles profile, Grades grade, Posts post, Filiere filiere, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -91,13 +94,11 @@ public class Employees {
         this.profile = profile;
         this.grade = grade;
         this.post = post;
+        this.filiere = filiere;
+        this.annualLeaveLines = annualLeaveLines;
+        this.leaves = leaves;
     }
 
-    public Employees(Long idE) {
-        this.idE = idE;
-    }
-
-    // Getters and setters
     public Long getIdE() {
         return idE;
     }
@@ -258,6 +259,14 @@ public class Employees {
         this.post = post;
     }
 
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
+    }
+
     public List<AnnualLeaveLine> getAnnualLeaveLines() {
         return annualLeaveLines;
     }
@@ -297,6 +306,7 @@ public class Employees {
                 ", profile=" + profile +
                 ", grade=" + grade +
                 ", post=" + post +
+                ", filiere=" + filiere +
                 ", annualLeaveLines=" + annualLeaveLines +
                 ", leaves=" + leaves +
                 '}';
