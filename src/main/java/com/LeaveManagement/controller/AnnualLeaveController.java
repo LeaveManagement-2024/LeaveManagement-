@@ -26,7 +26,6 @@ public class AnnualLeaveController {
     public List<Employees> getAllEmployee(){
         return  employeeService.getAllEmployees();
     }
-    
 
     @GetMapping(path="/getEmployeeById/{Id}")
     public Employees getEmployeeById(@PathVariable Long Id){
