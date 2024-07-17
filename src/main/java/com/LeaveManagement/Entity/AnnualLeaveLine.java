@@ -1,6 +1,7 @@
 package com.LeaveManagement.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 @Entity
 @IdClass(AnnualLeaveLineId.class)
@@ -16,7 +17,7 @@ public class AnnualLeaveLine {
     @ManyToOne
     @JoinColumn(name = "idE")
     private Employees employee;
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;

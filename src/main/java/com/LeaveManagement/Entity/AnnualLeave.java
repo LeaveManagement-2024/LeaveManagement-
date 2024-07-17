@@ -1,36 +1,41 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 @Entity
 public class AnnualLeave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long annualLeaveId;
-    private int year;
+    private Date startDate;
+    private Date endDate;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String label;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String status;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "annualLeave")
     private List<AnnualLeaveLine> annualLeaveLines;
     @OneToMany(mappedBy = "annualLeave")
     private List<Leave> leaves;
 
-    public AnnualLeave(Long annualLeaveId, int year, String label, String status, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
+
+
+    public AnnualLeave() {
+    }
+
+    public AnnualLeave(Long annualLeaveId, Date startDate, Date endDate, String label, String status, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
         this.annualLeaveId = annualLeaveId;
-        this.year = year;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.label = label;
         this.status = status;
         this.annualLeaveLines = annualLeaveLines;
-
         this.leaves = leaves;
-    }
-
-    public AnnualLeave() {
     }
 
     public Long getAnnualLeaveId() {
@@ -41,12 +46,20 @@ public class AnnualLeave {
         this.annualLeaveId = annualLeaveId;
     }
 
-    public int getYear() {
-        return year;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getLabel() {
@@ -73,8 +86,6 @@ public class AnnualLeave {
         this.annualLeaveLines = annualLeaveLines;
     }
 
-
-
     public List<Leave> getLeaves() {
         return leaves;
     }
@@ -82,5 +93,4 @@ public class AnnualLeave {
     public void setLeaves(List<Leave> leaves) {
         this.leaves = leaves;
     }
-
 }

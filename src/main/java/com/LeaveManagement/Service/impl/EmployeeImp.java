@@ -94,7 +94,7 @@ public class EmployeeImp implements EmployeeService {
         employeesToUpdate.setProfile(profile);
         employeesToUpdate.setGrade(grade);
         employeesToUpdate.setPost(post);
-    employeesToUpdate.setFiliere(filiere);
+        employeesToUpdate.setFiliere(filiere);
         employeeRep.save(employeesToUpdate);
     }
 

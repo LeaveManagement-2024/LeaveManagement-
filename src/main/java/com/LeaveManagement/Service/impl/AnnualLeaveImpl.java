@@ -1,5 +1,6 @@
 package com.LeaveManagement.Service.impl;
 
+import com.LeaveManagement.Dto.AnnualLeaveDTO;
 import com.LeaveManagement.Entity.AnnualLeave;
 import com.LeaveManagement.Repo.AnnualLeaveRepo;
 import com.LeaveManagement.Service.AnnualLeaveService;
@@ -14,7 +15,12 @@ public class AnnualLeaveImpl implements AnnualLeaveService {
     private AnnualLeaveRepo annualLeaveRepo;
 
     @Override
-    public Long addAnnualLeave(AnnualLeave annualLeave) {
+    public Long addAnnualLeave(AnnualLeaveDTO annualLeaveDTO) {
+        AnnualLeave annualLeave =new AnnualLeave();
+        annualLeave.setStartDate(annualLeaveDTO.getStartDate());
+        annualLeave.setEndDate(annualLeaveDTO.getEndDate());
+        annualLeave.setLabel(annualLeaveDTO.getLabel());
+        annualLeave.setStatus(annualLeaveDTO.getStatus());
         annualLeaveRepo.save(annualLeave);
         return annualLeave.getAnnualLeaveId();
     }
@@ -30,16 +36,18 @@ public class AnnualLeaveImpl implements AnnualLeaveService {
     }
 
     @Override
-    public void updateAnnualLeave(Long id, AnnualLeave annualLeave) {
+    public void updateAnnualLeave(Long id, AnnualLeaveDTO annualLeaveDTO) {
         AnnualLeave annualLeaveToUpdate = annualLeaveRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
-        annualLeaveToUpdate.setYear(annualLeave.getYear());
-        annualLeaveToUpdate.setLabel(annualLeave.getLabel());
-        annualLeaveToUpdate.setStatus(annualLeave.getStatus());
+        annualLeaveToUpdate.setStartDate(annualLeaveDTO.getStartDate());
+        annualLeaveToUpdate.setEndDate(annualLeaveDTO.getEndDate());
+        annualLeaveToUpdate.setLabel(annualLeaveDTO.getLabel());
+        annualLeaveToUpdate.setStatus(annualLeaveDTO.getStatus());
         annualLeaveRepo.save(annualLeaveToUpdate);
     }
 
     @Override
     public void deleteAnnualLeave(Long id) {
+
         annualLeaveRepo.deleteById(id);
     }
 }

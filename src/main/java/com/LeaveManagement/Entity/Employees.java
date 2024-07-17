@@ -1,6 +1,7 @@
 package com.LeaveManagement.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -61,11 +62,11 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name= "IdFiliere")
     private Filiere filiere;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "employee")
     private List<AnnualLeaveLine> annualLeaveLines;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "employee")
     private List<Leave> leaves;
 
     public Employees() {

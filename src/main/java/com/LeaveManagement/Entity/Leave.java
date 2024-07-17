@@ -15,7 +15,7 @@ public class Leave {
     private Date startDate;
     private Date endDate;
     @Column(columnDefinition = "NVARCHAR(255)")
-    private String supervisorVisa;
+    private Boolean supervisorVisa;
     private Date visaDate;
 
     @JsonBackReference
@@ -51,7 +51,7 @@ public class Leave {
         this.leaveId = leaveId;
     }
 
-    public Leave(Long leaveId, Date startDate, Date endDate, String supervisorVisa, Date visaDate, Employees employee,
+    public Leave(Long leaveId, Date startDate, Date endDate, Boolean supervisorVisa, Date visaDate, Employees employee,
                  AnnualLeave annualLeave, LeaveType leaveType, Employees replacement, Employees lmanager) {
         this.leaveId = leaveId;
         this.startDate = startDate;
@@ -89,11 +89,11 @@ public class Leave {
         this.endDate = endDate;
     }
 
-    public String getSupervisorVisa() {
+    public Boolean getSupervisorVisa() {
         return supervisorVisa;
     }
 
-    public void setSupervisorVisa(String supervisorVisa) {
+    public void setSupervisorVisa(Boolean supervisorVisa) {
         this.supervisorVisa = supervisorVisa;
     }
 

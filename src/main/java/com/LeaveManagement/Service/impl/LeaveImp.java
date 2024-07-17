@@ -72,7 +72,6 @@ public class LeaveImp implements LeaveService {
         leaveToUpdate.setLeaveType(leaveType);
         leaveToUpdate.setReplacement(replacement);
         leaveToUpdate.setLmanager(lmanager);
-
         leaveRepo.save(leaveToUpdate);
     }
 

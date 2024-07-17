@@ -7,7 +7,7 @@ public class LeaveDTO {
     private Long leaveId;
     private Date startDate;
     private Date endDate;
-    private String supervisorVisa;
+    private Boolean  supervisorVisa;
     private Date visaDate;
     private Long employeeId;
     private Long annualLeaveId;
@@ -18,7 +18,7 @@ public class LeaveDTO {
     public LeaveDTO() {
     }
 
-    public LeaveDTO(Long leaveId, Date startDate, Date endDate, String supervisorVisa, Date visaDate,
+    public LeaveDTO(Long leaveId, Date startDate, Date endDate, Boolean supervisorVisa, Date visaDate,
                     Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId) {
         this.leaveId = leaveId;
         this.startDate = startDate;
@@ -56,11 +56,11 @@ public class LeaveDTO {
         this.endDate = endDate;
     }
 
-    public String getSupervisorVisa() {
+    public Boolean getSupervisorVisa() {
         return supervisorVisa;
     }
 
-    public void setSupervisorVisa(String supervisorVisa) {
+    public void setSupervisorVisa(Boolean supervisorVisa) {
         this.supervisorVisa = supervisorVisa;
     }
 
