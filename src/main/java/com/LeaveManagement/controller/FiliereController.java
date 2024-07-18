@@ -1,5 +1,6 @@
 package com.LeaveManagement.controller;
 
+import com.LeaveManagement.Dto.FiliereDTO;
 import com.LeaveManagement.Entity.Departement;
 import com.LeaveManagement.Entity.Filiere;
 import com.LeaveManagement.Service.DepartementService;
@@ -17,9 +18,9 @@ public class FiliereController {
     @Autowired
     private FiliereService filiereService;
     @PostMapping(path = "/save")
-    public  Long saveFilieres(@RequestBody Filiere filiere){
+    public  Long saveFilieres(@RequestBody FiliereDTO filiereDTO){
 
-        Long id =filiereService.addFiliere(filiere);
+        Long id =filiereService.addFiliere(filiereDTO);
         return id;
 
     }
@@ -34,8 +35,8 @@ public class FiliereController {
     }
 
     @PutMapping(path = "/update/{id}")
-    public ResponseEntity<String> updateFiliere(@PathVariable Long id, @RequestBody Filiere filiere) {
-        filiereService.updateFiliere(id,filiere);
+    public ResponseEntity<String> updateFiliere(@PathVariable Long id, @RequestBody FiliereDTO filiereDTO) {
+        filiereService.updateFiliere(id,filiereDTO);
         return ResponseEntity.ok("Filiere updated successfully");
     }
 
