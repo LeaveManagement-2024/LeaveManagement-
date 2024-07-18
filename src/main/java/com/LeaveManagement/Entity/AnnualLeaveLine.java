@@ -3,20 +3,20 @@ package com.LeaveManagement.Entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
+
 @Entity
 @IdClass(AnnualLeaveLineId.class)
 public class AnnualLeaveLine {
-    @Id
-    private Long idE;
-    @Id
-    private Long annualLeaveId;
-
     private int declaredDays;
     private int remainingDays;
+    @Id
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "idE")
     private Employees employee;
+    @Id
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
@@ -25,34 +25,16 @@ public class AnnualLeaveLine {
     public AnnualLeaveLine() {
     }
 
-    public AnnualLeaveLine(Long idE, Long annualLeaveId) {
-        this.idE = idE;
-        this.annualLeaveId = annualLeaveId;
-    }
-
-    public AnnualLeaveLine(Long idE, Long annualLeaveId, int declaredDays, int remainingDays, Employees employee, AnnualLeave annualLeave) {
-        this.idE = idE;
-        this.annualLeaveId = annualLeaveId;
+    public AnnualLeaveLine(int declaredDays, int remainingDays, Employees employee, AnnualLeave annualLeave) {
         this.declaredDays = declaredDays;
         this.remainingDays = remainingDays;
         this.employee = employee;
         this.annualLeave = annualLeave;
     }
 
-    public Long getIdE() {
-        return idE;
-    }
-
-    public void setIdE(Long idE) {
-        this.idE = idE;
-    }
-
-    public Long getAnnualLeaveId() {
-        return annualLeaveId;
-    }
-
-    public void setAnnualLeaveId(Long annualLeaveId) {
-        this.annualLeaveId = annualLeaveId;
+    public AnnualLeaveLine(Employees employee, AnnualLeave annualLeave) {
+        this.employee = employee;
+        this.annualLeave = annualLeave;
     }
 
     public int getDeclaredDays() {

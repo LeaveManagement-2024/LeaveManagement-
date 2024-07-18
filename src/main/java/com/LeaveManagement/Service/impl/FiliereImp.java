@@ -7,9 +7,10 @@ import com.LeaveManagement.Repo.DepartementRepo;
 import com.LeaveManagement.Repo.FiliereRepo;
 import com.LeaveManagement.Service.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class FiliereImp implements FiliereService {
     @Autowired
     private FiliereRepo filiereRepo;
