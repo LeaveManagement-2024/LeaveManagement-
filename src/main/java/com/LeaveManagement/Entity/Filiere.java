@@ -11,6 +11,8 @@ public class Filiere {
     @Column(columnDefinition = "NVARCHAR(255)")
     private String filiereNameAr;
 
+
+
     public Filiere() {
     }
 

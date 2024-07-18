@@ -6,9 +6,10 @@ import com.LeaveManagement.Repo.DepartementRepo;
 import com.LeaveManagement.Repo.GradesRepo;
 import com.LeaveManagement.Service.DepartementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DepartementImp implements DepartementService {
     @Autowired
     private DepartementRepo departementRepo;

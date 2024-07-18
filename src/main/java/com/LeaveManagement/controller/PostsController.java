@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("Posts")
+@RequestMapping("posts")
 public class PostsController {
     @Autowired
     private PostsService postsService;

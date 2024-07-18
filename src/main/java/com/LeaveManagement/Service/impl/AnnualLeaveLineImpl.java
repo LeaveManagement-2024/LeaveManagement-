@@ -1,23 +1,40 @@
 package com.LeaveManagement.Service.impl;
 
+import com.LeaveManagement.Dto.AnnualLeaveLineDTO;
+import com.LeaveManagement.Entity.AnnualLeave;
 import com.LeaveManagement.Entity.AnnualLeaveLine;
 import com.LeaveManagement.Entity.AnnualLeaveLineId;
+import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Repo.AnnualLeaveLineRepo;
+import com.LeaveManagement.Repo.AnnualLeaveRepo;
+import com.LeaveManagement.Repo.EmployeeRepo;
 import com.LeaveManagement.Service.AnnualLeaveLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
     @Autowired
     private AnnualLeaveLineRepo annualLeaveLineRepo;
 
+    @Autowired
+    private EmployeeRepo  employeeRepo;
+    @Autowired
+    private AnnualLeaveRepo annualLeaveRepo;
+
     @Override
-    public Optional<AnnualLeaveLine> addAnnualLeaveLine(AnnualLeaveLine annualLeaveLine) {
+    public void addAnnualLeaveLine(AnnualLeaveLineDTO annualLeaveLineDTO) {
+        Employees employee = employeeRepo.findById(annualLeaveLineDTO.getIdE()).orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        AnnualLeave annualLeave=annualLeaveRepo.findById(annualLeaveLineDTO.getAnnualLeaveId()).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+        AnnualLeaveLine annualLeaveLine=new AnnualLeaveLine();
+        annualLeaveLine.setDeclaredDays(annualLeaveLineDTO.getDeclaredDays());
+        annualLeaveLine.setRemainingDays(annualLeaveLineDTO.getRemainingDays());
+        annualLeaveLine.setEmployee(employee);
+        annualLeaveLine.setAnnualLeave(annualLeave);
         annualLeaveLineRepo.save(annualLeaveLine);
-        return annualLeaveLineRepo.findById(new AnnualLeaveLineId(annualLeaveLine.getIdE(),annualLeaveLine.getAnnualLeaveId()));
+        System.out.println("dsf");
     }
 
     @Override
@@ -32,12 +49,17 @@ public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
     }
 
     @Override
-    public void updateAnnualLeaveLine(Long idE, Long annualLeaveId, AnnualLeaveLine annualLeaveLine) {
+    public void updateAnnualLeaveLine(Long idE, Long annualLeaveId, AnnualLeaveLineDTO annualLeaveLineDTO) {
         AnnualLeaveLine annualLeaveLineToUpdate = annualLeaveLineRepo.findById(new AnnualLeaveLineId(idE, annualLeaveId))
                 .orElseThrow(() -> new IllegalArgumentException("Annual Leave Line not found"));
-        annualLeaveLineToUpdate.setDeclaredDays(annualLeaveLine.getDeclaredDays());
-        annualLeaveLineToUpdate.setRemainingDays(annualLeaveLine.getRemainingDays());
+        Employees employee = employeeRepo.findById(annualLeaveLineDTO.getIdE()).orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        AnnualLeave annualLeave=annualLeaveRepo.findById(annualLeaveLineDTO.getAnnualLeaveId()).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+        annualLeaveLineToUpdate.setDeclaredDays(annualLeaveLineDTO.getDeclaredDays());
+        annualLeaveLineToUpdate.setRemainingDays(annualLeaveLineDTO.getRemainingDays());
+        annualLeaveLineToUpdate.setEmployee(employee);
+        annualLeaveLineToUpdate.setAnnualLeave(annualLeave);
         annualLeaveLineRepo.save(annualLeaveLineToUpdate);
+
     }
 
     @Override
