@@ -10,14 +10,18 @@ public class Filiere {
     private String filiereNameFr;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String filiereNameAr;
+    @ManyToOne
+    @JoinColumn(name = "IdDepartment")
+    private Departement departement;
 
     public Filiere() {
     }
 
-    public Filiere(Long idFiliere, String filiereNameFr, String filiereNameAr) {
+    public Filiere(Long idFiliere, String filiereNameFr, String filiereNameAr, Departement departement) {
         IdFiliere = idFiliere;
         this.filiereNameFr = filiereNameFr;
         this.filiereNameAr = filiereNameAr;
+        this.departement = departement;
     }
 
     public Long getIdFiliere() {
@@ -42,5 +46,13 @@ public class Filiere {
 
     public void setFiliereNameAr(String filiereNameAr) {
         this.filiereNameAr = filiereNameAr;
+    }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
     }
 }
