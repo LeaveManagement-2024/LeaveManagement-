@@ -7,7 +7,13 @@ import com.LeaveManagement.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 @Service
 public class EmployeeImp implements EmployeeService {
@@ -22,12 +28,11 @@ public class EmployeeImp implements EmployeeService {
     private GradesRepo gradesRepo;
     @Autowired
     private FiliereRepo filiereRepo;
-
-
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private final String storageDirectoryPath = Paths.get("uploaded-images").toAbsolutePath().toString();
     @Override
-    public Long addEmployee(EmployeesDTO employeeDTO) {
+    public Long addEmployee(EmployeesDTO employeeDTO) throws IOException {
         Posts post = postsRepo.findById(employeeDTO.getPostId()).orElse(null);
         Grades grade = gradesRepo.findById(employeeDTO.getGradeId()).orElse(null);
         Profiles profile = profileRepo.findById(employeeDTO.getProfileId()).orElse(null);
@@ -48,7 +53,17 @@ public class EmployeeImp implements EmployeeService {
         employee.setHireDate(employeeDTO.getHireDate());
         employee.setWorkLocationFr(employeeDTO.getWorkLocationFr());
         employee.setWorkLocationAr(employeeDTO.getWorkLocationAr());
-        employee.setImage(employeeDTO.getImage());
+        MultipartFile file = employeeDTO.getImage();
+        if (file != null && !file.isEmpty()) {
+            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            Path storageDirectory = Paths.get(storageDirectoryPath);
+            if (!Files.exists(storageDirectory)) {
+                Files.createDirectories(storageDirectory);
+            }
+            Path destinationPath = storageDirectory.resolve(filename);
+            file.transferTo(destinationPath);
+            employee.setImage("/" + storageDirectoryPath + filename);
+        }
         employee.setGrade(grade);
         employee.setPost(post);
         employee.setProfile(profile);
@@ -69,7 +84,7 @@ public class EmployeeImp implements EmployeeService {
     }
 
     @Override
-    public void updateEmployee(Long id, EmployeesDTO employeeDTO) {
+    public void updateEmployee(Long id, EmployeesDTO employeeDTO) throws IOException {
         Posts post = postsRepo.findById(employeeDTO.getPostId()).orElse(null);
         Grades grade = gradesRepo.findById(employeeDTO.getGradeId()).orElse(null);
         Profiles profile = profileRepo.findById(employeeDTO.getProfileId()).orElse(null);
@@ -89,7 +104,17 @@ public class EmployeeImp implements EmployeeService {
         employeesToUpdate.setHireDate(employeeDTO.getHireDate());
         employeesToUpdate.setWorkLocationFr(employeeDTO.getWorkLocationFr());
         employeesToUpdate.setWorkLocationAr(employeeDTO.getWorkLocationAr());
-        employeesToUpdate.setImage(employeeDTO.getImage());
+        MultipartFile file = employeeDTO.getImage();
+        if (file != null && !file.isEmpty()) {
+            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            Path storageDirectory = Paths.get(storageDirectoryPath);
+            if (!Files.exists(storageDirectory)) {
+                Files.createDirectories(storageDirectory);
+            }
+            Path destinationPath = storageDirectory.resolve(filename);
+            file.transferTo(destinationPath);
+            employeesToUpdate.setImage("/" + storageDirectoryPath + filename);
+        }
         employeesToUpdate.setManager(manager);
         employeesToUpdate.setProfile(profile);
         employeesToUpdate.setGrade(grade);

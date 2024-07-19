@@ -1,5 +1,7 @@
 package com.LeaveManagement.Dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
 
 public class EmployeesDTO{
@@ -18,7 +20,7 @@ public class EmployeesDTO{
     private LocalDate hireDate;
     private String workLocationFr;
     private String workLocationAr;
-    private String image;
+    private MultipartFile image;
     private Long managerId;
     private Long profileId;
     private Long gradeId;
@@ -28,7 +30,9 @@ public class EmployeesDTO{
     public EmployeesDTO() {
     }
 
-    public EmployeesDTO(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, String image, Long managerId, Long profileId, Long gradeId, Long filiereId, Long postId) {
+    public EmployeesDTO(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr,
+                        String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, MultipartFile image, Long managerId,
+                        Long profileId, Long gradeId, Long filiereId, Long postId) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -172,11 +176,11 @@ public class EmployeesDTO{
         this.workLocationAr = workLocationAr;
     }
 
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
     }
 
