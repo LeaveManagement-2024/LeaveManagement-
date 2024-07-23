@@ -1,9 +1,11 @@
 package com.LeaveManagement.Service.impl;
 
 import com.LeaveManagement.Dto.EmployeesDTO;
+import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Entity.*;
 import com.LeaveManagement.Repo.*;
 import com.LeaveManagement.Service.EmployeeService;
+import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EmployeeImp implements EmployeeService {
     @Autowired
@@ -31,6 +35,34 @@ public class EmployeeImp implements EmployeeService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     private final String storageDirectoryPath = Paths.get("uploaded-images").toAbsolutePath().toString();
+    String baseUrl = "http://localhost:8093/uploaded-images/";
+
+
+    @Override
+    public LogInResponse loginEmployee(LogInDTO logInDTO) {
+        String msg ="";
+        Employees user1 = employeeRep.findByEmail(logInDTO.getEmail());
+        if (user1 != null) {
+            String password = logInDTO.getPassword();
+            String encodedPassword = user1.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            if (isPwdRight) {
+                Optional<Employees> employee = employeeRep.findOneByEmailAndPassword(logInDTO.getEmail(), encodedPassword);
+                if (employee.isPresent()) {
+                    return new LogInResponse("login Success",true,user1.getIdE());
+                }else {
+                    return new LogInResponse("login Failed",false,null);
+                }
+            }else {
+                return new LogInResponse("Password not match",false,null);
+            }
+        }else {
+            return new LogInResponse("Email Not Exist",false,null);
+        }
+    }
+
+
+
     @Override
     public Long addEmployee(EmployeesDTO employeeDTO) throws IOException {
         Posts post = postsRepo.findById(employeeDTO.getPostId()).orElse(null);
@@ -38,6 +70,7 @@ public class EmployeeImp implements EmployeeService {
         Profiles profile = profileRepo.findById(employeeDTO.getProfileId()).orElse(null);
         Employees manager=employeeRep.findById(employeeDTO.getManagerId()).orElse(null);
         Filiere filiere= filiereRepo.findById(employeeDTO.getFiliereId()).orElse(null);
+        Employees responsible =employeeRep.findById(employeeDTO.getResponsibleId()).orElse(null);
         Employees employee = new Employees();
         employee.setFirstNameFr(employeeDTO.getFirstNameFr());
         employee.setFirstNameAr(employeeDTO.getFirstNameAr());
@@ -54,20 +87,22 @@ public class EmployeeImp implements EmployeeService {
         employee.setWorkLocationFr(employeeDTO.getWorkLocationFr());
         employee.setWorkLocationAr(employeeDTO.getWorkLocationAr());
         MultipartFile file = employeeDTO.getImage();
+
         if (file != null && !file.isEmpty()) {
             String filename = StringUtils.cleanPath(file.getOriginalFilename());
             Path storageDirectory = Paths.get(storageDirectoryPath);
             if (!Files.exists(storageDirectory)) {
                 Files.createDirectories(storageDirectory);
             }
-            Path destinationPath = storageDirectory.resolve(filename);
+            Path destinationPath = storageDirectory.resolve(Path.of(filename));
             file.transferTo(destinationPath);
-            employee.setImage("/" + storageDirectoryPath + filename);
+            employee.setImage(baseUrl + filename);
         }
         employee.setGrade(grade);
         employee.setPost(post);
         employee.setProfile(profile);
         employee.setManager(manager);
+        employee.setResponsible(responsible);
         employee.setFiliere(filiere);
         employeeRep.save(employee);
         return  employee.getIdE();
@@ -90,6 +125,7 @@ public class EmployeeImp implements EmployeeService {
         Profiles profile = profileRepo.findById(employeeDTO.getProfileId()).orElse(null);
         Filiere filiere= filiereRepo.findById(employeeDTO.getFiliereId()).orElse(null);
         Employees manager=employeeRep.findById(employeeDTO.getManagerId()).orElse(null);
+        Employees responsible =employeeRep.findById(employeeDTO.getResponsibleId()).orElse(null);
         Employees employeesToUpdate = employeeRep.findById(id).orElseThrow(() ->new IllegalArgumentException("Employee not found"));
         employeesToUpdate.setFirstNameFr(employeeDTO.getFirstNameFr());
         employeesToUpdate.setFirstNameAr(employeeDTO.getFirstNameAr());
@@ -110,12 +146,12 @@ public class EmployeeImp implements EmployeeService {
             Path storageDirectory = Paths.get(storageDirectoryPath);
             if (!Files.exists(storageDirectory)) {
                 Files.createDirectories(storageDirectory);
-            }
-            Path destinationPath = storageDirectory.resolve(filename);
+            }            Path destinationPath = storageDirectory.resolve(Path.of(filename));
             file.transferTo(destinationPath);
-            employeesToUpdate.setImage("/" + storageDirectoryPath + filename);
+            employeesToUpdate.setImage(baseUrl + filename);
         }
         employeesToUpdate.setManager(manager);
+        employeesToUpdate.setResponsible(responsible);
         employeesToUpdate.setProfile(profile);
         employeesToUpdate.setGrade(grade);
         employeesToUpdate.setPost(post);

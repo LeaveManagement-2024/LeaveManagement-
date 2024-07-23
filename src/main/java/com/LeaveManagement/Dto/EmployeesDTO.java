@@ -22,6 +22,7 @@ public class EmployeesDTO{
     private String workLocationAr;
     private MultipartFile image;
     private Long managerId;
+    private Long responsibleId;
     private Long profileId;
     private Long gradeId;
     private Long filiereId;
@@ -30,9 +31,7 @@ public class EmployeesDTO{
     public EmployeesDTO() {
     }
 
-    public EmployeesDTO(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr,
-                        String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, MultipartFile image, Long managerId,
-                        Long profileId, Long gradeId, Long filiereId, Long postId) {
+    public EmployeesDTO(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, MultipartFile image, Long managerId, Long responsibleId, Long profileId, Long gradeId, Long filiereId, Long postId) {
         this.idE = idE;
         this.firstNameFr = firstNameFr;
         this.firstNameAr = firstNameAr;
@@ -50,6 +49,7 @@ public class EmployeesDTO{
         this.workLocationAr = workLocationAr;
         this.image = image;
         this.managerId = managerId;
+        this.responsibleId = responsibleId;
         this.profileId = profileId;
         this.gradeId = gradeId;
         this.filiereId = filiereId;
@@ -190,6 +190,14 @@ public class EmployeesDTO{
 
     public void setManagerId(Long managerId) {
         this.managerId = managerId;
+    }
+
+    public Long getResponsibleId() {
+        return responsibleId;
+    }
+
+    public void setResponsibleId(Long responsibleId) {
+        this.responsibleId = responsibleId;
     }
 
     public Long getProfileId() {

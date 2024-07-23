@@ -3,17 +3,17 @@ package com.LeaveManagement.response;
 public class LogInResponse {
     String message;
     Boolean status;
-    int id;
+    Long id;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public LogInResponse(String message, Boolean status, int id ) {
+    public LogInResponse(String message, Boolean status, Long id ) {
         this.message = message;
         this.status = status;
         this.id=id;
@@ -38,6 +38,7 @@ public class LogInResponse {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
 
     @Override
     public String toString() {

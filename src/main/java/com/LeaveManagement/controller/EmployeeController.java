@@ -1,8 +1,10 @@
 package com.LeaveManagement.controller;
 
 import com.LeaveManagement.Dto.EmployeesDTO;
+import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Service.EmployeeService;
+import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,13 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+
+    @PostMapping(path="/login")
+    public ResponseEntity<?> loginUser(@RequestBody LogInDTO logInDTO) {
+        LogInResponse logInResponse = employeeService.loginEmployee(logInDTO);
+        return ResponseEntity.ok(logInResponse);
+    }
 
     @PostMapping(path = "/save", consumes = {"multipart/form-data"})
     public Long saveEmployee(
@@ -41,6 +50,7 @@ public class EmployeeController {
             @RequestParam("gradeId") Long gradeId,
             @RequestParam("profileId") Long profileId,
             @RequestParam("managerId") Long managerId,
+            @RequestParam("responsibleId") Long responsibleId,
             @RequestParam("filiereId") Long filiereId) throws IOException {
 
         EmployeesDTO employeesDTO = new EmployeesDTO();
@@ -63,6 +73,7 @@ public class EmployeeController {
         employeesDTO.setGradeId(gradeId);
         employeesDTO.setProfileId(profileId);
         employeesDTO.setManagerId(managerId);
+        employeesDTO.setResponsibleId(responsibleId);
         employeesDTO.setFiliereId(filiereId);
 
         Long id = employeeService.addEmployee(employeesDTO);
@@ -100,6 +111,7 @@ public class EmployeeController {
             @RequestParam("gradeId") Long gradeId,
             @RequestParam("profileId") Long profileId,
             @RequestParam("managerId") Long managerId,
+            @RequestParam("responsibleId") Long responsibleId,
             @RequestParam("filiereId") Long filiereId) throws IOException {
 
         EmployeesDTO employeesDTO = new EmployeesDTO();
@@ -121,8 +133,8 @@ public class EmployeeController {
         employeesDTO.setGradeId(gradeId);
         employeesDTO.setProfileId(profileId);
         employeesDTO.setManagerId(managerId);
+        employeesDTO.setResponsibleId(responsibleId);
         employeesDTO.setFiliereId(filiereId);
-
         employeeService.updateEmployee(id, employeesDTO);
         return ResponseEntity.ok("Employee updated successfully");
     }

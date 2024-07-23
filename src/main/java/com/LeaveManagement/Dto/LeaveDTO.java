@@ -1,5 +1,7 @@
 package com.LeaveManagement.Dto;
 
+import jakarta.persistence.Column;
+
 import java.util.Date;
 
 public class LeaveDTO {
@@ -7,29 +9,39 @@ public class LeaveDTO {
     private Long leaveId;
     private Date startDate;
     private Date endDate;
-    private Boolean  supervisorVisa;
-    private Date visaDate;
+    private Boolean remplecementVisa;
+    private Date remplecementVisaDate;
+    private Boolean responsibleVisa;
+    private Date responsibleVisaDate;
+    private Boolean managerVisa;
+    private Date managerVisaDate;
+
     private Long employeeId;
     private Long annualLeaveId;
     private Long leaveTypeId;
     private Long replacementId;
     private Long lmanagerId;
+    private Long responsible;
 
     public LeaveDTO() {
     }
 
-    public LeaveDTO(Long leaveId, Date startDate, Date endDate, Boolean supervisorVisa, Date visaDate,
-                    Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId) {
+    public LeaveDTO(Long leaveId, Date startDate, Date endDate, Boolean remplecementVisa, Date remplecementVisaDate, Boolean responsibleVisa, Date responsibleVisaDate, Boolean managerVisa, Date managerVisaDate, Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
         this.leaveId = leaveId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.supervisorVisa = supervisorVisa;
-        this.visaDate = visaDate;
+        this.remplecementVisa = remplecementVisa;
+        this.remplecementVisaDate = remplecementVisaDate;
+        this.responsibleVisa = responsibleVisa;
+        this.responsibleVisaDate = responsibleVisaDate;
+        this.managerVisa = managerVisa;
+        this.managerVisaDate = managerVisaDate;
         this.employeeId = employeeId;
         this.annualLeaveId = annualLeaveId;
         this.leaveTypeId = leaveTypeId;
         this.replacementId = replacementId;
         this.lmanagerId = lmanagerId;
+        this.responsible = responsible;
     }
 
     public Long getLeaveId() {
@@ -56,20 +68,52 @@ public class LeaveDTO {
         this.endDate = endDate;
     }
 
-    public Boolean getSupervisorVisa() {
-        return supervisorVisa;
+    public Boolean getRemplecementVisa() {
+        return remplecementVisa;
     }
 
-    public void setSupervisorVisa(Boolean supervisorVisa) {
-        this.supervisorVisa = supervisorVisa;
+    public void setRemplecementVisa(Boolean remplecementVisa) {
+        this.remplecementVisa = remplecementVisa;
     }
 
-    public Date getVisaDate() {
-        return visaDate;
+    public Date getRemplecementVisaDate() {
+        return remplecementVisaDate;
     }
 
-    public void setVisaDate(Date visaDate) {
-        this.visaDate = visaDate;
+    public void setRemplecementVisaDate(Date remplecementVisaDate) {
+        this.remplecementVisaDate = remplecementVisaDate;
+    }
+
+    public Boolean getResponsibleVisa() {
+        return responsibleVisa;
+    }
+
+    public void setResponsibleVisa(Boolean responsibleVisa) {
+        this.responsibleVisa = responsibleVisa;
+    }
+
+    public Date getResponsibleVisaDate() {
+        return responsibleVisaDate;
+    }
+
+    public void setResponsibleVisaDate(Date responsibleVisaDate) {
+        this.responsibleVisaDate = responsibleVisaDate;
+    }
+
+    public Boolean getManagerVisa() {
+        return managerVisa;
+    }
+
+    public void setManagerVisa(Boolean managerVisa) {
+        this.managerVisa = managerVisa;
+    }
+
+    public Date getManagerVisaDate() {
+        return managerVisaDate;
+    }
+
+    public void setManagerVisaDate(Date managerVisaDate) {
+        this.managerVisaDate = managerVisaDate;
     }
 
     public Long getEmployeeId() {
@@ -110,5 +154,13 @@ public class LeaveDTO {
 
     public void setLmanagerId(Long lmanagerId) {
         this.lmanagerId = lmanagerId;
+    }
+
+    public Long getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(Long responsible) {
+        this.responsible = responsible;
     }
 }

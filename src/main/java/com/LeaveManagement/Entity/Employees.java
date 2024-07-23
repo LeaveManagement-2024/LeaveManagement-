@@ -47,6 +47,9 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "managerId")
     private Employees manager;
+    @ManyToOne
+    @JoinColumn(name = "responsibleId")
+    private Employees responsible;
 
     @ManyToOne
     @JoinColumn(name = "IdProfile")
@@ -70,34 +73,6 @@ public class Employees {
     private List<Leave> leaves;
 
     public Employees() {
-    }
-
-    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone,
-                     String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr,
-                     String image, Employees manager, Profiles profile, Grades grade, Posts post, Filiere filiere, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
-        this.idE = idE;
-        this.firstNameFr = firstNameFr;
-        this.firstNameAr = firstNameAr;
-        this.lastNameFr = lastNameFr;
-        this.lastNameAr = lastNameAr;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.ppr = ppr;
-        this.cin = cin;
-        this.addressFr = addressFr;
-        this.addressAr = addressAr;
-        this.hireDate = hireDate;
-        this.workLocationFr = workLocationFr;
-        this.workLocationAr = workLocationAr;
-        this.image = image;
-        this.manager = manager;
-        this.profile = profile;
-        this.grade = grade;
-        this.post = post;
-        this.filiere = filiere;
-        this.annualLeaveLines = annualLeaveLines;
-        this.leaves = leaves;
     }
 
     public Long getIdE() {
@@ -236,6 +211,14 @@ public class Employees {
         this.manager = manager;
     }
 
+    public Employees getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(Employees responsible) {
+        this.responsible = responsible;
+    }
+
     public Profiles getProfile() {
         return profile;
     }
@@ -284,32 +267,30 @@ public class Employees {
         this.leaves = leaves;
     }
 
-    @Override
-    public String toString() {
-        return "Employees{" +
-                "idE=" + idE +
-                ", firstNameFr='" + firstNameFr + '\'' +
-                ", firstNameAr='" + firstNameAr + '\'' +
-                ", lastNameFr='" + lastNameFr + '\'' +
-                ", lastNameAr='" + lastNameAr + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", ppr='" + ppr + '\'' +
-                ", cin='" + cin + '\'' +
-                ", addressFr='" + addressFr + '\'' +
-                ", addressAr='" + addressAr + '\'' +
-                ", hireDate=" + hireDate +
-                ", workLocationFr='" + workLocationFr + '\'' +
-                ", workLocationAr='" + workLocationAr + '\'' +
-                ", image='" + image + '\'' +
-                ", manager=" + manager +
-                ", profile=" + profile +
-                ", grade=" + grade +
-                ", post=" + post +
-                ", filiere=" + filiere +
-                ", annualLeaveLines=" + annualLeaveLines +
-                ", leaves=" + leaves +
-                '}';
+    public Employees(Long idE, String firstNameFr, String firstNameAr, String lastNameFr, String lastNameAr, String email, String password, String phone, String ppr, String cin, String addressFr, String addressAr, LocalDate hireDate, String workLocationFr, String workLocationAr, String image, Employees manager, Employees responsible, Profiles profile, Grades grade, Posts post, Filiere filiere, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
+        this.idE = idE;
+        this.firstNameFr = firstNameFr;
+        this.firstNameAr = firstNameAr;
+        this.lastNameFr = lastNameFr;
+        this.lastNameAr = lastNameAr;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.ppr = ppr;
+        this.cin = cin;
+        this.addressFr = addressFr;
+        this.addressAr = addressAr;
+        this.hireDate = hireDate;
+        this.workLocationFr = workLocationFr;
+        this.workLocationAr = workLocationAr;
+        this.image = image;
+        this.manager = manager;
+        this.responsible = responsible;
+        this.profile = profile;
+        this.grade = grade;
+        this.post = post;
+        this.filiere = filiere;
+        this.annualLeaveLines = annualLeaveLines;
+        this.leaves = leaves;
     }
 }
