@@ -14,13 +14,13 @@ public class Leave {
     private Long leaveId;
     private Date startDate;
     private Date endDate;
-    @Column(columnDefinition = "NVARCHAR(255)")
+
     private Boolean remplecementVisa;
     private Date remplecementVisaDate;
-    @Column(columnDefinition = "NVARCHAR(255)")
+
     private Boolean responsibleVisa;
     private Date responsibleVisaDate;
-    @Column(columnDefinition = "NVARCHAR(255)")
+
     private Boolean managerVisa;
     private Date managerVisaDate;
 
