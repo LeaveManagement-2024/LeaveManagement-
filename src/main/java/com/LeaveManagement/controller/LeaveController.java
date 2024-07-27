@@ -2,6 +2,7 @@ package com.LeaveManagement.controller;
 
 import com.LeaveManagement.Dto.LeaveDTO;
 import com.LeaveManagement.Entity.Leave;
+import com.LeaveManagement.Entity.Projects;
 import com.LeaveManagement.Service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,9 @@ public class LeaveController {
     public ResponseEntity<String> deleteLeave(@PathVariable Long id) {
         leaveService.deleteLeave(id);
         return ResponseEntity.ok("Leave deleted successfully");
+    }
+    @GetMapping(path="/LeavesByEmpId/{Id}")
+    public List<Leave> getLeavesByEmpId(@PathVariable Long Id) {
+        return leaveService.getLeavesByEmpId(Id);
     }
 }

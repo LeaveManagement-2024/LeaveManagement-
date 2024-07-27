@@ -11,4 +11,5 @@ public interface AnnualLeaveLineService {
     AnnualLeaveLine getAnnualLeaveLineById(Long idE, Long annualLeaveId);
     void updateAnnualLeaveLine(Long idE, Long annualLeaveId, AnnualLeaveLineDTO annualLeaveLineDTO);
     void deleteAnnualLeaveLine(Long idE, Long annualLeaveId);
+    public List<AnnualLeaveLine> getAnnualLeaveLineByEmpId(Long ide);
 }

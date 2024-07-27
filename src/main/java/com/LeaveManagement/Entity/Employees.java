@@ -1,5 +1,6 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -8,9 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idE")
 public class Employees {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idE;
@@ -45,9 +44,11 @@ public class Employees {
     private String image;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "managerId")
     private Employees manager;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "responsibleId")
     private Employees responsible;
 
@@ -65,10 +66,10 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name= "IdFiliere")
     private Filiere filiere;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "employee")
     private List<AnnualLeaveLine> annualLeaveLines;
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "employee")
     private List<Leave> leaves;
 

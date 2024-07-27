@@ -24,12 +24,12 @@ public class Leave {
     private Boolean managerVisa;
     private Date managerVisaDate;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employees employee;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;
@@ -39,17 +39,17 @@ public class Leave {
     @JoinColumn(name = "leaveTypeId")
     private LeaveType leaveType;
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "replacementId")
     private Employees replacement;
 
     // Removed duplicate 'idE' column mapping
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "lmanagerId")
     private Employees lmanager;
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "responsibleId")
     private Employees responsible;
