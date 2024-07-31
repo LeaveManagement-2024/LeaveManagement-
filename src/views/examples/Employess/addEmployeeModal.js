@@ -88,7 +88,7 @@ const AddEmployeeModal = (props) => {
                         </FormGroup>
                       </Col>
                       <Col lg="6">
-                        <FormGroup className="text-right">
+                        <FormGroup className="text-left">
                           <label
                             className="form-control-label"ك
                             htmlFor="input-first-name"
