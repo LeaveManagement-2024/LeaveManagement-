@@ -383,7 +383,7 @@ const AddEmployeeModal = (props) => {
         <Modal.Footer>
           <Button onClick={props.onHide}>خروج</Button>
           <Button variant="primary" >
-           حفظ 
+           حفظ
           </Button>
         </Modal.Footer>
       </Modal>
