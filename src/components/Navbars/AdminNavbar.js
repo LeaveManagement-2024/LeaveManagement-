@@ -33,8 +33,37 @@ import {
   Container,
   Media,
 } from "reactstrap";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {
+  loginEmployee,
+  addEmployee,
+  getAllEmployees,
+  getEmployeeById,
+  updateEmployee,
+  deleteEmployee,
+  getManagerByIdEmp,
+  getResponsibleByIdEmp
+} from '../../views/examples/Employess/employeeApi'
 
 const AdminNavbar = (props) => {
+
+  const [employee, setEmployee] = useState({});
+
+  useEffect(() => {
+    fetchEmployee();
+  }, []);
+  
+  const fetchEmployee = async () => {
+    try {
+      const data = await getEmployeeById(1);
+      setEmployee(data);
+    } catch (error) {
+      console.error('Error fetching employee:', error);
+    }
+  };
+
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark  " expand="md" id="navbar-main">
@@ -61,17 +90,18 @@ const AdminNavbar = (props) => {
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">
-                  <span className="avatar avatar-sm rounded-circle">
-                    <img
-                      alt="..."
-                      src={require("../../assets/img/theme/team-4-800x800.jpg")}
-                    />
-                  </span>
                   <Media className="ml-2 d-none d-lg-block">
-                    <span className="mb-0 text-sm font-weight-bold">
-                      Jessica Jones
+                    <span className="mb-0 text-lg font-weight-bold" style={{marginRight:"10px"}}>
+                        {employee.lastNameAr}  {employee.firstNameAr}
                     </span>
                   </Media>
+                  <span className="avatar avatar-md rounded-circle">
+                    <img
+                      alt="..."
+                      src={employee.image}
+                    />
+                  </span>
+                  
                 </Media>
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-arrow" right>

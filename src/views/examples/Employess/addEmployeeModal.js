@@ -20,32 +20,11 @@ const AddEmployeeModal = (props) => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-      >     
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
-          </Modal.Title>
-        </Modal.Header>
+      >  
         <Modal.Body>
-          <h4>Centered Modal</h4>
-         
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">حسابي</h3>
-                  </Col>
-                  <Col className="text-right" xs="4">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      الإعدادات
-                    </Button>
-                  </Col>
-                </Row>
+              <h4 className='text-center text-xl'> بطاقة الموظف</h4>
               </CardHeader>
               <CardBody>
                 <Form>
