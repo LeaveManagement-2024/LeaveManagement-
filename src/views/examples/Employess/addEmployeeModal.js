@@ -60,12 +60,12 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"ك
                             htmlFor="input-first-name"
                           >
-                            الاسم الأول
+                            الاسم العائلي
                           </label>
                           <Input
                             className="form-control-alternative text-right"                           
                             id="input-first-name"
-                            placeholder="الاسم الأول"
+                            placeholder="الاسم العائلي"
                             type="text"
                           />
                         </FormGroup>
@@ -76,13 +76,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >
-                            اسم العائلة
+                            الاسم الشخصي
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                         
                             id="input-last-name"
-                            placeholder="اسم العائلة"
+                            placeholder="الاسم الشخصي"
                             type="text"
                           /> 
                         </FormGroup>
@@ -90,15 +90,15 @@ const AddEmployeeModal = (props) => {
                       <Col lg="6">
                         <FormGroup className="text-right">
                           <label
-                            className="form-control-label"ك
+                            className="form-control-label"
                             htmlFor="input-first-name"
                           >
-                            Prenom
+                            Prénom
                           </label>
                           <Input
                             className="form-control-alternative text-right"                           
                             id="input-first-name"
-                            placeholder="الم "
+                            placeholder=" Votre prénom"
                             type="text"
                           />
                         </FormGroup>
@@ -109,13 +109,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >
-                            اسم العائلة
+                            Nom 
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                         
                             id="input-last-name"
-                            placeholder="اسم العائلة"
+                            placeholder=" Votre nom"
                             type="text"
                           /> 
                         </FormGroup>
@@ -237,7 +237,7 @@ const AddEmployeeModal = (props) => {
                             placeholder="رقم التاجير"
                             type="text"
                         
-                            disabled
+                            
                           />
                         </FormGroup>
                       </Col>
@@ -282,13 +282,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-city"
                           >
-                            المدينة
+                            الصفة
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                            
                             id="input-city"
-                            placeholder="المدينة"
+                            placeholder="الصفة"
                             type="text"
                           />
                         </FormGroup>
@@ -305,7 +305,7 @@ const AddEmployeeModal = (props) => {
                             className="form-control-alternative text-right"
                             
                             id="input-country"
-                            placeholder="البلد"
+                            placeholder="الشعبة"
                             type="text"
                           />
                         </FormGroup>
@@ -316,13 +316,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-postal-code"
                           >
-                            الرمز البريدي
+                            المصلحة
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                             id="input-postal-code"
-                            placeholder="الرمز البريدي"
-                            type="number"
+                            placeholder="المصلحة"
+                            type="text"
                           />
                         </FormGroup>
                       </Col>
@@ -330,7 +330,7 @@ const AddEmployeeModal = (props) => {
                   </div>
                   <hr className="my-4" />
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>
-                              تغيير كلمة المرور
+                  إدخال كلمة المرور 
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
@@ -340,85 +340,37 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-address"
                           >
-                            كلمة المرور القديمة 
+                            كلمة المرور  
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                            
                             id="input-address"
-                            placeholder="كلمة المرور القديمة"
+                            placeholder="كلمة المرور "
                             type="text"
                           />
                         </FormGroup>
                       </Col>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور الجديدة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور الجديدة"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور الجديدة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور الجديدة"
-                            type="text"
-                          />
-                        </FormGroup>
-                        <Col className="text-right" xs="12">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      تغيير كلمة المرور 
-                    </Button>
-                  </Col>
-                      </Col>
-                    </Row>
+                 
                     
+                    </Row>
+                     
                   </div>
                   <hr className="my-4" />
                   {/* Description */}
-                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>معلومات عني</h6>
+                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>تغيير الصورة الشخصية </h6>
                   <div className="pl-lg-4">
                     <FormGroup className="text-right">
-                      <label >معلومات عني</label>
+                      
                       <div className="d-flex justify-content-center " style={{marginTop : '7px',marginBottom : '0px'}} >
                             <Input                                                       
                               size="sm" 
                               type="file"
                               
                             >
-                              تغيير صورتي الشخصية 
+                              
                             </Input>
-                            <Button
-                                color="info"
-                                size="sm"
-                                onClick={(e) => e.preventDefault()}
-                            >
-                                  Edit image
-                            </Button>
+                            
                         </div>
                       
                     </FormGroup>
@@ -429,9 +381,9 @@ const AddEmployeeModal = (props) => {
           
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={props.onHide}>خروج</Button>
           <Button variant="primary" >
-            Save Changes
+           حفظ 
           </Button>
         </Modal.Footer>
       </Modal>
