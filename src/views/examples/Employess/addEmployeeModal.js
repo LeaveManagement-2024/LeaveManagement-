@@ -84,7 +84,40 @@ const AddEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="اسم العائلة"
                             type="text"
+                          /> 
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">
+                        <FormGroup className="text-right">
+                          <label
+                            className="form-control-label"ك
+                            htmlFor="input-first-name"
+                          >
+                            Prenom
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"                           
+                            id="input-first-name"
+                            placeholder="الم "
+                            type="text"
                           />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">
+                        <FormGroup className="text-right">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-last-name"
+                          >
+                            اسم العائلة
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                        
+                            id="input-last-name"
+                            placeholder="اسم العائلة"
+                            type="text"
+                          /> 
                         </FormGroup>
                       </Col>
                     </Row>
