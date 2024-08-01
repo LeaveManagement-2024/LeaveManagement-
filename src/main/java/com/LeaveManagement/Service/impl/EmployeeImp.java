@@ -166,15 +166,16 @@ public class EmployeeImp implements EmployeeService {
     }
     @Override
     public Employees GetManagerByIdEmp(Long id) {
-        Employees employee =employeeRep.findById(id).orElse(null);
-        return employee.getManager();
-
+        return employeeRep.findById(id)
+                .map(Employees::getManager)
+                .orElse(null);
     }
+
     @Override
     public Employees GetResponsibleByIdEmp(Long id) {
-        Employees employee =employeeRep.findById(id).orElse(null);
-        return employee.getResponsible();
-
+        return employeeRep.findById(id)
+                .map(Employees::getResponsible)
+                .orElse(null);
     }
 
 

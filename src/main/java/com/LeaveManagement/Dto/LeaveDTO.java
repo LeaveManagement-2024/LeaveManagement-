@@ -27,9 +27,10 @@ public class LeaveDTO {
     public LeaveDTO() {
     }
 
-    public LeaveDTO(Long leaveId, LocalDate startDate, LocalDate endDate, Boolean remplecementVisa, LocalDate remplecementVisaDate,
-                    Boolean responsibleVisa, LocalDate responsibleVisaDate, Boolean managerVisa, LocalDate managerVisaDate,
-                    Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
+    public LeaveDTO(Long leaveId, LocalDate startDate, LocalDate endDate, Boolean remplecementVisa,
+                    LocalDate remplecementVisaDate, Boolean responsibleVisa, LocalDate responsibleVisaDate,
+                    Boolean managerVisa, LocalDate managerVisaDate, Long employeeId, Long annualLeaveId,
+                    Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
         this.leaveId = leaveId;
         this.startDate = startDate;
         this.endDate = endDate;
