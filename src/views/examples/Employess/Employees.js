@@ -123,9 +123,10 @@ const Employees = () => {
     }
   };
 
-  const handleDeleteEmployee = async () => {
+  const handleDeleteEmployee = async (idE) => {
     try {
-      await deleteEmployee(employeeId);
+      
+      await deleteEmployee(idE);
       setMessage('تم حذف الموظف بنجاح');
       fetchAllEmployees(); // Refresh the list
     } catch (error) {
@@ -176,10 +177,13 @@ const Employees = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">الاسم</th>
+                    <th scope="col">الاسم الكامل</th>
+                    <th scope="col">الاطار</th>
+                    <th scope="col">الشعبة</th>
+                    <th scope="col">رقم البطاقة الوطنية</th>
                     <th scope="col">البريد الإلكتروني</th>
                     <th scope="col">الهاتف</th>
-                    <th scope="col">الحالة</th>
+                    <th scope="col">العنوان الشخصي</th>
                     <th scope="col">الإجراءات</th>
                   </tr>
                 </thead>
@@ -205,13 +209,19 @@ const Employees = () => {
                           </Media>
                         </Media>
                       </th>
-                      <td>{emp.email}</td>
-                      <td>{emp.phone}</td>
+                      <td>{emp?.grade?.gradeNameAr}</td>
+                      <td>{emp?.filiere?.filiereNameAr}</td>
                       <td>
-                        <Badge color="" className="badge-dot mr-4">
-                          <i className={`bg-${emp.statusColor}`} />
-                          {emp.cin}
-                        </Badge>
+                        {emp.cin}
+                      </td>
+                      <td>
+                        {emp.email}
+                      </td>
+                      <td>
+                        {emp.phone}
+                      </td>
+                      <td>
+                        {emp.addressAr}
                       </td>
                       <td >
                         <UncontrolledDropdown>
@@ -251,10 +261,10 @@ const Employees = () => {
                   ))}
                 </tbody>
               </Table>
-              <CardFooter className="py-4">
+              <CardFooter className="py-4 text-right">
                 <nav aria-label="...">
                   <Pagination
-                    className="pagination justify-content-end mb-0"
+                    className="pagination justify-content-start mb-0"
                     listClassName="justify-content-end mb-0"
                   >
                     <PaginationItem className={currentPage === 1 ? 'disabled' : ''}>
