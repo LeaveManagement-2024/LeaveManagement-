@@ -17,6 +17,8 @@ public interface EmployeeService {
     public Employees GetEmployeeById(Long  id);
     void updateEmployee(Long id, EmployeesDTO employeeDTO ) throws IOException;
     void deleteEmployee(Long id);
+    public Employees GetManagerByIdEmp(Long id);
+    public Employees GetResponsibleByIdEmp(Long id);
 
 
-}
+    }

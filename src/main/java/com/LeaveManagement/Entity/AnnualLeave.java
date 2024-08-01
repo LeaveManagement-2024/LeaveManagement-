@@ -20,10 +20,9 @@ public class AnnualLeave {
     @JsonBackReference
     @OneToMany(mappedBy = "annualLeave")
     private List<AnnualLeaveLine> annualLeaveLines;
+    @JsonBackReference
     @OneToMany(mappedBy = "annualLeave")
     private List<Leave> leaves;
-
-
 
     public AnnualLeave() {
     }

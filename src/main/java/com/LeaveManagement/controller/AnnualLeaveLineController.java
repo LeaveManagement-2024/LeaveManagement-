@@ -33,6 +33,10 @@ public class AnnualLeaveLineController {
         return annualLeaveLineService.getAnnualLeaveLineById(idE,idal);
     }
 
+    @GetMapping(path = "/getAnnualLeaveLineByEmpId/{idE}")
+    public List<AnnualLeaveLine>  getAnnualLeaveLineByEmpId(@PathVariable Long idE) {
+        return annualLeaveLineService.getAnnualLeaveLineByEmpId(idE) ;   }
+
     @PutMapping(path = "/update/{idE}/{idal}")
     public ResponseEntity<String> updateAnnualLeaveLine(@PathVariable Long idE,@PathVariable Long idal, @RequestBody AnnualLeaveLineDTO annualLeaveLineDTO) {
         annualLeaveLineService.updateAnnualLeaveLine(idE,idal, annualLeaveLineDTO);

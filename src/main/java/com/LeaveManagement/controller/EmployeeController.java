@@ -89,7 +89,14 @@ public class EmployeeController {
     public Employees getEmployeeById(@PathVariable Long Id) {
         return employeeService.GetEmployeeById(Id);
     }
-
+    @GetMapping(path="/getManagerByIdEmp/{Id}")
+    public Employees getManagerByIdEmp(@PathVariable Long Id) {
+        return employeeService.GetManagerByIdEmp(Id);
+    }
+    @GetMapping(path="/getResponsibleByIdEmp/{Id}")
+    public Employees getResponsibleByIdEmp(@PathVariable Long Id) {
+        return employeeService.GetResponsibleByIdEmp(Id);
+    }
     @PutMapping(path = "/update/{id}", consumes = {"multipart/form-data"})
     public ResponseEntity<String> updateUser(
             @PathVariable Long id,
