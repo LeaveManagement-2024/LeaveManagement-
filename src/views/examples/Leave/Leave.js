@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import AddEmployeeModal from './Employess/addEmployeeModal';
+import AddLeaveModal from './addLeaveModal';
 
 const data = [
   {
@@ -31,10 +31,10 @@ const data = [
     status: 'pending',
     statusColor: 'warning',
     users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
+      { name: 'Ryan Tompson', img: require("../../../assets/img/theme/team-1-800x800.jpg") },
+      { name: 'Romina Hadid', img: require("../../../assets/img/theme/team-2-800x800.jpg") },
+      { name: 'Alexander Smith', img: require("../../../assets/img/theme/team-3-800x800.jpg") },
+      { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
     ],
     completion: 60,
     completionColor: 'danger',
@@ -45,10 +45,10 @@ const data = [
     status: 'pending',
     statusColor: 'warning',
     users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
+      { name: 'Ryan Tompson', img: require("../../../assets/img/theme/team-1-800x800.jpg") },
+      { name: 'Romina Hadid', img: require("../../../assets/img/theme/team-2-800x800.jpg") },
+      { name: 'Alexander Smith', img: require("../../../assets/img/theme/team-3-800x800.jpg") },
+      { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
     ],
     completion: 60,
     completionColor: 'danger',
@@ -59,66 +59,10 @@ const data = [
     status: 'pending',
     statusColor: 'warning',
     users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../assets/img/theme/team-4-800x800.jpg") },
+      { name: 'Ryan Tompson', img: require("../../../assets/img/theme/team-1-800x800.jpg") },
+      { name: 'Romina Hadid', img: require("../../../assets/img/theme/team-2-800x800.jpg") },
+      { name: 'Alexander Smith', img: require("../../../assets/img/theme/team-3-800x800.jpg") },
+      { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
     ],
     completion: 60,
     completionColor: 'danger',
@@ -126,7 +70,7 @@ const data = [
   // Ajoutez plus de données ici
 ];
 
-const Tables = () => {
+const Leave = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -150,7 +94,7 @@ const Tables = () => {
                   <Button  color="primary" onClick={() => setModalShow(true)}>
                   إضافة رخصة                 
                   </Button>
-                  <AddEmployeeModal show={modalShow} onHide={() => setModalShow(false)}></AddEmployeeModal>
+                  <AddLeaveModal show={modalShow} onHide={() => setModalShow(false)}></AddLeaveModal>
                   <h3 className="mb-0">جدول الرخص</h3>
                 </div>
               </CardHeader>
@@ -179,7 +123,7 @@ const Tables = () => {
                           >
                             <img
                               alt="..."
-                              src={require("../../assets/img/theme/bootstrap.jpg")}
+                              src={require("../../../assets/img/theme/bootstrap.jpg")}
                             />
                           </a>
                           <Media>
@@ -320,4 +264,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default Leave;

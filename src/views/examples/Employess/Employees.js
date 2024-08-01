@@ -25,6 +25,7 @@ import {
   CardBody,
 } from "reactstrap";
 import AddEmployeeModal from './addEmployeeModal';
+import EditEmployeeModal from './editEmployeeModal';
 import Header from "components/Headers/Header.js";
 import {
   loginEmployee,
@@ -70,6 +71,8 @@ const Employees = () => {
   const itemsPerPage = 10;
   const [message, setMessage] = useState('');
   const [modalShow, setModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
+  const [editemp, setEditemp] = useState([])
 
 
   useEffect(() => {
@@ -244,10 +247,17 @@ const Employees = () => {
                             </DropdownItem>
                             <DropdownItem
                               
-                              onClick={() => handleUpdateEmployee(emp.idE)}
+                              onClick={() => setEditModalShow(true)}
                             >
                               تعديل
                             </DropdownItem>
+                            <EditEmployeeModal 
+                            show={editModalShow} 
+                            onHide={() => {setEditModalShow(false)
+                              setEditemp(emp)}}
+                            emp={editemp}
+                              >
+                            </EditEmployeeModal>
                             <DropdownItem
                               
                               onClick={() => handleDeleteEmployee(emp.idE)}
