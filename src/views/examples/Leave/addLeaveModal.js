@@ -34,7 +34,7 @@ const AddEmployeeModal = (props) => {
                       <Col lg="6">
                         <FormGroup className="text-right">
                           <label
-                            className="form-control-label"ك
+                            className="form-control-label"
                             htmlFor="input-first-name"
                           >
                               اسم النائب 
