@@ -12,14 +12,17 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
+  Button,
   Progress,
   Table,
   Container,
   Row,
   UncontrolledTooltip,
+  
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import AddEmployeeModal from './Employess/addEmployeeModal';
 
 const data = [
   {
@@ -133,28 +136,35 @@ const Tables = () => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
       <Header />
-      {/* Page content */}
-      <Container className="mt--7" fluid>
-        {/* Table */}
+      <Container className="mt--7" fluid style={{ direction: 'rtl' }}>
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">Card tables</h3>
+                <div className="d-flex justify-content-between align-items-center">
+                  <Button  color="primary" onClick={() => setModalShow(true)}>
+                  إضافة رخصة                 
+                  </Button>
+                  <AddEmployeeModal show={modalShow} onHide={() => setModalShow(false)}></AddEmployeeModal>
+                  <h3 className="mb-0">جدول الرخص</h3>
+                </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
-                <thead className="thead-light">
+              <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Project</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Users</th>
-                    <th scope="col">Completion</th>
-                    <th scope="col" />
+                    <th scope="col"> نوع الرخصة</th>
+                    <th scope="col">   تاريخ مغادرة المنصب</th>
+                    <th scope="col">  تاريخ استئناف العمل </th>
+                    <th scope="col">  اسم القائم بالنياية </th>
+                    <th scope="col">المسؤول عن النائب </th>
+                    <th scope="col">رئيس المصلحة</th>
+                    <th scope="col"> </th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
