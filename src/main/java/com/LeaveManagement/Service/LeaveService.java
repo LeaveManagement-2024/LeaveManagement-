@@ -10,4 +10,5 @@ public interface LeaveService {
     Leave getLeaveById(Long id);
     void updateLeave(Long id, LeaveDTO leave);
     void deleteLeave(Long id);
+    List<Leave> getLeavesByEmpId(Long ide);
 }

@@ -1,16 +1,15 @@
 package com.LeaveManagement.Service.impl;
 
 import com.LeaveManagement.Dto.AnnualLeaveLineDTO;
-import com.LeaveManagement.Entity.AnnualLeave;
-import com.LeaveManagement.Entity.AnnualLeaveLine;
-import com.LeaveManagement.Entity.AnnualLeaveLineId;
-import com.LeaveManagement.Entity.Employees;
+import com.LeaveManagement.Entity.*;
 import com.LeaveManagement.Repo.AnnualLeaveLineRepo;
 import com.LeaveManagement.Repo.AnnualLeaveRepo;
 import com.LeaveManagement.Repo.EmployeeRepo;
 import com.LeaveManagement.Service.AnnualLeaveLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 
 
@@ -65,5 +64,18 @@ public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
     @Override
     public void deleteAnnualLeaveLine(Long idE, Long annualLeaveId) {
         annualLeaveLineRepo.deleteById(new AnnualLeaveLineId(idE, annualLeaveId));
+    }
+    @Override
+    public List<AnnualLeaveLine> getAnnualLeaveLineByEmpId(Long ide) {
+
+        Employees employee = employeeRepo.findById(ide).orElse(null);
+
+        if (employee != null) {
+
+            return employee.getAnnualLeaveLines();
+        } else {
+
+            return Collections.emptyList();
+        }
     }
 }

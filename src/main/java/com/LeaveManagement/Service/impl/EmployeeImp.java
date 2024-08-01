@@ -164,4 +164,18 @@ public class EmployeeImp implements EmployeeService {
         employeeRep.deleteById(id);
 
     }
+    @Override
+    public Employees GetManagerByIdEmp(Long id) {
+        Employees employee =employeeRep.findById(id).orElse(null);
+        return employee.getManager();
+
+    }
+    @Override
+    public Employees GetResponsibleByIdEmp(Long id) {
+        Employees employee =employeeRep.findById(id).orElse(null);
+        return employee.getResponsible();
+
+    }
+
+
 }

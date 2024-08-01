@@ -7,6 +7,7 @@ import com.LeaveManagement.Service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -91,4 +92,20 @@ public class LeaveImp implements LeaveService {
     public void deleteLeave(Long id) {
         leaveRepo.deleteById(id);
     }
+
+    @Override
+    public List<Leave> getLeavesByEmpId(Long ide) {
+
+        Employees employee = employeeRepo.findById(ide).orElse(null);
+
+        if (employee != null) {
+
+            return employee.getLeaves();
+        } else {
+
+            return Collections.emptyList();
+        }
+    }
+
+
 }
