@@ -494,7 +494,7 @@ const AddEmployeeModal = (props) => {
             </Card>
           
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="d-flex justify-content-center">
           <Button onClick={props.onHide}>خروج</Button>
           <Button variant="primary" >
            حفظ
