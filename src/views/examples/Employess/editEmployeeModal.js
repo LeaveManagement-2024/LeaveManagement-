@@ -187,6 +187,7 @@ const EditEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="Votre prénom "
                             type="text"
+                            defaultValue={props.emp.firstNameFr}
                           /> 
                         </FormGroup>
                       </Col>
@@ -212,6 +213,7 @@ const EditEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="Ville,Quartier,Num "
                             type="text"
+                            defaultValue={props.emp.addressFr}
                           />
                         </FormGroup>
                       </Col>
@@ -236,7 +238,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
+                            defaultValue={props.emp.grade?.gradeNameAr}
                             id="input-address"
                             placeholder="الرتبة"
                             type="text"
@@ -256,7 +258,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
+                            defaultValue={props.emp.ppr}
                             id="input-city"
                             placeholder="رقم التاجير"
                             type="text"
@@ -275,7 +277,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            
+                            defaultValue={props.emp.hireDate}
                             id="input-country"
                             
                             type="datetime-local"
@@ -295,6 +297,7 @@ const EditEmployeeModal = (props) => {
                             id="input-postal-code"
                             placeholder="مقر العمل"
                             type="text"
+                            defaultValue={props.emp.workLocationAr}
                           />
                         </FormGroup>
                       </Col>
@@ -310,7 +313,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
+                            defaultValue={props.emp?.post?.postNameAr}
                             id="input-city"
                             placeholder="الصفة"
                             type="text"
@@ -327,7 +330,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            
+                            defaultValue={props.emp?.filiere?.filiereNameAr}
                             id="input-country"
                             placeholder="الشعبة"
                             type="text"
@@ -347,6 +350,8 @@ const EditEmployeeModal = (props) => {
                             id="input-postal-code"
                             placeholder="المصلحة"
                             type="text"
+                            defaultValue={props.emp?.filiere?.departement?.departementNameAr}
+
                           />
                         </FormGroup>
                       </Col>
@@ -368,7 +373,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-left"
-                           
+                            defaultValue={props.emp.grade?.gradeNameFr}
                             id="input-address"
                             placeholder="Votre grade"
                             type="text"
@@ -389,6 +394,7 @@ const EditEmployeeModal = (props) => {
                               Lieu de travail
                           </label>
                           <Input
+                           defaultValue={props.emp.workLocationFr}
                             className="form-control-alternative text-left"
                             id="input-postal-code"
                             placeholder=" Votre lieu de travail "
@@ -408,7 +414,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-left"
-                           
+                            defaultValue={props.emp.post?.postNameFr}
                             id="input-city"
                             placeholder="Votre fonction"
                             type="text"
@@ -425,7 +431,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input 
                             className="form-control-alternative text-left"
-                            
+                            defaultValue={props.emp?.filiere?.filiereNameFr}
                             id="input-country"
                             placeholder="Votre filiere"
                             type="text"
@@ -441,6 +447,7 @@ const EditEmployeeModal = (props) => {
                             Service
                           </label>
                           <Input
+                            defaultValue={props.emp?.filiere?.departement?.departementNameFr}
                             className="form-control-alternative text-left"
                             id="input-postal-code"
                             placeholder="Votre service"
