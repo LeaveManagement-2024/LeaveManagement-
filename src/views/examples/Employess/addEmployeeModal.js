@@ -29,8 +29,7 @@ const AddEmployeeModal = (props) => {
               <CardBody>
                 <Form>
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>
-                    معلومات الموظف
-                  </h6>
+                   المعلومات الشخصية                 </h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
@@ -49,7 +48,7 @@ const AddEmployeeModal = (props) => {
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="6">
+                      <Col lg="6">    
                         <FormGroup className="text-right">
                           <label
                             className="form-control-label"
@@ -66,39 +65,8 @@ const AddEmployeeModal = (props) => {
                           /> 
                         </FormGroup>
                       </Col>
-                      <Col lg="6">
-                        <FormGroup className="text-left">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
-                            Prénom
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"                           
-                            id="input-first-name"
-                            placeholder=" Votre prénom"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">
-                        <FormGroup className="text-right">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                            Nom 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                        
-                            id="input-last-name"
-                            placeholder=" Votre nom"
-                            type="text"
-                          /> 
-                        </FormGroup>
-                      </Col>
+                     
+                     
                     </Row>
                     <Row>
                       <Col lg="6">
@@ -113,7 +81,7 @@ const AddEmployeeModal = (props) => {
                             className="form-control-alternative text-right"
                            
                             id="input-username"
-                            placeholder="رقم البطاقة الوطنية"
+                            placeholder="  E161616"
                             type="text"
                           />
                         </FormGroup>
@@ -124,7 +92,7 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label text-left"
                             htmlFor="input-email"
                           >
-                            عنوان البريد الإلكتروني
+                             البريد الإلكتروني
                           </label>
                           <Input
                             className="form-control-alternative text-right"
@@ -144,12 +112,14 @@ const AddEmployeeModal = (props) => {
                           >
                             رقم الهاتف
                           </label>
-                          <Input
+                          <Input 
                             className="form-control-alternative text-right"
                          
                             id="input-first-name"
-                            placeholder="رقم الهاتف"
-                            type="text"
+                            placeholder=" 06 56 30 98 03"
+                            type="tel"
+                            maxLength={10}
+
                           />
                         </FormGroup>
                       </Col>
@@ -165,7 +135,74 @@ const AddEmployeeModal = (props) => {
                             className="form-control-alternative text-right"
                            
                             id="input-last-name"
-                            placeholder="العنوان"
+                            placeholder="المدينة،الحي،رقم المنزل"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    
+                  </div>
+                  <hr className="my-4" />
+                  <h6 className=" text-left mb-4  "style={{ fontSize: '1.3em' }}>
+                   Les informations personnels
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col lg="6">
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"ك
+                            htmlFor="input-first-name"
+                          >
+                            Nom
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"                           
+                            id="input-first-name"
+                            placeholder="Votre nom"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">    
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-last-name"
+                          >
+                            Prénom 
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                        
+                            id="input-last-name"
+                            placeholder="Votre prénom "
+                            type="text"
+                          /> 
+                        </FormGroup>
+                      </Col>
+                     
+                     
+                    </Row>
+                    <Row>
+                      
+                    </Row>
+                    <Row>
+                     
+                      <Col md="12">
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-last-name"
+                          >
+                            Adresse
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                           
+                            id="input-last-name"
+                            placeholder="Ville,Quartier,Num "
                             type="text"
                           />
                         </FormGroup>
@@ -182,7 +219,7 @@ const AddEmployeeModal = (props) => {
                   <div className="pl-lg-4">
                     <Row>
                       <Col md="12">
-                        <FormGroup className="text-center" >
+                        <FormGroup className="text-right" >
                           <label
                             className="form-control-label"
                             htmlFor="input-address"
@@ -308,6 +345,104 @@ const AddEmployeeModal = (props) => {
                     </Row>
                   </div>
                   <hr className="my-4" />
+                  <h6 className=" text-left mb-4  "style={{ fontSize: '1.3em' }}>
+                    Les informations de travail
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col md="12">
+                        <FormGroup className="text-left" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            Grade 
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                           
+                            id="input-address"
+                            placeholder="Votre grade"
+                            type="text"
+                        
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                     
+                      
+                      <Col  md="12">
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-postal-code"
+                          >
+                              Lieu de travail
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                            id="input-postal-code"
+                            placeholder=" Votre lieu de travail "
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg="4">
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-city"
+                          >
+                            Fonction
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                           
+                            id="input-city"
+                            placeholder="Votre fonction"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="4">
+                        <FormGroup className="text-left">
+                          <label 
+                            className="form-control-label "
+                            htmlFor="input-country"
+                          >
+                            Filiere
+                          </label>
+                          <Input 
+                            className="form-control-alternative text-left"
+                            
+                            id="input-country"
+                            placeholder="Votre filiere"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="4">
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-postal-code"
+                          >
+                            Service
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                            id="input-postal-code"
+                            placeholder="Votre service"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                  <hr className="my-4" />
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>
                   إدخال كلمة المرور 
                   </h6>
@@ -337,7 +472,7 @@ const AddEmployeeModal = (props) => {
                   </div>
                   <hr className="my-4" />
                   {/* Description */}
-                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>تغيير الصورة الشخصية </h6>
+                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}> الصورة الشخصية </h6>
                   <div className="pl-lg-4">
                     <FormGroup className="text-right">
                       
