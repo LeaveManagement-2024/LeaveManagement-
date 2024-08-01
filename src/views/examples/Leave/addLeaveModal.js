@@ -23,12 +23,12 @@ const AddEmployeeModal = (props) => {
         <Modal.Body>
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
-              <h4 className='text-center text-xl'> ب</h4>
+              <h4 className='text-center text-xl'> الرخصة الادارية</h4>
               </CardHeader>
               <CardBody>
                 <Form>
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>
-                   المعلومات الشخصية                 </h6>
+                                   </h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
@@ -37,12 +37,12 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"ك
                             htmlFor="input-first-name"
                           >
-                            الاسم العائلي
+                              اسم النائب 
                           </label>
                           <Input
                             className="form-control-alternative text-right"                           
                             id="input-first-name"
-                            placeholder="الاسم العائلي"
+                            placeholder=" اسم النائب"
                             type="text"
                           />
                         </FormGroup>
@@ -53,15 +53,31 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >
-                            الاسم الشخصي
+                             نوع الرخصة
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                         
                             id="input-last-name"
-                            placeholder="الاسم الشخصي"
-                            type="text"
-                          /> 
+                            placeholder="...رخصة مرضية،رخصة ولادة"
+                            type="select"
+                          >
+                            <option>
+                              
+                            </option>
+                            <option>
+                              2
+                            </option>
+                            <option>
+                              3
+                            </option>
+                            <option>
+                              4
+                            </option>
+                            <option>
+                              5
+                            </option>
+                            </Input>
                         </FormGroup>
                       </Col>
                      
@@ -74,13 +90,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-username"
                           >
-                              رقم البطاقة الوطنية
+                              تاريخ استئناف العمل
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                            
                             id="input-username"
-                            placeholder="  E161616"
+                            placeholder="    "
                             type="text"
                           />
                         </FormGroup>
@@ -91,13 +107,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label text-left"
                             htmlFor="input-email"
                           >
-                             البريد الإلكتروني
+                              
                           </label>
-                          <Input
+                          <Input 
                             className="form-control-alternative text-right"
                             id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
+                            placeholder=" "
+                            type="text"
                           />
                         </FormGroup>
                       </Col>
