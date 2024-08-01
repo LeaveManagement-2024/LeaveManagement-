@@ -2,19 +2,20 @@ package com.LeaveManagement.Dto;
 
 import jakarta.persistence.Column;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class LeaveDTO {
 
     private Long leaveId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Boolean remplecementVisa;
-    private Date remplecementVisaDate;
+    private LocalDate remplecementVisaDate;
     private Boolean responsibleVisa;
-    private Date responsibleVisaDate;
+    private LocalDate responsibleVisaDate;
     private Boolean managerVisa;
-    private Date managerVisaDate;
+    private LocalDate managerVisaDate;
 
     private Long employeeId;
     private Long annualLeaveId;
@@ -26,7 +27,9 @@ public class LeaveDTO {
     public LeaveDTO() {
     }
 
-    public LeaveDTO(Long leaveId, Date startDate, Date endDate, Boolean remplecementVisa, Date remplecementVisaDate, Boolean responsibleVisa, Date responsibleVisaDate, Boolean managerVisa, Date managerVisaDate, Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
+    public LeaveDTO(Long leaveId, LocalDate startDate, LocalDate endDate, Boolean remplecementVisa, LocalDate remplecementVisaDate,
+                    Boolean responsibleVisa, LocalDate responsibleVisaDate, Boolean managerVisa, LocalDate managerVisaDate,
+                    Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
         this.leaveId = leaveId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -52,19 +55,19 @@ public class LeaveDTO {
         this.leaveId = leaveId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -76,11 +79,11 @@ public class LeaveDTO {
         this.remplecementVisa = remplecementVisa;
     }
 
-    public Date getRemplecementVisaDate() {
+    public LocalDate getRemplecementVisaDate() {
         return remplecementVisaDate;
     }
 
-    public void setRemplecementVisaDate(Date remplecementVisaDate) {
+    public void setRemplecementVisaDate(LocalDate remplecementVisaDate) {
         this.remplecementVisaDate = remplecementVisaDate;
     }
 
@@ -92,11 +95,11 @@ public class LeaveDTO {
         this.responsibleVisa = responsibleVisa;
     }
 
-    public Date getResponsibleVisaDate() {
+    public LocalDate getResponsibleVisaDate() {
         return responsibleVisaDate;
     }
 
-    public void setResponsibleVisaDate(Date responsibleVisaDate) {
+    public void setResponsibleVisaDate(LocalDate responsibleVisaDate) {
         this.responsibleVisaDate = responsibleVisaDate;
     }
 
@@ -108,11 +111,11 @@ public class LeaveDTO {
         this.managerVisa = managerVisa;
     }
 
-    public Date getManagerVisaDate() {
+    public LocalDate getManagerVisaDate() {
         return managerVisaDate;
     }
 
-    public void setManagerVisaDate(Date managerVisaDate) {
+    public void setManagerVisaDate(LocalDate managerVisaDate) {
         this.managerVisaDate = managerVisaDate;
     }
 

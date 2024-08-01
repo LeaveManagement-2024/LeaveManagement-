@@ -63,7 +63,7 @@ public class Employees {
     @JoinColumn(name = "IdPost")
     private Posts post;
     @ManyToOne
-    @JoinColumn(name= "IdFiliere")
+    @JoinColumn(name = "IdFiliere")
     private Filiere filiere;
     @JsonManagedReference
     @OneToMany(mappedBy = "employee")
@@ -162,6 +162,7 @@ public class Employees {
     public void setAddressFr(String addressFr) {
         this.addressFr = addressFr;
     }
+
 
     public String getAddressAr() {
         return addressAr;

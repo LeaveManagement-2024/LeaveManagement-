@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,17 +13,17 @@ public class Leave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long leaveId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     @Column(columnDefinition = "NVARCHAR(255)")
     private Boolean remplecementVisa;
-    private Date remplecementVisaDate;
+    private LocalDate remplecementVisaDate;
     @Column(columnDefinition = "NVARCHAR(255)")
     private Boolean responsibleVisa;
-    private Date responsibleVisaDate;
+    private LocalDate responsibleVisaDate;
     @Column(columnDefinition = "NVARCHAR(255)")
     private Boolean managerVisa;
-    private Date managerVisaDate;
+    private LocalDate managerVisaDate;
 
     @JsonBackReference
     @ManyToOne
@@ -57,7 +58,7 @@ public class Leave {
     public Leave() {
     }
 
-    public Leave(Long leaveId, Date startDate, Date endDate, Boolean remplecementVisa, Date remplecementVisaDate, Boolean responsibleVisa, Date responsibleVisaDate, Boolean managerVisa, Date managerVisaDate, Employees employee, AnnualLeave annualLeave, LeaveType leaveType, Employees replacement, Employees lmanager, Employees responsible) {
+    public Leave(Long leaveId, LocalDate startDate, LocalDate endDate, Boolean remplecementVisa, LocalDate remplecementVisaDate, Boolean responsibleVisa, LocalDate responsibleVisaDate, Boolean managerVisa, LocalDate managerVisaDate, Employees employee, AnnualLeave annualLeave, LeaveType leaveType, Employees replacement, Employees lmanager, Employees responsible) {
         this.leaveId = leaveId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -83,19 +84,19 @@ public class Leave {
         this.leaveId = leaveId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -107,11 +108,11 @@ public class Leave {
         this.remplecementVisa = remplecementVisa;
     }
 
-    public Date getRemplecementVisaDate() {
+    public LocalDate getRemplecementVisaDate() {
         return remplecementVisaDate;
     }
 
-    public void setRemplecementVisaDate(Date remplecementVisaDate) {
+    public void setRemplecementVisaDate(LocalDate remplecementVisaDate) {
         this.remplecementVisaDate = remplecementVisaDate;
     }
 
@@ -123,11 +124,11 @@ public class Leave {
         this.responsibleVisa = responsibleVisa;
     }
 
-    public Date getResponsibleVisaDate() {
+    public LocalDate getResponsibleVisaDate() {
         return responsibleVisaDate;
     }
 
-    public void setResponsibleVisaDate(Date responsibleVisaDate) {
+    public void setResponsibleVisaDate(LocalDate responsibleVisaDate) {
         this.responsibleVisaDate = responsibleVisaDate;
     }
 
@@ -139,11 +140,11 @@ public class Leave {
         this.managerVisa = managerVisa;
     }
 
-    public Date getManagerVisaDate() {
+    public LocalDate getManagerVisaDate() {
         return managerVisaDate;
     }
 
-    public void setManagerVisaDate(Date managerVisaDate) {
+    public void setManagerVisaDate(LocalDate managerVisaDate) {
         this.managerVisaDate = managerVisaDate;
     }
 
