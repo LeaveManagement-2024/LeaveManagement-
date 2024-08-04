@@ -342,6 +342,72 @@ const AddEmployeeModal = (props) => {
                           />
                         </FormGroup>
                       </Col>
+                      <Col lg="6">    
+                        <FormGroup className="text-right">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-last-name"
+                          >
+                              المسؤول عنه 
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                        
+                            id="input-last-name"
+                            placeholder="...رخصة مرضية،رخصة ولادة"
+                            type="select"
+                          >
+                            <option>
+                              
+                            </option>
+                            <option>
+                              2
+                            </option>
+                            <option>
+                              3
+                            </option>
+                            <option>
+                              4
+                            </option>
+                            <option>
+                              5
+                            </option>
+                            </Input>
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">    
+                        <FormGroup className="text-right">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-last-name"
+                          >
+                            رئيس الموظف                                       
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                        
+                            id="input-last-name"
+                            placeholder="...رخصة مرضية،رخصة ولادة"
+                            type="select"
+                          >
+                            <option>
+                              
+                            </option>
+                            <option>
+                              2
+                            </option>
+                            <option>
+                              3
+                            </option>
+                            <option>
+                              4
+                            </option>
+                            <option>
+                              5
+                            </option>
+                            </Input>
+                        </FormGroup>
+                      </Col>
                     </Row>
                   </div>
                   <hr className="my-4" />
