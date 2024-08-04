@@ -7,6 +7,7 @@ import com.LeaveManagement.Service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -106,6 +107,17 @@ public class LeaveImp implements LeaveService {
             return Collections.emptyList();
         }
     }
+    public Long getNumberOfEmployeesOnLeaveToday() {
+        LocalDate today = LocalDate.now();
+        List<Leave> leavesToday = leaveRepo.findLeavesByDate(today);
+        return leavesToday.stream().map(Leave::getEmployee).distinct().count();
+    }
+    public List<Leave> getLeaveToday() {
+        LocalDate today = LocalDate.now();
+        List<Leave> leavesToday = leaveRepo.findLeavesByDate(today);
+        return leavesToday;
+    }
+
 
 
 }

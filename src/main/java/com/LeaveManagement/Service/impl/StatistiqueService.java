@@ -30,5 +30,6 @@ public class StatistiqueService {
     public long getUnconfirmedLeavesByManager() {
         return leaveRepository.countUnconfirmedLeavesByManager();
     }
+
 }
 

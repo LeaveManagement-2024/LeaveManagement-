@@ -1,8 +1,11 @@
 package com.LeaveManagement.Service.impl;
 
+import com.LeaveManagement.Dto.DepartementDTO;
 import com.LeaveManagement.Entity.Departement;
+import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Entity.Grades;
 import com.LeaveManagement.Repo.DepartementRepo;
+import com.LeaveManagement.Repo.EmployeeRepo;
 import com.LeaveManagement.Repo.GradesRepo;
 import com.LeaveManagement.Service.DepartementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,15 @@ import java.util.List;
 public class DepartementImp implements DepartementService {
     @Autowired
     private DepartementRepo departementRepo;
+    private EmployeeRepo employeeRepo;
 
     @Override
-    public Long addDepartement(Departement departement) {
+    public Long addDepartement(DepartementDTO departementDTO) {
+        Employees employees = employeeRepo.findById(departementDTO.getRespDepartementId()).orElseThrow(()->new IllegalArgumentException("Employee not found"));
+        Departement departement=new Departement();
+        departement.setDepartementNameAr(departementDTO.getDepartementNameAr());
+        departement.setDepartementNameFr(departementDTO.getDepartementNameFr());
+        departement.setRespDepartement(employees);
         departementRepo.save(departement);
         return departement.getIdDepartement();
     }
@@ -31,10 +40,12 @@ public class DepartementImp implements DepartementService {
     }
 
     @Override
-    public void updateDepartement(Long id, Departement departement) {
+    public void updateDepartement(Long id, DepartementDTO departementDTO) {
         Departement departementToUpdate = departementRepo.findById(id).orElseThrow(()->new IllegalArgumentException("Departement not found"));
-       departementToUpdate.setDepartementNameAr(departement.getDepartementNameAr());
-       departementToUpdate.setDepartementNameFr(departement.getDepartementNameFr());
+        Employees employees = employeeRepo.findById(departementDTO.getRespDepartementId()).orElseThrow(()->new IllegalArgumentException("Employee not found"));
+        departementToUpdate.setDepartementNameAr(departementDTO.getDepartementNameAr());
+        departementToUpdate.setDepartementNameFr(departementDTO.getDepartementNameFr());
+        departementToUpdate.setRespDepartement(employees);
         departementRepo.save(departementToUpdate);
     }
 

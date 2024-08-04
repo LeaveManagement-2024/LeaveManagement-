@@ -25,7 +25,7 @@ public class Leave {
     private Boolean managerVisa;
     private LocalDate managerVisaDate;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employees employee;

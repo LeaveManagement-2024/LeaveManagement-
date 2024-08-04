@@ -3,15 +3,15 @@ package com.LeaveManagement.Dto;
 public class FiliereDTO {
     private String FiliereNameFr;
     private String FiliereNameAr;
-    private long idDepartment;
+    private long idService;
 
     public FiliereDTO() {
     }
 
-    public FiliereDTO(String filiereNameFr, String filiereNameAr, long idDepartment) {
+    public FiliereDTO(String filiereNameFr, String filiereNameAr, long idService) {
         FiliereNameFr = filiereNameFr;
         FiliereNameAr = filiereNameAr;
-        this.idDepartment = idDepartment;
+        this.idService = idService;
     }
 
     public String getFiliereNameFr() {
@@ -30,11 +30,11 @@ public class FiliereDTO {
         FiliereNameAr = filiereNameAr;
     }
 
-    public long getIdDepartment() {
-        return idDepartment;
+    public long getIdService() {
+        return idService;
     }
 
-    public void setIdDepartment(long idDepartment) {
-        this.idDepartment = idDepartment;
+    public void setIdService(long idService) {
+        this.idService = idService;
     }
 }

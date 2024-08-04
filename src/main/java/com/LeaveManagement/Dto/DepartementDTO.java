@@ -1,33 +1,23 @@
-package com.LeaveManagement.Entity;
+package com.LeaveManagement.Dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.LeaveManagement.Entity.Employees;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-@Entity
-public class Departement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DepartementDTO {
     private long IdDepartement;
-    @Column(columnDefinition = "NVARCHAR(255)")
     private String departementNameFr;
-    @Column(columnDefinition = "NVARCHAR(255)")
     private String departementNameAr;
-    @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "respDepartementId")
-    private Employees respDepartement ;
+    private Long respDepartementId;
 
-    public Departement() {
+    public DepartementDTO() {
     }
-
-    public Departement(long idDepartement, String departementNameFr, String departementNameAr, Employees respDepartement) {
+    public DepartementDTO(long idDepartement, String departementNameFr, String departementNameAr, Long respDepartementId) {
         IdDepartement = idDepartement;
         this.departementNameFr = departementNameFr;
         this.departementNameAr = departementNameAr;
-        this.respDepartement = respDepartement;
+        this.respDepartementId = respDepartementId;
     }
-
     public long getIdDepartement() {
         return IdDepartement;
     }
@@ -52,12 +42,13 @@ public class Departement {
         this.departementNameAr = departementNameAr;
     }
 
-    public Employees getRespDepartement() {
-        return respDepartement;
+    public Long getRespDepartementId() {
+        return respDepartementId;
     }
 
-    public void setRespDepartement(Employees respDepartement) {
-        this.respDepartement = respDepartement;
+    public void setRespDepartementId(Long respDepartementId) {
+        this.respDepartementId = respDepartementId;
     }
+
+
 }
-

@@ -3,7 +3,8 @@ package com.LeaveManagement.Service.impl;
 import com.LeaveManagement.Dto.FiliereDTO;
 import com.LeaveManagement.Entity.Departement;
 import com.LeaveManagement.Entity.Filiere;
-import com.LeaveManagement.Repo.DepartementRepo;
+import com.LeaveManagement.Entity.ServiceE;
+import com.LeaveManagement.Repo.ServiceRepo;
 import com.LeaveManagement.Repo.FiliereRepo;
 import com.LeaveManagement.Service.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,16 @@ public class FiliereImp implements FiliereService {
     @Autowired
     private FiliereRepo filiereRepo;
     @Autowired
-    private DepartementRepo departementRepo;
+    private ServiceRepo serviceRepo;
 
     @Override
     public Long addFiliere(FiliereDTO filiereDTO)
     {
-        Departement departement = departementRepo.findById(filiereDTO.getIdDepartment()).orElseThrow(()->new IllegalArgumentException("Department not found"));
+        ServiceE serviceE = serviceRepo.findById(filiereDTO.getIdService()).orElseThrow(()->new IllegalArgumentException("Service not found"));
         Filiere filiere = new Filiere();
         filiere.setFiliereNameFr(filiereDTO.getFiliereNameFr());
         filiere.setFiliereNameAr(filiereDTO.getFiliereNameAr());
-        filiere.setDepartement(departement);
+        filiere.setService(serviceE);
         filiereRepo.save(filiere);
         return filiere.getIdFiliere();
     }
@@ -42,10 +43,10 @@ public class FiliereImp implements FiliereService {
     @Override
     public void updateFiliere(Long id, FiliereDTO filiereDTO) {
         Filiere filiereToUpdate = filiereRepo.findById(id).orElseThrow(()->new IllegalArgumentException("Filiere not found"));
-        Departement departement = departementRepo.findById(filiereDTO.getIdDepartment()).orElseThrow(()->new IllegalArgumentException("Department not found"));
+        ServiceE serviceE = serviceRepo.findById(filiereDTO.getIdService()).orElseThrow(()->new IllegalArgumentException("Service not found"));
         filiereToUpdate.setFiliereNameAr(filiereDTO.getFiliereNameAr());
         filiereToUpdate.setFiliereNameFr(filiereDTO.getFiliereNameFr());
-        filiereToUpdate.setDepartement(departement);
+        filiereToUpdate.setService(serviceE);
         filiereRepo.save(filiereToUpdate);
     }
 

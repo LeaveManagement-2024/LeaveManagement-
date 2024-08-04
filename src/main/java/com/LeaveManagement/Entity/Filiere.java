@@ -11,17 +11,17 @@ public class Filiere {
     @Column(columnDefinition = "NVARCHAR(255)")
     private String filiereNameAr;
     @ManyToOne
-    @JoinColumn(name = "IdDepartment")
-    private Departement departement;
+    @JoinColumn(name = "IdService")
+    private ServiceE service;
 
     public Filiere() {
     }
 
-    public Filiere(Long idFiliere, String filiereNameFr, String filiereNameAr, Departement departement) {
+    public Filiere(Long idFiliere, String filiereNameFr, String filiereNameAr, ServiceE service) {
         IdFiliere = idFiliere;
         this.filiereNameFr = filiereNameFr;
         this.filiereNameAr = filiereNameAr;
-        this.departement = departement;
+        this.service = service;
     }
 
     public Long getIdFiliere() {
@@ -48,11 +48,11 @@ public class Filiere {
         this.filiereNameAr = filiereNameAr;
     }
 
-    public Departement getDepartement() {
-        return departement;
+    public ServiceE getService() {
+        return service;
     }
 
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
+    public void setService(ServiceE service) {
+        this.service = service;
     }
 }
