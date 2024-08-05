@@ -54,7 +54,7 @@ const Employees = () => {
     ppr: '',
     cin: '',
     addressFr: '',
-    addressAr: '',
+    addressAr: '',  
     hireDate: '',
     workLocationFr: '',
     workLocationAr: '',
