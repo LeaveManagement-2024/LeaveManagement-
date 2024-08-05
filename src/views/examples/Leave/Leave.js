@@ -23,6 +23,7 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import AddLeaveModal from './addLeaveModal';
+import EditLeaveModal from './editLeaveModal '
 
 const data = [
   {
@@ -78,7 +79,7 @@ const Leave = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
+  const [editModalShow, setEditModalShow] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [modalShow, setModalShow] = useState(false);
 
@@ -197,19 +198,26 @@ const Leave = () => {
                               href="#pablo"
                               onClick={(e) => e.preventDefault()}
                             >
-                              Action
+                              عرض
                             </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={() => setEditModalShow(true)}
+                            >
+                               تعديل
+                            </DropdownItem>
+                            <EditLeaveModal
+                            show={editModalShow} 
+                            onHide={() => {setEditModalShow(false)
+                              }}
+                              >
+                            </EditLeaveModal>
                             <DropdownItem
                               href="#pablo"
                               onClick={(e) => e.preventDefault()}
                             >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
+                           
+                                حذف
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>

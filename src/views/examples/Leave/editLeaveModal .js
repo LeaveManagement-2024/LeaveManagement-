@@ -12,7 +12,7 @@ import {
   Col,
 } from "reactstrap";
 
-const AddLeaveModal = (props) => {
+const EditLeaveModal = (props) => {
     return (
       <Modal
         {...props}
@@ -23,7 +23,7 @@ const AddLeaveModal = (props) => {
         <Modal.Body>
             <Card className="bg-secondary shadow ">
               <CardHeader className="bg-white border-0">
-              <h4 className='text-center text-xl'> الرخصة الادارية</h4>
+              <h4 className='text-center text-xl'>  تعديل الرخصة الادارية</h4>
               </CardHeader>
               <CardBody>
                 <Form>
@@ -170,7 +170,7 @@ const AddLeaveModal = (props) => {
        
           <Button onClick={props.onHide}>خروج</Button>
           <Button variant="primary" >
-           حفظ
+          تعديل
           </Button>
           
         </Modal.Footer>
@@ -178,4 +178,4 @@ const AddLeaveModal = (props) => {
       
     );
   };
-  export default AddLeaveModal;
+  export default EditLeaveModal;

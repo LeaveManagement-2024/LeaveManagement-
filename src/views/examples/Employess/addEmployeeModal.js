@@ -244,13 +244,13 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-city"
                           >
-                            رقم التاجر
+                            رقم التأجير
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                            
                             id="input-city"
-                            placeholder="رقم التاجير"
+                            placeholder="رقم التأجير"
                             type="text"
                         
                             
