@@ -1,5 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -12,8 +13,191 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import {
+  loginEmployee,
+  addEmployee,
+  getAllEmployees,
+  getEmployeeById,
+  updateEmployee,
+  deleteEmployee,
+  getManagerByIdEmp,
+  getResponsibleByIdEmp
+} from './employeeApi'; 
+
+
 
 const EditEmployeeModal = (props) => {
+
+  const [firstNameFr, setFirstNameFr] = useState('');
+  const [firstNameAr, setFirstNameAr] = useState('');
+  const [lastNameFr, setLastNameFr] = useState('');
+  const [lastNameAr, setLastNameAr] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [ppr, setPpr] = useState('');
+  const [cin, setCin] = useState('');
+  const [addressFr, setAddressFr] = useState('');
+  const [addressAr, setAddressAr] = useState('');
+  const [hireDate, setHireDate] = useState('');
+  const [workLocationFr, setWorkLocationFr] = useState('');
+  const [workLocationAr, setWorkLocationAr] = useState('');
+  const [image, setImage] = useState(null);
+  const [postId, setPostId] = useState('');
+  const [gradeId, setGradeId] = useState('');
+  const [profileId, setProfileId] = useState('');
+  const [managerId, setManagerId] = useState('');
+  const [responsibleId, setResponsibleId] = useState('');
+  const [filiereId, setFiliereId] = useState('');
+  const navigate = useNavigate();
+
+
+  const handleChange = (e) => {
+    
+    const { id, value, type, files } = e.target;
+    if (type === 'file') {
+      setImage(files[0]);
+    } else {
+      switch (id) {
+        case 'firstNameFr':
+          setFirstNameFr(value);
+          break;
+        case 'firstNameAr':
+          setFirstNameAr(value);
+          break;
+        case 'lastNameFr':
+          setLastNameFr(value);
+          break;
+        case 'lastNameAr':
+          setLastNameAr(value);
+          break;
+        case 'email':
+          setEmail(value);
+          break;
+        case 'password':
+          setPassword(value);
+          break;
+        case 'phone':
+          setPhone(value);
+          break;
+        case 'ppr':
+          setPpr(value);
+          break;
+        case 'cin':
+          setCin(value);
+          break;
+        case 'addressFr':
+          setAddressFr(value);
+          break;
+        case 'addressAr':
+          setAddressAr(value);
+          break;
+        case 'hireDate':
+          setHireDate(value);
+          break;
+        case 'workLocationFr':
+          setWorkLocationFr(value);
+          break;
+        case 'workLocationAr':
+          setWorkLocationAr(value);
+          break;
+        case 'postId':
+          setPostId(value);
+          break;
+        case 'gradeId':
+          setGradeId(value);
+          break;
+        case 'profileId':
+          setProfileId(value);
+          break;
+        case 'managerId':
+          setManagerId(value);
+          break;
+        case 'responsibleId':
+          setResponsibleId(value);
+          break;
+        case 'filiereId':
+          setFiliereId(value);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const handleAddEmployee = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('firstNameFr', firstNameFr);
+      formData.append('firstNameAr', firstNameAr);
+      formData.append('lastNameFr', lastNameFr);
+      formData.append('lastNameAr', lastNameAr);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('phone', phone);
+      formData.append('ppr', ppr);
+      formData.append('cin', cin);
+      formData.append('addressFr', addressFr);
+      formData.append('addressAr', addressAr);
+      formData.append('hireDate', hireDate);
+      formData.append('workLocationFr', workLocationFr);
+      formData.append('workLocationAr', workLocationAr);
+      formData.append('postId', postId);
+      formData.append('gradeId', gradeId); 
+      formData.append('managerId', managerId);
+      formData.append('responsibleId', responsibleId);
+      formData.append('filiereId', filiereId);
+      formData.append('profileId', 1);
+
+      if(image !== null){
+        formData.append('image', image)
+    }
+
+    await axios({
+          method: 'post',
+          url: 'http://localhost:8093/employee/save',
+          data: formData
+    }).then((response) => {
+          console.log(response.data)
+          window.location.reload();
+    })
+    } catch (error) {
+      console.error('Error adding employee:', error);
+    }
+  };
+
+  const [employee, setEmployee] = useState({});
+
+  useEffect(() => {
+    fetchEmployee();
+    
+  }, []);
+  
+  const fetchEmployee = async () => {
+    try {
+      const data = await getEmployeeById(props.empl.idE);
+      setEmployee(data);
+      setFirstNameFr(data.firstNameFr)
+      setFirstNameAr(data.firstNameAr)
+      setLastNameFr(data.lastNameFr)
+      setLastNameAr(data.lastNameAr)
+      setEmail(data.email)
+      setPhone(data.phone)
+      setPpr(data.ppr)
+      setCin(data.cin)
+      setAddressFr(data.addressFr)
+      setAddressAr(data.addressAr)
+      setHireDate(data.hireDate)
+      setWorkLocationFr(data.workLocationFr)
+      setWorkLocationAr(data.workLocationAr)
+      
+      
+       } catch (error) {
+      console.error('Error fetching employee:', error);
+    }
+  };
+
     return (
       <Modal
         {...props}
@@ -24,7 +208,7 @@ const EditEmployeeModal = (props) => {
         <Modal.Body>
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
-              <h4 className='text-center text-xl'>تعديل بطاقة الموظف</h4>
+              <h4 className='text-center text-xl'>تعديل بطاقة الموظف {props.empl.idE}</h4>
               </CardHeader>
               <CardBody>
                 <Form>
@@ -46,7 +230,7 @@ const EditEmployeeModal = (props) => {
                             id="input-first-name"
                             placeholder="الاسم العائلي"
                             type="text"
-                            defaultValue={props.emp.lastNameAr}
+                            Value={lastNameAr}
                           />
                         </FormGroup>
                       </Col>
@@ -64,7 +248,7 @@ const EditEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="الاسم الشخصي"
                             type="text"
-                            defaultValue={props.emp.firstNameAr}
+                            Value={firstNameAr}
                           /> 
                         </FormGroup>
                       </Col>
@@ -86,7 +270,7 @@ const EditEmployeeModal = (props) => {
                             id="input-username"
                             placeholder="  E161616"
                             type="text"
-                            defaultValue={props.emp.cin}
+                            Value={cin}
                           />
                         </FormGroup>
                       </Col>
@@ -103,7 +287,7 @@ const EditEmployeeModal = (props) => {
                             id="input-email"
                             placeholder="jesse@example.com"
                             type="email"
-                            defaultValue={props.emp.email}
+                            Value={email}
                           />
                         </FormGroup>
                       </Col>
@@ -124,7 +308,7 @@ const EditEmployeeModal = (props) => {
                             placeholder=" 06 56 30 98 03"
                             type="tel"
                             maxLength={10}
-                            defaultValue={props.emp.phone}
+                            Value={phone}
 
                           />
                         </FormGroup>
@@ -143,7 +327,7 @@ const EditEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="المدينة،الحي،رقم المنزل"
                             type="text"
-                            defaultValue={props.emp.addressAr}
+                            Value={addressAr}
                           />
                         </FormGroup>
                       </Col>
@@ -169,7 +353,7 @@ const EditEmployeeModal = (props) => {
                             id="input-first-name"
                             placeholder="Votre nom"
                             type="text"
-                            defaultValue={props.emp.lastNameFr}
+                            Value={lastNameFr}
                           />
                         </FormGroup>
                       </Col>
@@ -187,7 +371,7 @@ const EditEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="Votre prénom "
                             type="text"
-                            defaultValue={props.emp.firstNameFr}
+                            Value={firstNameFr}
                           /> 
                         </FormGroup>
                       </Col>
@@ -213,7 +397,7 @@ const EditEmployeeModal = (props) => {
                             id="input-last-name"
                             placeholder="Ville,Quartier,Num "
                             type="text"
-                            defaultValue={props.emp.addressFr}
+                            Value={addressFr}
                           />
                         </FormGroup>
                       </Col>
@@ -238,7 +422,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            defaultValue={props.emp.grade?.gradeNameAr}
+                            Value={employee.grade?.gradeNameAr}
                             id="input-address"
                             placeholder="الرتبة"
                             type="text"
@@ -258,7 +442,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            defaultValue={props.emp.ppr}
+                            Value={ppr}
                             id="input-city"
                             placeholder="رقم التاجير"
                             type="text"
@@ -277,7 +461,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            defaultValue={props.emp.hireDate}
+                            Value={hireDate}
                             id="input-country"
                             
                             type="datetime-local"
@@ -297,13 +481,13 @@ const EditEmployeeModal = (props) => {
                             id="input-postal-code"
                             placeholder="مقر العمل"
                             type="text"
-                            defaultValue={props.emp.workLocationAr}
+                            Value={workLocationAr}
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup className="text-right">
                           <label
                             className="form-control-label"
@@ -313,14 +497,14 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            defaultValue={props.emp?.post?.postNameAr}
+                            Value={employee?.post?.postNameAr}
                             id="input-city"
                             placeholder="الصفة"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup className="text-right">
                           <label 
                             className="form-control-label "
@@ -330,31 +514,14 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            defaultValue={props.emp?.filiere?.filiereNameAr}
+                            Value={employee?.filiere?.filiereNameAr}
                             id="input-country"
                             placeholder="الشعبة"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-right">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-postal-code"
-                          >
-                            المصلحة
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                            id="input-postal-code"
-                            placeholder="المصلحة"
-                            type="text"
-                            defaultValue={props.emp?.filiere?.departement?.departementNameAr}
-
-                          />
-                        </FormGroup>
-                      </Col>
+                      
                     </Row>
                   </div>
                   <hr className="my-4" />
@@ -362,26 +529,7 @@ const EditEmployeeModal = (props) => {
                     Les informations de travail
                   </h6>
                   <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup className="text-left" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            Grade 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-left"
-                            defaultValue={props.emp.grade?.gradeNameFr}
-                            id="input-address"
-                            placeholder="Votre grade"
-                            type="text"
-                        
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+                    
                     <Row>
                      
                       
@@ -394,7 +542,7 @@ const EditEmployeeModal = (props) => {
                               Lieu de travail
                           </label>
                           <Input
-                           defaultValue={props.emp.workLocationFr}
+                          Value={workLocationFr}
                             className="form-control-alternative text-left"
                             id="input-postal-code"
                             placeholder=" Votre lieu de travail "
@@ -403,59 +551,7 @@ const EditEmployeeModal = (props) => {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup className="text-left">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            Fonction
-                          </label>
-                          <Input
-                            className="form-control-alternative text-left"
-                            defaultValue={props.emp.post?.postNameFr}
-                            id="input-city"
-                            placeholder="Votre fonction"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-left">
-                          <label 
-                            className="form-control-label "
-                            htmlFor="input-country"
-                          >
-                            Filiere
-                          </label>
-                          <Input 
-                            className="form-control-alternative text-left"
-                            defaultValue={props.emp?.filiere?.filiereNameFr}
-                            id="input-country"
-                            placeholder="Votre filiere"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-left">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-postal-code"
-                          >
-                            Service
-                          </label>
-                          <Input
-                            defaultValue={props.emp?.filiere?.departement?.departementNameFr}
-                            className="form-control-alternative text-left"
-                            id="input-postal-code"
-                            placeholder="Votre service"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+                    
                   </div>
                   <hr className="my-4" />
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>

@@ -247,15 +247,18 @@ const Employees = () => {
                             </DropdownItem>
                             <DropdownItem
                              
-                              onClick={() => setEditModalShow(true)}
+                              onClick={() => {setEditModalShow(true)
+                                setEditemp(emp)
+                              }}
                             >
                               تعديل
                             </DropdownItem>
                             <EditEmployeeModal 
-                            show={editModalShow} 
-                            onHide={() => {setEditModalShow(false)
-                              setEditemp(emp)}}
-                            emp={editemp}
+                            show={editModalShow}
+                            empl={editemp} 
+                            onHide={() => {setEditModalShow(false)}}
+
+                           
                               >
                             </EditEmployeeModal>
                             <DropdownItem

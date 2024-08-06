@@ -23,7 +23,7 @@ import {
   getManagerByIdEmp,
   getResponsibleByIdEmp
 } from './employeeApi'; 
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 
 const AddEmployeeModal = (props) => {
@@ -159,7 +159,7 @@ const AddEmployeeModal = (props) => {
           data: formData
     }).then((response) => {
           console.log(response.data)
-          navigate('/employees')
+          window.location.reload();
     })
     } catch (error) {
       console.error('Error adding employee:', error);
