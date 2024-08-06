@@ -1,5 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -12,8 +13,163 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import {
+  loginEmployee,
+  addEmployee,
+  getAllEmployees,
+  getEmployeeById,
+  updateEmployee,
+  deleteEmployee,
+  getManagerByIdEmp,
+  getResponsibleByIdEmp
+} from './employeeApi'; 
+import { useNavigate } from "react-router-dom"
+
 
 const AddEmployeeModal = (props) => {
+
+  const [firstNameFr, setFirstNameFr] = useState('');
+  const [firstNameAr, setFirstNameAr] = useState('');
+  const [lastNameFr, setLastNameFr] = useState('');
+  const [lastNameAr, setLastNameAr] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [ppr, setPpr] = useState('');
+  const [cin, setCin] = useState('');
+  const [addressFr, setAddressFr] = useState('');
+  const [addressAr, setAddressAr] = useState('');
+  const [hireDate, setHireDate] = useState('');
+  const [workLocationFr, setWorkLocationFr] = useState('');
+  const [workLocationAr, setWorkLocationAr] = useState('');
+  const [image, setImage] = useState(null);
+  const [postId, setPostId] = useState('');
+  const [gradeId, setGradeId] = useState('');
+  const [profileId, setProfileId] = useState('');
+  const [managerId, setManagerId] = useState('');
+  const [responsibleId, setResponsibleId] = useState('');
+  const [filiereId, setFiliereId] = useState('');
+  const navigate = useNavigate();
+
+
+  const handleChange = (e) => {
+    
+    const { id, value, type, files } = e.target;
+    if (type === 'file') {
+      setImage(files[0]);
+    } else {
+      switch (id) {
+        case 'firstNameFr':
+          setFirstNameFr(value);
+          break;
+        case 'firstNameAr':
+          setFirstNameAr(value);
+          break;
+        case 'lastNameFr':
+          setLastNameFr(value);
+          break;
+        case 'lastNameAr':
+          setLastNameAr(value);
+          break;
+        case 'email':
+          setEmail(value);
+          break;
+        case 'password':
+          setPassword(value);
+          break;
+        case 'phone':
+          setPhone(value);
+          break;
+        case 'ppr':
+          setPpr(value);
+          break;
+        case 'cin':
+          setCin(value);
+          break;
+        case 'addressFr':
+          setAddressFr(value);
+          break;
+        case 'addressAr':
+          setAddressAr(value);
+          break;
+        case 'hireDate':
+          setHireDate(value);
+          break;
+        case 'workLocationFr':
+          setWorkLocationFr(value);
+          break;
+        case 'workLocationAr':
+          setWorkLocationAr(value);
+          break;
+        case 'postId':
+          setPostId(value);
+          break;
+        case 'gradeId':
+          setGradeId(value);
+          break;
+        case 'profileId':
+          setProfileId(value);
+          break;
+        case 'managerId':
+          setManagerId(value);
+          break;
+        case 'responsibleId':
+          setResponsibleId(value);
+          break;
+        case 'filiereId':
+          setFiliereId(value);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const handleAddEmployee = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('firstNameFr', firstNameFr);
+      formData.append('firstNameAr', firstNameAr);
+      formData.append('lastNameFr', lastNameFr);
+      formData.append('lastNameAr', lastNameAr);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('phone', phone);
+      formData.append('ppr', ppr);
+      formData.append('cin', cin);
+      formData.append('addressFr', addressFr);
+      formData.append('addressAr', addressAr);
+      formData.append('hireDate', hireDate);
+      formData.append('workLocationFr', workLocationFr);
+      formData.append('workLocationAr', workLocationAr);
+      formData.append('postId', postId);
+      formData.append('gradeId', gradeId); 
+      formData.append('managerId', managerId);
+      formData.append('responsibleId', responsibleId);
+      formData.append('filiereId', filiereId);
+      formData.append('profileId', 1);
+
+      if(image !== null){
+        formData.append('image', image)
+    }
+
+    await axios({
+          method: 'post',
+          url: 'http://localhost:8093/employee/save',
+          data: formData
+    }).then((response) => {
+          console.log(response.data)
+          navigate('/employees')
+    })
+    } catch (error) {
+      console.error('Error adding employee:', error);
+    }
+  };
+
+
+ 
+
+
     return (
       <Modal
         {...props}
@@ -42,8 +198,10 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"                           
-                            id="input-first-name"
+                            id="lastNameAr"
                             placeholder="الاسم العائلي"
+                            value={lastNameAr}
+                            onChange={handleChange}
                             type="text"
                           />
                         </FormGroup>
@@ -58,8 +216,9 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                        
-                            id="input-last-name"
+                            value={firstNameAr}
+                            onChange={handleChange}
+                            id="firstNameAr"
                             placeholder="الاسم الشخصي"
                             type="text"
                           /> 
@@ -79,10 +238,11 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
-                            id="input-username"
-                            placeholder="  E161616"
+                            id="cin"
+                            placeholder="E161616"
                             type="text"
+                            value={cin}
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
@@ -96,9 +256,11 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            id="input-email"
+                            id="email"
                             placeholder="jesse@example.com"
                             type="email"
+                            value={email}
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
@@ -114,11 +276,12 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                         
-                            id="input-first-name"
-                            placeholder=" 06 56 30 98 03"
+                            id="phone"
+                            placeholder="06 56 30 98 03"
                             type="tel"
                             maxLength={10}
+                            value={phone}
+                            onChange={handleChange}
 
                           />
                         </FormGroup>
@@ -133,10 +296,11 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
-                            id="input-last-name"
+                            id="addressAr"
                             placeholder="المدينة،الحي،رقم المنزل"
                             type="text"
+                            value={addressAr}
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
@@ -159,9 +323,11 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-left"                           
-                            id="input-first-name"
-                            placeholder="Votre nom"
+                            id="lastNameFr"
+                            placeholder="Nom"
                             type="text"
+                            value={lastNameFr}
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
@@ -176,9 +342,11 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-left"
                         
-                            id="input-last-name"
-                            placeholder="Votre prénom "
+                            id="firstNameFr"
+                            placeholder="Prénom"
                             type="text"
+                            value={firstNameFr}
+                            onChange={handleChange}
                           /> 
                         </FormGroup>
                       </Col>
@@ -201,10 +369,12 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-left"
                            
-                            id="input-last-name"
-                            placeholder="Ville,Quartier,Num "
+                            id="addressFr"
+                            placeholder="Adresse"
                             type="text"
-                          />
+                            value={addressFr}
+                            onChange={handleChange}
+                              />
                         </FormGroup>
                       </Col>
                     </Row>
@@ -229,9 +399,11 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-right"
                            
-                            id="input-address"
+                            id="gradeId"
                             placeholder="الرتبة"
                             type="text"
+                            value={gradeId}
+                            onChange={handleChange}
                         
                           />
                         </FormGroup>
@@ -249,9 +421,12 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-right"
                            
-                            id="input-city"
-                            placeholder="رقم التاجير"
+                            id="ppr"
                             type="text"
+                            value={ppr}
+                            onChange={handleChange}
+                            placeholder="رقم التاجير"
+                            
                         
                             
                           />
@@ -268,8 +443,9 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-right"
                             
-                            id="input-country"
-                            
+                            id="hireDate"
+                            value={hireDate}
+                            onChange={handleChange}
                             type="date"
                           />
                         </FormGroup>
@@ -284,15 +460,17 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            id="input-postal-code"
+                            id="workLocationAr"
                             placeholder="مقر العمل"
                             type="text"
+                            value={workLocationAr}
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup className="text-right">
                           <label
                             className="form-control-label"
@@ -303,13 +481,16 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-right"
                            
-                            id="input-city"
+                            id="postId"
                             placeholder="الصفة"
                             type="text"
+                            value={postId}
+                            onChange={handleChange}
+
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup className="text-right">
                           <label 
                             className="form-control-label "
@@ -320,28 +501,16 @@ const AddEmployeeModal = (props) => {
                           <Input 
                             className="form-control-alternative text-right"
                             
-                            id="input-country"
+                            id="filiereId"
+                            value={filiereId}
                             placeholder="الشعبة"
                             type="text"
+                            
+                            onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-right">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-postal-code"
-                          >
-                            المصلحة
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                            id="input-postal-code"
-                            placeholder="المصلحة"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
+                      
                       <Col lg="6">    
                         <FormGroup className="text-right">
                           <label
@@ -353,9 +522,12 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-right"
                         
-                            id="input-last-name"
-                            placeholder="...رخصة مرضية،رخصة ولادة"
+                            id="responsibleId"
+                            value={responsibleId}
+                   
                             type="select"
+                            onChange={handleChange}
+                            
                           >
                             <option>
                               
@@ -370,7 +542,7 @@ const AddEmployeeModal = (props) => {
                               4
                             </option>
                             <option>
-                              5
+                              7
                             </option>
                             </Input>
                         </FormGroup>
@@ -386,7 +558,9 @@ const AddEmployeeModal = (props) => {
                           <Input
                             className="form-control-alternative text-right"
                         
-                            id="input-last-name"
+                            id="managerId"
+                            value={managerId}
+                            onChange={handleChange}
                             placeholder="...رخصة مرضية،رخصة ولادة"
                             type="select"
                           >
@@ -416,28 +590,6 @@ const AddEmployeeModal = (props) => {
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
-                      <Col md="12">
-                        <FormGroup className="text-left" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            Grade 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-left"
-                           
-                            id="input-address"
-                            placeholder="Votre grade"
-                            type="text"
-                        
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                     
-                      
                       <Col  md="12">
                         <FormGroup className="text-left">
                           <label
@@ -448,61 +600,12 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-left"
-                            id="input-postal-code"
+                            id="workLocationFr"
+                            value={workLocationFr}
                             placeholder=" Votre lieu de travail "
                             type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg="4">
-                        <FormGroup className="text-left">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
-                            Fonction
-                          </label>
-                          <Input
-                            className="form-control-alternative text-left"
-                           
-                            id="input-city"
-                            placeholder="Votre fonction"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-left">
-                          <label 
-                            className="form-control-label "
-                            htmlFor="input-country"
-                          >
-                            Filiere
-                          </label>
-                          <Input 
-                            className="form-control-alternative text-left"
-                            
-                            id="input-country"
-                            placeholder="Votre filiere"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-left">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-postal-code"
-                          >
-                            Service
-                          </label>
-                          <Input
-                            className="form-control-alternative text-left"
-                            id="input-postal-code"
-                            placeholder="Votre service"
-                            type="text"
+                            onChange={handleChange}
+
                           />
                         </FormGroup>
                       </Col>
@@ -524,45 +627,39 @@ const AddEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
-                            id="input-address"
+                            onChange={handleChange}
+                            id="password"
+                            value={password}
                             placeholder="كلمة المرور "
-                            type="text"
+                            type="password"
                           />
                         </FormGroup>
                       </Col>
-                 
-                    
-                    </Row>
-                     
+                    </Row>     
                   </div>
                   <hr className="my-4" />
                   {/* Description */}
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}> الصورة الشخصية </h6>
                   <div className="pl-lg-4">
-                    <FormGroup className="text-right">
-                      
+                    <FormGroup className="text-right">                     
                       <div className="d-flex justify-content-center " style={{marginTop : '7px',marginBottom : '0px'}} >
                             <Input                                                       
                               size="sm" 
-                              type="file"
-                              
-                            >
-                              
-                            </Input>
-                            
-                        </div>
-                      
+                              type="file"  
+                              id="image"
+                              onChange={handleChange}              
+                            >                             
+                            </Input>                         
+                        </div>                     
                     </FormGroup>
                   </div>
                 </Form>
               </CardBody>
             </Card>
-          
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button onClick={props.onHide}>خروج</Button>
-          <Button variant="primary" >
+          <Button variant="primary" onClick={handleAddEmployee}>
            حفظ
           </Button>
         </Modal.Footer>
