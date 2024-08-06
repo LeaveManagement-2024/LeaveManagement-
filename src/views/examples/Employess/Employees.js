@@ -77,7 +77,7 @@ const Employees = () => {
 
   useEffect(() => {
     fetchAllEmployees();
-  }, []);
+  }, [employee]);
 
   const fetchAllEmployees = async () => {
     try {

@@ -172,7 +172,7 @@ const EditEmployeeModal = (props) => {
   useEffect(() => {
     fetchEmployee();
     
-  }, []);
+  }, [props.empl.idE]);
   
   const fetchEmployee = async () => {
     try {
@@ -191,8 +191,10 @@ const EditEmployeeModal = (props) => {
       setHireDate(data.hireDate)
       setWorkLocationFr(data.workLocationFr)
       setWorkLocationAr(data.workLocationAr)
-      
-      
+      setFiliereId(data?.filiere?.filiereNameAr)
+      setGradeId(data?.grade?.gradeNameAr)
+      setPostId(data?.post?.postNameAr)
+     
        } catch (error) {
       console.error('Error fetching employee:', error);
     }
@@ -422,7 +424,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            Value={employee.grade?.gradeNameAr}
+                            Value={gradeId}
                             id="input-address"
                             placeholder="الرتبة"
                             type="text"
@@ -497,7 +499,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            Value={employee?.post?.postNameAr}
+                            Value={postId}
                             id="input-city"
                             placeholder="الصفة"
                             type="text"
@@ -514,7 +516,7 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            Value={employee?.filiere?.filiereNameAr}
+                            Value={filiereId}
                             id="input-country"
                             placeholder="الشعبة"
                             type="text"
