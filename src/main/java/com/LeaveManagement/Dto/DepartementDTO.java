@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 public class DepartementDTO {
-    private long IdDepartement;
+    private Long IdDepartement;
     private String departementNameFr;
     private String departementNameAr;
     private Long respDepartementId;

@@ -14,7 +14,7 @@ public class Departement {
     @Column(columnDefinition = "NVARCHAR(255)")
     private String departementNameAr;
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "respDepartementId")
     private Employees respDepartement ;
 

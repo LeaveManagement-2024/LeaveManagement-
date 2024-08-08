@@ -1,5 +1,6 @@
 package com.LeaveManagement.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 @Entity
@@ -15,7 +16,7 @@ public class ServiceE {
     @JoinColumn(name = "IdDepartment")
     private Departement departement;
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "respServiceId")
     private Employees respService;
 

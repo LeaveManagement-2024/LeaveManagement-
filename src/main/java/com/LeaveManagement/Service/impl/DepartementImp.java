@@ -16,11 +16,12 @@ import java.util.List;
 public class DepartementImp implements DepartementService {
     @Autowired
     private DepartementRepo departementRepo;
+    @Autowired
     private EmployeeRepo employeeRepo;
 
     @Override
     public Long addDepartement(DepartementDTO departementDTO) {
-        Employees employees = employeeRepo.findById(departementDTO.getRespDepartementId()).orElseThrow(()->new IllegalArgumentException("Employee not found"));
+        Employees employees = employeeRepo.findById(departementDTO.getRespDepartementId()).orElse(null);
         Departement departement=new Departement();
         departement.setDepartementNameAr(departementDTO.getDepartementNameAr());
         departement.setDepartementNameFr(departementDTO.getDepartementNameFr());
