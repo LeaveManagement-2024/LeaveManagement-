@@ -23,30 +23,31 @@ const Header = () => {
   return (
     <>
       <div className="header bg-gradient-success pb-8 pt-5 pt-md-8">
-        <Container fluid>
-          <div className="header-body">
+        <Container fluid style={{ direction: 'rtl' }}>
+          <div className="header-body " >
             {/* Card stats */}
             <Row>
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
+                  <CardBody className="text-right">
                     <Row>
+                        <Col className="col-auto">
+                          <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i className="ni ni-calendar-grid-58" />
+                          </div>
+                        </Col>
                       <div className="col">
                         <CardTitle
                           tag="h5"
-                          className="text-uppercase text-muted mb-0"
+                          className="text-uppercase text-muted mb-0 text-lg "
                         >
-                          Traffic
+                          الموظفون في رخصة اليوم 
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
                           350,897
                         </span>
                       </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
-                        </div>
-                      </Col>
+                      
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success mr-2">
@@ -59,22 +60,23 @@ const Header = () => {
               </Col>
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
+                  <CardBody  className="text-right">
                     <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          New users
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">2,356</span>
-                      </div>
-                      <Col className="col-auto">
+                    <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
                           <i className="fas fa-chart-pie" />
                         </div>
                       </Col>
+                      <div className="col">
+                        <CardTitle
+                          tag="h5"
+                          className="text-uppercase text-muted mb-0 text-lg"
+                        >
+                          الرخص التي لم يتم الموافقة عليها
+                        </CardTitle>
+                        <span className="h2 font-weight-bold mb-0">2,356</span>
+                      </div>
+                      
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-danger mr-2">
@@ -87,22 +89,23 @@ const Header = () => {
               </Col>
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
+                  <CardBody className="text-right">
                     <Row>
+                    <Col className="col-auto">
+                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                          <i className="fas fa-users" />
+                        </div>
+                      </Col>
                       <div className="col">
                         <CardTitle
                           tag="h5"
-                          className="text-uppercase text-muted mb-0"
+                          className="text-uppercase text-muted mb-0 text-lg"
                         >
                           Sales
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">924</span>
                       </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
-                        </div>
-                      </Col>
+                      
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-warning mr-2">
@@ -115,22 +118,23 @@ const Header = () => {
               </Col>
               <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
+                  <CardBody className="text-right">
                     <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Performance
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">49,65%</span>
-                      </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-info text-white rounded-circle shadow">
                           <i className="fas fa-percent" />
                         </div>
                       </Col>
+                      <div className="col">
+                        <CardTitle
+                          tag="h5"
+                          className="text-uppercase text-muted mb-0 text-lg"
+                        >
+                          Performance
+                        </CardTitle>
+                        <span className="h2 font-weight-bold mb-0">49,65%</span>
+                      </div>
+                      
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success mr-2">

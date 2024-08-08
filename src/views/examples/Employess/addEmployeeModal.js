@@ -23,6 +23,7 @@ import {
   getManagerByIdEmp,
   getResponsibleByIdEmp
 } from './employeeApi'; 
+import {getAllGrades} from '../grades/gradeApi'
 import { useNavigate } from "react-router-dom";
 
 
@@ -46,10 +47,23 @@ const AddEmployeeModal = (props) => {
   const [postId, setPostId] = useState('');
   const [gradeId, setGradeId] = useState('');
   const [profileId, setProfileId] = useState('');
-  const [managerId, setManagerId] = useState('');
-  const [responsibleId, setResponsibleId] = useState('');
   const [filiereId, setFiliereId] = useState('');
+  const [grades, setGrades] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const gradesData = await getAllGrades();
+        setGrades(gradesData);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des grades:', error);
+      }
+    };
+
+    fetchGrades();
+  }, []);
 
 
   const handleChange = (e) => {
@@ -110,12 +124,6 @@ const AddEmployeeModal = (props) => {
         case 'profileId':
           setProfileId(value);
           break;
-        case 'managerId':
-          setManagerId(value);
-          break;
-        case 'responsibleId':
-          setResponsibleId(value);
-          break;
         case 'filiereId':
           setFiliereId(value);
           break;
@@ -144,8 +152,6 @@ const AddEmployeeModal = (props) => {
       formData.append('workLocationAr', workLocationAr);
       formData.append('postId', postId);
       formData.append('gradeId', gradeId); 
-      formData.append('managerId', managerId);
-      formData.append('responsibleId', responsibleId);
       formData.append('filiereId', filiereId);
       formData.append('profileId', 1);
 
@@ -401,11 +407,18 @@ const AddEmployeeModal = (props) => {
                            
                             id="gradeId"
                             placeholder="الرتبة"
-                            type="text"
+                            type="select"
                             value={gradeId}
                             onChange={handleChange}
                         
-                          />
+                          >
+                            
+                          <option value="">اختر الرتبة</option>
+                        {grades.map((grade) => (
+                          <option key={grade.idGrade} value={grade.idGrade}>
+                            {grade.gradeNameAr}
+                          </option>
+                        ))}</Input>
                         </FormGroup>
                       </Col>
                     </Row>
@@ -511,77 +524,7 @@ const AddEmployeeModal = (props) => {
                         </FormGroup>
                       </Col>
                       
-                      <Col lg="6">    
-                        <FormGroup className="text-right">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                              المسؤول عنه 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                        
-                            id="responsibleId"
-                            value={responsibleId}
-                   
-                            type="select"
-                            onChange={handleChange}
-                            
-                          >
-                            <option>
-                              
-                            </option>
-                            <option>
-                              2
-                            </option>
-                            <option>
-                              3
-                            </option>
-                            <option>
-                              4
-                            </option>
-                            <option>
-                              7
-                            </option>
-                            </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col lg="6">    
-                        <FormGroup className="text-right">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
-                            رئيس الموظف                                       
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                        
-                            id="managerId"
-                            value={managerId}
-                            onChange={handleChange}
-                            placeholder="...رخصة مرضية،رخصة ولادة"
-                            type="select"
-                          >
-                            <option>
-                              
-                            </option>
-                            <option>
-                              2
-                            </option>
-                            <option>
-                              3
-                            </option>
-                            <option>
-                              4
-                            </option>
-                            <option>
-                              5
-                            </option>
-                            </Input>
-                        </FormGroup>
-                      </Col>
+                      
                     </Row>
                   </div>
                   <hr className="my-4" />
