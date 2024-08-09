@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL de votre API
-const API_URL = 'http://localhost:8080/posts';  // Remplacez par l'URL de votre API
+const API_URL = 'http://localhost:8093/posts';  // Remplacez par l'URL de votre API
 
 // Fonction pour obtenir tous les posts
 export const getAllPosts = async () => {

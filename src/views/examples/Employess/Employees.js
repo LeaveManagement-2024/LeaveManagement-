@@ -43,29 +43,7 @@ const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [employee, setEmployee] = useState({});
   const [logInDTO, setLogInDTO] = useState({ email: '', password: '' });
-  const [employeeDTO, setEmployeeDTO] = useState({
-    firstNameFr: '',
-    firstNameAr: '',
-    lastNameFr: '',
-    lastNameAr: '',
-    email: '',
-    password: '',
-    phone: '',
-    ppr: '',
-    cin: '',
-    addressFr: '',
-    addressAr: '',  
-    hireDate: '',
-    workLocationFr: '',
-    workLocationAr: '',
-    image: null,
-    postId: '',
-    gradeId: '',
-    profileId: '',
-    managerId: '',
-    responsibleId: '',
-    filiereId: ''
-  });
+
   const [employeeId, setEmployeeId] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -96,17 +74,6 @@ const Employees = () => {
       console.error('Error logging in:', error);
     }
   };
-
-  const handleAddEmployee = async () => {
-    try {
-      const response = await addEmployee(employeeDTO);
-      setMessage(`تم إضافة الموظف برقم: ${response}`);
-      fetchAllEmployees(); // Refresh the list
-    } catch (error) {
-      console.error('Error adding employee:', error);
-    }
-  };
-
   const handleGetEmployeeById = async () => {
     try {
       const data = await getEmployeeById(employeeId);
@@ -115,17 +82,6 @@ const Employees = () => {
       console.error('Error fetching employee:', error);
     }
   };
-
-  const handleUpdateEmployee = async () => {
-    try {
-      await updateEmployee(employeeId, employeeDTO);
-      setMessage('تم تحديث الموظف بنجاح');
-      fetchAllEmployees(); // Refresh the list
-    } catch (error) {
-      console.error('Error updating employee:', error);
-    }
-  };
-
   const handleDeleteEmployee = async (idE) => {
     try {
       

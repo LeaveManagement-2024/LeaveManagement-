@@ -24,6 +24,9 @@ import {
   getManagerByIdEmp,
   getResponsibleByIdEmp
 } from './employeeApi'; 
+import {getAllGrades} from '../grades/gradeApi'
+import{getAllPosts} from'../posts/postsAPI'
+import{getAllFilieres} from '../filiere/filieresApi'
 
 
 
@@ -50,7 +53,42 @@ const EditEmployeeModal = (props) => {
   const [managerId, setManagerId] = useState('');
   const [responsibleId, setResponsibleId] = useState('');
   const [filiereId, setFiliereId] = useState('');
+  const [grades, setGrades] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [filieres, setFilieres] = useState([]);
+
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const gradesData = await getAllGrades();
+        setGrades(gradesData);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des grades:', error);
+      }
+    };
+    const fetchPosts = async () => {
+      try {
+        const postsData = await getAllPosts();
+        setPosts(postsData);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des posts:', error);
+      }
+    };
+    const fetchFilieres = async () => {
+      try {
+        const filieresData = await getAllFilieres();
+        setFilieres(filieresData);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des posts:', error);
+      }
+    };
+    fetchGrades();
+    fetchPosts();
+    fetchFilieres();
+  }, []);
 
 
   const handleChange = (e) => {
@@ -145,8 +183,6 @@ const EditEmployeeModal = (props) => {
       formData.append('workLocationAr', workLocationAr);
       formData.append('postId', postId);
       formData.append('gradeId', gradeId); 
-      formData.append('managerId', managerId);
-      formData.append('responsibleId', responsibleId);
       formData.append('filiereId', filiereId);
       formData.append('profileId', 1);
 
@@ -155,9 +191,10 @@ const EditEmployeeModal = (props) => {
     }
 
     await axios({
-          method: 'post',
-          url: 'http://localhost:8093/employee/save',
-          data: formData
+          method: 'put',
+          url: `http://localhost:8093/employee/update/${props.empl.idE}`,
+          data: formData,
+          headers: { 'Content-Type': 'multipart/form-data' }
     }).then((response) => {
           console.log(response.data)
           window.location.reload();
@@ -191,9 +228,10 @@ const EditEmployeeModal = (props) => {
       setHireDate(data.hireDate)
       setWorkLocationFr(data.workLocationFr)
       setWorkLocationAr(data.workLocationAr)
-      setFiliereId(data?.filiere?.filiereNameAr)
-      setGradeId(data?.grade?.gradeNameAr)
-      setPostId(data?.post?.postNameAr)
+      setFiliereId(data?.filiere?.idFiliere)
+      setGradeId(data?.grade?.idGrade)
+      setPostId(data?.post?.idPost)
+      setImage(data.image)
      
        } catch (error) {
       console.error('Error fetching employee:', error);
@@ -413,7 +451,7 @@ const EditEmployeeModal = (props) => {
                     معلومات العمل
                   </h6>
                   <div className="pl-lg-4">
-                    <Row>
+                  <Row>
                       <Col md="12">
                         <FormGroup className="text-right" >
                           <label
@@ -424,12 +462,21 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            Value={gradeId}
-                            id="input-address"
+                           
+                            id="gradeId"
                             placeholder="الرتبة"
-                            type="text"
+                            type="select"
+                            value={gradeId}
+                            onChange={handleChange}
                         
-                          />
+                          >
+                            
+                          <option value="">اختر الرتبة</option>
+                        {grades.map((grade) => (
+                          <option key={grade.idGrade} value={grade.idGrade}>
+                            {grade.gradeNameAr}
+                          </option>
+                        ))}</Input>
                         </FormGroup>
                       </Col>
                     </Row>
@@ -495,15 +542,24 @@ const EditEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-city"
                           >
-                            الصفة
+                            المهمة
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                            Value={postId}
-                            id="input-city"
-                            placeholder="الصفة"
-                            type="text"
-                          />
+                           
+                            id="postId"
+                            placeholder="المهمة"
+                            type="select"
+                            value={postId}
+                            onChange={handleChange}
+
+                          >
+                          <option value="">اخترالمهمة</option>
+                            {posts.map((post) => (
+                          <option key={post.idPost} value={post.idPost}>
+                            {post.postNameAr}
+                          </option>
+                        ))}</Input>
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -516,14 +572,77 @@ const EditEmployeeModal = (props) => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            Value={filiereId}
-                            id="input-country"
+                            
+                            id="filiereId"
+                            value={filiereId}
                             placeholder="الشعبة"
-                            type="text"
-                          />
+                            type="select"
+                            
+                            onChange={handleChange}
+                          >
+                            <option value="">اخترالشعبة</option>
+                            {filieres.map((filiere) => (
+                          <option key={filiere.idFiliere} value={filiere.idFiliere}>
+                            {filiere.filiereNameAr}
+                          </option>
+                        ))}</Input>
                         </FormGroup>
                       </Col>
                       
+                      
+                    </Row>
+                  </div>
+                  <hr className="my-4" />
+                  <h6 className=" text-left mb-4  "style={{ fontSize: '1.3em' }}>
+                    Les informations de travail
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col  md="12">
+                        <FormGroup className="text-left">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-postal-code"
+                          >
+                              Lieu de travail
+                          </label>
+                          <Input
+                            className="form-control-alternative text-left"
+                            id="workLocationFr"
+                            value={workLocationFr}
+                            placeholder=" Votre lieu de travail "
+                            type="text"
+                            onChange={handleChange}
+
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                  <hr className="my-4" />
+                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>
+                  إدخال كلمة المرور 
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            كلمة المرور  
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                            onChange={handleChange}
+                            id="password"
+                            value={password}
+                            placeholder="كلمة المرور "
+                            type="password"
+                          />
+                        </FormGroup>
+                      </Col>
                     </Row>
                   </div>
                   <hr className="my-4" />
@@ -587,19 +706,16 @@ const EditEmployeeModal = (props) => {
                   {/* Description */}
                   <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}> الصورة الشخصية </h6>
                   <div className="pl-lg-4">
-                    <FormGroup className="text-right">
-                      
+                  <FormGroup className="text-right">                     
                       <div className="d-flex justify-content-center " style={{marginTop : '7px',marginBottom : '0px'}} >
                             <Input                                                       
                               size="sm" 
-                              type="file"
-                              
-                            >
-                              
-                            </Input>
-                            
-                        </div>
-                      
+                              type="file"  
+                              id="image"
+                              onChange={handleChange}              
+                            >                             
+                            </Input>                         
+                        </div>                     
                     </FormGroup>
                   </div>
                 </Form>
@@ -609,7 +725,7 @@ const EditEmployeeModal = (props) => {
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button onClick={props.onHide}>خروج</Button>
-          <Button variant="primary" >
+          <Button variant="primary" onClick={handleAddEmployee}>
            حفظ
           </Button>
         </Modal.Footer>

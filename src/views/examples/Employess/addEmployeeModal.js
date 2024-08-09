@@ -24,6 +24,8 @@ import {
   getResponsibleByIdEmp
 } from './employeeApi'; 
 import {getAllGrades} from '../grades/gradeApi'
+import{getAllPosts} from'../posts/postsAPI'
+import{getAllFilieres} from '../filiere/filieresApi'
 import { useNavigate } from "react-router-dom";
 
 
@@ -49,6 +51,10 @@ const AddEmployeeModal = (props) => {
   const [profileId, setProfileId] = useState('');
   const [filiereId, setFiliereId] = useState('');
   const [grades, setGrades] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [filieres, setFilieres] = useState([]);
+
+
 
   const navigate = useNavigate();
 
@@ -61,8 +67,25 @@ const AddEmployeeModal = (props) => {
         console.error('Erreur lors de la récupération des grades:', error);
       }
     };
-
+    const fetchPosts = async () => {
+      try {
+        const postsData = await getAllPosts();
+        setPosts(postsData);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des posts:', error);
+      }
+    };
+    const fetchFilieres = async () => {
+      try {
+        const filieresData = await getAllFilieres();
+        setFilieres(filieresData);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des posts:', error);
+      }
+    };
     fetchGrades();
+    fetchPosts();
+    fetchFilieres();
   }, []);
 
 
@@ -489,18 +512,24 @@ const AddEmployeeModal = (props) => {
                             className="form-control-label"
                             htmlFor="input-city"
                           >
-                            الصفة
+                            المهمة
                           </label>
                           <Input
                             className="form-control-alternative text-right"
                            
                             id="postId"
-                            placeholder="الصفة"
-                            type="text"
+                            placeholder="المهمة"
+                            type="select"
                             value={postId}
                             onChange={handleChange}
 
-                          />
+                          >
+                          <option value="">اخترالمهمة</option>
+                            {posts.map((post) => (
+                          <option key={post.idPost} value={post.idPost}>
+                            {post.postNameAr}
+                          </option>
+                        ))}</Input>
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -517,10 +546,16 @@ const AddEmployeeModal = (props) => {
                             id="filiereId"
                             value={filiereId}
                             placeholder="الشعبة"
-                            type="text"
+                            type="select"
                             
                             onChange={handleChange}
-                          />
+                          >
+                            <option value="">اخترالشعبة</option>
+                            {filieres.map((filiere) => (
+                          <option key={filiere.idFiliere} value={filiere.idFiliere}>
+                            {filiere.filiereNameAr}
+                          </option>
+                        ))}</Input>
                         </FormGroup>
                       </Col>
                       
