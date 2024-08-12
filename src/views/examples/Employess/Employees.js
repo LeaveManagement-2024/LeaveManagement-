@@ -29,13 +29,10 @@ import EditEmployeeModal from './editEmployeeModal';
 import Header from "components/Headers/Header.js";
 import {
   loginEmployee,
-  addEmployee,
   getAllEmployees,
   getEmployeeById,
-  updateEmployee,
   deleteEmployee,
-  getManagerByIdEmp,
-  getResponsibleByIdEmp
+ 
 } from './employeeApi'; 
 
 
@@ -43,7 +40,6 @@ const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [employee, setEmployee] = useState({});
   const [logInDTO, setLogInDTO] = useState({ email: '', password: '' });
-
   const [employeeId, setEmployeeId] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -93,28 +89,9 @@ const Employees = () => {
     }
   };
 
-  const handleGetManagerByIdEmp = async () => {
-    try {
-      const data = await getManagerByIdEmp(employeeId);
-      setEmployee(data);
-    } catch (error) {
-      console.error('Error fetching manager:', error);
-    }
-  };
-
-  const handleGetResponsibleByIdEmp = async () => {
-    try {
-      const data = await getResponsibleByIdEmp(employeeId);
-      setEmployee(data);
-    } catch (error) {
-      console.error('Error fetching responsible:', error);
-    }
-  };
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = employees.slice(indexOfFirstItem, indexOfLastItem);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -188,7 +165,7 @@ const Employees = () => {
                             className="btn-icon-only text-light"
                             href="#pablo"
                             role="button"
-                            size="sm"
+                            size="md"
                             color=""
                             onClick={(e) => e.preventDefault()}
                           >
