@@ -2,6 +2,7 @@ package com.LeaveManagement.Service.impl;
 
 
 import com.LeaveManagement.Entity.Employees;
+import com.LeaveManagement.Entity.Leave;
 import com.LeaveManagement.Repo.LeaveRepo;
 import com.LeaveManagement.Repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class StatistiqueService {
+public class StatistiqueImp {
 
     @Autowired
     private LeaveRepo leaveRepository;
@@ -27,8 +28,11 @@ public class StatistiqueService {
         return employeesRepository.count();
     }
 
-    public long getUnconfirmedLeavesByResponsible() {
-        return leaveRepository.countUnconfirmedLeavesByResponsible();
+    public List<Leave> UnconfirmedLeaves() {
+        return leaveRepository.UnconfirmedLeaves();
+    }
+    public long nbrUnconfirmedLeaves(){
+        return leaveRepository.UnconfirmedLeaves().size();
     }
 
     public long getUnconfirmedLeavesByManager() {

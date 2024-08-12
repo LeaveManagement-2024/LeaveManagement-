@@ -14,8 +14,8 @@ public interface LeaveRepo extends JpaRepository<Leave,Long> {
     @Query("SELECT COUNT(l) FROM Leave l WHERE l.startDate >= CURRENT_DATE")
     long countNewLeaveRequests();
 
-    @Query("SELECT COUNT(l) FROM Leave l WHERE l.responsibleVisa = False")
-    long countUnconfirmedLeavesByResponsible();
+    @Query("SELECT l FROM Leave l WHERE l.responsibleVisa = False or l.managerVisa = False or l.remplecementVisa")
+    List<Leave> UnconfirmedLeaves();
 
     @Query("SELECT COUNT(l) FROM Leave l WHERE l.managerVisa = False")
     long countUnconfirmedLeavesByManager();

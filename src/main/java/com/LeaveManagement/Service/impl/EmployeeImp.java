@@ -2,6 +2,7 @@ package com.LeaveManagement.Service.impl;
 
 import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Dto.LogInDTO;
+import  com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.*;
 import com.LeaveManagement.Repo.*;
 import com.LeaveManagement.Service.EmployeeService;
@@ -68,9 +69,7 @@ public class EmployeeImp implements EmployeeService {
         Posts post = postsRepo.findById(employeeDTO.getPostId()).orElse(null);
         Grades grade = gradesRepo.findById(employeeDTO.getGradeId()).orElse(null);
         Profiles profile = profileRepo.findById(employeeDTO.getProfileId()).orElse(null);
-        Employees manager=employeeRep.findById(employeeDTO.getManagerId()).orElse(null);
         Filiere filiere= filiereRepo.findById(employeeDTO.getFiliereId()).orElse(null);
-        Employees responsible =employeeRep.findById(employeeDTO.getResponsibleId()).orElse(null);
         Employees employee = new Employees();
         employee.setFirstNameFr(employeeDTO.getFirstNameFr());
         employee.setFirstNameAr(employeeDTO.getFirstNameAr());
@@ -101,8 +100,6 @@ public class EmployeeImp implements EmployeeService {
         employee.setGrade(grade);
         employee.setPost(post);
         employee.setProfile(profile);
-        employee.setManager(manager);
-        employee.setResponsible(responsible);
         employee.setFiliere(filiere);
         employeeRep.save(employee);
         return  employee.getIdE();
@@ -123,9 +120,7 @@ public class EmployeeImp implements EmployeeService {
         Posts post = postsRepo.findById(employeeDTO.getPostId()).orElse(null);
         Grades grade = gradesRepo.findById(employeeDTO.getGradeId()).orElse(null);
         Profiles profile = profileRepo.findById(employeeDTO.getProfileId()).orElse(null);
-        Filiere filiere= filiereRepo.findById(employeeDTO.getFiliereId()).orElse(null);
-        Employees manager=employeeRep.findById(employeeDTO.getManagerId()).orElse(null);
-        Employees responsible =employeeRep.findById(employeeDTO.getResponsibleId()).orElse(null);
+
         Employees employeesToUpdate = employeeRep.findById(id).orElseThrow(() ->new IllegalArgumentException("Employee not found"));
         employeesToUpdate.setFirstNameFr(employeeDTO.getFirstNameFr());
         employeesToUpdate.setFirstNameAr(employeeDTO.getFirstNameAr());
@@ -150,33 +145,70 @@ public class EmployeeImp implements EmployeeService {
             file.transferTo(destinationPath);
             employeesToUpdate.setImage(baseUrl + filename);
         }
-        employeesToUpdate.setManager(manager);
-        employeesToUpdate.setResponsible(responsible);
+
+        String newPassword = employeeDTO.getPassword();
+        if (newPassword != null && !newPassword.isEmpty()) {
+            employeesToUpdate.setPassword(passwordEncoder.encode(newPassword));
+        }
+        Long filieret  = employeeDTO.getFiliereId();
+        if (filieret != null) {
+            Filiere filiere= filiereRepo.findById(filieret).orElse(null);
+            employeesToUpdate.setFiliere(filiere);
+        }
+
         employeesToUpdate.setProfile(profile);
         employeesToUpdate.setGrade(grade);
         employeesToUpdate.setPost(post);
-        employeesToUpdate.setFiliere(filiere);
+
         employeeRep.save(employeesToUpdate);
     }
-
     @Override
     public void deleteEmployee(Long id) {
         employeeRep.deleteById(id);
 
     }
     @Override
-    public Employees GetManagerByIdEmp(Long id) {
-        return employeeRep.findById(id)
-                .map(Employees::getManager)
-                .orElse(null);
-    }
+    public void updatePassword(Long id,UpdatePassword updatePassword){
+        Employees employeesToUpdate = employeeRep.findById(id).orElseThrow(() ->new IllegalArgumentException("Employee not found"));
+        if (employeesToUpdate != null) {
+            String password = updatePassword.getOldPassword();
+            String encodedPassword = employeesToUpdate.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            if (isPwdRight) {
+                employeesToUpdate.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
+                employeeRep.save(employeesToUpdate);
+            }
+            else  throw new IllegalArgumentException("Ancien mot de passe incorrect");
 
-    @Override
-    public Employees GetResponsibleByIdEmp(Long id) {
-        return employeeRep.findById(id)
-                .map(Employees::getResponsible)
-                .orElse(null);
+
+        }
+
+
     }
+    @Override
+    public void updatePasswordByAdmin(Long id,UpdatePassword updatePassword){
+        Employees employeesToUpdate = employeeRep.findById(id).orElseThrow(() ->new IllegalArgumentException("Employee not found"));
+                employeesToUpdate.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
+                employeeRep.save(employeesToUpdate);
+            }
+    @Override
+    public void updateImage(Long id,EmployeesDTO employeeDTO) throws IOException {
+        Employees employeesToUpdate = employeeRep.findById(id).orElseThrow(() ->new IllegalArgumentException("Employee not found"));
+        MultipartFile file = employeeDTO.getImage();
+
+        if (file != null && !file.isEmpty()) {
+            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            Path storageDirectory = Paths.get(storageDirectoryPath);
+            if (!Files.exists(storageDirectory)) {
+                Files.createDirectories(storageDirectory);
+            }
+            Path destinationPath = storageDirectory.resolve(Path.of(filename));
+            file.transferTo(destinationPath);
+            employeesToUpdate.setImage(baseUrl + filename);
+            employeeRep.save(employeesToUpdate);
+        }
+        }
+
 
 
 }

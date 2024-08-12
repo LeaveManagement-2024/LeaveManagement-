@@ -2,6 +2,7 @@ package com.LeaveManagement.Service;
 
 import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Dto.LogInDTO;
+import com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.response.LogInResponse;
 
@@ -17,8 +18,8 @@ public interface EmployeeService {
     public Employees GetEmployeeById(Long  id);
     void updateEmployee(Long id, EmployeesDTO employeeDTO ) throws IOException;
     void deleteEmployee(Long id);
-    public Employees GetManagerByIdEmp(Long id);
-    public Employees GetResponsibleByIdEmp(Long id);
-
+    void updatePassword(Long id, UpdatePassword updatePassword);
+    void updateImage(Long id,EmployeesDTO employeeDTO)throws IOException;
+    void updatePasswordByAdmin(Long id,UpdatePassword updatePassword);
 
     }

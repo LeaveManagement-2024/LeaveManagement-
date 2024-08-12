@@ -16,7 +16,7 @@ public class ServiceE {
     @JoinColumn(name = "IdDepartment")
     private Departement departement;
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "respServiceId")
     private Employees respService;
 

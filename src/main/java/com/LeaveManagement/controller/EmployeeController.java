@@ -2,10 +2,12 @@ package com.LeaveManagement.controller;
 
 import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Dto.LogInDTO;
+import com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Service.EmployeeService;
 import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,12 +47,10 @@ public class EmployeeController {
             @RequestParam("hireDate") String hireDate, // Format: "yyyy-MM-dd"
             @RequestParam("workLocationFr") String workLocationFr,
             @RequestParam("workLocationAr") String workLocationAr,
-            @RequestParam("image") MultipartFile image,
+            @RequestParam(value = "image",required = false) MultipartFile image,
             @RequestParam("postId") Long postId,
             @RequestParam("gradeId") Long gradeId,
             @RequestParam("profileId") Long profileId,
-            @RequestParam("managerId") Long managerId,
-            @RequestParam("responsibleId") Long responsibleId,
             @RequestParam("filiereId") Long filiereId) throws IOException {
 
         EmployeesDTO employeesDTO = new EmployeesDTO();
@@ -72,8 +72,7 @@ public class EmployeeController {
         employeesDTO.setPostId(postId);
         employeesDTO.setGradeId(gradeId);
         employeesDTO.setProfileId(profileId);
-        employeesDTO.setManagerId(managerId);
-        employeesDTO.setResponsibleId(responsibleId);
+
         employeesDTO.setFiliereId(filiereId);
 
         Long id  = employeeService.addEmployee(employeesDTO);
@@ -89,14 +88,6 @@ public class EmployeeController {
     public Employees getEmployeeById(@PathVariable Long Id) {
         return employeeService.GetEmployeeById(Id);
     }
-    @GetMapping(path="/getManagerByIdEmp/{Id}")
-    public Employees getManagerByIdEmp(@PathVariable Long Id) {
-        return employeeService.GetManagerByIdEmp(Id);
-    }
-    @GetMapping(path="/getResponsibleByIdEmp/{Id}")
-    public Employees getResponsibleByIdEmp(@PathVariable Long Id) {
-        return employeeService.GetResponsibleByIdEmp(Id);
-    }
     @PutMapping(path = "/update/{id}", consumes = {"multipart/form-data"})
     public ResponseEntity<String> updateUser(
             @PathVariable Long id,
@@ -105,6 +96,7 @@ public class EmployeeController {
             @RequestParam("lastNameFr") String lastNameFr,
             @RequestParam("lastNameAr") String lastNameAr,
             @RequestParam("email") String email,
+            @RequestParam("password") String password,
             @RequestParam("phone") String phone,
             @RequestParam("ppr") String ppr,
             @RequestParam("cin") String cin,
@@ -113,13 +105,11 @@ public class EmployeeController {
             @RequestParam("hireDate") String hireDate, // Format: "yyyy-MM-dd"
             @RequestParam("workLocationFr") String workLocationFr,
             @RequestParam("workLocationAr") String workLocationAr,
-            @RequestParam("image") MultipartFile image,
+            @RequestParam(value = "image",required = false) MultipartFile image,
             @RequestParam("postId") Long postId,
             @RequestParam("gradeId") Long gradeId,
             @RequestParam("profileId") Long profileId,
-            @RequestParam("managerId") Long managerId,
-            @RequestParam("responsibleId") Long responsibleId,
-            @RequestParam("filiereId") Long filiereId) throws IOException {
+            @RequestParam(value = "filiereId",required = false) Long filiereId) throws IOException {
 
         EmployeesDTO employeesDTO = new EmployeesDTO();
         employeesDTO.setFirstNameFr(firstNameFr);
@@ -127,6 +117,7 @@ public class EmployeeController {
         employeesDTO.setLastNameFr(lastNameFr);
         employeesDTO.setLastNameAr(lastNameAr);
         employeesDTO.setEmail(email);
+        employeesDTO.setPassword(password);
         employeesDTO.setPhone(phone);
         employeesDTO.setPpr(ppr);
         employeesDTO.setCin(cin);
@@ -139,8 +130,6 @@ public class EmployeeController {
         employeesDTO.setPostId(postId);
         employeesDTO.setGradeId(gradeId);
         employeesDTO.setProfileId(profileId);
-        employeesDTO.setManagerId(managerId);
-        employeesDTO.setResponsibleId(responsibleId);
         employeesDTO.setFiliereId(filiereId);
         employeeService.updateEmployee(id, employeesDTO);
         return ResponseEntity.ok("Employee updated successfully");
@@ -149,5 +138,41 @@ public class EmployeeController {
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
         return ResponseEntity.ok("Employee deleted successfully");
+    }
+    @PostMapping(path="/updatePassword/{id}")
+    public ResponseEntity<String> updatePassword(@PathVariable Long id,@RequestBody UpdatePassword updatePassword) {
+        try {
+            employeeService.updatePassword(id, updatePassword);
+            return ResponseEntity.ok("Mot de passe mis à jour avec succès");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Une erreur est survenue");
+        }
+    }
+
+
+
+    @PostMapping("/image/{id}")
+    public ResponseEntity<String> updateImage(
+            @PathVariable Long id,
+            @RequestParam("image") MultipartFile imageFile) {
+
+        try {
+            // Crée un DTO pour transporter l'image
+            EmployeesDTO employeeDTO = new EmployeesDTO();
+            employeeDTO.setImage(imageFile);
+
+            // Appelle le service pour mettre à jour l'image
+            employeeService.updateImage(id, employeeDTO);
+            return ResponseEntity.ok("Image mise à jour avec succès");
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la mise à jour de l'image");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue");
+        }
     }
 }

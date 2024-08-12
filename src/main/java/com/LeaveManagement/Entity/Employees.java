@@ -42,24 +42,12 @@ public class Employees {
     private String workLocationAr;
     @Column(columnDefinition = "NVARCHAR(MAX)")
     private String image;
-
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "managerId")
-    private Employees manager;
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "responsibleId")
-    private Employees responsible;
-
     @ManyToOne
     @JoinColumn(name = "IdProfile")
     private Profiles profile;
-
     @ManyToOne
     @JoinColumn(name = "IdGrade")
     private Grades grade;
-
     @ManyToOne
     @JoinColumn(name = "IdPost")
     private Posts post;
@@ -205,22 +193,6 @@ public class Employees {
         this.image = image;
     }
 
-    public Employees getManager() {
-        return manager;
-    }
-
-    public void setManager(Employees manager) {
-        this.manager = manager;
-    }
-
-    public Employees getResponsible() {
-        return responsible;
-    }
-
-    public void setResponsible(Employees responsible) {
-        this.responsible = responsible;
-    }
-
     public Profiles getProfile() {
         return profile;
     }
@@ -286,8 +258,6 @@ public class Employees {
         this.workLocationFr = workLocationFr;
         this.workLocationAr = workLocationAr;
         this.image = image;
-        this.manager = manager;
-        this.responsible = responsible;
         this.profile = profile;
         this.grade = grade;
         this.post = post;
