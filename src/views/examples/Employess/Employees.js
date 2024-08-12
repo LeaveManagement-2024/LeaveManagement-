@@ -70,9 +70,9 @@ const Employees = () => {
       console.error('Error logging in:', error);
     }
   };
-  const handleGetEmployeeById = async () => {
+  const handleGetEmployeeById = async (idE) => {
     try {
-      const data = await getEmployeeById(employeeId);
+      const data = await getEmployeeById(idE);
       setEmployee(data);
     } catch (error) {
       console.error('Error fetching employee:', error);

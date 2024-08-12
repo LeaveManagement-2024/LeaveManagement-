@@ -90,12 +90,21 @@ const AddEmployeeModal = (props) => {
 
 
   const handleChange = (e) => {
-    
     const { id, value, type, files } = e.target;
     if (type === 'file') {
       setImage(files[0]);
     } else {
       switch (id) {
+        case 'postId':
+        case 'gradeId':
+        case 'profileId':
+        case 'filiereId':
+          const numberValue = value ? Number(value) : '';
+          if (id === 'postId') setPostId(numberValue);
+          if (id === 'gradeId') setGradeId(numberValue);
+          if (id === 'profileId') setProfileId(numberValue);
+          if (id === 'filiereId') setFiliereId(numberValue);
+          break;
         case 'firstNameFr':
           setFirstNameFr(value);
           break;
@@ -138,24 +147,11 @@ const AddEmployeeModal = (props) => {
         case 'workLocationAr':
           setWorkLocationAr(value);
           break;
-        case 'postId':
-          setPostId(value);
-          break;
-        case 'gradeId':
-          setGradeId(value);
-          break;
-        case 'profileId':
-          setProfileId(value);
-          break;
-        case 'filiereId':
-          setFiliereId(value);
-          break;
         default:
           break;
       }
     }
   };
-
   const handleAddEmployee = async () => {
     try {
       const formData = new FormData();

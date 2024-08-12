@@ -89,7 +89,7 @@ const EditEmployeeModal = (props) => {
     fetchPosts();
     fetchFilieres();
     fetchEmployee();
-  }, []);
+  }, [props.empl.idE]);
 
 
   const handleChange = (e) => {
