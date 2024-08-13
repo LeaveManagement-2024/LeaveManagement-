@@ -23,6 +23,7 @@ import Login from "views/examples/Login.js";
 import Leave from "views/examples/Leave/Leave";
 import Employees from "views/examples/Employess/Employees";
 import Icons from "views/examples/Icons.js";
+import Parametre from "views/examples/parametre/parametre";
 
 var routes = [
   {
@@ -39,13 +40,7 @@ var routes = [
     component: <Icons />,
     layout: "/admin",
   },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    component: <Maps />,
-    layout: "/admin",
-  },
+  
   {
     path: "/user-profile",
     name: "User Profile",
@@ -58,6 +53,13 @@ var routes = [
     name: "Leave",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Leave/>,
+    layout: "/admin",
+  },
+  {
+    path: "/Parametre",
+    name: "Parametre",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <Parametre/>,
     layout: "/admin",
   },
   {
