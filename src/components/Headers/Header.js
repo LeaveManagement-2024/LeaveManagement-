@@ -23,14 +23,14 @@ const Header = () => {
       try {
         const newLeave = await getNewLeaveRequests();
         const totalEmp = await getTotalEmployees();
-        //const unconfirmed = await getUnconfirmedLeaves();
+        const unconfirmed = await getUnconfirmedLeaves();
         const leaveToday = await getNumberOfEmployeesOnLeaveToday();
         const newEmp = await getCountNewEmployees();
         const oldEmp = await getCountOldEmployees();
 
         setNewLeaveRequests(newLeave);
         setTotalEmployees(totalEmp);
-        //setUnconfirmedLeaves(unconfirmed);
+        setUnconfirmedLeaves(unconfirmed);
         setEmployeesOnLeaveToday(leaveToday);
         setCountNewEmployees(newEmp);
         setCountOldEmployees(oldEmp);

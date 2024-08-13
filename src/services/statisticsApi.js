@@ -14,7 +14,7 @@ export const getTotalEmployees = async () => {
 };
 
 export const getUnconfirmedLeaves = async () => {
-  const response = await axios.get(`${API_URL}/numberUnconfirmedLeaves`);
+  const response = await axios.get(`${API_URL}/numberUnconfirmedLeavesByManager`);
   return response.data;
 };
 
