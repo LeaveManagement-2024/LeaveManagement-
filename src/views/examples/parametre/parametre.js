@@ -49,15 +49,37 @@ const Parametre= () => {
                   <h3 className="mb-0">جدول الموظفين</h3>
                 </div>
               </CardHeader>
-            
-<div class="carddr">
-  Click me
-</div>
-            
+              <div className="row side-row divstu" >
+                
+              <div class="carddr">
+                <h1>الرتب</h1>
+              
+              </div>
+              <div class="carddr">
+                Click me
+              </div>
+              <div class="carddr">
+                Click me
+              </div>
+              <div class="carddr">
+                Click me
+              </div>
+              <div class="carddr">
+                Click me
+              </div>
+              <div class="carddr">
+                Click me
+              </div>
+              <div class="carddr">
+                Click me
+              </div>
+              
+            </div>
+
             </Card>
           </div>
         </Row>
-        {/* مثال لنموذج لإضافة/تحديث الموظفين */}
+       
         
       </Container>
     </>

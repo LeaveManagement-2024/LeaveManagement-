@@ -41,6 +41,7 @@ Input[type=file] {
   user-select: none;
   font-weight: bolder;
   color: black;
+  margin: 50px;
 }
 
 .carddr:hover {
@@ -50,4 +51,9 @@ Input[type=file] {
 
 .carddr:active {
   transform: scale(0.95) rotateZ(1.7deg);
+}
+.divstu{
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
