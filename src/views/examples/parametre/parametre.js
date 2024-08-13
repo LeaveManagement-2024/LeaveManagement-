@@ -49,18 +49,10 @@ const Parametre= () => {
                   <h3 className="mb-0">جدول الموظفين</h3>
                 </div>
               </CardHeader>
-                 <div class="card1">
-                      <div class="card1-details">
-                        <p class="text1-title"> </p>
-
-                      </div>
-                      <Link >
-                          <button class="card-button">More info</button>
-                      </Link>
-                  </div>
-              
-                <p></p>
-                <p></p>
+            
+<div class="carddr">
+  Click me
+</div>
             
             </Card>
           </div>
