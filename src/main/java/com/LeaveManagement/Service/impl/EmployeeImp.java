@@ -114,6 +114,14 @@ public class EmployeeImp implements EmployeeService {
         return employeeRep.findById(id).get();
 
     }
+    @Override
+    public Filiere getFiliereByIdEmployee(Long id){
+        Employees employee= employeeRep.findById(id).orElseThrow(() ->new IllegalArgumentException("Employee not found"));
+        return employee.getFiliere();
+
+    }
+
+
 
     @Override
     public void updateEmployee(Long id, EmployeesDTO employeeDTO) throws IOException {
@@ -174,6 +182,7 @@ public class EmployeeImp implements EmployeeService {
             String password = updatePassword.getOldPassword();
             String encodedPassword = employeesToUpdate.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+
             if (isPwdRight) {
                 employeesToUpdate.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
                 employeeRep.save(employeesToUpdate);

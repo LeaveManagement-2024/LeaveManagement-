@@ -49,4 +49,9 @@ public class LeaveController {
     public List<Leave> getLeavesByEmpId(@PathVariable Long Id) {
         return leaveService.getLeavesByEmpId(Id);
     }
+    @GetMapping(path="/LeavesById/{id}")
+    public List<Leave> getLeavesById(@PathVariable Long id) {
+        return leaveService.getLeavesById(id);
+    }
+
 }

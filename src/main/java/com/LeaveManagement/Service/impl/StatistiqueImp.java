@@ -28,11 +28,8 @@ public class StatistiqueImp {
         return employeesRepository.count();
     }
 
-    public List<Leave> UnconfirmedLeaves() {
-        return leaveRepository.UnconfirmedLeaves();
-    }
-    public long nbrUnconfirmedLeaves(){
-        return leaveRepository.UnconfirmedLeaves().size();
+    public List<Leave> UnconfirmedLeavesByManager() {
+        return leaveRepository.unconfirmedLeavesByManager();
     }
 
     public long getUnconfirmedLeavesByManager() {

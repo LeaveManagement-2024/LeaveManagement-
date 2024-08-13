@@ -117,6 +117,9 @@ public class LeaveImp implements LeaveService {
         List<Leave> leavesToday = leaveRepo.findLeavesByDate(today);
         return leavesToday;
     }
+    public List<Leave> getLeavesById(Long id) {
+        return leaveRepo.findLeavesById(id);
+    }
 
 
 

@@ -10,11 +10,11 @@ public class LeaveDTO {
     private Long leaveId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Boolean remplecementVisa;
+    private String remplecementVisa;
     private LocalDate remplecementVisaDate;
-    private Boolean responsibleVisa;
+    private String responsibleVisa;
     private LocalDate responsibleVisaDate;
-    private Boolean managerVisa;
+    private String managerVisa;
     private LocalDate managerVisaDate;
 
     private Long employeeId;
@@ -27,10 +27,7 @@ public class LeaveDTO {
     public LeaveDTO() {
     }
 
-    public LeaveDTO(Long leaveId, LocalDate startDate, LocalDate endDate, Boolean remplecementVisa,
-                    LocalDate remplecementVisaDate, Boolean responsibleVisa, LocalDate responsibleVisaDate,
-                    Boolean managerVisa, LocalDate managerVisaDate, Long employeeId, Long annualLeaveId,
-                    Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
+    public LeaveDTO(Long leaveId, LocalDate startDate, LocalDate endDate, String remplecementVisa, LocalDate remplecementVisaDate, String responsibleVisa, LocalDate responsibleVisaDate, String managerVisa, LocalDate managerVisaDate, Long employeeId, Long annualLeaveId, Long leaveTypeId, Long replacementId, Long lmanagerId, Long responsible) {
         this.leaveId = leaveId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -72,11 +69,11 @@ public class LeaveDTO {
         this.endDate = endDate;
     }
 
-    public Boolean getRemplecementVisa() {
+    public String getRemplecementVisa() {
         return remplecementVisa;
     }
 
-    public void setRemplecementVisa(Boolean remplecementVisa) {
+    public void setRemplecementVisa(String remplecementVisa) {
         this.remplecementVisa = remplecementVisa;
     }
 
@@ -88,11 +85,11 @@ public class LeaveDTO {
         this.remplecementVisaDate = remplecementVisaDate;
     }
 
-    public Boolean getResponsibleVisa() {
+    public String getResponsibleVisa() {
         return responsibleVisa;
     }
 
-    public void setResponsibleVisa(Boolean responsibleVisa) {
+    public void setResponsibleVisa(String responsibleVisa) {
         this.responsibleVisa = responsibleVisa;
     }
 
@@ -104,11 +101,11 @@ public class LeaveDTO {
         this.responsibleVisaDate = responsibleVisaDate;
     }
 
-    public Boolean getManagerVisa() {
+    public String getManagerVisa() {
         return managerVisa;
     }
 
-    public void setManagerVisa(Boolean managerVisa) {
+    public void setManagerVisa(String managerVisa) {
         this.managerVisa = managerVisa;
     }
 

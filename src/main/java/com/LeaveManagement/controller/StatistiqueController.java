@@ -32,14 +32,15 @@ public class StatistiqueController {
         return statistiqueService.getTotalEmployees();
     }
 
-    @GetMapping("/unconfirmedLeaves")
+    @GetMapping("/unconfirmedLeavesByManager")
     public List<Leave> UnconfirmedLeaves() {
-        return statistiqueService.UnconfirmedLeaves();
+        return statistiqueService.UnconfirmedLeavesByManager();
     }
 
-    @GetMapping("/numberUnconfirmedLeaves")
-    public long nbrUnconfirmedLeaves() {
-        return statistiqueService.nbrUnconfirmedLeaves();
+
+    @GetMapping("/numberUnconfirmedLeavesByManager")
+    public long nbrUnconfirmedLeavesByManager() {
+        return statistiqueService.getUnconfirmedLeavesByManager();
     }
 
     @GetMapping("/numberLeaves-today")
@@ -71,5 +72,6 @@ public class StatistiqueController {
     public List<Employees> oldEmployees() {
         return statistiqueService.oldEmployees();
     }
+
 
 }

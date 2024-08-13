@@ -24,7 +24,6 @@ public class AnnualLeaveLine {
 
     public AnnualLeaveLine() {
     }
-
     public AnnualLeaveLine(int declaredDays, int remainingDays, Employees employee, AnnualLeave annualLeave) {
         this.declaredDays = declaredDays;
         this.remainingDays = remainingDays;

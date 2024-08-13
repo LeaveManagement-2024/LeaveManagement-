@@ -4,6 +4,7 @@ import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.Employees;
+import com.LeaveManagement.Entity.Filiere;
 import com.LeaveManagement.Service.EmployeeService;
 import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,10 @@ public class EmployeeController {
     @GetMapping(path="/getById/{Id}")
     public Employees getEmployeeById(@PathVariable Long Id) {
         return employeeService.GetEmployeeById(Id);
+    }
+    @GetMapping(path="/getFiliere/{Id}")
+    public Filiere getFiliere(@PathVariable Long Id) {
+        return employeeService.getFiliereByIdEmployee(Id);
     }
     @PutMapping(path = "/update/{id}", consumes = {"multipart/form-data"})
     public ResponseEntity<String> updateUser(
@@ -175,4 +180,5 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue");
         }
     }
+
 }
