@@ -41,13 +41,7 @@ const Parametre= () => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <div className="d-flex justify-content-between align-items-center">
-                  <Button color="primary" >
-                    إضافة موظف
-                  </Button>
-                 
-                  <h3 className="mb-0">جدول الموظفين</h3>
-                </div>
+                
               </CardHeader>
               <div className="row side-row divstu" >
                 
@@ -56,22 +50,22 @@ const Parametre= () => {
               
               </div>
               <div class="carddr">
-                Click me
+              <h1>المهام</h1>
               </div>
               <div class="carddr">
-                Click me
+              <h1>الاقسام</h1>
               </div>
               <div class="carddr">
-                Click me
+              <h1>الشعب</h1>
               </div>
               <div class="carddr">
-                Click me
+              <h1>المصالح</h1>
               </div>
               <div class="carddr">
-                Click me
+              <h1>ايام العطل</h1>
               </div>
               <div class="carddr">
-                Click me
+              <h1>الصفات</h1>
               </div>
               
             </div>
