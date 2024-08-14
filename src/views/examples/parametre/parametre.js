@@ -62,7 +62,7 @@ const Parametre= () => {
               <h1>المصالح</h1>
               </div>
               <div class="carddr">
-              <h1>ايام العطل</h1>
+              <h1> العطل السنوية</h1>
               </div>
               <div class="carddr">
               <h1>الصفات</h1>
