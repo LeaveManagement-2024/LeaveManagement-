@@ -24,6 +24,7 @@ import Leave from "views/examples/Leave/Leave";
 import Employees from "views/examples/Employess/Employees";
 import Icons from "views/examples/Icons.js";
 import Parametre from "views/examples/parametre/parametre";
+import AnnualLeave from "views/examples/annualLeave/annualLeave"
 
 var routes = [
   {
@@ -43,30 +44,37 @@ var routes = [
   
   {
     path: "/user-profile",
-    name: "User Profile",
+    name: "الملف الشخصي للمستخدم",
     icon: "ni ni-single-02 text-yellow",
     component: <Profile />,
     layout: "/admin",
   },
   {
     path: "/Leave",
-    name: "Leave",
+    name: "الرخص",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Leave/>,
     layout: "/admin",
   },
   {
     path: "/Parametre",
-    name: "Parametre",
+    name: "الاعدادات",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Parametre/>,
     layout: "/admin",
   },
   {
     path: "/employees",
-    name: "Employees",
+    name: "الموظفون",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Employees />,
+    layout: "/admin",
+  },
+  {
+    path: "/annualLeave",
+    name: "العطل السنوية ",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <AnnualLeave />,
     layout: "/admin",
   },
   {

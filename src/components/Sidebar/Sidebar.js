@@ -72,14 +72,15 @@ const Sidebar = (props) => {
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
       return (
-        <NavItem key={key}>
+        <NavItem key={key} style={{ direction: 'rtl' }}> 
           <NavLink
             to={prop.layout + prop.path}
             tag={NavLinkRRD}
             onClick={closeCollapse}
-          >
-            <i className={prop.icon} />
-            {prop.name}
+          ><div className="text-lg text-center">
+            <i className={prop.icon} style={{ marginLeft:'10px'}}/>
+            {prop.name}</div>
+            
           </NavLink>
         </NavItem>
       );
