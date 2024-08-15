@@ -13,7 +13,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { getPublicHolidayById, updatePublicHoliday } from './publicHolidayApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
+import { getPublicHolidayById, updatePublicHoliday } from './public_holidayApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
 
 const EditPublicHolidayModal = (props) => {
   const [holidayDate, setHolidayDate] = useState('');
