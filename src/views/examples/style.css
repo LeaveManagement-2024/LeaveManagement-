@@ -23,35 +23,7 @@ Input[type=file] {
     background: #1161e9;
   }
   /* From Uiverse.io by SteveBloX */ 
-.carddr {
-  box-sizing: border-box;
-  width: 190px;
-  height: 254px;
-  background: rgba(217, 217, 217, 0.58);
-  border: 1px solid white;
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(6px);
-  border-radius: 17px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  font-weight: bolder;
-  color: black;
-  margin: 35px;
-}
 
-.carddr:hover {
-  border: 1px solid black;
-  transform: scale(1.05);
-}
-
-.carddr:active {
-  transform: scale(0.95) rotateZ(1.7deg);
-}
 .divstu{
   align-items: center;
   display: flex;
@@ -64,7 +36,7 @@ Input[type=file] {
   --border-radius: 0.75rem;
   --primary-color: #7257fa;
   --secondary-color: #3c3852;
-  width: 210px;
+  width: 400px;
   font-family: "Arial";
   padding: 1rem;
   cursor: pointer;
@@ -126,3 +98,62 @@ Input[type=file] {
 .card78:hover .card__arrow svg {
   transform: translateX(3px);
 }
+
+/* From Uiverse.io by alexruix */ 
+.cardParametre {
+  width: 300px;
+  height: 254px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #ffffff;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  margin: 65px;
+ }
+ 
+ .card-details {
+  color: black;
+  height: 100%;
+  gap: .5em;
+  display: grid;
+  place-content: center;
+ }
+ 
+ .card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #000000;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+ }
+ 
+ .text-body {
+  color: rgb(134, 134, 134);
+ }
+ 
+ /*Text*/
+ .text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+ }
+ 
+ /*Hover*/
+ .cardParametre:hover {
+  border-color: #000000;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+ }
+ 
+ .cardParametre:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+ }

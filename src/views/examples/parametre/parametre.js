@@ -1,37 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Badge,
   Card,
   CardHeader,
-  CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Button,
-  Progress,
-  Table,
   Container,
-  Row,
-  UncontrolledTooltip,
-  
+  Row
 } from "reactstrap";
-// core components
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import Header from "components/Headers/Header.js";
-import '../style.css'
-import { Link } from 'react-router-dom';
+import '../style.css';
 
-
-const Parametre= () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-
-  // Calculer les indices de la page actuelle
- 
+const Parametre = () => {
+  // Array of card details with navigation paths
+  const cardDetails = [
+    { title: "الرتب", body: "Here are the details of the card", link: "/grades" },
+    { title: "المهام", body: "Here are the details of the card", link: "/tasks" },
+    { title: "الاقسام", body: "Here are the details of the card", link: "/departments" },
+    { title: "الشعب", body: "Here are the details of the card", link: "/divisions" },
+    { title: "المصالح", body: "Here are the details of the card", link: "/services" },
+    { title: "العطل السنوية", body: "Here are the details of the card", link: "/annual-leave" },
+    { title: "الصفات", body: "Profile", link: "/profiles" }
+  ];
 
   return (
     <>
@@ -41,40 +29,25 @@ const Parametre= () => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                
+                {/* Optional header content */}
               </CardHeader>
-              <div className="row side-row divstu" >
-                
-              <div class="carddr">
-                <h1>الرتب</h1>
-              
+              <div className="row side-row divstu">
+                {cardDetails.map((card, index) => (
+                  <div className="cardParametre" key={index}>
+                    <div className="card-details text-center">
+                      <p className="text-title">{card.title}</p>
+                      <p className="text-body">{card.body}</p>
+                    </div>
+                    {/* Use Link for navigation */}
+                    <Link to={card.link}>
+                      <button className="card-button">للمزيد من المعلومات</button>
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <div class="carddr">
-              <h1>المهام</h1>
-              </div>
-              <div class="carddr">
-              <h1>الاقسام</h1>
-              </div>
-              <div class="carddr">
-              <h1>الشعب</h1>
-              </div>
-              <div class="carddr">
-              <h1>المصالح</h1>
-              </div>
-              <div class="carddr">
-              <h1> العطل السنوية</h1>
-              </div>
-              <div class="carddr">
-              <h1>الصفات</h1>
-              </div>
-              
-            </div>
-
             </Card>
           </div>
         </Row>
-       
-        
       </Container>
     </>
   );
