@@ -14,7 +14,7 @@ import {
   Col,
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { getDepartmentById, updateDepartment } from './departmentApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
+import { getDepartmentById, updateDepartment } from './departementApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
 
 const EditDepartmentModal = (props) => {
 

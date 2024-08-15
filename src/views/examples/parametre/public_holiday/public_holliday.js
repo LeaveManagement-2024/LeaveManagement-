@@ -19,7 +19,7 @@ import {
   CardBody,
 } from "reactstrap";
 import AddPublicHolidayModal from './addPublicHolidayModal';
-import EditPublicHolidayModal from './editPublicHolidayModal';
+import EditPublicHolidayModal from './editPublicHollidayModal';
 import Header from "components/Headers/Header.js";
 import {
   getAllPublicHolidays,
