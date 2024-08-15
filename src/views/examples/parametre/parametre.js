@@ -12,13 +12,13 @@ import '../style.css';
 const Parametre = () => {
   // Array of card details with navigation paths
   const cardDetails = [
-    { title: "الرتب", body: "Here are the details of the card", link: "/grades" },
-    { title: "المهام", body: "Here are the details of the card", link: "/posts" },
-    { title: "الاقسام", body: "Here are the details of the card", link: "/departments" },
-    { title: "الشعب", body: "Here are the details of the card", link: "/filieres" },
-    { title: "المصالح", body: "Here are the details of the card", link: "/services" },
+    { title: "الرتب", body: "Here are the details of the card", link: "/admin/grades" },
+    { title: "المهام", body: "Here are the details of the card", link: "/admin/posts" },
+    { title: "الاقسام", body: "Here are the details of the card", link: "/admin/departments" },
+    { title: "الشعب", body: "Here are the details of the card", link: "/admin/filieres" },
+    { title: "المصالح", body: "Here are the details of the card", link: "/admin/services" },
     { title: "العطل السنوية", body: "Here are the details of the card", link: "/public-holiday" },
-    { title: "الصفات", body: "Profile", link: "/profiles" }
+    { title: "الصفات", body: "Profile", link: "/admin/profiles" }
   ];
 
   return (

@@ -23,6 +23,13 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import Grades from "views/examples/parametre/grades/grades";
+import Postes from "views/examples/parametre/posts/posts";
+import Departments from "views/examples/parametre/departement/departement";
+import Filieres from "views/examples/parametre/filiere/filiere";
+import Services from "views/examples/parametre/service/service";
+import PublicHoliday from "views/examples/parametre/public_holiday/public_holliday";
+import Profiles from "views/examples/parametre/profiles/profiles";
 
 import routes from "routes.js";
 
@@ -78,6 +85,13 @@ const Admin = (props) => {
         />
         <Routes>
           {getRoutes(routes)}
+           <Route path="/grades" element={<Grades />} />
+           <Route path="/posts" element={<Postes />} />
+           <Route path="/departments" element={<Departments />} />
+           <Route path="/filieres" element={<Filieres />} />
+           <Route path="/services" element={<Services />} />
+           <Route path="/public-holiday" element={<PublicHoliday />} />
+           <Route path="/profiles" element={<Profiles />} />
           <Route path="*" element={<Navigate to="/admin/index" replace />} />
         </Routes>
         <Container fluid>
