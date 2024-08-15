@@ -93,10 +93,12 @@ const PublicHolidays = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Public Holiday Name</th>
-                    <th scope="col">اسم العطلة الرسمية</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">التاريخ</th>
+                    <th scope="col"> اسم العطلة الرسمية</th>
+                    <th scope="col">    بداية العطلة</th>
+                    <th scope="col">نهاية العطلة</th>
+                    <th scope="col">Date fin</th>
+                    <th scope="col"> Date debut     </th>
+                    <th scope="col">  Nom de jour férié  </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">

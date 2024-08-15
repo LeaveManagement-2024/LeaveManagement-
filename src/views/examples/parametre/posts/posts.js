@@ -84,17 +84,17 @@ const Posts = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة منشور
+                    إضافة مهمة
                   </Button>
                   <AddPostModal show={modalShow} onHide={() => setModalShow(false)}></AddPostModal>
-                  <h3 className="mb-0">جدول المنشورات</h3>
+                  <h3 className="mb-0">جدول المهام</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Post Title</th>
-                    <th scope="col">عنوان المنشور</th>
+                    <th scope="col"> اسم المهمة</th>
+                    <th scope="col"> Nom du post</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">

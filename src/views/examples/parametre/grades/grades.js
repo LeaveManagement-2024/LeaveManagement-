@@ -93,8 +93,8 @@ const Grades = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col"> Grade Name </th>
-                    <th scope="col">اسم الدرجة</th>
+                    <th scope="col" >اسم الدرجة  </th>
+                    <th scope="col"> Nom de grade </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">

@@ -65,13 +65,11 @@ const AddPublicHolidayModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>إضافة عطلة عامة</h4>
+            <h4 className='text-center text-xl'>إضافة عطلة سنوية</h4>
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                معلومات العطلة العامة
-              </h6>
+            
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="12">
@@ -94,7 +92,24 @@ const AddPublicHolidayModal = (props) => {
                   <Col lg="12">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="holidayDate">
-                        تاريخ العطلة
+                        تاريخ بداية العطلة
+                      </label>
+                      <Input
+                        className="form-control-alternative text-right"
+                        id="holidayDate"
+                        placeholder="YYYY-MM-DD"
+                        type="date"
+                        value={holidayDate}
+                        onChange={handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="12">
+                    <FormGroup className="text-right">
+                      <label className="form-control-label" htmlFor="holidayDate">
+                        تاريخ نهاية العطلة
                       </label>
                       <Input
                         className="form-control-alternative text-right"

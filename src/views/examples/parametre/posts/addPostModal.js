@@ -74,20 +74,18 @@ const AddPostModal = (props) => {
             </CardHeader>
             <CardBody>
               <Form>
-                <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                  معلومات المهمة
-                </h6>
+                
                 <div className="pl-lg-4">
                   <Row>
                     <Col lg="6">
-                      <FormGroup className="text-right">
+                      <FormGroup className="text-left">
                         <label className="form-control-label" htmlFor="postNameAr">
-                          اسم المهمة (بالعربية)
+                        Nom du poste 
                         </label>
                         <Input
-                          className="form-control-alternative text-right"
+                          className="form-control-alternative text-left"
                           id="postNameAr"
-                          placeholder="اسم المهمة"
+                          placeholder="Nom du poste "
                           type="text"
                           value={postNameAr}
                           onChange={handleChange}
@@ -95,14 +93,14 @@ const AddPostModal = (props) => {
                       </FormGroup>
                     </Col>
                     <Col lg="6">    
-                      <FormGroup className="text-left">
+                      <FormGroup className="text-right">
                         <label className="form-control-label" htmlFor="postNameFr">
-                          Nom du poste (en français)
+                        اسم المهمة
                         </label>
                         <Input
-                          className="form-control-alternative"
+                          className="form-control-alternative text-right"
                           id="postNameFr"
-                          placeholder="Nom du poste"
+                          placeholder="   اسم المهمة"
                           type="text"
                           value={postNameFr}
                           onChange={handleChange}
@@ -110,38 +108,7 @@ const AddPostModal = (props) => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col lg="6">
-                      <FormGroup className="text-right">
-                        <label className="form-control-label" htmlFor="postDescriptionAr">
-                          وصف المهمة (بالعربية)
-                        </label>
-                        <Input
-                          className="form-control-alternative text-right"
-                          id="postDescriptionAr"
-                          placeholder="وصف المهمة"
-                          type="textarea"
-                          value={postDescriptionAr}
-                          onChange={handleChange}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg="6">
-                      <FormGroup className="text-left">
-                        <label className="form-control-label" htmlFor="postDescriptionFr">
-                          Description du poste (en français)
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          id="postDescriptionFr"
-                          placeholder="Description du poste"
-                          type="textarea"
-                          value={postDescriptionFr}
-                          onChange={handleChange}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                 
                 </div>
               </Form>
             </CardBody>

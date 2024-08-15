@@ -93,10 +93,9 @@ const Services = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Service Name</th>
-                    <th scope="col">اسم الخدمة</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">الوصف</th>
+                    <th scope="col">اسم الخدمة </th>
+                    <th scope="col">Nom de service  </th>
+                    
                   </tr>
                 </thead>
                 <tbody className="text-center">

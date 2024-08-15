@@ -81,20 +81,18 @@ const AddDepartmentModal = (props) => {
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-right mb-4 " style={{ fontSize: '1.5em' }}>
-                معلومات القسم
-              </h6>
+           
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="6">
-                    <FormGroup className="text-right">
+                    <FormGroup className="text-left">
                       <label className="form-control-label" htmlFor="departmentNameAr">
-                        اسم القسم 
+                          Nom du département
                       </label>
                       <Input
-                        className="form-control-alternative text-right"
+                        className="form-control-alternative text-left"
                         id="departmentNameAr"
-                        placeholder="اسم القسم "
+                        placeholder=" Nom du département "
                         type="text"
                         value={departmentNameAr}
                         onChange={handleChange}
@@ -103,13 +101,13 @@ const AddDepartmentModal = (props) => {
                   </Col>
                   <Col lg="6">
                     <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="departmentNameFr">
-                        Nom du département  
+                      <label className="form-control-label " htmlFor="departmentNameFr" >
+                      اسم القسم   
                       </label>
                       <Input
-                        className="form-control-alternative text-left"
+                        className="form-control-alternative text-right"
                         id="departmentNameFr"
-                        placeholder="Nom du département  "
+                        placeholder="اسم القسم  "
                         type="text"
                         value={departmentNameFr}
                         onChange={handleChange}

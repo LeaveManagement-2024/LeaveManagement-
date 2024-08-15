@@ -84,17 +84,17 @@ const Filieres = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة تخصص
+                    إضافة شعبة
                   </Button>
                   <AddFiliereModal show={modalShow} onHide={() => setModalShow(false)}></AddFiliereModal>
-                  <h3 className="mb-0">جدول التخصصات</h3>
+                  <h3 className="mb-0">جدول الشعب</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Filiere Name</th>
-                    <th scope="col">اسم التخصص</th>
+                    <th scope="col"> اسم الشعبة</th>
+                    <th scope="col">Nom de filiere </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">

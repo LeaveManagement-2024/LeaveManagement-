@@ -84,17 +84,17 @@ const Profiles = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة ملف شخصي
+                    إضافة صفة 
                   </Button>
                   <AddProfileModal show={modalShow} onHide={() => setModalShow(false)}></AddProfileModal>
-                  <h3 className="mb-0">جدول الملفات الشخصية</h3>
+                  <h3 className="mb-0">جدول الصفات </h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Profile Name</th>
-                    <th scope="col">اسم الملف الشخصي</th>
+                    <th scope="col"> اسم الصفة</th>
+                    <th scope="col"> Nom de profil </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">

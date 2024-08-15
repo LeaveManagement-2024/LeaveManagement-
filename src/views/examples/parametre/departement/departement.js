@@ -93,8 +93,8 @@ const Departments = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">Department Name</th>
                     <th scope="col">اسم القسم</th>
+                    <th scope="col "> Nom de department</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">

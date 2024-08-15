@@ -64,9 +64,7 @@ const AddServiceModal = (props) => {
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                معلومات الخدمة
-              </h6>
+             
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="12">
@@ -87,21 +85,22 @@ const AddServiceModal = (props) => {
                 </Row>
                 <Row>
                   <Col lg="12">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="description">
-                        الوصف
+                    <FormGroup className="text-left">
+                      <label className="form-control-label" htmlFor="serviceName">
+                        Nom de service 
                       </label>
                       <Input
-                        className="form-control-alternative text-right"
-                        id="description"
-                        placeholder="وصف الخدمة"
-                        type="textarea"
-                        value={description}
+                        className="form-control-alternative text-left"
+                        id="serviceName"
+                        placeholder=" Nom de service "
+                        type="text"
+                        value={serviceName}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
                 </Row>
+                
               </div>
             </Form>
           </CardBody>

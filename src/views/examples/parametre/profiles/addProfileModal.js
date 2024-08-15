@@ -70,78 +70,31 @@ const AddProfileModal = (props) => {
       <Modal.Body>
           <Card className="bg-secondary shadow">
             <CardHeader className="bg-white border-0">
-              <h4 className='text-center text-xl'>إضافة ملف جديد</h4>
+              <h4 className='text-center text-xl'>إضافة  صفة</h4>
             </CardHeader>
             <CardBody>
               <Form>
-                <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                  معلومات الملف
-                </h6>
+                
                 <div className="pl-lg-4">
                   <Row>
-                    <Col lg="6">
+                    <Col lg="12">
                       <FormGroup className="text-right">
                         <label className="form-control-label" htmlFor="profileNameAr">
-                          اسم الملف (بالعربية)
+                          اسم الصفة 
                         </label>
                         <Input
                           className="form-control-alternative text-right"
                           id="profileNameAr"
-                          placeholder="اسم الملف"
+                          placeholder="اسم الصفة"
                           type="text"
                           value={profileNameAr}
                           onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
-                    <Col lg="6">    
-                      <FormGroup className="text-left">
-                        <label className="form-control-label" htmlFor="profileNameFr">
-                          Nom du profil (en français)
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          id="profileNameFr"
-                          placeholder="Nom du profil"
-                          type="text"
-                          value={profileNameFr}
-                          onChange={handleChange}
-                        /> 
-                      </FormGroup>
-                    </Col>
+                    
                   </Row>
-                  <Row>
-                    <Col lg="6">
-                      <FormGroup className="text-right">
-                        <label className="form-control-label" htmlFor="profileDescriptionAr">
-                          وصف الملف (بالعربية)
-                        </label>
-                        <Input
-                          className="form-control-alternative text-right"
-                          id="profileDescriptionAr"
-                          placeholder="وصف الملف"
-                          type="textarea"
-                          value={profileDescriptionAr}
-                          onChange={handleChange}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg="6">
-                      <FormGroup className="text-left">
-                        <label className="form-control-label" htmlFor="profileDescriptionFr">
-                          Description du profil (en français)
-                        </label>
-                        <Input
-                          className="form-control-alternative"
-                          id="profileDescriptionFr"
-                          placeholder="Description du profil"
-                          type="textarea"
-                          value={profileDescriptionFr}
-                          onChange={handleChange}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                  
                 </div>
               </Form>
             </CardBody>

@@ -74,9 +74,7 @@ const AddFiliereModal = (props) => {
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                المعلومات باللغة العربية
-              </h6>
+             
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="12">
@@ -95,28 +93,10 @@ const AddFiliereModal = (props) => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col lg="12">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="descriptionAr">
-                        الوصف
-                      </label>
-                      <Input
-                        className="form-control-alternative text-right"
-                        id="descriptionAr"
-                        placeholder="الوصف"
-                        value={descriptionAr}
-                        onChange={handleChange}
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
+              
               </div>
-              <hr className="my-4" />
-              <h6 className="heading-small text-left mb-4" style={{ fontSize: '1.5em' }}>
-                Information en français
-              </h6>
+              
+              
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="12">
@@ -135,32 +115,16 @@ const AddFiliereModal = (props) => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col lg="12">
-                    <FormGroup className="text-left">
-                      <label className="form-control-label" htmlFor="descriptionFr">
-                        Description
-                      </label>
-                      <Input
-                        className="form-control-alternative text-left"
-                        id="descriptionFr"
-                        placeholder="Description"
-                        value={descriptionFr}
-                        onChange={handleChange}
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
+              
               </div>
             </Form>
           </CardBody>
         </Card>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
-        <Button onClick={props.onHide}>Annuler</Button>
+        <Button onClick={props.onHide}>خروج</Button>
         <Button variant="primary" onClick={handleAddFiliere}>
-          Ajouter
+        حفظ
         </Button>
       </Modal.Footer>
     </Modal>
