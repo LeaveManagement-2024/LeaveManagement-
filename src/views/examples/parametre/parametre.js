@@ -13,11 +13,11 @@ const Parametre = () => {
   // Array of card details with navigation paths
   const cardDetails = [
     { title: "الرتب", body: "Here are the details of the card", link: "/grades" },
-    { title: "المهام", body: "Here are the details of the card", link: "/tasks" },
+    { title: "المهام", body: "Here are the details of the card", link: "/posts" },
     { title: "الاقسام", body: "Here are the details of the card", link: "/departments" },
-    { title: "الشعب", body: "Here are the details of the card", link: "/divisions" },
+    { title: "الشعب", body: "Here are the details of the card", link: "/filieres" },
     { title: "المصالح", body: "Here are the details of the card", link: "/services" },
-    { title: "العطل السنوية", body: "Here are the details of the card", link: "/annual-leave" },
+    { title: "العطل السنوية", body: "Here are the details of the card", link: "/public-holiday" },
     { title: "الصفات", body: "Profile", link: "/profiles" }
   ];
 

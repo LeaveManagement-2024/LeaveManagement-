@@ -25,7 +25,7 @@ import {
   getAllGrades,
   getGradeById,
   deleteGrade,
-} from './gradeApi'; 
+} from './gradesApi'; 
 
 const Grades = () => {
   const [grades, setGrades] = useState([]);

@@ -18,14 +18,14 @@ import {
   Button,
   CardBody,
 } from "reactstrap";
-import AddDepartmentModal from './addDepartmentModal';
-import EditDepartmentModal from './editDepartmentModal';
+import AddDepartmentModal from './addDepartementModal';
+import EditDepartmentModal from './editDepartementModal';
 import Header from "components/Headers/Header.js";
 import {
   getAllDepartments,
   getDepartmentById,
   deleteDepartment,
-} from './departmentApi'; 
+} from './departementApi'; 
 
 const Departments = () => {
   const [departments, setDepartments] = useState([]);

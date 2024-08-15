@@ -13,7 +13,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { getGradeById, updateGrade } from './gradeApi'; // Assuming these functions exist for interacting with the grade API.
+import { getGradeById, updateGrade } from './gradesApi'; // Assuming these functions exist for interacting with the grade API.
 
 const EditGradeModal = (props) => {
 
