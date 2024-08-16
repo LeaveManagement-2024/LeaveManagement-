@@ -99,6 +99,7 @@ const Profiles = () => {
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((profile) => (
+                    
                     <tr key={profile.idP}>
                       <td>{profile.profileNameAr}</td>
                       <td>{profile.profileNameEn}</td>
