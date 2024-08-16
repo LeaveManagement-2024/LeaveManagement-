@@ -59,7 +59,7 @@ const EditPostModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/post/update/${props.post.idPost}`,
+        url: `http://localhost:8093/posts/update/${props.post.idPost}`,
         data: updatedPost,
       }).then((response) => {
         console.log(response.data);
@@ -80,24 +80,24 @@ const EditPostModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل الوظيفة {props.post.idPost}</h4>
+            <h4 className='text-center text-xl'>تعديل المهمة {props.post.idPost}</h4>
           </CardHeader>
           <CardBody>
             <Form>
               <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                المعلومات الشخصية
+              معلومات المهمة
               </h6>
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="6">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="postNameAr">
-                        اسم الوظيفة بالعربية
+                        اسم المهمة 
                       </label>
                       <Input
                         className="form-control-alternative text-right"
                         id="postNameAr"
-                        placeholder="اسم الوظيفة بالعربية"
+                        placeholder="اسم المهمة "
                         type="text"
                         value={postNameAr}
                         onChange={handleChange}
@@ -107,7 +107,7 @@ const EditPostModal = (props) => {
                   <Col lg="6">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="postNameFr">
-                        Nom du poste en français
+                        Nom du poste 
                       </label>
                       <Input
                         className="form-control-alternative text-right"

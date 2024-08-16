@@ -26,7 +26,7 @@ const EditDepartmentModal = (props) => {
   useEffect(() => {
     const fetchDepartment = async () => {
       try {
-        const data = await getDepartmentById(props.dep.idD);
+        const data = await getDepartmentById(props.dep.idDepartement);
         setDepartmentNameFr(data.departmentNameFr);
         setDepartmentNameAr(data.departmentNameAr);
       } catch (error) {
@@ -34,7 +34,7 @@ const EditDepartmentModal = (props) => {
       }
     };
     fetchDepartment();
-  }, [props.dep.idD]);
+  }, [props.dep.idDepartement]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -59,7 +59,7 @@ const EditDepartmentModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/department/update/${props.dep.idD}`,
+        url: `http://localhost:8093/department/update/${props.dep.idDepartement}`,
         data: updatedDepartment,
       }).then((response) => {
         console.log(response.data);
@@ -80,7 +80,7 @@ const EditDepartmentModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل قسم {props.dep.idD}</h4>
+            <h4 className='text-center text-xl'>تعديل قسم {props.dep.idDepartement}</h4>
           </CardHeader>
           <CardBody>
             <Form>

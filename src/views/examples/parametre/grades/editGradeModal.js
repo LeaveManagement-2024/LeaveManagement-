@@ -19,8 +19,7 @@ const EditGradeModal = (props) => {
 
   const [gradeNameFr, setGradeNameFr] = useState('');
   const [gradeNameAr, setGradeNameAr] = useState('');
-  const [gradeDescriptionFr, setGradeDescriptionFr] = useState('');
-  const [gradeDescriptionAr, setGradeDescriptionAr] = useState('');
+  
 
   useEffect(() => {
     const fetchGrade = async () => {
@@ -28,8 +27,7 @@ const EditGradeModal = (props) => {
         const data = await getGradeById(props.grade.idGrade);
         setGradeNameFr(data.gradeNameFr);
         setGradeNameAr(data.gradeNameAr);
-        setGradeDescriptionFr(data.gradeDescriptionFr);
-        setGradeDescriptionAr(data.gradeDescriptionAr);
+       
       } catch (error) {
         console.error('Erreur lors de la récupération du grade:', error);
       }
@@ -46,13 +44,7 @@ const EditGradeModal = (props) => {
       case 'gradeNameAr':
         setGradeNameAr(value);
         break;
-      case 'gradeDescriptionFr':
-        setGradeDescriptionFr(value);
-        break;
-      case 'gradeDescriptionAr':
-        setGradeDescriptionAr(value);
-        break;
-      default:
+       default:
         break;
     }
   };
@@ -62,8 +54,6 @@ const EditGradeModal = (props) => {
       const gradeData = {
         gradeNameFr,
         gradeNameAr,
-        gradeDescriptionFr,
-        gradeDescriptionAr,
       };
 
       await axios({
@@ -89,19 +79,19 @@ const EditGradeModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>Modifier le grade {props.grade.idGrade}</h4>
+            <h4 className='text-center text-xl'>تعديل الإطار{props.grade.idGrade}</h4>
           </CardHeader>
           <CardBody>
             <Form>
               <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                معلومات الترقية
+                معلومات الإطار
               </h6>
               <div className="pl-lg-4">
                 <Row>
-                  <Col lg="6">
+                  <Col lg="12">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="input-grade-name-ar">
-                        اسم الرتبة
+                        اسم الإطار
                       </label>
                       <Input
                         className="form-control-alternative text-right"
@@ -113,7 +103,7 @@ const EditGradeModal = (props) => {
                       />
                     </FormGroup>
                   </Col>
-                  <Col lg="6">
+                  <Col lg="12">
                     <FormGroup className="text-left">
                       <label className="form-control-label" htmlFor="input-grade-name-fr">
                         Nom du grade
@@ -129,47 +119,16 @@ const EditGradeModal = (props) => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col lg="6">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="input-grade-description-ar">
-                        وصف الرتبة
-                      </label>
-                      <Input
-                        className="form-control-alternative text-right"
-                        id="gradeDescriptionAr"
-                        placeholder="وصف الرتبة"
-                        value={gradeDescriptionAr}
-                        onChange={handleChange}
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup className="text-left">
-                      <label className="form-control-label" htmlFor="input-grade-description-fr">
-                        Description du grade
-                      </label>
-                      <Input
-                        className="form-control-alternative text-left"
-                        id="gradeDescriptionFr"
-                        placeholder="Description du grade"
-                        value={gradeDescriptionFr}
-                        onChange={handleChange}
-                        type="textarea"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
+                
               </div>
             </Form>
           </CardBody>
         </Card>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
-        <Button onClick={props.onHide}>Annuler</Button>
+        <Button onClick={props.onHide}>خروج</Button>
         <Button variant="primary" onClick={handleUpdateGrade}>
-          Sauvegarder
+          حفظ
         </Button>
       </Modal.Footer>
     </Modal>

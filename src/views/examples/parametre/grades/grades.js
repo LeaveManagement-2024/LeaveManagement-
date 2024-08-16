@@ -84,24 +84,25 @@ const Grades = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة درجة
+                    إضافة إطار
                   </Button>
                   <AddGradeModal show={modalShow} onHide={() => setModalShow(false)}></AddGradeModal>
-                  <h3 className="mb-0">جدول الدرجات</h3>
+                  <h3 className="mb-0">جدول الأطر</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
-                <thead className="thead-light text-center">
-                  <tr>
-                    <th scope="col" >اسم الدرجة  </th>
-                    <th scope="col"> Nom de grade </th>
+                <thead className="thead-light text-center text-lg">
+                  <tr className=''>
+                    <th scope="col" className='text-lg' >اسم الإطار  </th>
+                    <th scope="col"className="text-lg text-uppercase"> Nom de grade </th>
+                    <th scope="col" className='text-lg' > الإعدادات </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((grd) => (
-                    <tr key={grd.idG}>
+                    <tr key={grd.idGrade}>
                       <td>{grd.gradeNameAr}</td>
-                      <td>{grd.gradeNameEn}</td>
+                      <td>{grd.gradeNameFr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -131,7 +132,7 @@ const Grades = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteGrade(grd.idG)}
+                              onClick={() => handleDeleteGrade(grd.idGrade)}
                             >
                               حذف
                             </DropdownItem>

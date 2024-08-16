@@ -94,14 +94,15 @@ const Departments = () => {
                 <thead className="thead-light text-center">
                   <tr>
                     <th scope="col">اسم القسم</th>
+                    <th scope="col"> المسؤول عن القسم</th>
                     <th scope="col "> Nom de department</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((dept) => (
-                    <tr key={dept.idD}>
+                    <tr key={dept.idDepartement}>
                       <td>{dept.departmentNameAr}</td>
-                      <td>{dept.departmentNameEn}</td>
+                      <td>{dept.departmentNameFr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -116,7 +117,7 @@ const Departments = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetDepartmentById(dept.idD)}
+                              onClick={() => handleGetDepartmentById(dept.idDepartement)}
                             >
                               عرض
                             </DropdownItem>
@@ -131,7 +132,7 @@ const Departments = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteDepartment(dept.idD)}
+                              onClick={() => handleDeleteDepartment(dept.idDepartement )}
                             >
                               حذف
                             </DropdownItem>

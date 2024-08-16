@@ -18,9 +18,7 @@ const AddGradeModal = (props) => {
 
   const [gradeNameFr, setGradeNameFr] = useState('');
   const [gradeNameAr, setGradeNameAr] = useState('');
-  const [descriptionFr, setDescriptionFr] = useState('');
-  const [descriptionAr, setDescriptionAr] = useState('');
-
+ 
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
@@ -29,12 +27,6 @@ const AddGradeModal = (props) => {
         break;
       case 'gradeNameAr':
         setGradeNameAr(value);
-        break;
-      case 'descriptionFr':
-        setDescriptionFr(value);
-        break;
-      case 'descriptionAr':
-        setDescriptionAr(value);
         break;
       default:
         break;
@@ -46,11 +38,10 @@ const AddGradeModal = (props) => {
       const gradeData = {
         gradeNameFr,
         gradeNameAr,
-        descriptionFr,
-        descriptionAr,
+       
       };
 
-      await axios.post('http://localhost:8093/grade/save', gradeData)
+      await axios.post('http://localhost:8093/grades/save', gradeData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();
@@ -70,7 +61,7 @@ const AddGradeModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>إضافة درجة</h4>
+            <h4 className='text-center text-xl'>إضافة إطار</h4>
           </CardHeader>
           <CardBody>
             <Form>
@@ -80,12 +71,12 @@ const AddGradeModal = (props) => {
                   <Col lg="12">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="gradeNameAr">
-                        اسم الدرجة
+                        اسم الإطار
                       </label>
                       <Input
                         className="form-control-alternative text-right"
                         id="gradeNameAr"
-                        placeholder="اسم الدرجة"
+                        placeholder="اسم الإطار"
                         value={gradeNameAr}
                         onChange={handleChange}
                         type="text"
