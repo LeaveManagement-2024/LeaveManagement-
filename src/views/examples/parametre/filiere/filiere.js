@@ -132,7 +132,7 @@ const Filieres = () => {
                             </DropdownItem>
                             <EditFiliereModal 
                               show={editModalShow}
-                              filiere={editFiliere} 
+                              fil={editFiliere} 
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem

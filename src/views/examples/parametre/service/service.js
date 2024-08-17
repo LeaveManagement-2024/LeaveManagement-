@@ -84,27 +84,28 @@ const Services = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة خدمة
+                    إضافة مصلحة
                   </Button>
                   <AddServiceModal show={modalShow} onHide={() => setModalShow(false)}></AddServiceModal>
-                  <h3 className="mb-0">جدول الخدمات</h3>
+                  <h3 className="mb-0">جدول المصالح</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">اسم الخدمة </th>
+                    <th scope="col">اسم المصلحة </th>
                     <th scope="col">Nom de service  </th>
+                    <th scope="col">القسم   </th>
+                    <th scope="col">الإعدادات</th>
                     
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((service) => (
-                    <tr key={service.id}>
-                      <td>{service.nameAr}</td>
-                      <td>{service.nameEn}</td>
-                      <td>{service.descriptionAr}</td>
-                      <td>{service.descriptionEn}</td>
+                    <tr key={service.idService}>
+                      <td>{service.serviceNameAr}</td>
+                      <td>{service.serviceNameFr}</td>
+                      <td>{service?.departement?.departementNameAr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle

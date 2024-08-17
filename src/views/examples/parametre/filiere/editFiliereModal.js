@@ -15,27 +15,42 @@ import {
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { getFiliereById, updateFiliere } from './filiereApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
+import {
+  getAllServices
+
+} from "../service/serviceApi"
 
 const EditFiliereModal = (props) => {
 
   const [filiereNameFr, setFiliereNameFr] = useState('');
   const [filiereNameAr, setFiliereNameAr] = useState('');
-
+  const [idService,setIdService] = useState('');
+  const [services,setServices] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFiliere = async () => {
       try {
-        const data = await getFiliereById(props.filiere.idService);
+        const data = await getFiliereById(props.fil.idFiliere);
         setFiliereNameFr(data.filiereNameFr);
         setFiliereNameAr(data.filiereNameAr);
+        setIdService(data?.service?.idService);
       } catch (error) {
         console.error('Erreur lors de la récupération de la filière:', error);
       }
     };
     fetchFiliere();
-  }, [props.filiere.idService]);
+    fetchAllServices();
+  }, [props.fil.idFiliere]);
 
+  const fetchAllServices = async () => {
+    try {
+      const data = await getAllServices();
+      setServices(data);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
@@ -44,6 +59,9 @@ const EditFiliereModal = (props) => {
         break;
       case 'filiereNameAr':
         setFiliereNameAr(value);
+        break;
+      case 'idService':
+        setIdService(value);
         break;
       default:
         break;
@@ -55,11 +73,12 @@ const EditFiliereModal = (props) => {
       const updatedFiliere = {
         filiereNameFr,
         filiereNameAr,
+        idService,
       };
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/filiere/update/${props.filiere.idService}`,
+        url: `http://localhost:8093/filieres/update/${props.fil.idFiliere}`,
         data: updatedFiliere,
       }).then((response) => {
         console.log(response.data);
@@ -80,24 +99,24 @@ const EditFiliereModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل تخصص {props.filiere.idService}</h4>
+            <h4 className='text-center text-xl'>تعديل شعبة {props.fil.idFiliere}</h4>
           </CardHeader>
           <CardBody>
             <Form>
               <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                المعلومات الشخصية
+              معلومات الشعبة
               </h6>
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="6">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="filiereNameAr">
-                        اسم التخصص بالعربية
+                        اسم الشعبة 
                       </label>
                       <Input
                         className="form-control-alternative text-right"
                         id="filiereNameAr"
-                        placeholder="اسم التخصص بالعربية"
+                        placeholder="اسم الشعبة "
                         type="text"
                         value={filiereNameAr}
                         onChange={handleChange}
@@ -107,12 +126,12 @@ const EditFiliereModal = (props) => {
                   <Col lg="6">    
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="filiereNameFr">
-                        Nom de la filière en français
+                        Nom de la filière 
                       </label>
                       <Input
                         className="form-control-alternative text-right"
                         id="filiereNameFr"
-                        placeholder="Nom de la filière en français"
+                        placeholder="Nom de la filière "
                         type="text"
                         value={filiereNameFr}
                         onChange={handleChange}
@@ -120,6 +139,35 @@ const EditFiliereModal = (props) => {
                     </FormGroup>
                   </Col>
                 </Row>
+                <Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            المصلحة
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                           
+                            id="idService"
+                            placeholder="المصلحة"
+                            type="select"
+                            value={idService}
+                            onChange={handleChange}
+                        
+                          >
+                            
+                          <option value>اختر المصلحة </option>
+                          {services.map((service) => (
+                          <option key={service.idService} value={service.idService}>
+                            {service.serviceNameAr}
+                          </option>
+                        ))}</Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
               </div>
             </Form>
           </CardBody>

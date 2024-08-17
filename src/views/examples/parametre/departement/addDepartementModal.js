@@ -150,7 +150,6 @@ const AddDepartmentModal = (props) => {
                         </FormGroup>
                       </Col>
                     </Row>
-                    
               </div>
             </Form>
           </CardBody>

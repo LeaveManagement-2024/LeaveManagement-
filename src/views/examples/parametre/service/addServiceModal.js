@@ -40,7 +40,7 @@ const AddServiceModal = (props) => {
         description
       };
 
-      await axios.post('http://localhost:8093/service/save', service)
+      await axios.post('http://localhost:8093/services/save', service)
         .then((response) => {
           console.log(response.data);
           window.location.reload();
@@ -60,7 +60,7 @@ const AddServiceModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>إضافة خدمة</h4>
+            <h4 className='text-center text-xl'>إضافة مصلحة</h4>
           </CardHeader>
           <CardBody>
             <Form>
@@ -70,7 +70,7 @@ const AddServiceModal = (props) => {
                   <Col lg="12">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="serviceName">
-                        اسم الخدمة
+                        اسم المصلحة
                       </label>
                       <Input
                         className="form-control-alternative text-right"
