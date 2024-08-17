@@ -31,7 +31,7 @@ const EditDepartmentModal = (props) => {
     const fetchDepartment = async () => {
       try {
         const data = await getDepartmentById(props.dep.idDepartement);
-        setepartementNameFr(data.departementNameFr);
+        setDepartementNameFr(data.departementNameFr);
         setDepartementNameAr(data.departementNameAr);
         setRespDepartementId(data?.respDepartement?.idE)
       } catch (error) {
