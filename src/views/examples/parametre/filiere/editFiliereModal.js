@@ -26,7 +26,7 @@ const EditFiliereModal = (props) => {
   useEffect(() => {
     const fetchFiliere = async () => {
       try {
-        const data = await getFiliereById(props.fil.idF);
+        const data = await getFiliereById(props.filiere.idService);
         setFiliereNameFr(data.filiereNameFr);
         setFiliereNameAr(data.filiereNameAr);
       } catch (error) {
@@ -34,7 +34,7 @@ const EditFiliereModal = (props) => {
       }
     };
     fetchFiliere();
-  }, [props.fil.idF]);
+  }, [props.filiere.idService]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -59,7 +59,7 @@ const EditFiliereModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/filiere/update/${props.fil.idF}`,
+        url: `http://localhost:8093/filiere/update/${props.filiere.idService}`,
         data: updatedFiliere,
       }).then((response) => {
         console.log(response.data);
@@ -80,7 +80,7 @@ const EditFiliereModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل تخصص {props.fil.idF}</h4>
+            <h4 className='text-center text-xl'>تعديل تخصص {props.filiere.idService}</h4>
           </CardHeader>
           <CardBody>
             <Form>

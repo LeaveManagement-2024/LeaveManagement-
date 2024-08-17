@@ -14,47 +14,52 @@ import {
   Col,
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import {
+  getAllEmployees,
+} from '../../Employess/employeeApi'; 
 
 const AddDepartmentModal = (props) => {
-  const [departmentNameFr, setDepartmentNameFr] = useState('');
-  const [departmentNameAr, setDepartmentNameAr] = useState('');
-  const [descriptionFr, setDescriptionFr] = useState('');
-  const [descriptionAr, setDescriptionAr] = useState('');
+  const [departementNameFr, setDepartementNameFr] = useState('');
+  const [departementNameAr, setDepartementNameAr] = useState('');
+  const [respDepartementId,setRespDepartementId] =useState('');
+  const [employees, setEmployees] = useState([]);
   const [headOfDepartment, setHeadOfDepartment] = useState('');
 
   const navigate = useNavigate();
+  useEffect(() => {  
+    fetchAllEmployees();
 
+  }, []);
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'departmentNameFr':
-        setDepartmentNameFr(value);
+      case 'departementNameFr':
+        setDepartementNameFr(value);
         break;
-      case 'departmentNameAr':
-        setDepartmentNameAr(value);
+      case 'departementNameAr':
+        setDepartementNameAr(value);
         break;
-      case 'descriptionFr':
-        setDescriptionFr(value);
-        break;
-      case 'descriptionAr':
-        setDescriptionAr(value);
-        break;
-      case 'headOfDepartment':
-        setHeadOfDepartment(value);
+        case 'respDepartementId':
+        setRespDepartementId(value);
         break;
       default:
         break;
     }
   };
-
+  const fetchAllEmployees = async () => {
+    try {
+      const data = await getAllEmployees();
+      setEmployees(data);
+    } catch (error) {
+      console.error('Error fetching employees:', error);
+    }
+  };
   const handleAddDepartment = async () => {
     try {
       const departmentData = {
-        departmentNameFr,
-        departmentNameAr,
-        descriptionFr,
-        descriptionAr,
-        headOfDepartment,
+        departementNameFr,
+        departementNameAr,
+        respDepartementId,
       };
 
       await axios.post('http://localhost:8093/departments/save', departmentData)
@@ -86,30 +91,30 @@ const AddDepartmentModal = (props) => {
                 <Row>
                   <Col lg="6">
                     <FormGroup className="text-left">
-                      <label className="form-control-label" htmlFor="departmentNameAr">
+                      <label className="form-control-label" htmlFor="departmentNameFr">
                           Nom du département
                       </label>
                       <Input
                         className="form-control-alternative text-left"
-                        id="departmentNameAr"
+                        id="departementNameFr"
                         placeholder=" Nom du département "
                         type="text"
-                        value={departmentNameAr}
+                        value={departementNameFr}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
                   <Col lg="6">
                     <FormGroup className="text-right">
-                      <label className="form-control-label " htmlFor="departmentNameFr" >
-                      اسم القسم   
+                      <label className="form-control-label " htmlFor="departmentNameAr" >
+                      اسم القسم 
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="departmentNameFr"
+                        id="departementNameAr"
                         placeholder="اسم القسم  "
                         type="text"
-                        value={departmentNameFr}
+                        value={departementNameAr}
                         onChange={handleChange}
                       />
                     </FormGroup>
@@ -117,22 +122,35 @@ const AddDepartmentModal = (props) => {
                 </Row>
                 
                 <Row>
-                  <Col lg="12">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="headOfDepartment">
-                        رئيس القسم
-                      </label>
-                      <Input
-                        className="form-control-alternative text-right"
-                        id="headOfDepartment"
-                        placeholder="رئيس القسم"
-                        type="text"
-                        value={headOfDepartment}
-                        onChange={handleChange}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            المسؤول عن القسم
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                           
+                            id="respDepartementId"
+                            placeholder="الرتبة"
+                            type="select"
+                            value={respDepartementId}
+                            onChange={handleChange}
+                        
+                          >
+                            
+                          <option value="">اختر المسؤول عن القسم</option>
+                          {employees.map((emp) => (
+                          <option key={emp.idE} value={emp.idE}>
+                            {emp.lastNameAr} {emp.firstNameAr}
+                          </option>
+                        ))}</Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    
               </div>
             </Form>
           </CardBody>

@@ -50,18 +50,18 @@ const Filieres = () => {
     }
   };
 
-  const handleGetFiliereById = async (idF) => {
+  const handleGetFiliereById = async (idService) => {
     try {
-      const data = await getFiliereById(idF);
+      const data = await getFiliereById(idService);
       setFiliere(data);
     } catch (error) {
       console.error('Error fetching filière:', error);
     }
   };
 
-  const handleDeleteFiliere = async (idF) => {
+  const handleDeleteFiliere = async (idService) => {
     try {
-      await deleteFiliere(idF);
+      await deleteFiliere(idService);
       setMessage('تم حذف التخصص بنجاح');
       fetchAllFilieres(); // Refresh the list
     } catch (error) {
@@ -95,13 +95,18 @@ const Filieres = () => {
                   <tr>
                     <th scope="col"> اسم الشعبة</th>
                     <th scope="col">Nom de filiere </th>
+                    <th scope="col">المصلحة التابعة لها الشعبة </th>
+                    <th scope="col">المصلحة التابعة لها الشعبة </th>
+                    <th scope="col">الإعدادات</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((filiere) => (
-                    <tr key={filiere.idF}>
+                    <tr key={filiere.idService}>
                       <td>{filiere.filiereNameAr}</td>
-                      <td>{filiere.filiereNameEn}</td>
+                      <td>{filiere.filiereNameFr}</td>
+                      <td>{filiere?.service?.serviceNameAr}</td>
+                      <td>{filiere?.service?.departement?.departementNameAr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -116,7 +121,7 @@ const Filieres = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetFiliereById(filiere.idF)}
+                              onClick={() => handleGetFiliereById(filiere.idService)}
                             >
                               عرض
                             </DropdownItem>
@@ -131,7 +136,7 @@ const Filieres = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteFiliere(filiere.idF)}
+                              onClick={() => handleDeleteFiliere(filiere.idService)}
                             >
                               حذف
                             </DropdownItem>
