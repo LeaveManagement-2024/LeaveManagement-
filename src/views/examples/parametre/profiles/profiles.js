@@ -50,18 +50,18 @@ const Profiles = () => {
     }
   };
 
-  const handleGetProfileById = async (idP) => {
+  const handleGetProfileById = async (idProfile) => {
     try {
-      const data = await getProfileById(idP);
+      const data = await getProfileById(idProfile);
       setProfile(data);
     } catch (error) {
       console.error('Error fetching profile:', error);
     }
   };
 
-  const handleDeleteProfile = async (idP) => {
+  const handleDeleteProfile = async (idProfile) => {
     try {
-      await deleteProfile(idP);
+      await deleteProfile(idProfile);
       setMessage('تم حذف الملف الشخصي بنجاح');
       fetchAllProfiles(); // Refresh the list
     } catch (error) {
@@ -93,15 +93,15 @@ const Profiles = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col"> اسم الصفة</th>
-                    <th scope="col"> Nom de profil </th>
+                    <th scope="col"  className='text-lg' > اسم الصفة</th>
+                    <th scope="col" className='text-lg' > الإعدادات </th>
+
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((profile) => (
-                    <tr key={profile.idP}>
-                      <td>{profile.profileNameAr}</td>
-                      <td>{profile.profileNameEn}</td>
+                    <tr key={profile.idProfile}>
+                      <td>{profile.profileName}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -116,7 +116,7 @@ const Profiles = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetProfileById(profile.idP)}
+                              onClick={() => handleGetProfileById(profile.idProfile)}
                             >
                               عرض
                             </DropdownItem>
@@ -131,7 +131,7 @@ const Profiles = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteProfile(profile.idP)}
+                              onClick={() => handleDeleteProfile(profile.idProfile)}
                             >
                               حذف
                             </DropdownItem>

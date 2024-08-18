@@ -16,18 +16,22 @@ import axios from 'axios';
 
 const AddPublicHolidayModal = (props) => {
 
-  const [holidayName, setHolidayName] = useState('');
-  const [holidayDate, setHolidayDate] = useState('');
+  const [name, setname] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [description, setDescription] = useState('');
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'holidayName':
-        setHolidayName(value);
+      case 'name':
+        setname(value);
         break;
-      case 'holidayDate':
-        setHolidayDate(value);
+      case 'startDate':
+        setStartDate(value);
+        break;
+        case 'endDate':
+          setEndDate(value);
         break;
       case 'description':
         setDescription(value);
@@ -40,9 +44,10 @@ const AddPublicHolidayModal = (props) => {
   const handleAddPublicHoliday = async () => {
     try {
       const publicHoliday = {
-        holidayName,
-        holidayDate,
-        description
+        name,
+        startDate,
+        endDate,
+        description,
       };
 
       await axios.post('http://localhost:8093/publicHoliday/save', publicHoliday)
@@ -65,7 +70,7 @@ const AddPublicHolidayModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>إضافة عطلة سنوية</h4>
+            <h4 className='text-center text-xl'>إضافة عطلة رسمية</h4>
           </CardHeader>
           <CardBody>
             <Form>
@@ -79,10 +84,10 @@ const AddPublicHolidayModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="holidayName"
+                        id="name"
                         placeholder="اسم العطلة"
                         type="text"
-                        value={holidayName}
+                        value={name}
                         onChange={handleChange}
                       />
                     </FormGroup>
@@ -96,10 +101,10 @@ const AddPublicHolidayModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="holidayDate"
+                        id="startDate"
                         placeholder="YYYY-MM-DD"
                         type="date"
-                        value={holidayDate}
+                        value={startDate}
                         onChange={handleChange}
                       />
                     </FormGroup>
@@ -113,10 +118,10 @@ const AddPublicHolidayModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="holidayDate"
+                        id="endDate"
                         placeholder="YYYY-MM-DD"
                         type="date"
-                        value={holidayDate}
+                        value={endDate}
                         onChange={handleChange}
                       />
                     </FormGroup>

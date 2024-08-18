@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Button,
   Card,
@@ -13,21 +13,59 @@ import {
   Col,
 } from "reactstrap";
 import axios from 'axios';
+import {
+  getAllDepartments
+
+} from "../departement/departementApi"
+import {
+  getAllEmployees,
+} from '../../Employess/employeeApi'; 
+
 
 const AddServiceModal = (props) => {
 
-  const [serviceName, setServiceName] = useState('');
-  const [description, setDescription] = useState('');
+  const [serviceNameFr, setServiceNameFr] = useState('');
+  const [serviceNameAr, setServiceNameAr] = useState('');
+  const [idDepartment, setIdDepartment,] = useState('');  
+  const [respServiceId,setRespServiceId] = useState('')
+  const [departements,setDepartements] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  useEffect(() => {  
+    fetchAllDepartments();
+    fetchAllEmployees();
 
+  }, []);
+  const fetchAllDepartments = async () => {
+    try {
+      const data = await getAllDepartments();
+      setDepartements(data);
+    } catch (error) {
+      console.error('Error fetching department:', error);
+    }
+  };
+  const fetchAllEmployees = async () => {
+    try {
+      const data = await getAllEmployees();
+      setEmployees(data);
+    } catch (error) {
+      console.error('Error fetching employees:', error);
+    }
+  };
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'serviceName':
-        setServiceName(value);
+      case 'serviceNameFr':
+        setServiceNameFr(value);
         break;
-      case 'description':
-        setDescription(value);
+      case 'serviceNameAr':
+        setServiceNameAr(value);
         break;
+      case 'idDepartment':
+        setIdDepartment(value);
+        break;
+        case 'respServiceId':
+          setRespServiceId(value);
+          break;
       default:
         break;
     }
@@ -36,8 +74,10 @@ const AddServiceModal = (props) => {
   const handleAddService = async () => {
     try {
       const service = {
-        serviceName,
-        description
+        serviceNameFr,
+        serviceNameAr,
+        idDepartment,
+        respServiceId
       };
 
       await axios.post('http://localhost:8093/services/save', service)
@@ -74,10 +114,10 @@ const AddServiceModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="serviceName"
-                        placeholder="اسم الخدمة"
+                        id="serviceNameAr"
+                        placeholder="اسم المصلحة"
                         type="text"
-                        value={serviceName}
+                        value={serviceNameAr}
                         onChange={handleChange}
                       />
                     </FormGroup>
@@ -91,15 +131,73 @@ const AddServiceModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-left"
-                        id="serviceName"
+                        id="serviceNameFr"
                         placeholder=" Nom de service "
                         type="text"
-                        value={serviceName}
+                        value={serviceNameFr}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
                 </Row>
+                <Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            القسم
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                           
+                            id="idDepartment"
+                            placeholder="القسم"
+                            type="select"
+                            value={idDepartment}
+                            onChange={handleChange}
+                        
+                          >
+                            
+                          <option value>اختر القسم </option>
+                          {departements.map((departement) => (
+                          <option key={departement.idDepartement} value={departement.idDepartement}>
+                            {departement.departementNameAr}
+                          </option>
+                        ))}</Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            المسؤول عن المصلحة
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                           
+                            id="respServiceId"
+                            placeholder="الرتبة"
+                            type="select"
+                            value={respServiceId}
+                            onChange={handleChange}
+                        
+                          >
+                            
+                          <option value="">اختر المسؤول عن المصلحة</option>
+                          {employees.map((emp) => (
+                          <option key={emp.idE} value={emp.idE}>
+                            {emp.lastNameAr} {emp.firstNameAr}
+                          </option>
+                        ))}</Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
                 
               </div>
             </Form>

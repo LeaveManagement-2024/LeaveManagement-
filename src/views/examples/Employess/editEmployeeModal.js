@@ -24,10 +24,9 @@ import {
   getManagerByIdEmp,
   getResponsibleByIdEmp
 } from './employeeApi'; 
-import {getAllGrades} from '../grades/gradeApi'
-import{getAllPosts} from'../posts/postsAPI'
-import{getAllFilieres} from '../filiere/filieresApi'
-
+import {getAllGrades} from '../parametre/grades/gradesApi'
+import{getAllPosts} from'../parametre/posts/postApi'
+import{getAllFilieres} from '../parametre/filiere/filiereApi'
 
 
 const EditEmployeeModal = (props) => {

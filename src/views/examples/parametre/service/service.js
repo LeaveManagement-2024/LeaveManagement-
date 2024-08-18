@@ -50,18 +50,18 @@ const Services = () => {
     }
   };
 
-  const handleGetServiceById = async (id) => {
+  const handleGetServiceById = async (idService) => {
     try {
-      const data = await getServiceById(id);
+      const data = await getServiceById(idService);
       setService(data);
     } catch (error) {
       console.error('Error fetching service:', error);
     }
   };
 
-  const handleDeleteService = async (id) => {
+  const handleDeleteService = async (idService) => {
     try {
-      await deleteService(id);
+      await deleteService(idService);
       setMessage('تم حذف الخدمة بنجاح');
       fetchAllServices(); // Refresh the list
     } catch (error) {
@@ -94,6 +94,7 @@ const Services = () => {
                 <thead className="thead-light text-center">
                   <tr>
                     <th scope="col">اسم المصلحة </th>
+                    <th scope="col"> المسؤول عن المصلحة</th>
                     <th scope="col">Nom de service  </th>
                     <th scope="col">القسم   </th>
                     <th scope="col">الإعدادات</th>
@@ -104,6 +105,27 @@ const Services = () => {
                   {currentItems.map((service) => (
                     <tr key={service.idService}>
                       <td>{service.serviceNameAr}</td>
+                      <td >
+
+                      <Media className="align-items-center">
+                          <a
+                            className="avatar avatar-sm rounded-circle mr-0" 
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <img
+                              alt="..."
+                              src={service?.respService?.image}
+                            />
+                          </a>
+                          <Media>
+                            <span className="mb-0 text-sm" style={{marginRight:'15px'}}>
+                              {service?.respService?.firstNameAr} {service?.respService?.lastNameAr}
+                            </span>
+                          </Media>
+                        </Media>
+                        
+                      </td>
                       <td>{service.serviceNameFr}</td>
                       <td>{service?.departement?.departementNameAr}</td>
                       <td >
@@ -120,7 +142,7 @@ const Services = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetServiceById(service.id)}
+                              onClick={() => handleGetServiceById(service.idService)}
                             >
                               عرض
                             </DropdownItem>
@@ -131,11 +153,11 @@ const Services = () => {
                             </DropdownItem>
                             <EditServiceModal 
                               show={editModalShow}
-                              service={editService} 
+                              serv={editService} 
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteService(service.id)}
+                              onClick={() => handleDeleteService(service.idService)}
                             >
                               حذف
                             </DropdownItem>

@@ -96,17 +96,18 @@ const PublicHolidays = () => {
                     <th scope="col"> اسم العطلة الرسمية</th>
                     <th scope="col">    بداية العطلة</th>
                     <th scope="col">نهاية العطلة</th>
-                    <th scope="col">Date fin</th>
-                    <th scope="col"> Date debut     </th>
-                    <th scope="col">  Nom de jour férié  </th>
+                    <th scope="col">  وصف   </th>
+                    <th scope="col">الإعدادات</th>
+                    
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((holiday) => (
                     <tr key={holiday.id}>
-                      <td>{holiday.nameAr}</td>
-                      <td>{holiday.nameEn}</td>
-                      <td>{holiday.date}</td>
+                      <td>{holiday.name}</td>
+                      <td>{holiday.startDate}</td>
+                      <td>{holiday.endDate}</td>
+                      <td>{holiday.description}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle

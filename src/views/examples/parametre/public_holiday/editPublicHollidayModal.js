@@ -16,52 +16,60 @@ import {
 import { getPublicHolidayById, updatePublicHoliday } from './public_holidayApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
 
 const EditPublicHolidayModal = (props) => {
-  const [holidayDate, setHolidayDate] = useState('');
-  const [holidayNameFr, setHolidayNameFr] = useState('');
-  const [holidayNameAr, setHolidayNameAr] = useState('');
-
-  useEffect(() => {
-    const fetchPublicHoliday = async () => {
-      try {
-        const data = await getPublicHolidayById(props.publicHoliday.idHoliday);
-        setHolidayDate(data.holidayDate);
-        setHolidayNameFr(data.holidayNameFr);
-        setHolidayNameAr(data.holidayNameAr);
-      } catch (error) {
-        console.error('Erreur lors de la récupération du jour férié:', error);
-      }
-    };
-    fetchPublicHoliday();
-  }, [props.publicHoliday.idHoliday]);
+  const [name, setname] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'holidayDate':
-        setHolidayDate(value);
+      case 'name':
+        setname(value);
         break;
-      case 'holidayNameFr':
-        setHolidayNameFr(value);
+      case 'startDate':
+        setStartDate(value);
         break;
-      case 'holidayNameAr':
-        setHolidayNameAr(value);
+        case 'endDate':
+          setEndDate(value);
+        break;
+      case 'description':
+        setDescription(value);
         break;
       default:
         break;
     }
   };
+  useEffect(() => {
+    const fetchPublicHoliday = async () => {
+      try {
+        const data = await getPublicHolidayById(props.publicHoliday.id);
+        setname(data.name);
+        setStartDate(data.startDate);
+        setEndDate(data.endDate);
+        setDescription(data.description);
+      } catch (error) {
+        console.error('Erreur lors de la récupération du jour férié:', error);
+      }
+    };
+    fetchPublicHoliday();
+  }, [props.publicHoliday.id]);
+
+ 
 
   const handleUpdatePublicHoliday = async () => {
     try {
       const updatedPublicHoliday = {
-        holidayDate,
-        holidayNameFr,
-        holidayNameAr,
+        name,
+        startDate,
+        endDate,
+        description,
+      
       };
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/publicHoliday/update/${props.publicHoliday.idHoliday}`,
+        url: `http://localhost:8093/publicHoliday/update/${props.publicHoliday.id}`,
         data: updatedPublicHoliday,
       }).then((response) => {
         console.log(response.data);
@@ -82,57 +90,75 @@ const EditPublicHolidayModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل يوم العطلة {props.publicHoliday.idHoliday}</h4>
+            <h4 className='text-center text-xl'>تعديل يوم العطلة {props.publicHoliday.id}</h4>
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                المعلومات الشخصية
-              </h6>
-              <div className="pl-lg-4">
+             
+            <div className="pl-lg-4">
                 <Row>
-                  <Col lg="6">
+                  <Col lg="12">
                     <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="holidayDate">
-                        تاريخ العطلة
+                      <label className="form-control-label" htmlFor="holidayName">
+                        اسم العطلة
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="holidayDate"
-                        type="date"
-                        value={holidayDate}
-                        onChange={handleChange}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg="6">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="holidayNameAr">
-                        اسم العطلة بالعربية
-                      </label>
-                      <Input
-                        className="form-control-alternative text-right"
-                        id="holidayNameAr"
-                        placeholder="اسم العطلة بالعربية"
+                        id="name"
+                        placeholder="اسم العطلة"
                         type="text"
-                        value={holidayNameAr}
+                        value={name}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
-                  <Col lg="6">
+                  <Col lg="12">
                     <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="holidayNameFr">
-                        Nom de la fête en français
+                      <label className="form-control-label" htmlFor="holidayDate">
+                        تاريخ بداية العطلة
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="holidayNameFr"
-                        placeholder="Nom de la fête en français"
-                        type="text"
-                        value={holidayNameFr}
+                        id="startDate"
+                        placeholder="YYYY-MM-DD"
+                        type="date"
+                        value={startDate}
+                        onChange={handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="12">
+                    <FormGroup className="text-right">
+                      <label className="form-control-label" htmlFor="holidayDate">
+                        تاريخ نهاية العطلة
+                      </label>
+                      <Input
+                        className="form-control-alternative text-right"
+                        id="endDate"
+                        placeholder="YYYY-MM-DD"
+                        type="date"
+                        value={endDate}
+                        onChange={handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="12">
+                    <FormGroup className="text-right">
+                      <label className="form-control-label" htmlFor="description">
+                        الوصف
+                      </label>
+                      <Input
+                        className="form-control-alternative text-right"
+                        id="description"
+                        placeholder="وصف العطلة"
+                        type="textarea"
+                        value={description}
                         onChange={handleChange}
                       />
                     </FormGroup>

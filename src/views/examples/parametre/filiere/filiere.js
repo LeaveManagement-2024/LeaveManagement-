@@ -50,18 +50,18 @@ const Filieres = () => {
     }
   };
 
-  const handleGetFiliereById = async (idService) => {
+  const handleGetFiliereById = async (idFiliere) => {
     try {
-      const data = await getFiliereById(idService);
+      const data = await getFiliereById(idFiliere);
       setFiliere(data);
     } catch (error) {
       console.error('Error fetching filière:', error);
     }
   };
 
-  const handleDeleteFiliere = async (idService) => {
+  const handleDeleteFiliere = async (idFiliere) => {
     try {
-      await deleteFiliere(idService);
+      await deleteFiliere(idFiliere);
       setMessage('تم حذف التخصص بنجاح');
       fetchAllFilieres(); // Refresh the list
     } catch (error) {
@@ -95,8 +95,8 @@ const Filieres = () => {
                   <tr>
                     <th scope="col"> اسم الشعبة</th>
                     <th scope="col">Nom de filiere </th>
-                    <th scope="col">المصلحة التابعة لها الشعبة </th>
-                    <th scope="col">المصلحة التابعة لها الشعبة </th>
+                    <th scope="col">المصلحة</th>
+                    <th scope="col">القسم </th>
                     <th scope="col">الإعدادات</th>
                   </tr>
                 </thead>
@@ -121,7 +121,7 @@ const Filieres = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetFiliereById(filiere.idService)}
+                              onClick={() => handleGetFiliereById(filiere.idFiliere)}
                             >
                               عرض
                             </DropdownItem>
@@ -136,7 +136,7 @@ const Filieres = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteFiliere(filiere.idService)}
+                              onClick={() => handleDeleteFiliere(filiere.idFiliere)}
                             >
                               حذف
                             </DropdownItem>

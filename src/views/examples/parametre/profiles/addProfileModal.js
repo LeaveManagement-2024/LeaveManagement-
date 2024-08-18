@@ -16,25 +16,13 @@ import {
 
 const AddProfileModal = (props) => {
 
-  const [profileNameFr, setProfileNameFr] = useState('');
-  const [profileNameAr, setProfileNameAr] = useState('');
-  const [profileDescriptionFr, setProfileDescriptionFr] = useState('');
-  const [profileDescriptionAr, setProfileDescriptionAr] = useState('');
-
+  const [profileName, setProfileName] = useState('');
+  
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'profileNameFr':
-        setProfileNameFr(value);
-        break;
-      case 'profileNameAr':
-        setProfileNameAr(value);
-        break;
-      case 'profileDescriptionFr':
-        setProfileDescriptionFr(value);
-        break;
-      case 'profileDescriptionAr':
-        setProfileDescriptionAr(value);
+      case 'profileName':
+        setProfileName(value);
         break;
       default:
         break;
@@ -44,10 +32,8 @@ const AddProfileModal = (props) => {
   const handleAddProfile = async () => {
     try {
       const profileData = {
-        profileNameFr,
-        profileNameAr,
-        profileDescriptionFr,
-        profileDescriptionAr,
+        profileName,
+       
       };
 
       await axios.post('http://localhost:8093/profiles/save', profileData)
@@ -84,10 +70,10 @@ const AddProfileModal = (props) => {
                         </label>
                         <Input
                           className="form-control-alternative text-right"
-                          id="profileNameAr"
+                          id="profileName"
                           placeholder="اسم الصفة"
                           type="text"
-                          value={profileNameAr}
+                          value={profileName}
                           onChange={handleChange}
                         />
                       </FormGroup>
