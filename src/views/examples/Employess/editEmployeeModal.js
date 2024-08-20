@@ -87,7 +87,9 @@ const EditEmployeeModal = (props) => {
     fetchGrades();
     fetchPosts();
     fetchFilieres();
-    fetchEmployee();
+    if (props.empl && props.empl.idE) {
+      fetchEmployee();
+    }
   }, [props.empl.idE]);
 
 

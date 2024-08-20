@@ -16,7 +16,7 @@
 
 */
 import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
+import Profile from "views/examples/profilePerso/Profile";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Leave from "views/examples/Leave/Leave";
@@ -24,6 +24,7 @@ import Employees from "views/examples/Employess/Employees";
 import Icons from "views/examples/Icons.js";
 import Parametre from "views/examples/parametre/parametre";
 import AnnualLeave from "views/examples/annualLeave/annualLeave"
+import LeavePerson from "views/examples/Leave/LeavePerson";
 
 var routes = [
   {
@@ -53,6 +54,13 @@ var routes = [
     name: "الرخص",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Leave/>,
+    layout: "/admin",
+  },
+  {
+    path: "/LeavePerson",
+    name: "الرخص الشخصية",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <LeavePerson/>,
     layout: "/admin",
   },
   {

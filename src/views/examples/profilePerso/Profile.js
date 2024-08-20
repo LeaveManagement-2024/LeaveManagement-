@@ -24,12 +24,14 @@ import {
   deleteEmployee,
   getManagerByIdEmp,
   getResponsibleByIdEmp
-} from '../examples/Employess/employeeApi'; 
-import './style.css'
+} from '../Employess/employeeApi'; 
+import '../style.css';
+import Parametre from './Para';
 
 const Profile = () => {
   const userId = localStorage.getItem('userId');
   const [employee, setEmployee] = useState({});
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     fetchEmployee();
@@ -57,7 +59,7 @@ const Profile = () => {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
-                        className="rounded-circle"xl
+                        className="rounded-circle"
                         src={employee?.filiere?.service?.departement?.respDepartement?.image}
                       />
                     </a>
@@ -85,20 +87,34 @@ const Profile = () => {
                     </div>
                   </div>
                 </Row>
-                <div className="text-right">
-                  <h4>
+                
+                <hr className="my-2" />
 
-                  {employee?.filiere?.service?.departement?.respDepartement?.email} :  البريد الإلكتروني 
+                  <div className="text-right"> 
+                    <h4> 
+                      :  البريد الإلكتروني 
+                    </h4>
+                  </div>
+                  <div>
+                    <h4>
+                    {employee?.filiere?.service?.departement?.respDepartement?.email}
+                    </h4>
+                  </div>
+                  <hr className="my-2" />
+                  <div className="text-right"> 
+                    <h4>
+                      :  رقم الهاتف 
+                    </h4>
+                  </div>                 
+                  <div>  
+                    <h4> 
+                    {employee?.filiere?.service?.departement?.respDepartement?.phone}
+                    </h4>
+                  </div> 
                   
-                  </h4>
-                  <h4>
-                  {employee?.filiere?.service?.departement?.respDepartement?.phone} :  رقم الهاتف
-                  </h4>
+                  <hr className="my-2" />
                   
-                  
-                  <hr className="my-4" />
-                  
-                </div>
+                
               </CardBody>
             </Card>
             <Card className="card-profile shadow">
@@ -108,7 +124,7 @@ const Profile = () => {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
-                        className="rounded-circle"xl
+                        className="rounded-circle"
                         src={employee?.filiere?.service?.respService?.image}
                       />
                     </a>
@@ -135,21 +151,34 @@ const Profile = () => {
                       
                     </div>
                   </div>
+                  
                 </Row>
-                <div className="text-right">
-                  <h4>
-
-                  {employee?.filiere?.service?.respService?.email} :  البريد الإلكتروني 
+                <hr className="my-2" />
+                  <div className="text-right"> 
+                    <h4> 
+                      :  البريد الإلكتروني 
+                    </h4>
+                  </div>
+                  <div>
+                    <h4>
+                      {employee?.filiere?.service?.respService?.email}
+                    </h4>
+                  </div>
+                  <hr className="my-2" />
+                  <div className="text-right"> 
+                    <h4>
+                      :  رقم الهاتف 
+                    </h4>
+                  </div>                 
+                  <div>  
+                    <h4> 
+                      {employee?.filiere?.service?.respService?.phone}
+                    </h4>
+                  </div> 
                   
-                  </h4>
-                  <h4>
-                  {employee?.filiere?.service?.respService?.phone} :  رقم الهاتف
-                  </h4>
+                  <hr className="my-2" />
                   
-                  
-                  <hr className="my-4" />
-                  
-                </div>
+                
               </CardBody>
             </Card>
           </Col>
@@ -180,11 +209,12 @@ const Profile = () => {
                     <Button
                       color="primary"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={() => setModalShow(true)}
                       size="sm"
                     >
                       الإعدادات
                     </Button>
+                    <Parametre show={modalShow} onHide={() => setModalShow(false)}></Parametre>
                   </Col>
                 </Row>
               </CardHeader>
@@ -198,7 +228,7 @@ const Profile = () => {
                       <Col lg="6">
                         <FormGroup className="text-right">
                           <label
-                            className="form-control-label"ك
+                            className="form-control-label"
                             htmlFor="input-first-name"
                           >
                             الاسم الأول
@@ -473,101 +503,10 @@ const Profile = () => {
                       
                     </Row>
                   </div>
-                  <hr className="my-4" />
-                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>
-                              تغيير كلمة المرور
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور القديمة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور القديمة"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور الجديدة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور الجديدة"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور الجديدة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور الجديدة"
-                            type="text"
-                          />
-                        </FormGroup>
-                        <Col className="text-right" xs="12">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      تغيير كلمة المرور 
-                    </Button>
-                  </Col>
-                      </Col>
-                    </Row>
-                    
-                  </div>
-                  <hr className="my-4" />
-                  {/* Description */}
-                  <h6 className="heading-small text-right mb-4 "style={{ fontSize: '1.5em' }}>معلومات عني</h6>
-                  <div className="pl-lg-4">
-                    <FormGroup className="text-right">
-                      <label >معلومات عني</label>
-                      <div className="d-flex justify-content-center " style={{marginTop : '7px',marginBottom : '0px'}} >
-                            <Input                                                       
-                              size="sm" 
-                              type="file"
-                              
-                            >
-                              تغيير صورتي الشخصية 
-                            </Input>
-                            <Button
-                                color="info"
-                                size="sm"
-                                onClick={(e) => e.preventDefault()}
-                            >
-                                  Edit image
-                            </Button>
-                        </div>
+                  
                       
-                    </FormGroup>
-                  </div>
+                    
+                  
                 </Form>
               </CardBody>
             </Card>

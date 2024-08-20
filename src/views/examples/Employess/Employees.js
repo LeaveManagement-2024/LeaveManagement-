@@ -51,7 +51,7 @@ const Employees = () => {
 
   useEffect(() => {
     fetchAllEmployees();
-  }, [employee]);
+  }, [employees]);
 
   const fetchAllEmployees = async () => {
     try {
@@ -71,6 +71,10 @@ const Employees = () => {
     }
   };
   const handleGetEmployeeById = async (idE) => {
+    if (!idE) {
+      console.error('Error: Employee ID is undefined.');
+      return;
+    }
     try {
       const data = await getEmployeeById(idE);
       setEmployee(data);
@@ -124,8 +128,9 @@ const Employees = () => {
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  {currentItems.map((emp) => (
-                    <tr key={emp.idE}>
+                {currentItems.length > 0 ? (
+  currentItems.map((emp) => (
+    <tr key={emp.idE}>
                       <th scope="row">
                         <Media className="align-items-center">
                           <a
@@ -204,7 +209,12 @@ const Employees = () => {
                         </UncontrolledDropdown>
                       </td>
                     </tr>
-                  ))}
+                   ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8">Loading...</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
               <CardFooter className="py-4 text-right">
