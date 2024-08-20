@@ -77,9 +77,11 @@ const Sidebar = (props) => {
             to={prop.layout + prop.path}
             tag={NavLinkRRD}
             onClick={closeCollapse}
-          ><div className="text-lg text-center">
-            <i className={prop.icon} style={{ marginLeft:'10px'}}/>
-            {prop.name}</div>
+          > 
+          <i className={prop.icon} style={{ marginLeft:'10px'}}/>
+          <div className=" text-center">
+            {prop.name}
+          </div>
             
           </NavLink>
         </NavItem>
@@ -117,15 +119,7 @@ const Sidebar = (props) => {
           <span className="navbar-toggler-icon" />
         </button>
         {/* Brand */}
-        {logo ? (
-          <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
-          </NavbarBrand>
-        ) : null}
+        
         {/* User */}
         <Nav className="align-items-center d-md-none">
           
@@ -142,7 +136,7 @@ const Sidebar = (props) => {
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
               <DropdownItem className="noti-title" header tag="div">
-                <h6 className="text-overflow m-0">Welcome!</h6>
+                <h6 className="text-overflow m-0">Welcome!....</h6>
               </DropdownItem>
               <DropdownItem to="/admin/user-profile" tag={Link}>
                 <i className="ni ni-single-02" />

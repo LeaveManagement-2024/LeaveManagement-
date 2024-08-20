@@ -30,7 +30,7 @@ import Filieres from "views/examples/parametre/filiere/filiere";
 import Services from "views/examples/parametre/service/service";
 import PublicHoliday from "views/examples/parametre/public_holiday/public_holliday";
 import Profiles from "views/examples/parametre/profiles/profiles";
-
+import Index from "views/Index";
 import routes from "routes.js";
 
 const Admin = (props) => {
@@ -92,6 +92,7 @@ const Admin = (props) => {
            <Route path="/services" element={<Services />} />
            <Route path="/public-holiday" element={<PublicHoliday />} />
            <Route path="/profiles" element={<Profiles />} />
+           <Route path="/index" element={<Index />} />
           <Route path="*" element={<Navigate to="/admin/index" replace />} />
         </Routes>
         <Container fluid>

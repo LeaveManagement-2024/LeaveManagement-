@@ -58,19 +58,14 @@ const Header = () => {
                     </Col>
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                        الموظفون في رخصة اليوم
+                        الموظفون في رخصة اليوم :
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
                         {employeesOnLeaveToday}
                       </span>
                     </div>
                   </Row>
-                  <p className="mt-3 mb-0 text-muted text-sm">
-                    <span className="text-success mr-2">
-                      <i className="fa fa-arrow-up" /> 3.48%
-                    </span>{" "}
-                    <span className="text-nowrap">منذ الشهر الماضي</span>
-                  </p>
+                  
                 </CardBody>
               </Card>
             </Col>
@@ -85,19 +80,14 @@ const Header = () => {
                     </Col>
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                        الرخص التي لم يتم الموافقة عليها
+                         الرخص التي لم يتم الموافقة عليها :
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
                         {unconfirmedLeaves}
                       </span>
                     </div>
                   </Row>
-                  <p className="mt-3 mb-0 text-muted text-sm">
-                    <span className="text-danger mr-2">
-                      <i className="fas fa-arrow-down" /> 3.48%
-                    </span>{" "}
-                    <span className="text-nowrap">منذ الأسبوع الماضي</span>
-                  </p>
+                  
                 </CardBody>
               </Card>
             </Col>
@@ -112,7 +102,7 @@ const Header = () => {
                     </Col>
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                        عدد الموظفين
+                        عدد الموظفين :
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
                         الجدد: {countNewEmployees}
@@ -139,16 +129,11 @@ const Header = () => {
                         عدد طلبات الرخص الجديدة
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
-                        {newLeaveRequests} %
+                        {newLeaveRequests} 
                       </span>
                     </div>
                   </Row>
-                  <p className="mt-3 mb-0 text-muted text-sm">
-                    <span className="text-success mr-2">
-                      <i className="fas fa-arrow-up" /> 12%
-                    </span>{" "}
-                    <span className="text-nowrap">منذ الشهر الماضي</span>
-                  </p>
+                  
                 </CardBody>
               </Card>
             </Col>

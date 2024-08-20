@@ -28,6 +28,7 @@ import {
 import './style.css'
 
 const Profile = () => {
+  const userId = localStorage.getItem('userId');
   const [employee, setEmployee] = useState({});
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Profile = () => {
   
   const fetchEmployee = async () => {
     try {
-      const data = await getEmployeeById(1);
+      const data = await getEmployeeById(userId);
       setEmployee(data);
     } catch (error) {
       console.error('Error fetching employee:', error);
@@ -48,16 +49,16 @@ const Profile = () => {
       {/* Page content */}
       <Container className="mt--7" fluid >
         <Row>
-          <Col className="order-xl-1 mb-5 mb-xl-0" xl="4">
-            <Card className="card-profile shadow">
+          <Col className="order-xl-1 mb-5 mb-xl-0" xl="4" >
+            <Card className="card-profile shadow"style={{marginBottom: '90px'}}>
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
-                        className="rounded-circle"
-                        src={employee.image}
+                        className="rounded-circle"xl
+                        src={employee?.filiere?.service?.departement?.respDepartement?.image}
                       />
                     </a>
                   </div>
@@ -74,44 +75,102 @@ const Profile = () => {
                   <div className="col">
                        
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">أصدقاء</span>
-                      </div>
-                      <div>
-                        <span className="description">الاسم الكامل </span>
-                        <span className="heading">{employee.firstNameAr} {employee.lastNameAr}</span>
+                     
+                      <div className=" text-right">
+                        <span className="heading ">   القسم : {employee?.filiere?.service?.departement?.departementNameAr}</span>
+                        <span className="heading ">رئيس القسم : {employee?.filiere?.service?.departement?.respDepartement?.firstNameAr} {employee?.filiere?.service?.departement?.respDepartement?.lastNameAr}</span>
                         
                       </div>
                       
                     </div>
                   </div>
                 </Row>
-                <div className="text-center">
-                  <h3>
-                  {employee.filiere?.filiereNameFr}
-                    <span className="font-weight-light">, 27</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    بوخارست، رومانيا
+                <div className="text-right">
+                  <h4>
+
+                  {employee?.filiere?.service?.departement?.respDepartement?.email} :  البريد الإلكتروني 
+                  
+                  </h4>
+                  <h4>
+                  {employee?.filiere?.service?.departement?.respDepartement?.phone} :  رقم الهاتف
+                  </h4>
+                  
+                  
+                  <hr className="my-4" />
+                  
+                </div>
+              </CardBody>
+            </Card>
+            <Card className="card-profile shadow">
+              <Row className="justify-content-center">
+                <Col className="order-lg-2" lg="3">
+                  <div className="card-profile-image">
+                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                      <img
+                        alt="..."
+                        className="rounded-circle"xl
+                        src={employee?.filiere?.service?.respService?.image}
+                      />
+                    </a>
                   </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    مدير الحلول - ضابط الإبداع تيم
+                  
+                </Col>
+                
+              </Row>
+              
+              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+
+              </CardHeader>
+              <CardBody className="pt-0 pt-md-4">
+                <Row>
+                  <div className="col">
+                       
+                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
+                     
+                      <div className=" text-right">
+                        <span className="heading ">   المصلحة : {employee?.filiere?.service?.serviceNameAr}</span>
+                        <span className="heading ">رئيس المصلحة : {employee?.filiere?.service?.respService?.firstNameAr} {employee?.filiere?.service?.respService?.lastNameAr}</span>
+                        
+                      </div>
+                      
+                    </div>
                   </div>
-                  <div>
-                    <i className="ni education_hat mr-2" />
-                    جامعة علوم الكمبيوتر
-                  </div>
+                </Row>
+                <div className="text-right">
+                  <h4>
+
+                  {employee?.filiere?.service?.respService?.email} :  البريد الإلكتروني 
+                  
+                  </h4>
+                  <h4>
+                  {employee?.filiere?.service?.respService?.phone} :  رقم الهاتف
+                  </h4>
+                  
+                  
                   <hr className="my-4" />
                   
                 </div>
               </CardBody>
             </Card>
           </Col>
+          
           <Col className="order-xl-1" xl="8">
             <Card className="bg-secondary shadow">
+            <Row className="justify-content-center">
+                <Col className="order-lg-2" lg="3">
+                  <div className="card-profile-image">
+                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                      <img
+                        alt="..."
+                        className="rounded-circle"
+                        src={employee.image}
+                      />
+                    </a>
+                  </div>
+                  
+                </Col>
+                
+              </Row>
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
@@ -149,6 +208,8 @@ const Profile = () => {
                             id="input-first-name"
                             placeholder="الاسم الأول"
                             type="text"
+                            defaultValue={employee.firstNameAr}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -162,10 +223,11 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                        
+                            defaultValue={employee.lastNameAr}
                             id="input-last-name"
                             placeholder="اسم العائلة"
                             type="text"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -181,10 +243,11 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
+                            defaultValue={employee.cin}
                             id="input-username"
                             placeholder="رقم البطاقة الوطنية"
                             type="text"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -201,6 +264,8 @@ const Profile = () => {
                             id="input-email"
                             placeholder="jesse@example.com"
                             type="email"
+                            defaultValue={employee.email}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -216,10 +281,11 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                         
+                            defaultValue={employee.phone}
                             id="input-first-name"
                             placeholder="رقم الهاتف"
                             type="text"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -233,10 +299,11 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
+                            defaultValue={employee.addressAr}
                             id="input-last-name"
                             placeholder="العنوان"
                             type="text"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -266,6 +333,7 @@ const Profile = () => {
                             placeholder="الرتبة"
                             type="text"
                             defaultValue={employee.grade?.gradeNameAr}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -302,8 +370,8 @@ const Profile = () => {
                             className="form-control-alternative text-right"
                             defaultValue={employee.hireDate}
                             id="input-country"
-                            
                             type="date"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -320,29 +388,71 @@ const Profile = () => {
                             id="input-postal-code"
                             placeholder="مقر العمل"
                             type="text"
+                            defaultValue={employee.workLocationAr}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg="4">
+                      <Col lg="6">
                         <FormGroup className="text-right">
                           <label
                             className="form-control-label"
                             htmlFor="input-city"
                           >
-                            المدينة
+                            المصلحة
                           </label>
                           <Input
                             className="form-control-alternative text-right"
-                           
                             id="input-city"
-                            placeholder="المدينة"
+                            placeholder="المهمة"
                             type="text"
+                            defaultValue={employee?.filiere?.service?.serviceNameAr}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
+                      <Col lg="6">
+                        <FormGroup className="text-right">
+                          <label 
+                            className="form-control-label "
+                            htmlFor="input-country"
+                          >
+                            القسم
+                          </label>
+                          <Input 
+                            className="form-control-alternative text-right"
+                            defaultValue={employee?.filiere?.service?.departement?.departementNameAr}
+                            id="input-country"
+                            placeholder="الشعبة"
+                            type="text"
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      
+                    </Row>
+                    <Row>
+                      <Col lg="6">
+                        <FormGroup className="text-right">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-city"
+                          >
+                            المهمة
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                            id="input-city"
+                            placeholder="المهمة"
+                            type="text"
+                            defaultValue={employee?.post?.postNameAr}
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">
                         <FormGroup className="text-right">
                           <label 
                             className="form-control-label "
@@ -352,29 +462,15 @@ const Profile = () => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            
+                            defaultValue={employee?.filiere?.filiereNameAr}
                             id="input-country"
-                            placeholder="البلد"
+                            placeholder="الشعبة"
                             type="text"
+                            disabled
                           />
                         </FormGroup>
                       </Col>
-                      <Col lg="4">
-                        <FormGroup className="text-right">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-postal-code"
-                          >
-                            الرمز البريدي
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                            id="input-postal-code"
-                            placeholder="الرمز البريدي"
-                            type="number"
-                          />
-                        </FormGroup>
-                      </Col>
+                      
                     </Row>
                   </div>
                   <hr className="my-4" />

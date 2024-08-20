@@ -47,6 +47,7 @@ import {
 } from '../../views/examples/Employess/employeeApi'
 
 const AdminNavbar = (props) => {
+  const userId = localStorage.getItem('userId');
 
   const [employee, setEmployee] = useState({});
 
@@ -56,7 +57,7 @@ const AdminNavbar = (props) => {
   
   const fetchEmployee = async () => {
     try {
-      const data = await getEmployeeById(1);
+      const data = await getEmployeeById(userId);
       setEmployee(data);
     } catch (error) {
       console.error('Error fetching employee:', error);
@@ -106,7 +107,7 @@ const AdminNavbar = (props) => {
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem className="noti-title" header tag="div">
-                  <h6 className="text-overflow m-0">Welcome!</h6>
+                  <h6 className="text-overflow m-0">Welcome!...................</h6>
                 </DropdownItem>
                 <DropdownItem to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-single-02" />
