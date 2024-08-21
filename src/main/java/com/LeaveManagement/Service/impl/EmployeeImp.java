@@ -19,11 +19,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeImp implements EmployeeService {
     @Autowired
     private EmployeeRepo employeeRep;
+    @Autowired
+    private LeaveRepo leaveRepo;
 
     @Autowired
     private PostsRepo postsRepo;
@@ -187,7 +190,7 @@ public class EmployeeImp implements EmployeeService {
                 employeesToUpdate.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
                 employeeRep.save(employeesToUpdate);
             }
-            else  throw new IllegalArgumentException("Ancien mot de passe incorrect");
+            else  throw new IllegalArgumentException("كلمة المرور القديمة غير صحيحة");
 
 
         }
@@ -217,7 +220,105 @@ public class EmployeeImp implements EmployeeService {
             employeeRep.save(employeesToUpdate);
         }
         }
+    @Override
+    public List<Leave> AllLeaveE(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        return employee.getLeaves();
+    }
 
+    @Override
+    public List<Leave> ConfermedLeaveE(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
 
+        List<Leave> leaves = employee.getLeaves();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> confirmedLeaves = leaves.stream()
+                .filter(leave -> "true".equals(leave.getManagerVisa())
+                        || "true".equals(leave.getResponsibleVisa())
+                        || "true".equals(leave.getRemplecementVisa()))
+                .collect(Collectors.toList());
+
+        return confirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveE(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        List<Leave> leaves = employee.getLeaves();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave -> "false".equals(leave.getManagerVisa())
+                        || "false".equals(leave.getResponsibleVisa())
+                        || "false".equals(leave.getRemplecementVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveByManagerE(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        List<Leave> leaves = employee.getLeaves();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave -> "false".equals(leave.getManagerVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveByResponsibleE(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        List<Leave> leaves = employee.getLeaves();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave -> "false".equals(leave.getResponsibleVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveByRemplacmentE(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        List<Leave> leaves = employee.getLeaves();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave ->  "false".equals(leave.getRemplecementVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+    @Override
+    public List<Leave> getLeavesToConfirm(Long id) {
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        // Récupérer tous les congés où cet employé est soit manager, soit responsable, soit remplaçant
+        List<Leave> leavesToConfirm = leaveRepo.findAll().stream()
+                .filter(leave -> (leave.getLmanager() != null && leave.getLmanager().getIdE().equals(id) && leave.getManagerVisa().equals("false"))
+                        || (leave.getResponsible() != null && leave.getResponsible().getIdE().equals(id) && leave.getResponsibleVisa() .equals("false"))
+                        || (leave.getReplacement() != null && leave.getReplacement().getIdE().equals(id) && leave.getRemplecementVisa().equals("false")))
+                .collect(Collectors.toList());
+
+        return leavesToConfirm;
+    }
 
 }
+

@@ -1,12 +1,13 @@
 package com.LeaveManagement.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class AnnualLeaveDTO {
     private Long annualLeaveId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String label;
     private String status;
 
@@ -14,7 +15,7 @@ public class AnnualLeaveDTO {
     public AnnualLeaveDTO() {
     }
 
-    public AnnualLeaveDTO(Long annualLeaveId, Date startDate, Date endDate, String label, String status) {
+    public AnnualLeaveDTO(Long annualLeaveId, LocalDate startDate, LocalDate endDate, String label, String status) {
         this.annualLeaveId = annualLeaveId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -31,19 +32,19 @@ public class AnnualLeaveDTO {
         this.annualLeaveId = annualLeaveId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

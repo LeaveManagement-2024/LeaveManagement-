@@ -5,6 +5,7 @@ import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Entity.Filiere;
+import com.LeaveManagement.Entity.Leave;
 import com.LeaveManagement.response.LogInResponse;
 
 import java.io.IOException;
@@ -23,5 +24,12 @@ public interface EmployeeService {
     void updateImage(Long id,EmployeesDTO employeeDTO)throws IOException;
     void updatePasswordByAdmin(Long id,UpdatePassword updatePassword);
     Filiere getFiliereByIdEmployee(Long id);
+    List<Leave> AllLeaveE(Long id);
+    List<Leave> ConfermedLeaveE(Long id);
+    List<Leave> UnconfermedLeaveE(Long id);
+    List<Leave> UnconfermedLeaveByManagerE(Long id);
+    List<Leave> UnconfermedLeaveByResponsibleE(Long id);
+    List<Leave> UnconfermedLeaveByRemplacmentE(Long id);
+    List<Leave> getLeavesToConfirm(Long id);
 
-    }
+}

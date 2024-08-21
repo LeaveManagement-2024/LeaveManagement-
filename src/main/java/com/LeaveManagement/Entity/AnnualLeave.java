@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 @Entity
@@ -11,8 +12,8 @@ public class AnnualLeave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long annualLeaveId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     @Column(columnDefinition = "NVARCHAR(255)")
     private String label;
     @Column(columnDefinition = "NVARCHAR(255)")
@@ -27,7 +28,7 @@ public class AnnualLeave {
     public AnnualLeave() {
     }
 
-    public AnnualLeave(Long annualLeaveId, Date startDate, Date endDate, String label, String status, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
+    public AnnualLeave(Long annualLeaveId, LocalDate startDate, LocalDate endDate, String label, String status, List<AnnualLeaveLine> annualLeaveLines, List<Leave> leaves) {
         this.annualLeaveId = annualLeaveId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -45,19 +46,19 @@ public class AnnualLeave {
         this.annualLeaveId = annualLeaveId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

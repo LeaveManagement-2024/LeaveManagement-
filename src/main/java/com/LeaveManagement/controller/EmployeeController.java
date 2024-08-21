@@ -5,6 +5,7 @@ import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Entity.Filiere;
+import com.LeaveManagement.Entity.Leave;
 import com.LeaveManagement.Service.EmployeeService;
 import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,7 +149,7 @@ public class EmployeeController {
     public ResponseEntity<String> updatePassword(@PathVariable Long id,@RequestBody UpdatePassword updatePassword) {
         try {
             employeeService.updatePassword(id, updatePassword);
-            return ResponseEntity.ok("Mot de passe mis à jour avec succès");
+            return ResponseEntity.ok("تم تحديث كلمة المرور بنجاح");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
@@ -180,5 +181,34 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue");
         }
     }
+    @GetMapping(path="/AllLeaveE/{Id}")
+    public List<Leave>AllLeaveE(@PathVariable Long Id) {
+        return employeeService.AllLeaveE(Id);
+    }
+    @GetMapping(path="/ConfermedLeaveE/{Id}")
+    public List<Leave>ConfermedLeaveE(@PathVariable Long Id) {
+        return employeeService.ConfermedLeaveE(Id);
+    }
+    @GetMapping(path="/getLeavesToConfirm/{Id}")
+    public List<Leave>getLeavesToConfirm(@PathVariable Long Id) {
+        return employeeService.getLeavesToConfirm(Id);
+    }
+    @GetMapping(path="/UnconfermedLeaveE/{Id}")
+    public List<Leave>UnconfermedLeaveE(@PathVariable Long Id) {
+        return employeeService.UnconfermedLeaveE(Id);
+    }
+    @GetMapping(path="/UnconfermedLeaveByManagerE/{Id}")
+    public List<Leave>UnconfermedLeaveByManagerE(@PathVariable Long Id) {
+        return employeeService.UnconfermedLeaveByManagerE(Id);
+    }
+    @GetMapping(path="/UnconfermedLeaveByResponsibleE/{Id}")
+    public List<Leave>UnconfermedLeaveByResponsibleE(@PathVariable Long Id) {
+        return employeeService.UnconfermedLeaveByResponsibleE(Id);
+    }
+    @GetMapping(path="/UnconfermedLeaveByRemplacmentE/{Id}")
+    public List<Leave>UnconfermedLeaveByRemplacmentE(@PathVariable Long Id) {
+        return employeeService.UnconfermedLeaveByRemplacmentE(Id);
+    }
+
 
 }

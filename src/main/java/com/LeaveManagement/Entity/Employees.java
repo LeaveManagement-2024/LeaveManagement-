@@ -51,6 +51,7 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "IdPost")
     private Posts post;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "IdFiliere")
     private Filiere filiere;

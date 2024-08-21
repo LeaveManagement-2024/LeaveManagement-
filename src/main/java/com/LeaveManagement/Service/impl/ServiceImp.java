@@ -25,11 +25,13 @@ public class ServiceImp implements ServiceService {
     @Override
     public Long addService(ServiceDTO serviceDTO) {
         Departement departement = departementRepo.findById(serviceDTO.getIdDepartment()).orElseThrow(()->new IllegalArgumentException("Department not found"));
-        Employees employee = employeeRepo.findById(serviceDTO.getRespServiceId()).orElseThrow(()->new IllegalArgumentException("Employee not found"));
+        Employees employee = employeeRepo.findById(serviceDTO.getRespServiceId()).orElse(null);
         ServiceE serviceE =new ServiceE();
         serviceE.setServiceNameFr(serviceDTO.getServiceNameFr());
         serviceE.setServiceNameAr(serviceDTO.getServiceNameAr());
+
         serviceE.setDepartement(departement);
+
         serviceE.setRespService(employee);
         serviceRepo.save(serviceE);
         return serviceE.getIdService();
