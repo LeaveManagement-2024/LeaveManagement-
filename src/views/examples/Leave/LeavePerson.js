@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Badge,
   Card,
@@ -20,68 +20,47 @@ import {
   UncontrolledTooltip,
   
 } from "reactstrap";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 // core components
 import Header from "components/Headers/Header.js";
 import AddLeaveModal from './addLeaveModal';
 import EditLeaveModal from './editLeaveModal '
-
-const data = [
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  {
-    project: 'Argon Design System',
-    budget: '$2,500 USD',
-    status: 'pending',
-    statusColor: 'warning',
-    users: [
-      { name: 'Ryan Tompson', img: require("../../../assets/img/theme/team-1-800x800.jpg") },
-      { name: 'Romina Hadid', img: require("../../../assets/img/theme/team-2-800x800.jpg") },
-      { name: 'Alexander Smith', img: require("../../../assets/img/theme/team-3-800x800.jpg") },
-      { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
-    ],
-    completion: 60,
-    completionColor: 'danger',
-  },
-  // Ajoutez plus de données ici
-];
-
+import {
+getAllLeavesByEmployee
+ 
+} from '../Employess/employeeApi'
 const Leave = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
+  const userId = localStorage.getItem('userId');
+  const [leaves, setLeaves] = useState([]);
+  const [loading, setLoading] = useState(true);
   // Calculer les indices de la page actuelle
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = leaves.slice(indexOfFirstItem, indexOfLastItem);
   const [editModalShow, setEditModalShow] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [modalShow, setModalShow] = useState(false);
+
+  useEffect(() => {
+    const fetchLeaves = async () => {
+      try {
+        const response = await getAllLeavesByEmployee(userId);
+        setLeaves(response);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching leaves:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchLeaves();
+  }, [userId]);
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner component
+  }
 
   return (
     <>
@@ -92,10 +71,19 @@ const Leave = () => {
             <Card className="shadow">
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
+                <DropdownButton id="dropdown-item-button "  title="اختيارات اخرى">
+                      <Dropdown.Item as="button"  >جميع الرخص</Dropdown.Item>
+                      <Dropdown.Item as="button" >الرخص الموافق عليها </Dropdown.Item>
+                      <Dropdown.Item as="button"  >الرخص الغير موافق عليها </Dropdown.Item>
+                      <Dropdown.Item as="button"  >الرخص الغير موافق عليها من طرف رئيس القسم </Dropdown.Item>
+                      <Dropdown.Item as="button"  >الرخص الغير موافق عليها من طرف رئيس المصلحة </Dropdown.Item>
+                      <Dropdown.Item as="button"  >الرخص الغير موافق عليها من طرف النائب عنك </Dropdown.Item>
+                  </DropdownButton>
                   <Button  color="primary" onClick={() => setModalShow(true)}>
-                  إضافة رخصة                 
+                  طلب رخصة                 
                   </Button>
                   <AddLeaveModal show={modalShow} onHide={() => setModalShow(false)}></AddLeaveModal>
+                  
                   <h3 className="mb-0">جدول الرخص</h3>
                 </div>
               </CardHeader>
@@ -106,118 +94,36 @@ const Leave = () => {
                     <th scope="col">   تاريخ مغادرة المنصب</th>
                     <th scope="col">  تاريخ استئناف العمل </th>
                     <th scope="col">  اسم القائم بالنياية </th>
-                    <th scope="col">المسؤول عن النائب </th>
                     <th scope="col">رئيس المصلحة</th>
+                    <th scope="col">  رئيس القسم </th>
+                    <th scope="col">   الإعدادات </th>
                     <th scope="col"> </th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((item, index) => (
+                {currentItems.map((leave, index) => (
                     <tr key={index}>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <a
-                            className="avatar rounded-circle mr-3"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
-                              alt="..."
-                              src={require("../../../assets/img/theme/bootstrap.jpg")}
-                            />
-                          </a>
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              {item.project}
-                            </span>
-                          </Media>
-                        </Media>
-                      </th>
-                      <td>{item.budget}</td>
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                          <i className={`bg-${item.statusColor}`} />
-                          {item.status}
-                        </Badge>
-                      </td>
-                      <td>
-                        <div className="avatar-group">
-                          {item.users.map((user, idx) => (
-                            <a
-                              key={idx}
-                              className="avatar avatar-sm"
-                              href="#pablo"
-                              id={`tooltip${user.name.replace(/\s+/g, '')}`}
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <img
-                                alt="..."
-                                className="rounded-circle"
-                                src={user.img}
-                              />
-                            </a>
-                          ))}
-                          {item.users.map((user, idx) => (
-                            <UncontrolledTooltip
-                              key={idx}
-                              delay={0}
-                              target={`tooltip${user.name.replace(/\s+/g, '')}`}
-                            >
-                              {user.name}
-                            </UncontrolledTooltip>
-                          ))}
-                        </div>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">{item.completion}%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value={item.completion}
-                              barClassName={`bg-${item.completionColor}`}
-                            />
-                          </div>
-                        </div>
-                      </td>
+                      <th scope="row">{leave.type}</th>
+                      <td>{leave.startDate}</td>
+                      <td>{leave.endDate}</td>
+                      <td>{leave.replacementName}</td>
+                      <td>{leave.departmentHeadName}</td>
+                      <td>{leave.sectionHeadName}</td>
                       <td className="text-right">
                         <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownToggle className="btn-icon-only text-light" href="#pablo" role="button" size="sm" color="" onClick={(e) => e.preventDefault()}>
                             <i className="fas fa-ellipsis-v" />
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
+                            <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                               عرض
                             </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={() => setEditModalShow(true)}
-                            >
-                               تعديل
+                            <DropdownItem href="#pablo" onClick={() => setEditModalShow(true)}>
+                              تعديل
                             </DropdownItem>
-                            <EditLeaveModal
-                            show={editModalShow} 
-                            onHide={() => {setEditModalShow(false)
-                              }}
-                              >
-                            </EditLeaveModal>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                           
-                                حذف
+                            <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                              حذف
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
@@ -242,7 +148,7 @@ const Leave = () => {
                         <span className="sr-only">Previous</span>
                       </PaginationLink>
                     </PaginationItem>
-                    {Array.from({ length: Math.ceil(data.length / itemsPerPage) }, (_, i) => (
+                    {Array.from({ length: Math.ceil(leaves.length / itemsPerPage) }, (_, i) => (
                       <PaginationItem key={i + 1} className={currentPage === i + 1 ? 'active' : ''}>
                         <PaginationLink
                           href="#pablo"
@@ -252,7 +158,7 @@ const Leave = () => {
                         </PaginationLink>
                       </PaginationItem>
                     ))}
-                    <PaginationItem className={currentPage === Math.ceil(data.length / itemsPerPage) ? 'disabled' : ''}>
+                    <PaginationItem className={currentPage === Math.ceil(leaves.length / itemsPerPage) ? 'disabled' : ''}>
                       <PaginationLink
                         href="#pablo"
                         onClick={(e) => { e.preventDefault(); paginate(currentPage + 1); }}

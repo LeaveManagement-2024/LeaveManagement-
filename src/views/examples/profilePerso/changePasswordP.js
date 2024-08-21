@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {
   Button,
@@ -9,283 +9,104 @@ import {
   FormGroup,
   Form,
   Input,
-  Container,
   Row,
   Col,
 } from "reactstrap";
-import {
-  loginEmployee,
-  addEmployee,
-  getAllEmployees,
-  getEmployeeById,
-  updateEmployee,
-  deleteEmployee,
-  getManagerByIdEmp,
-  getResponsibleByIdEmp
-} from '../Employess/employeeApi' 
-import {getAllGrades} from '../parametre/grades/gradesApi'
-import{getAllPosts} from'../parametre/posts/postApi'
-import{getAllFilieres} from '../parametre/filiere/filiereApi'
 import { useNavigate } from "react-router-dom";
 
-
 const ChangePass = (props) => {
-
-  const [firstNameFr, setFirstNameFr] = useState('');
-  const [firstNameAr, setFirstNameAr] = useState('');
-  const [lastNameFr, setLastNameFr] = useState('');
-  const [lastNameAr, setLastNameAr] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [ppr, setPpr] = useState('');
-  const [cin, setCin] = useState('');
-  const [addressFr, setAddressFr] = useState('');
-  const [addressAr, setAddressAr] = useState('');
-  const [hireDate, setHireDate] = useState('');
-  const [workLocationFr, setWorkLocationFr] = useState('');
-  const [workLocationAr, setWorkLocationAr] = useState('');
-  const [image, setImage] = useState(null);
-  const [postId, setPostId] = useState('');
-  const [gradeId, setGradeId] = useState('');
-  const [profileId, setProfileId] = useState('');
-  const [filiereId, setFiliereId] = useState('');
-  const [grades, setGrades] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [filieres, setFilieres] = useState([]);
-
-
-
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchGrades = async () => {
-      try {
-        const gradesData = await getAllGrades();
-        setGrades(gradesData);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des grades:', error);
-      }
-    };
-    const fetchPosts = async () => {
-      try {
-        const postsData = await getAllPosts();
-        setPosts(postsData);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des posts:', error);
-      }
-    };
-    const fetchFilieres = async () => {
-      try {
-        const filieresData = await getAllFilieres();
-        setFilieres(filieresData);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des posts:', error);
-      }
-    };
-    fetchGrades();
-    fetchPosts();
-    fetchFilieres();
-  }, []);
-
-
-  const handleChange = (e) => {
-    const { id, value, type, files } = e.target;
-    if (type === 'file') {
-      setImage(files[0]);
-    } else {
-      switch (id) {
-        case 'postId':
-        case 'gradeId':
-        case 'profileId':
-        case 'filiereId':
-          const numberValue = value ? Number(value) : '';
-          if (id === 'postId') setPostId(numberValue);
-          if (id === 'gradeId') setGradeId(numberValue);
-          if (id === 'profileId') setProfileId(numberValue);
-          if (id === 'filiereId') setFiliereId(numberValue);
-          break;
-        case 'firstNameFr':
-          setFirstNameFr(value);
-          break;
-        case 'firstNameAr':
-          setFirstNameAr(value);
-          break;
-        case 'lastNameFr':
-          setLastNameFr(value);
-          break;
-        case 'lastNameAr':
-          setLastNameAr(value);
-          break;
-        case 'email':
-          setEmail(value);
-          break;
-        case 'password':
-          setPassword(value);
-          break;
-        case 'phone':
-          setPhone(value);
-          break;
-        case 'ppr':
-          setPpr(value);
-          break;
-        case 'cin':
-          setCin(value);
-          break;
-        case 'addressFr':
-          setAddressFr(value);
-          break;
-        case 'addressAr':
-          setAddressAr(value);
-          break;
-        case 'hireDate':
-          setHireDate(value);
-          break;
-        case 'workLocationFr':
-          setWorkLocationFr(value);
-          break;
-        case 'workLocationAr':
-          setWorkLocationAr(value);
-          break;
-        default:
-          break;
-      }
+  const handleSubmit = async () => {
+    if (newPassword !== confirmPassword) {
+      alert("كلمة مرور جديدة وكلمة سر تأكيد لا تتطابق!");
+      return;
     }
-  };
-  const handleAddEmployee = async () => {
+
     try {
-      const formData = new FormData();
-      formData.append('firstNameFr', firstNameFr);
-      formData.append('firstNameAr', firstNameAr);
-      formData.append('lastNameFr', lastNameFr);
-      formData.append('lastNameAr', lastNameAr);
-      formData.append('email', email);
-      formData.append('password', password);
-      formData.append('phone', phone);
-      formData.append('ppr', ppr);
-      formData.append('cin', cin);
-      formData.append('addressFr', addressFr);
-      formData.append('addressAr', addressAr);
-      formData.append('hireDate', hireDate);
-      formData.append('workLocationFr', workLocationFr);
-      formData.append('workLocationAr', workLocationAr);
-      formData.append('postId', postId);
-      formData.append('gradeId', gradeId); 
-      formData.append('filiereId', filiereId);
-      formData.append('profileId', 1);
-
-      if(image !== null){
-        formData.append('image', image)
-    }
-
-    await axios({
-          method: 'post',
-          url: 'http://localhost:8093/employee/save',
-          data: formData
-    }).then((response) => {
-          console.log(response.data)
-          window.location.reload();
-    })
+      const response = await axios.post(`http://localhost:8093/employee/updatePassword/${userId}`, {
+        oldPassword,
+        newPassword
+      });
+      
+      alert(response.data);
+      props.onHide(); // Hide modal on success
     } catch (error) {
-      console.error('Error adding employee:', error);
+      alert(error.response.data || 'An error occurred');
     }
   };
 
-
- 
-
-
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >  
-        <Modal.Body>
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
-              <h4 className='text-center text-xl'> تغيير كلمة المرور </h4>
-              </CardHeader>
-              <CardBody>
-                <Form>
-                  
-                  <div className="pl-lg-4">
-                    <Row>
-                  
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور القديمة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                            id="input-address"
-                            placeholder="كلمة المرور القديمة"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور الجديدة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور الجديدة"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col md="12">
-                        <FormGroup className="text-right" >
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
-                            كلمة المرور الجديدة 
-                          </label>
-                          <Input
-                            className="form-control-alternative text-right"
-                           
-                            id="input-address"
-                            placeholder="كلمة المرور الجديدة"
-                            type="text"
-                          />
-                        </FormGroup>
-                        <Col className="text-right" xs="12">
-                    
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >  
+      <Modal.Body>
+        <Card className="bg-secondary shadow">
+          <CardHeader className="bg-white border-0">
+            <h4 className='text-center text-xl'>تغيير كلمة المرور</h4>
+          </CardHeader>
+          <CardBody>
+            <Form>
+              <div className="pl-lg-4">
+                <Row>
+                  <Col md="12">
+                    <FormGroup className="text-right">
+                      <label className="form-control-label" htmlFor="old-password">كلمة المرور القديمة</label>
+                      <Input
+                        className="form-control-alternative text-right"
+                        id="old-password"
+                        placeholder="كلمة المرور القديمة"
+                        type="password"
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
+                      />
+                    </FormGroup>
                   </Col>
-                      </Col>
-                    </Row>
-                    
-                  </div>
-                    </Row> 
-                  </div>
-                 
-                </Form>
-              </CardBody>
-            </Card>
-        </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center">
-          <Button onClick={props.onHide} color="warning">خروج</Button>
-          <Button variant="primary" 
-          color="primary" onClick={handleAddEmployee}>
-           حفظ
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  };
-  export default ChangePass;
+                  <Col md="12">
+                    <FormGroup className="text-right">
+                      <label className="form-control-label" htmlFor="new-password">كلمة المرور الجديدة</label>
+                      <Input
+                        className="form-control-alternative text-right"
+                        id="new-password"
+                        placeholder="كلمة المرور الجديدة"
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="12">
+                    <FormGroup className="text-right">
+                      <label className="form-control-label" htmlFor="confirm-password">تأكيد كلمة المرور الجديدة</label>
+                      <Input
+                        className="form-control-alternative text-right"
+                        id="confirm-password"
+                        placeholder="تأكيد كلمة المرور الجديدة"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </div>
+            </Form>
+          </CardBody>
+        </Card>
+      </Modal.Body>
+      <Modal.Footer className="d-flex justify-content-center">
+        <Button onClick={props.onHide} color="warning">خروج</Button>
+        <Button color="primary" onClick={handleSubmit}>حفظ</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
+export default ChangePass;

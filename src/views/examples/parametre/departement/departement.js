@@ -108,19 +108,15 @@ const Departments = () => {
                       <td >
 
                       <Media className="align-items-center">
-                          <a
-                            className="avatar avatar-sm rounded-circle mr-0" 
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
+                        
+                            <img    className="avatar avatar-sm rounded-circle" 
                               alt="..."
                               src={dept?.respDepartement?.image}
                             />
-                          </a>
+                         
                           <Media>
                             <span className="mb-0 text-sm" style={{marginRight:'15px'}}>
-                              {dept.respDepartement?.firstNameAr} {dept.respDepartement?.lastNameAr}{dept.idDepartement}
+                              {dept.respDepartement?.firstNameAr} {dept.respDepartement?.lastNameAr}
                             </span>
                           </Media>
                         </Media>

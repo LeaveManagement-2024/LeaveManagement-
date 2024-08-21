@@ -77,10 +77,10 @@ const AddPostModal = (props) => {
                         </label>
                         <Input
                           className="form-control-alternative text-left"
-                          id="postNameAr"
+                          id="postNameFr"
                           placeholder="Nom du poste "
                           type="text"
-                          value={postNameAr}
+                          value={postNameFr}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -92,10 +92,10 @@ const AddPostModal = (props) => {
                         </label>
                         <Input
                           className="form-control-alternative text-right"
-                          id="postNameFr"
+                          id="postNameAr"
                           placeholder="   اسم المهمة"
                           type="text"
-                          value={postNameFr}
+                          value={postNameAr}
                           onChange={handleChange}
                         /> 
                       </FormGroup>

@@ -117,7 +117,7 @@ const Posts = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetPostById(post.idP)}
+                              onClick={() => handleGetPostById(post.idPost)}
                             >
                               عرض
                             </DropdownItem>
@@ -132,7 +132,7 @@ const Posts = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeletePost(post.idP)}
+                              onClick={() => handleDeletePost(post.idPost)}
                             >
                               حذف
                             </DropdownItem>

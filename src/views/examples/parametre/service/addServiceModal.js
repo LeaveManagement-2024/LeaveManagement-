@@ -27,7 +27,7 @@ const AddServiceModal = (props) => {
   const [serviceNameFr, setServiceNameFr] = useState('');
   const [serviceNameAr, setServiceNameAr] = useState('');
   const [idDepartment, setIdDepartment,] = useState('');  
-  const [respServiceId,setRespServiceId] = useState('')
+  const [respServiceId,setRespServiceId] = useState(0)
   const [departements,setDepartements] = useState([]);
   const [employees, setEmployees] = useState([]);
   useEffect(() => {  

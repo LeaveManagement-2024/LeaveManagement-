@@ -119,12 +119,11 @@ const Employees = () => {
                   <tr>
                     <th scope="col">الاسم الكامل</th>
                     <th scope="col">الاطار</th>
-                    <th scope="col">الشعبة</th>
                     <th scope="col">رقم البطاقة الوطنية</th>
                     <th scope="col">البريد الإلكتروني</th>
                     <th scope="col">الهاتف</th>
                     <th scope="col">العنوان الشخصي</th>
-                    <th scope="col">الإجراءات</th>
+                    <th scope="col">الإعدادات</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
@@ -133,16 +132,12 @@ const Employees = () => {
     <tr key={emp.idE}>
                       <th scope="row">
                         <Media className="align-items-center">
-                          <a
-                            className="avatar rounded-circle mr-3"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
+                         
+                            <img  className="avatar rounded-circle mr-3"
                               alt="..."
                               src={emp.image}
                             />
-                          </a>
+                          
                           <Media>
                             <span className="mb-0 text-sm mx-3">
                               {emp.firstNameAr} {emp.lastNameAr}
@@ -151,7 +146,7 @@ const Employees = () => {
                         </Media>
                       </th>
                       <td>{emp?.grade?.gradeNameAr}</td>
-                      <td>{emp?.filiere?.filiereNameAr}</td>
+                    
                       <td>
                         {emp.cin}
                       </td>

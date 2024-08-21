@@ -52,7 +52,7 @@ const AnnualLeave= () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <h3 className="mb-0 text-lg text-center"> العطل السنوية</h3>
                   <Button color="primary" >
-                    إضافة موظف
+                    إضافة عطلة سنوية
                   </Button>
                 </div>
               </CardHeader>

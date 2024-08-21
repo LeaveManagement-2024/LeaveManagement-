@@ -108,16 +108,12 @@ const Services = () => {
                       <td >
 
                       <Media className="align-items-center">
-                          <a
-                            className="avatar avatar-sm rounded-circle mr-0" 
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
+                          
+                            <img  className="avatar avatar-sm rounded-circle mr-0" 
                               alt="..."
                               src={service?.respService?.image}
                             />
-                          </a>
+                        
                           <Media>
                             <span className="mb-0 text-sm" style={{marginRight:'15px'}}>
                               {service?.respService?.firstNameAr} {service?.respService?.lastNameAr}

@@ -21,7 +21,7 @@ import {
 const AddDepartmentModal = (props) => {
   const [departementNameFr, setDepartementNameFr] = useState('');
   const [departementNameAr, setDepartementNameAr] = useState('');
-  const [respDepartementId,setRespDepartementId] =useState('');
+  const [respDepartementId,setRespDepartementId] =useState(0);
   const [employees, setEmployees] = useState([]);
   const [headOfDepartment, setHeadOfDepartment] = useState('');
 

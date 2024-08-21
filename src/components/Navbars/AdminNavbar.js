@@ -96,12 +96,12 @@ const AdminNavbar = (props) => {
                         {employee.lastNameAr}  {employee.firstNameAr}
                     </span>
                   </Media>
-                  <span className="avatar avatar-md rounded-circle">
-                    <img
+                 
+                    <img className="avatar avatar-md rounded-circle"  style={{height:'47px'}}
                       alt="..."
                       src={employee.image}
                     />
-                  </span>
+                 
                   
                 </Media>
               </DropdownToggle>

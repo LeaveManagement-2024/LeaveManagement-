@@ -16,14 +16,9 @@ import UserHeader from "components/Headers/UserHeader.js";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  loginEmployee,
-  addEmployee,
-  getAllEmployees,
   getEmployeeById,
-  updateEmployee,
-  deleteEmployee,
-  getManagerByIdEmp,
-  getResponsibleByIdEmp
+  getFilirerByEmployee
+ 
 } from '../Employess/employeeApi'; 
 import '../style.css';
 import Parametre from './Para';
@@ -32,9 +27,10 @@ const Profile = () => {
   const userId = localStorage.getItem('userId');
   const [employee, setEmployee] = useState({});
   const [modalShow, setModalShow] = useState(false);
-
+  const [filiereE,setFiliereE]=useState({});
   useEffect(() => {
     fetchEmployee();
+    fetchFiliereEmployee();
   }, []);
   
   const fetchEmployee = async () => {
@@ -43,6 +39,13 @@ const Profile = () => {
       setEmployee(data);
     } catch (error) {
       console.error('Error fetching employee:', error);
+    }
+  };const fetchFiliereEmployee = async () => {
+    try {
+      const data = await getFilirerByEmployee(userId);
+      setFiliereE(data);
+    } catch (error) {
+      console.error('Error fetching employee filiere :', error);
     }
   };
   return (
@@ -59,8 +62,8 @@ const Profile = () => {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
-                        className="rounded-circle"
-                        src={employee?.filiere?.service?.departement?.respDepartement?.image}
+                        className="rounded-circle" style={{height:'180px'}}
+                        src={filiereE?.service?.departement?.respDepartement?.image}
                       />
                     </a>
                   </div>
@@ -79,8 +82,8 @@ const Profile = () => {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                      
                       <div className=" text-right">
-                        <span className="heading ">   القسم : {employee?.filiere?.service?.departement?.departementNameAr}</span>
-                        <span className="heading ">رئيس القسم : {employee?.filiere?.service?.departement?.respDepartement?.firstNameAr} {employee?.filiere?.service?.departement?.respDepartement?.lastNameAr}</span>
+                        <span className="heading ">   القسم : {filiereE?.service?.departement?.departementNameAr}</span>
+                        <span className="heading ">رئيس القسم : {filiereE?.service?.departement?.respDepartement?.firstNameAr} {filiereE?.service?.departement?.respDepartement?.lastNameAr}</span>
                         
                       </div>
                       
@@ -97,7 +100,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <h4>
-                    {employee?.filiere?.service?.departement?.respDepartement?.email}
+                    {filiereE.service?.departement?.respDepartement?.email}
                     </h4>
                   </div>
                   <hr className="my-2" />
@@ -108,7 +111,7 @@ const Profile = () => {
                   </div>                 
                   <div>  
                     <h4> 
-                    {employee?.filiere?.service?.departement?.respDepartement?.phone}
+                    {filiereE.service?.departement?.respDepartement?.phone}
                     </h4>
                   </div> 
                   
@@ -124,8 +127,8 @@ const Profile = () => {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
-                        className="rounded-circle"
-                        src={employee?.filiere?.service?.respService?.image}
+                        className="rounded-circle" style={{height:'180px'}}
+                        src={filiereE.service?.respService?.image}
                       />
                     </a>
                   </div>
@@ -144,8 +147,8 @@ const Profile = () => {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                      
                       <div className=" text-right">
-                        <span className="heading ">   المصلحة : {employee?.filiere?.service?.serviceNameAr}</span>
-                        <span className="heading ">رئيس المصلحة : {employee?.filiere?.service?.respService?.firstNameAr} {employee?.filiere?.service?.respService?.lastNameAr}</span>
+                        <span className="heading ">   المصلحة : {filiereE?.service?.serviceNameAr}</span>
+                        <span className="heading ">رئيس المصلحة : {filiereE?.service?.respService?.firstNameAr} {filiereE.service?.respService?.lastNameAr}</span>
                         
                       </div>
                       
@@ -161,7 +164,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <h4>
-                      {employee?.filiere?.service?.respService?.email}
+                      {filiereE?.service?.respService?.email}
                     </h4>
                   </div>
                   <hr className="my-2" />
@@ -172,7 +175,7 @@ const Profile = () => {
                   </div>                 
                   <div>  
                     <h4> 
-                      {employee?.filiere?.service?.respService?.phone}
+                      {filiereE?.service?.respService?.phone}
                     </h4>
                   </div> 
                   
@@ -191,7 +194,7 @@ const Profile = () => {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       <img
                         alt="..."
-                        className="rounded-circle"
+                        className="rounded-circle" style={{height:'180px'}}
                         src={employee.image}
                       />
                     </a>
@@ -438,7 +441,7 @@ const Profile = () => {
                             id="input-city"
                             placeholder="المهمة"
                             type="text"
-                            defaultValue={employee?.filiere?.service?.serviceNameAr}
+                            defaultValue={filiereE?.service?.serviceNameAr}
                             disabled
                           />
                         </FormGroup>
@@ -453,7 +456,7 @@ const Profile = () => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            defaultValue={employee?.filiere?.service?.departement?.departementNameAr}
+                            defaultValue={filiereE?.service?.departement?.departementNameAr}
                             id="input-country"
                             placeholder="الشعبة"
                             type="text"
@@ -492,7 +495,7 @@ const Profile = () => {
                           </label>
                           <Input 
                             className="form-control-alternative text-right"
-                            defaultValue={employee?.filiere?.filiereNameAr}
+                            defaultValue={filiereE?.filiereNameAr}
                             id="input-country"
                             placeholder="الشعبة"
                             type="text"
