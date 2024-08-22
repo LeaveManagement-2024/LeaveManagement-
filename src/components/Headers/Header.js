@@ -57,11 +57,11 @@ const Header = () => {
                       </div>
                     </Col>
                     <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                        الموظفون في رخصة اليوم :
+                      <CardTitle tag="h5" className="text-uppercase  mb-0 text-lg">
+                       الموظفون في رخصة :  {employeesOnLeaveToday}
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">
-                        {employeesOnLeaveToday}
+                      <span className="h2  mb-0">
+                      
                       </span>
                     </div>
                   </Row>
@@ -80,7 +80,7 @@ const Header = () => {
                     </Col>
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                         الرخص التي لم يتم الموافقة عليها :
+                         رخص في الانتظار :
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
                         {unconfirmedLeaves}
@@ -102,7 +102,7 @@ const Header = () => {
                     </Col>
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                        عدد الموظفين :
+                       رخص  يوم الغد :
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
                         الجدد: {countNewEmployees}
@@ -126,7 +126,7 @@ const Header = () => {
                     </Col>
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                        عدد طلبات الرخص الجديدة
+                         الملتحقون لهذا اليوم : 
                       </CardTitle>
                       <span className="h2 font-weight-bold mb-0">
                         {newLeaveRequests} 

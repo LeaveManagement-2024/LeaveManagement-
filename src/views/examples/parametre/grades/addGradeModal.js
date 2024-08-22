@@ -18,7 +18,8 @@ const AddGradeModal = (props) => {
 
   const [gradeNameFr, setGradeNameFr] = useState('');
   const [gradeNameAr, setGradeNameAr] = useState('');
- 
+  const [errors, setErrors] = useState({}); // State to track validation errors
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
@@ -32,8 +33,22 @@ const AddGradeModal = (props) => {
         break;
     }
   };
+  const validateForm = () => {
+    const newErrors = {};
+    if (!gradeNameAr) newErrors.gradeNameAr = 'اسم الإطار مطلوب ';
+    if (!gradeNameFr) newErrors.gradeNameFr = 'Le nom du grade est obligatoire   ';
+ 
+    
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
 
   const handleAddGrade = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       const gradeData = {
         gradeNameFr,
@@ -80,7 +95,11 @@ const AddGradeModal = (props) => {
                         value={gradeNameAr}
                         onChange={handleChange}
                         type="text"
+                        
                       />
+                      {errors.gradeNameAr && (
+                        <div className="text-danger">{errors.gradeNameAr}</div>
+                      )}
                     </FormGroup>
                   </Col>
                 </Row>
