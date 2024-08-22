@@ -18,60 +18,60 @@ import {
   Button,
   CardBody,
 } from "reactstrap";
-import AddProfileModal from './addProfileModal';
-import EditProfileModal from './editProfileModal';
+import AddLeaveTypeModal from './addLeaveTypeModal'; // Import the AddLeaveTypeModal component
+import EditLeaveTypeModal from './editLeaveTypeModal'; // Import the EditLeaveTypeModal component
 import Header from "components/Headers/Header.js";
 import {
-  getAllProfiles,
-  getProfileById,
-  deleteProfile,
-} from './profileApi'; 
+  getAllLeaveTypes,
+  getLeaveTypeById,
+  deleteLeaveType,
+} from './leaveTypesApi'; // Assuming you have an API utility for leave types
 
-const Profiles = () => {
-  const [profiles, setProfiles] = useState([]);
-  const [profile, setProfile] = useState({});
+const LeaveTypes = () => {
+  const [leaveTypes, setLeaveTypes] = useState([]);
+  const [leaveType, setLeaveType] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [message, setMessage] = useState('');
   const [modalShow, setModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
-  const [editProfile, setEditProfile] = useState([])
+  const [editLeaveType, setEditLeaveType] = useState({})
 
   useEffect(() => {
-    fetchAllProfiles();
-  }, [profile]);
+    fetchAllLeaveTypes();
+  }, [leaveType]);
 
-  const fetchAllProfiles = async () => {
+  const fetchAllLeaveTypes = async () => {
     try {
-      const data = await getAllProfiles();
-      setProfiles(data);
+      const data = await getAllLeaveTypes();
+      setLeaveTypes(data);
     } catch (error) {
-      console.error('Error fetching profiles:', error);
+      console.error('Error fetching leave types:', error);
     }
   };
 
-  const handleGetProfileById = async (idProfile) => {
+  const handleGetLeaveTypeById = async (idLT) => {
     try {
-      const data = await getProfileById(idProfile);
-      setProfile(data);
+      const data = await getLeaveTypeById(idLT);
+      setLeaveType(data);
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.error('Error fetching leave type:', error);
     }
   };
 
-  const handleDeleteProfile = async (idProfile) => {
+  const handleDeleteLeaveType = async (idLT) => {
     try {
-      await deleteProfile(idProfile);
-      setMessage('تم حذف الملف الشخصي بنجاح');
-      fetchAllProfiles(); // Refresh the list
+      await deleteLeaveType(idLT);
+      setMessage('تم حذف نوع الإجازة بنجاح');
+      fetchAllLeaveTypes(); // Refresh the list
     } catch (error) {
-      console.error('Error deleting profile:', error);
+      console.error('Error deleting leave type:', error);
     }
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = profiles.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = leaveTypes.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -84,24 +84,25 @@ const Profiles = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة صفة 
+                    إضافة نوع إجازة
                   </Button>
-                  <AddProfileModal show={modalShow} onHide={() => setModalShow(false)}></AddProfileModal>
-                  <h3 className="mb-0">جدول الصفات </h3>
+                  <AddLeaveTypeModal show={modalShow} onHide={() => setModalShow(false)}></AddLeaveTypeModal>
+                  <h3 className="mb-0">جدول أنواع الإجازة</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
-                <thead className="thead-light text-center">
-                  <tr>
-                    <th scope="col"  className='text-lg' > اسم الصفة</th>
-                    <th scope="col" className='text-lg' > الإعدادات </th>
-
+                <thead className="thead-light text-center text-lg">
+                  <tr className=''>
+                    <th scope="col" className='text-lg'>اسم نوع الإجازة</th>
+                    <th scope="col" className="text-lg text-uppercase">Nom du type de congé</th>
+                    <th scope="col" className='text-lg'>الإعدادات</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  {currentItems.map((profile) => (
-                    <tr key={profile.idProfile}>
-                      <td>{profile.profileName}</td>
+                  {currentItems.map((lt) => (
+                    <tr key={lt.idLeaveType}>
+                      <td>{lt.leaveTypeNameAr}</td>
+                      <td>{lt.leaveTypeNameFr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -116,22 +117,22 @@ const Profiles = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetProfileById(profile.idProfile)}
+                              onClick={() => handleGetLeaveTypeById(lt.idLeaveType)}
                             >
                               عرض
                             </DropdownItem>
                             <DropdownItem
-                              onClick={() => { setEditModalShow(true); setEditProfile(profile); }}
+                              onClick={() => { setEditModalShow(true); setEditLeaveType(lt); }}
                             >
                               تعديل
                             </DropdownItem>
-                            <EditProfileModal 
+                            <EditLeaveTypeModal 
                               show={editModalShow}
-                              profile={editProfile} 
+                              leaveType={editLeaveType} 
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteProfile(profile.idProfile)}
+                              onClick={() => handleDeleteLeaveType(lt.idLeaveType)}
                             >
                               حذف
                             </DropdownItem>
@@ -158,7 +159,7 @@ const Profiles = () => {
                         <span className="sr-only">السابق</span>
                       </PaginationLink>
                     </PaginationItem>
-                    {Array.from({ length: Math.ceil(profiles.length / itemsPerPage) }, (_, i) => (
+                    {Array.from({ length: Math.ceil(leaveTypes.length / itemsPerPage) }, (_, i) => (
                       <PaginationItem key={i + 1} className={currentPage === i + 1 ? 'active' : ''}>
                         <PaginationLink
                           href="#pablo"
@@ -168,7 +169,7 @@ const Profiles = () => {
                         </PaginationLink>
                       </PaginationItem>
                     ))}
-                    <PaginationItem className={currentPage === Math.ceil(profiles.length / itemsPerPage) ? 'disabled' : ''}>
+                    <PaginationItem className={currentPage === Math.ceil(leaveTypes.length / itemsPerPage) ? 'disabled' : ''}>
                       <PaginationLink
                         href="#pablo"
                         onClick={(e) => { e.preventDefault(); paginate(currentPage + 1); }}
@@ -188,4 +189,4 @@ const Profiles = () => {
   );
 };
 
-export default Profiles;
+export default LeaveTypes;

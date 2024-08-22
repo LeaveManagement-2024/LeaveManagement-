@@ -53,6 +53,7 @@ const AddEmployeeModal = (props) => {
   const [grades, setGrades] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filieres, setFilieres] = useState([]);
+  const [errors, setErrors] = useState({}); // State to track validation errors
 
 
 
@@ -88,7 +89,7 @@ const AddEmployeeModal = (props) => {
     fetchFilieres();
   }, []);
 
-
+ 
   const handleChange = (e) => {
     const { id, value, type, files } = e.target;
     if (type === 'file') {
@@ -152,7 +153,37 @@ const AddEmployeeModal = (props) => {
       }
     }
   };
+
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!firstNameFr) newErrors.firstNameFr = 'Le prénom est obligatoire';
+    if (!firstNameAr) newErrors.firstNameAr = ' الاسم الشخصي مطلوب ';
+    if (!lastNameFr) newErrors.lastNameFr = 'Le nom est obligatoire';
+    if (!lastNameAr) newErrors.lastNameAr = ' الاسم العائلي مطلوب ';
+    if (!email) newErrors.email = 'البريد الالكتروني مطلوب';
+    if (!password) newErrors.password = 'كلمة المرور مطلوبة';
+    if (!phone) newErrors.phone = 'رقم الهاتف مطلوب';
+    if (!ppr) newErrors.ppr = 'رقم التاجير مطلوب';
+    if (!cin) newErrors.cin = 'رقم البطاقة الوطنية مطلوب';
+    if (!addressFr) newErrors.addressFr = 'L\'adresse est obligatoire';
+    if (!addressAr) newErrors.addressAr = 'العنوان مطلوب';
+    if (!hireDate) newErrors.hireDate = 'تاريخ التوظيف مطلوب';
+    if (!workLocationFr) newErrors.workLocationFr = 'Le lieu de travail est obligatoire';
+    if (!workLocationAr) newErrors.workLocationAr = 'مقر العمل مطلوب';
+    if (!postId) newErrors.postId = 'المهمة مطلوبة';
+    if (!gradeId) newErrors.gradeId = 'الرتبة مطلوبة';
+    if (!filiereId) newErrors.filiereId = 'الشعبة مطلوبة';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleAddEmployee = async () => {
+
+    if (!validateForm()) {
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append('firstNameFr', firstNameFr);
@@ -229,6 +260,9 @@ const AddEmployeeModal = (props) => {
                             onChange={handleChange}
                             type="text"
                           />
+                          {errors.lastNameAr && (
+                        <div className="text-danger">{errors.lastNameAr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                       <Col lg="6">    
@@ -247,6 +281,9 @@ const AddEmployeeModal = (props) => {
                             placeholder="الاسم الشخصي"
                             type="text"
                           /> 
+                          {errors.firstNameAr && (
+                            <div className="text-danger">{errors.firstNameAr}</div>
+                          )}
                         </FormGroup>
                       </Col>
                      
@@ -269,7 +306,11 @@ const AddEmployeeModal = (props) => {
                             value={cin}
                             onChange={handleChange}
                           />
+                          {errors.cin && (
+                            <div className="text-danger">{errors.cin}</div>
+                          )}
                         </FormGroup>
+                      
                       </Col>
                       <Col lg="6">
                         <FormGroup className="text-right">
@@ -287,6 +328,9 @@ const AddEmployeeModal = (props) => {
                             value={email}
                             onChange={handleChange}
                           />
+                        {errors.email && (
+                        <div className="text-danger">{errors.email}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>
@@ -309,6 +353,9 @@ const AddEmployeeModal = (props) => {
                             onChange={handleChange}
 
                           />
+                        {errors.phone && (
+                        <div className="text-danger">{errors.phone}</div>
+                      )}
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -327,6 +374,9 @@ const AddEmployeeModal = (props) => {
                             value={addressAr}
                             onChange={handleChange}
                           />
+                        {errors.addressAr && (
+                        <div className="text-danger">{errors.addressAr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>
@@ -354,6 +404,9 @@ const AddEmployeeModal = (props) => {
                             value={lastNameFr}
                             onChange={handleChange}
                           />
+                       {errors.lastNameFr && (
+                        <div className="text-danger">{errors.lastNameFr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                       <Col lg="6">    
@@ -373,6 +426,9 @@ const AddEmployeeModal = (props) => {
                             value={firstNameFr}
                             onChange={handleChange}
                           /> 
+                       {errors.firstNameFr && (
+                        <div className="text-danger">{errors.firstNameFr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                      
@@ -400,6 +456,9 @@ const AddEmployeeModal = (props) => {
                             value={addressFr}
                             onChange={handleChange}
                               />
+                      {errors.addressFr && (
+                        <div className="text-danger">{errors.addressFr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>
@@ -438,7 +497,10 @@ const AddEmployeeModal = (props) => {
                             {grade.gradeNameAr}
                           </option>
                         ))}</Input>
-                        </FormGroup>
+                        {errors.gradeId && (
+        <div className="text-danger">{errors.gradeId}</div>
+    )}
+</FormGroup>
                       </Col>
                     </Row>
                     <Row>
@@ -462,6 +524,9 @@ const AddEmployeeModal = (props) => {
                         
                             
                           />
+                        {errors.ppr && (
+                        <div className="text-danger">{errors.ppr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                       <Col lg="4">
@@ -480,6 +545,9 @@ const AddEmployeeModal = (props) => {
                             onChange={handleChange}
                             type="date"
                           />
+                        {errors.hireDate && (
+                        <div className="text-danger">{errors.hireDate}</div>
+                      )}
                         </FormGroup>
                       </Col>
                       <Col lg="4">
@@ -498,6 +566,9 @@ const AddEmployeeModal = (props) => {
                             value={workLocationAr}
                             onChange={handleChange}
                           />
+                        {errors.workLocationAr && (
+                        <div className="text-danger">{errors.workLocationAr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>
@@ -526,7 +597,13 @@ const AddEmployeeModal = (props) => {
                             {post.postNameAr}
                           </option>
                         ))}</Input>
-                        </FormGroup>
+                        {errors.postNameAr && (
+                        <div className="text-danger">{errors.postNameAr}</div>
+                      )}
+                      {errors.postId && (
+        <div className="text-danger">{errors.postId}</div>
+    )}
+</FormGroup>
                       </Col>
                       <Col lg="6">
                         <FormGroup className="text-right">
@@ -552,7 +629,10 @@ const AddEmployeeModal = (props) => {
                             {filiere.filiereNameAr}
                           </option>
                         ))}</Input>
-                        </FormGroup>
+                        {errors.filiereId && (
+        <div className="text-danger">{errors.filiereId}</div>
+    )}
+</FormGroup>
                       </Col>
                       
                       
@@ -581,6 +661,9 @@ const AddEmployeeModal = (props) => {
                             onChange={handleChange}
 
                           />
+                        {errors.workLocationFr && (
+                        <div className="text-danger">{errors.workLocationFr}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>
@@ -607,6 +690,9 @@ const AddEmployeeModal = (props) => {
                             placeholder="كلمة المرور "
                             type="password"
                           />
+                        {errors.password && (
+                        <div className="text-danger">{errors.password}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>     
