@@ -15,14 +15,9 @@ import {
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import {
-  loginEmployee,
-  addEmployee,
-  getAllEmployees,
+  getFilirerByEmployee,
   getEmployeeById,
-  updateEmployee,
-  deleteEmployee,
-  getManagerByIdEmp,
-  getResponsibleByIdEmp
+ 
 } from './employeeApi'; 
 import {getAllGrades} from '../parametre/grades/gradesApi'
 import{getAllPosts} from'../parametre/posts/postApi'
@@ -55,6 +50,7 @@ const EditEmployeeModal = (props) => {
   const [grades, setGrades] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filieres, setFilieres] = useState([]);
+ 
 
   const navigate = useNavigate();
 
@@ -68,6 +64,7 @@ const EditEmployeeModal = (props) => {
         console.error('Erreur lors de la récupération des grades:', error);
       }
     };
+    
     const fetchPosts = async () => {
       try {
         const postsData = await getAllPosts();
@@ -89,9 +86,18 @@ const EditEmployeeModal = (props) => {
     fetchFilieres();
     if (props.empl && props.empl.idE) {
       fetchEmployee();
+      fetchFilierEmployee(props.empl.idE)
     }
   }, [props.empl.idE]);
 
+  const fetchFilierEmployee = async (id) => {
+    try {
+      const filiereEmData = await getFilirerByEmployee(id);
+     setFiliereId(filiereEmData.idFiliere);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des filier de lemployee', error);
+    }
+  };
 
   const handleChange = (e) => {
     
@@ -159,28 +165,7 @@ const EditEmployeeModal = (props) => {
       }
     }
   };
-  const validateForm = () => {
-    const newErrors = {};
-    if (!firstNameFr) newErrors.firstNameFr = 'Le prénom est obligatoire';
-    if (!firstNameAr) newErrors.firstNameAr = ' الاسم الشخصي مطلوب ';
-    if (!lastNameFr) newErrors.lastNameFr = 'Le nom est obligatoire';
-    if (!lastNameAr) newErrors.lastNameAr = ' الاسم العائلي مطلوب ';
-    if (!email) newErrors.email = 'البريد الالكتروني مطلوب';
-    if (!password) newErrors.password = 'كلمة المرور مطلوبة';
-    if (!phone) newErrors.phone = 'رقم الهاتف مطلوب';
-    if (!ppr) newErrors.ppr = 'رقم التاجير مطلوب';
-    if (!cin) newErrors.cin = 'رقم البطاقة الوطنية مطلوب';
-    if (!addressFr) newErrors.addressFr = 'L\'adresse est obligatoire';
-    if (!addressAr) newErrors.addressAr = 'العنوان مطلوب';
-    if (!hireDate) newErrors.hireDate = 'تاريخ التوظيف مطلوب';
-    if (!workLocationFr) newErrors.workLocationFr = 'Le lieu de travail est obligatoire';
-    if (!workLocationAr) newErrors.workLocationAr = 'مقر العمل مطلوب';
-    if (!gradeId) newErrors.gradeId = 'الرتبة مطلوبة';
-    
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+ 
   const handleAddEmployee = async () => {
     try {
       const formData = new FormData();
@@ -273,7 +258,7 @@ const EditEmployeeModal = (props) => {
                       <Col lg="6">
                         <FormGroup className="text-right">
                           <label
-                            className="form-control-label"ك
+                            className="form-control-label"
                             htmlFor="input-first-name"
                           >
                             الاسم العائلي
@@ -636,9 +621,7 @@ const EditEmployeeModal = (props) => {
                             placeholder=" Votre lieu de travail "
                             type="text"
                             onChange={handleChange}
-                            {errors.hireDate && (
-                        <div className="text-danger">{errors.hireDate}</div>
-                      )}
+                            
                           />
                         </FormGroup>
                       </Col>

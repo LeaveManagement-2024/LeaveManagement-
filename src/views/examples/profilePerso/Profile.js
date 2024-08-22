@@ -22,11 +22,14 @@ import {
 } from '../Employess/employeeApi'; 
 import '../style.css';
 import Parametre from './Para';
+import ChangeImage from './changeImage';
+import ChangePass from './changePasswordP';
 
 const Profile = () => {
   const userId = localStorage.getItem('userId');
   const [employee, setEmployee] = useState({});
   const [modalShow, setModalShow] = useState(false);
+  const [modalShow1, setModalShow1] = useState(false);
   const [filiereE,setFiliereE]=useState({});
   useEffect(() => {
     fetchEmployee();
@@ -59,7 +62,7 @@ const Profile = () => {
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    <a href="#pablo">
                       <img
                         alt="..."
                         className="rounded-circle" style={{height:'180px'}}
@@ -191,13 +194,14 @@ const Profile = () => {
             <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    <a href="#pablo"  onClick={() => setModalShow1(true)}>
                       <img
                         alt="..."
                         className="rounded-circle" style={{height:'180px'}}
                         src={employee.image}
                       />
                     </a>
+                    <ChangeImage show={modalShow1} onHide={() => setModalShow1(false)}></ChangeImage>
                   </div>
                   
                 </Col>
@@ -215,9 +219,9 @@ const Profile = () => {
                       onClick={() => setModalShow(true)}
                       size="sm"
                     >
-                      الإعدادات
+                      تغيير كلمة المرور
                     </Button>
-                    <Parametre show={modalShow} onHide={() => setModalShow(false)}></Parametre>
+                    <ChangePass show={modalShow} onHide={() => setModalShow(false)}></ChangePass>
                   </Col>
                 </Row>
               </CardHeader>
