@@ -25,6 +25,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 // core components
 import Header from "components/Headers/Header.js";
 import AddLeaveModal from './addLeaveModal';
+import AddLeavePersonModal from './addLeavePersonModal';
 import EditLeaveModal from './editLeaveModal '
 import {
   getAllLeavesByEmployee,
@@ -126,7 +127,7 @@ const Leave = () => {
                   <Button color="primary" onClick={() => setModalShow(true)}>
                     طلب رخصة
                   </Button>
-                  <AddLeaveModal show={modalShow} onHide={() => setModalShow(false)} />
+                  <AddLeavePersonModal show={modalShow} onHide={() => setModalShow(false)} />
                   <h3 className="mb-0">جدول الرخص</h3>
                 </div>
               </CardHeader>

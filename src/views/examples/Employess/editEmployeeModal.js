@@ -165,10 +165,9 @@ const EditEmployeeModal = (props) => {
       }
     }
   };
-<<<<<<< HEAD
+
  
-=======
->>>>>>> fe0e0cf375cd32f17aae6db5c303c95f9612a677
+
   const handleAddEmployee = async () => {
     try {
       const formData = new FormData();
@@ -624,11 +623,6 @@ const EditEmployeeModal = (props) => {
                             placeholder=" Votre lieu de travail "
                             type="text"
                             onChange={handleChange}
-<<<<<<< HEAD
-                            
-=======
-
->>>>>>> fe0e0cf375cd32f17aae6db5c303c95f9612a677
                           />
                         </FormGroup>
                       </Col>
