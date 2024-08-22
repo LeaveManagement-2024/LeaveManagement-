@@ -171,9 +171,8 @@ const AddEmployeeModal = (props) => {
     if (!hireDate) newErrors.hireDate = 'تاريخ التوظيف مطلوب';
     if (!workLocationFr) newErrors.workLocationFr = 'Le lieu de travail est obligatoire';
     if (!workLocationAr) newErrors.workLocationAr = 'مقر العمل مطلوب';
-    if (!postId) newErrors.postId = 'المهمة مطلوبة';
     if (!gradeId) newErrors.gradeId = 'الرتبة مطلوبة';
-    if (!filiereId) newErrors.filiereId = 'الشعبة مطلوبة';
+    
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -600,9 +599,7 @@ const AddEmployeeModal = (props) => {
                         {errors.postNameAr && (
                         <div className="text-danger">{errors.postNameAr}</div>
                       )}
-                      {errors.postId && (
-        <div className="text-danger">{errors.postId}</div>
-    )}
+                     
 </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -629,9 +626,8 @@ const AddEmployeeModal = (props) => {
                             {filiere.filiereNameAr}
                           </option>
                         ))}</Input>
-                        {errors.filiereId && (
-        <div className="text-danger">{errors.filiereId}</div>
-    )}
+                       
+
 </FormGroup>
                       </Col>
                       

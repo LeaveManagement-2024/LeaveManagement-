@@ -66,7 +66,7 @@ const EditLeaveTypeModal = (props) => {
 
   return (
     <Modal
-      {...props}
+      {...props}     
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
