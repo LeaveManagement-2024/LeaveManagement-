@@ -16,17 +16,14 @@ import {
 
 const AddLeaveTypeModal = (props) => {
 
-  const [leaveTypeNameFr, setLeaveTypeNameFr] = useState('');
-  const [leaveTypeNameAr, setLeaveTypeNameAr] = useState('');
+ 
+  const [name, setName] = useState('');
  
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'leaveTypeNameFr':
-        setLeaveTypeNameFr(value);
-        break;
-      case 'leaveTypeNameAr':
-        setLeaveTypeNameAr(value);
+      case 'name':
+        setName(value);
         break;
       default:
         break;
@@ -36,11 +33,10 @@ const AddLeaveTypeModal = (props) => {
   const handleAddLeaveType = async () => {
     try {
       const leaveTypeData = {
-        leaveTypeNameFr,
-        leaveTypeNameAr,
+        name,
       };
 
-      await axios.post('http://localhost:8093/leave_types/save', leaveTypeData)
+      await axios.post('http://localhost:8093/leaveTypes/save', leaveTypeData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();
@@ -74,9 +70,9 @@ const AddLeaveTypeModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="leaveTypeNameAr"
+                        id="name"
                         placeholder="اسم نوع الإجازة"
-                        value={leaveTypeNameAr}
+                        value={name}
                         onChange={handleChange}
                         type="text"
                       />
@@ -87,23 +83,7 @@ const AddLeaveTypeModal = (props) => {
               </div>
              
               <div className="pl-lg-4">
-                <Row>
-                  <Col lg="12">
-                    <FormGroup className="text-left">
-                      <label className="form-control-label" htmlFor="leaveTypeNameFr">
-                        Nom du type de congé
-                      </label>
-                      <Input
-                        className="form-control-alternative text-left"
-                        id="leaveTypeNameFr"
-                        placeholder="Nom du type de congé"
-                        value={leaveTypeNameFr}
-                        onChange={handleChange}
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
+                
                
               </div>
             </Form>

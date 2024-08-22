@@ -13,34 +13,39 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import{
+  getLeaveTypeById
+} from "./leaveTypeApi"
 
 const EditLeaveTypeModal = (props) => {
 
-  const [leaveTypeNameFr, setLeaveTypeNameFr] = useState('');
-  const [leaveTypeNameAr, setLeaveTypeNameAr] = useState('');
+  const [name, setName] = useState('');
+  const [LeaveType,setLeaveType]= useState('');
 
   useEffect(() => {
-    const fetchLeaveType = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8093/leave_types/${props.leaveType.idLeaveType}`);
-        const data = response.data;
-        setLeaveTypeNameFr(data.leaveTypeNameFr);
-        setLeaveTypeNameAr(data.leaveTypeNameAr);
-      } catch (error) {
-        console.error('Erreur lors de la récupération du type de congé:', error);
-      }
-    };
-    fetchLeaveType();
-  }, [props.leaveType.idLeaveType]);
+    fetchLeaveType(props.leaveType.leaveTypeId);
+  }, [props.leaveType.leaveTypeId]);
+
+
+  const fetchLeaveType = async (id) => {
+    if (!id) {
+      console.error('Error: LeaveType ID is undefined.');
+      return;
+    }
+    try {
+      const data = await getLeaveTypeById(id);
+      setLeaveType(data);
+      setName(data.name);
+    } catch (error) {
+      console.error('Error fetching LeaveType:', error);
+    }
+  };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'leaveTypeNameFr':
-        setLeaveTypeNameFr(value);
-        break;
-      case 'leaveTypeNameAr':
-        setLeaveTypeNameAr(value);
+      case 'name':
+        setName(value);
         break;
       default:
         break;
@@ -50,11 +55,10 @@ const EditLeaveTypeModal = (props) => {
   const handleUpdateLeaveType = async () => {
     try {
       const leaveTypeData = {
-        leaveTypeNameFr,
-        leaveTypeNameAr,
+       name
       };
 
-      await axios.put(`http://localhost:8093/leave_types/update/${props.leaveType.idLeaveType}`, leaveTypeData)
+      await axios.put(`http://localhost:8093/leaveTypes/update/${props.leaveType.leaveTypeId}`, leaveTypeData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();
@@ -74,7 +78,7 @@ const EditLeaveTypeModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل نوع الإجازة {props.leaveType.idLeaveType}</h4>
+            <h4 className='text-center text-xl'>تعديل نوع الإجازة {props.leaveType.leaveTypeId}</h4>
           </CardHeader>
           <CardBody>
             <Form>
@@ -90,29 +94,15 @@ const EditLeaveTypeModal = (props) => {
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="leaveTypeNameAr"
+                        id="name"
                         placeholder="اسم نوع الإجازة"
-                        value={leaveTypeNameAr}
+                        value={name}
                         onChange={handleChange}
                         type="text"
                       />
                     </FormGroup>
                   </Col>
-                  <Col lg="12">
-                    <FormGroup className="text-left">
-                      <label className="form-control-label" htmlFor="leaveTypeNameFr">
-                        Nom du type de congé
-                      </label>
-                      <Input
-                        className="form-control-alternative text-left"
-                        id="leaveTypeNameFr"
-                        placeholder="Nom du type de congé"
-                        value={leaveTypeNameFr}
-                        onChange={handleChange}
-                        type="text"
-                      />
-                    </FormGroup>
-                  </Col>
+                  
                 </Row>
               </div>
             </Form>
