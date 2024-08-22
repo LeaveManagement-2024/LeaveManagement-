@@ -32,7 +32,7 @@ import PublicHoliday from "views/examples/parametre/public_holiday/public_hollid
 import Profiles from "views/examples/parametre/profiles/profiles";
 import Index from "views/Index";
 import routes from "routes.js";
-
+import LeaveTypes from "views/examples/parametre/leave_type/leave_type"
 const Admin = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
@@ -92,6 +92,7 @@ const Admin = (props) => {
            <Route path="/services" element={<Services />} />
            <Route path="/public-holiday" element={<PublicHoliday />} />
            <Route path="/profiles" element={<Profiles />} />
+           <Route path="/leaveType" element={<LeaveTypes />} />
            <Route path="/index" element={<Index />} />
           <Route path="*" element={<Navigate to="/admin/index" replace />} />
         </Routes>

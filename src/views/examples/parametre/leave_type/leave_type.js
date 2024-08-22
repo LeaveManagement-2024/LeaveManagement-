@@ -25,7 +25,7 @@ import {
   getAllLeaveTypes,
   getLeaveTypeById,
   deleteLeaveType,
-} from './leaveTypesApi'; // Assuming you have an API utility for leave types
+} from './leaveTypeApi'; // Assuming you have an API utility for leave types
 
 const LeaveTypes = () => {
   const [leaveTypes, setLeaveTypes] = useState([]);
@@ -94,15 +94,15 @@ const LeaveTypes = () => {
                 <thead className="thead-light text-center text-lg">
                   <tr className=''>
                     <th scope="col" className='text-lg'>اسم نوع الإجازة</th>
-                    <th scope="col" className="text-lg text-uppercase">Nom du type de congé</th>
+                
                     <th scope="col" className='text-lg'>الإعدادات</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((lt) => (
                     <tr key={lt.idLeaveType}>
-                      <td>{lt.leaveTypeNameAr}</td>
-                      <td>{lt.leaveTypeNameFr}</td>
+                      <td>{lt.name}</td>
+                     
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -117,7 +117,7 @@ const LeaveTypes = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetLeaveTypeById(lt.idLeaveType)}
+                              onClick={() => handleGetLeaveTypeById(lt.leaveTypeId)}
                             >
                               عرض
                             </DropdownItem>
@@ -132,7 +132,7 @@ const LeaveTypes = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteLeaveType(lt.idLeaveType)}
+                              onClick={() => handleDeleteLeaveType(lt.leaveTypeId)}
                             >
                               حذف
                             </DropdownItem>
