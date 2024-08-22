@@ -236,9 +236,7 @@ public class EmployeeImp implements EmployeeService {
 
         // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
         List<Leave> confirmedLeaves = leaves.stream()
-                .filter(leave -> "true".equals(leave.getManagerVisa())
-                        || "true".equals(leave.getResponsibleVisa())
-                        || "true".equals(leave.getRemplecementVisa()))
+                .filter(leave -> "true".equals(leave.getManagerVisa()))
                 .collect(Collectors.toList());
 
         return confirmedLeaves;
@@ -253,9 +251,7 @@ public class EmployeeImp implements EmployeeService {
 
         // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
         List<Leave> unconfirmedLeaves = leaves.stream()
-                .filter(leave -> "false".equals(leave.getManagerVisa())
-                        || "false".equals(leave.getResponsibleVisa())
-                        || "false".equals(leave.getRemplecementVisa()))
+                .filter(leave -> "false".equals(leave.getManagerVisa()))
                 .collect(Collectors.toList());
 
         return unconfirmedLeaves;

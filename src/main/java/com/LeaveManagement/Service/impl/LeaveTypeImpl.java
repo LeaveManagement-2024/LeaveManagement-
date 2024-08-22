@@ -1,5 +1,6 @@
 package com.LeaveManagement.Service.impl;
 
+import com.LeaveManagement.Dto.LeaveTypeDTO;
 import com.LeaveManagement.Entity.LeaveType;
 import com.LeaveManagement.Repo.LeaveTypeRepo;
 import com.LeaveManagement.Service.LeaveTypeService;
@@ -14,7 +15,9 @@ public class LeaveTypeImpl implements LeaveTypeService {
     private LeaveTypeRepo leaveTypeRepo;
 
     @Override
-    public Long addLeaveType(LeaveType leaveType) {
+    public Long addLeaveType(LeaveTypeDTO leaveTypeDTO) {
+        LeaveType leaveType=new LeaveType();
+        leaveType.setName(leaveTypeDTO.getName());
         leaveTypeRepo.save(leaveType);
         return leaveType.getLeaveTypeId();
     }
@@ -30,9 +33,9 @@ public class LeaveTypeImpl implements LeaveTypeService {
     }
 
     @Override
-    public void updateLeaveType(Long id, LeaveType leaveType) {
+    public void updateLeaveType(Long id, LeaveTypeDTO leaveTypeDTO) {
         LeaveType leaveTypeToUpdate = leaveTypeRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Leave Type not found"));
-        leaveTypeToUpdate.setName(leaveType.getName());
+        leaveTypeToUpdate.setName(leaveTypeDTO.getName());
         leaveTypeRepo.save(leaveTypeToUpdate);
     }
 
