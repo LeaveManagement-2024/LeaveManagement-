@@ -25,6 +25,8 @@ public interface LeaveRepo extends JpaRepository<Leave,Long> {
 
     @Query("SELECT l FROM Leave l WHERE :currentDate BETWEEN l.startDate AND l.endDate")
     List<Leave> findLeavesByDate(LocalDate currentDate);
+    @Query("SELECT l FROM Leave l WHERE l.endDate = :yesterday")
+    List<Leave> findEmployeesReturningToWorkTomorrow(LocalDate yesterday);
     @Query("SELECT l FROM Leave l WHERE l.lmanager.idE = :id OR l.responsible.idE = :id OR l.replacement.idE = :id")
     List<Leave> findLeavesById(@Param("id") Long id);
 

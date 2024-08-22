@@ -14,4 +14,8 @@ public interface LeaveService {
     Long getNumberOfEmployeesOnLeaveToday();
     List<Leave> getLeaveToday();
     List<Leave> getLeavesById(Long id);
+    Long getNumberOfEmployeesOnLeaveTomorrow();
+    List<Leave> getLeaveTomorrow();
+    List<Leave> findEmployeesReturningToWorkTomorrow ();
+    Long NumberfindEmployeesReturningToWorkTomorrow ();
 }

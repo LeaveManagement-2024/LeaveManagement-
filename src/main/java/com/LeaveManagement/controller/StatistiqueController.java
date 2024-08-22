@@ -52,6 +52,23 @@ public class StatistiqueController {
     public List<Leave> getLeaveToday() {
         return leaveService.getLeaveToday();
     }
+    @GetMapping("/numberLeaves-Tomorrow")
+    public Long getNumberOfEmployeesOnLeaveTomorrow() {
+        return leaveService.getNumberOfEmployeesOnLeaveTomorrow();
+    }
+    @GetMapping(path = "/LeaveEndYesterday")
+    public List<Leave> LeaveEndYesterday() {
+        return leaveService.findEmployeesReturningToWorkTomorrow();
+    }
+    @GetMapping("/numberLeaveEndYesterday")
+    public Long numberLeaveEndYesterday() {
+        return leaveService.NumberfindEmployeesReturningToWorkTomorrow();
+    }
+
+    @GetMapping(path = "/LeaveTomorrow")
+    public List<Leave> getLeaveTomorrow() {
+        return leaveService.getLeaveTomorrow();
+    }
 
     @GetMapping("/countNewEmp")
     public long countNewEmployees() {
@@ -72,6 +89,7 @@ public class StatistiqueController {
     public List<Employees> oldEmployees() {
         return statistiqueService.oldEmployees();
     }
+
 
 
 }

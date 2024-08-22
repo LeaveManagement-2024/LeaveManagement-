@@ -117,6 +117,29 @@ public class LeaveImp implements LeaveService {
         List<Leave> leavesToday = leaveRepo.findLeavesByDate(today);
         return leavesToday;
     }
+    public Long getNumberOfEmployeesOnLeaveTomorrow() {
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        List<Leave> leavestomorrow = leaveRepo.findLeavesByDate(tomorrow);
+        return leavestomorrow.stream().map(Leave::getEmployee).distinct().count();
+    }
+    public List<Leave> getLeaveTomorrow() {
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        List<Leave> leavestomorrow = leaveRepo.findLeavesByDate(tomorrow);
+        return leavestomorrow;
+    }
+    public List<Leave> findEmployeesReturningToWorkTomorrow (){
+
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+
+        List<Leave> leaveyes = leaveRepo.findEmployeesReturningToWorkTomorrow(yesterday);
+        return  leaveyes;
+    }
+    public Long NumberfindEmployeesReturningToWorkTomorrow (){
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        List<Leave> leaveyes = leaveRepo.findEmployeesReturningToWorkTomorrow(yesterday);
+        return leaveyes.stream().map(Leave::getEmployee).distinct().count();
+    }
+
     public List<Leave> getLeavesById(Long id) {
         return leaveRepo.findLeavesById(id);
     }
