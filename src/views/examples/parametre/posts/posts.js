@@ -93,15 +93,16 @@ const Posts = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col"> اسم المهمة</th>
-                    <th scope="col"> Nom du post</th>
+                    <th scope="col"className='text-lg'> اسم المهمة</th>
+                    <th scope="col" className='text-lg'> Nom du post</th>
+                    <th scope="col" className='text-lg' > الإعدادات </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((post) => (
-                    <tr key={post.idP}>
-                      <td>{post.postTitleAr}</td>
-                      <td>{post.postTitleEn}</td>
+                    <tr key={post.idPost}>
+                      <td>{post.postNameAr}</td>
+                      <td>{post.postNameFr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -116,7 +117,7 @@ const Posts = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetPostById(post.idP)}
+                              onClick={() => handleGetPostById(post.idPost)}
                             >
                               عرض
                             </DropdownItem>
@@ -131,7 +132,7 @@ const Posts = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeletePost(post.idP)}
+                              onClick={() => handleDeletePost(post.idPost)}
                             >
                               حذف
                             </DropdownItem>

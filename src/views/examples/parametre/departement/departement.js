@@ -17,6 +17,8 @@ import {
   Row,
   Button,
   CardBody,
+  UncontrolledTooltip,
+
 } from "reactstrap";
 import AddDepartmentModal from './addDepartementModal';
 import EditDepartmentModal from './editDepartementModal';
@@ -94,14 +96,33 @@ const Departments = () => {
                 <thead className="thead-light text-center">
                   <tr>
                     <th scope="col">اسم القسم</th>
+                    <th scope="col"> المسؤول عن القسم</th>
                     <th scope="col "> Nom de department</th>
+                    <th scope="col "> الإعدادات</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((dept) => (
-                    <tr key={dept.idD}>
-                      <td>{dept.departmentNameAr}</td>
-                      <td>{dept.departmentNameEn}</td>
+                    <tr key={dept.idDepartement}>
+                      <td>{dept.departementNameAr}</td>
+                      <td >
+
+                      <Media className="align-items-center">
+                        
+                            <img    className="avatar avatar-sm rounded-circle" 
+                              alt="..."
+                              src={dept?.respDepartement?.image}
+                            />
+                         
+                          <Media>
+                            <span className="mb-0 text-sm" style={{marginRight:'15px'}}>
+                              {dept.respDepartement?.firstNameAr} {dept.respDepartement?.lastNameAr}
+                            </span>
+                          </Media>
+                        </Media>
+                        
+                      </td>
+                      <td>{dept.departementNameFr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -116,7 +137,7 @@ const Departments = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetDepartmentById(dept.idD)}
+                              onClick={() => handleGetDepartmentById(dept.idDepartement)}
                             >
                               عرض
                             </DropdownItem>
@@ -127,11 +148,12 @@ const Departments = () => {
                             </DropdownItem>
                             <EditDepartmentModal 
                               show={editModalShow}
-                              department={editDept} 
+                              dep={editDept} 
                               onHide={() => setEditModalShow(false)}
                             />
+                            
                             <DropdownItem
-                              onClick={() => handleDeleteDepartment(dept.idD)}
+                              onClick={() => handleDeleteDepartment(dept.idDepartement )}
                             >
                               حذف
                             </DropdownItem>

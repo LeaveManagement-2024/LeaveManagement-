@@ -15,51 +15,70 @@ import {
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { getDepartmentById, updateDepartment } from './departementApi'; // Assurez-vous d'avoir créé ces fonctions dans un fichier API séparé
-
+import {
+  getAllEmployees,
+} from '../../Employess/employeeApi'; 
+import Employees from 'views/examples/Employess/Employees';
 const EditDepartmentModal = (props) => {
 
-  const [departmentNameFr, setDepartmentNameFr] = useState('');
-  const [departmentNameAr, setDepartmentNameAr] = useState('');
-
+  const [departementNameFr, setDepartementNameFr] = useState('');
+  const [departementNameAr, setDepartementNameAr] = useState('');
+  const [respDepartementId,setRespDepartementId] =useState('');
+  const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDepartment = async () => {
       try {
-        const data = await getDepartmentById(props.dep.idD);
-        setDepartmentNameFr(data.departmentNameFr);
-        setDepartmentNameAr(data.departmentNameAr);
+        const data = await getDepartmentById(props.dep.idDepartement);
+        setDepartementNameFr(data.departementNameFr);
+        setDepartementNameAr(data.departementNameAr);
+        setRespDepartementId(data?.respDepartement?.idE)
       } catch (error) {
         console.error('Erreur lors de la récupération du département:', error);
       }
     };
     fetchDepartment();
-  }, [props.dep.idD]);
+    fetchAllEmployees();
+  }, [props.dep.idDepartement]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'departmentNameFr':
-        setDepartmentNameFr(value);
+      case 'departementNameFr':
+        setDepartementNameFr(value);
         break;
       case 'departmentNameAr':
-        setDepartmentNameAr(value);
+        setDepartementNameAr(value);
+        break;
+        case 'respDepartementId':
+        setRespDepartementId(value);
         break;
       default:
         break;
     }
   };
+  const fetchAllEmployees = async () => {
+    try {
+      const data = await getAllEmployees();
+      setEmployees(data);
+    } catch (error) {
+      console.error('Error fetching employees:', error);
+    }
+  };
+
 
   const handleUpdateDepartment = async () => {
     try {
       const updatedDepartment = {
-        departmentNameFr,
-        departmentNameAr,
+        departementNameFr,
+        departementNameAr,
+        respDepartementId,
       };
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/department/update/${props.dep.idD}`,
+        url: `http://localhost:8093/departments/update/${props.dep.idDepartement}`,
         data: updatedDepartment,
       }).then((response) => {
         console.log(response.data);
@@ -80,46 +99,77 @@ const EditDepartmentModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل قسم {props.dep.idD}</h4>
+            <h4 className='text-center text-xl'>تعديل قسم {props.dep.idDepartement}</h4>
           </CardHeader>
           <CardBody>
             <Form>
               <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                المعلومات الشخصية
+                معلومات القسم
               </h6>
               <div className="pl-lg-4">
                 <Row>
                   <Col lg="6">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="departmentNameAr">
-                        اسم القسم بالعربية
+                        اسم القسم 
                       </label>
                       <Input
                         className="form-control-alternative text-right"
                         id="departmentNameAr"
-                        placeholder="اسم القسم بالعربية"
+                        placeholder="اسم القسم "
                         type="text"
-                        value={departmentNameAr}
+                        value={departementNameAr}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
                   <Col lg="6">    
                     <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="departmentNameFr">
-                        Nom du département en français
+                      <label className="form-control-label" htmlFor="departementNameFr">
+                        département 
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="departmentNameFr"
+                        id="departementNameFr"
                         placeholder="Nom du département en français"
                         type="text"
-                        value={departmentNameFr}
+                        value={departementNameFr}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
+
                 </Row>
+                <Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            المسؤول عن القسم
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                           
+                            id="respDepartementId"
+                            placeholder="الرتبة"
+                            type="select"
+                            value={respDepartementId}
+                            onChange={handleChange}
+                        
+                          >
+                            
+                          <option value="">اختر المسؤول عن القسم</option>
+                          {employees.map((emp) => (
+                          <option key={emp.idE} value={emp.idE}>
+                            {emp.lastNameAr} {emp.firstNameAr}
+                          </option>
+                        ))}</Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row></Row>
               </div>
             </Form>
           </CardBody>

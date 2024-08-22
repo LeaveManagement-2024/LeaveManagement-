@@ -11,33 +11,21 @@ const loginEmployee = async (logInDTO) => {
     throw error;
   }
 };
-
-const addEmployee = async (employeeDTO) => {
-  try {
-    const formData = new FormData();
-    for (const key in employeeDTO) {
-      if (employeeDTO.hasOwnProperty(key)) {
-        formData.append(key, employeeDTO[key]);
-      }
-    }
-    const response = await axios.post(`${BASE_URL}/save`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error adding employee:', error);
-    throw error;
-  }
-};
-
 const getAllEmployees = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/getAll`);
     return response.data;
   } catch (error) {
     console.error('Error fetching all employees:', error);
+    throw error;
+  }
+};
+const getFilirerByEmployee = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getFiliere/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching employee filiere:', error);
     throw error;
   }
 };
@@ -52,26 +40,6 @@ const getEmployeeById = async (id) => {
   }
 };
 
-const updateEmployee = async (id, employeeDTO) => {
-  try {
-    const formData = new FormData();
-    for (const key in employeeDTO) {
-      if (employeeDTO.hasOwnProperty(key)) {
-        formData.append(key, employeeDTO[key]);
-      }
-    }
-    const response = await axios.put(`${BASE_URL}/update/${id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(`Error updating employee with id ${id}:`, error);
-    throw error;
-  }
-};
-
 const deleteEmployee = async (id) => {
   try {
     const response = await axios.delete(`${BASE_URL}/delete/${id}`);
@@ -81,34 +49,78 @@ const deleteEmployee = async (id) => {
     throw error;
   }
 };
-
-const getManagerByIdEmp = async (id) => {
+const getAllLeavesByEmployee = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/getManagerByIdEmp/${id}`);
+    const response = await axios.get(`${BASE_URL}/AllLeaveE/${id}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching manager of employee with id ${id}:`, error);
+    console.error(`Error fetching all leaves for employee ${id}:`, error);
     throw error;
   }
 };
 
-const getResponsibleByIdEmp = async (id) => {
+const getConfirmedLeavesByEmployee = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/getResponsibleByIdEmp${id}`);
+    const response = await axios.get(`${BASE_URL}/ConfermedLeaveE/${id}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching responsible of employee with id ${id}:`, error);
+    console.error(`Error fetching confirmed leaves for employee ${id}:`, error);
     throw error;
   }
 };
+
+const getUnconfirmedLeavesByEmployee = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/UnconfermedLeaveE/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching unconfirmed leaves for employee ${id}:`, error);
+    throw error;
+  }
+};
+
+const getLeavesToConfirmByManager = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/UnconfermedLeaveByManagerE/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching leaves to confirm for manager ${id}:`, error);
+    throw error;
+  }
+};
+const getLeavesToConfirmByResponsible = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/UnconfermedLeaveByResponsibleE/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching leaves to confirm for Responsible ${id}:`, error);
+    throw error;
+  }
+};
+const getLeavesToConfirmByRemplacement = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/UnconfermedLeaveByRemplacmentE/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching leaves to confirm for Remplacement ${id}:`, error);
+    throw error;
+  }
+};
+
+
+
+
 
 export {
   loginEmployee,
-  addEmployee,
   getAllEmployees,
   getEmployeeById,
-  updateEmployee,
   deleteEmployee,
-  getManagerByIdEmp,
-  getResponsibleByIdEmp
+  getFilirerByEmployee,
+  getAllLeavesByEmployee,
+  getConfirmedLeavesByEmployee,
+  getLeavesToConfirmByManager,
+  getUnconfirmedLeavesByEmployee,
+  getLeavesToConfirmByResponsible,
+  getLeavesToConfirmByRemplacement,
 };

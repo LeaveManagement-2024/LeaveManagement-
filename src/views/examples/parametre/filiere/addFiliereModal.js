@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import {
   Button,
@@ -13,14 +13,28 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import {
+  getAllServices
+
+} from "../service/serviceApi"
 
 const AddFiliereModal = (props) => {
 
   const [filiereNameFr, setFiliereNameFr] = useState('');
   const [filiereNameAr, setFiliereNameAr] = useState('');
-  const [descriptionFr, setDescriptionFr] = useState('');
-  const [descriptionAr, setDescriptionAr] = useState('');
-
+  const [idService,setIdService] = useState('');
+  const [services,setServices] = useState([]);
+  useEffect(() => {  
+    fetchAllServices();
+  }, []);
+  const fetchAllServices = async () => {
+    try {
+      const data = await getAllServices();
+      setServices(data);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
@@ -30,11 +44,8 @@ const AddFiliereModal = (props) => {
       case 'filiereNameAr':
         setFiliereNameAr(value);
         break;
-      case 'descriptionFr':
-        setDescriptionFr(value);
-        break;
-      case 'descriptionAr':
-        setDescriptionAr(value);
+      case 'idService':
+        setIdService(value);
         break;
       default:
         break;
@@ -46,11 +57,10 @@ const AddFiliereModal = (props) => {
       const filiereData = {
         filiereNameFr,
         filiereNameAr,
-        descriptionFr,
-        descriptionAr,
+        idService
       };
 
-      await axios.post('http://localhost:8093/filiere/save', filiereData)
+      await axios.post('http://localhost:8093/filieres/save', filiereData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();
@@ -115,6 +125,35 @@ const AddFiliereModal = (props) => {
                     </FormGroup>
                   </Col>
                 </Row>
+                <Row>
+                      <Col md="12">
+                        <FormGroup className="text-right" >
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-address"
+                          >
+                            المصلحة
+                          </label>
+                          <Input
+                            className="form-control-alternative text-right"
+                           
+                            id="idService"
+                            placeholder="المصلحة"
+                            type="select"
+                            value={idService}
+                            onChange={handleChange}
+                        
+                          >
+                            
+                          <option value>اختر المصلحة </option>
+                          {services.map((service) => (
+                          <option key={service.idService} value={service.idService}>
+                            {service.serviceNameAr}
+                          </option>
+                        ))}</Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
               
               </div>
             </Form>

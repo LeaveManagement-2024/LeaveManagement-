@@ -1,22 +1,4 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2024 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -31,8 +13,68 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useNavigate } from "react-router-dom"; // For navigation
+import axios from "axios"; // To make API calls
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const dfsd = async (e) => {
+    e.preventDefault();
+    setError(""); // Clear any previous errors
+
+    try {
+      const response = await axios.post("http://localhost:8093/employee/login", { email, password });
+      
+      if (response.data.success) {
+        // Redirect to dashboard on successful login
+        navigate('/index');
+      } else {
+        // Show error message on failed login
+      }
+    } catch (err) {
+      setError("An error occurred during login. Please try again.");
+    }
+  };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      await axios.post("http://localhost:8093/employee/login", {
+        email: email,
+        password: password,
+        }).then((res) => 
+        {
+         console.log(res.data);
+         
+         if (res.data.message === "Email Not Exist") 
+         {
+           alert("Email not exits");
+         } 
+         else if(res.data.message === "login Success")
+         { 
+             
+             localStorage.setItem('userId', res.data.id); // Stockage de l'ID de l'utilisateur
+             navigate('/admin/index');
+         } 
+          else 
+         { 
+            alert("Incorrect Email and Password not match");
+         }
+      }, fail => {
+       console.error(fail); // Error!
+});
+    }
+
+     catch (err) {
+      alert(err);
+    }
+  
+  }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -41,11 +83,9 @@ const Login = () => {
             <div className="text-muted text-center mt-1 mb-1">
               <h1>تسجيل الدخول</h1>
             </div>
-            
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
-           
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -54,9 +94,11 @@ const Login = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="البريد الإلكتروني "
+                    placeholder="البريد الإلكتروني"
                     type="email"
-                    autoComplete="new-email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </InputGroup>
               </FormGroup>
@@ -70,26 +112,26 @@ const Login = () => {
                   <Input
                     placeholder="كلمة المرور"
                     type="password"
-                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </InputGroup>
               </FormGroup>
               <div className="custom-control custom-control-alternative custom-checkbox">
                 <input
                   className="custom-control-input"
-                  id=" customCheckLogin"
+                  id="customCheckLogin"
                   type="checkbox"
                 />
-                <label
-                  className="custom-control-label"
-                  htmlFor=" customCheckLogin"
-                >
+                <label className="custom-control-label" htmlFor="customCheckLogin">
                   <span className="text-muted">تذكير</span>
                 </label>
               </div>
+              {error && <div className="text-danger text-center mt-3">{error}</div>}
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
-                دخول 
+                <Button className="my-4" color="primary" type="submit">
+                  دخول
                 </Button>
               </div>
             </Form>
@@ -97,21 +139,13 @@ const Login = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
+            <a className="text-light" href="#pablo" onClick={(e) => e.preventDefault()}>
               <small>نسيت كلمة المرور</small>
             </a>
           </Col>
           <Col className="text-right" xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>إنشا ء حساب جديد</small>
+            <a className="text-light" href="#pablo" onClick={(e) => e.preventDefault()}>
+              <small>إنشاء حساب جديد</small>
             </a>
           </Col>
         </Row>

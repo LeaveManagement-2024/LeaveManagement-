@@ -17,15 +17,15 @@ import { getProfileById, updateProfile } from './profileApi'; // Assurez-vous d'
 
 const EditProfileModal = (props) => {
 
-  const [profileNameFr, setProfileNameFr] = useState('');
-  const [profileNameAr, setProfileNameAr] = useState('');
+  const [profileName, setProfileName] = useState('');
+
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const data = await getProfileById(props.profile.idProfile);
-        setProfileNameFr(data.profileNameFr);
-        setProfileNameAr(data.profileNameAr);
+        setProfileName(data.profileName);
+      
       } catch (error) {
         console.error('Erreur lors de la récupération du profil:', error);
       }
@@ -36,11 +36,8 @@ const EditProfileModal = (props) => {
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case 'profileNameFr':
-        setProfileNameFr(value);
-        break;
-      case 'profileNameAr':
-        setProfileNameAr(value);
+      case 'profileName':
+        setProfileName(value);
         break;
       default:
         break;
@@ -50,13 +47,12 @@ const EditProfileModal = (props) => {
   const handleUpdateProfile = async () => {
     try {
       const updatedProfile = {
-        profileNameFr,
-        profileNameAr,
+        profileName,
       };
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/profile/update/${props.profile.idProfile}`,
+        url: `http://localhost:8093/profiles/update/${props.profile.idProfile}`,
         data: updatedProfile,
       }).then((response) => {
         console.log(response.data);
@@ -81,41 +77,24 @@ const EditProfileModal = (props) => {
           </CardHeader>
           <CardBody>
             <Form>
-              <h6 className="heading-small text-right mb-4" style={{ fontSize: '1.5em' }}>
-                المعلومات الشخصية
-              </h6>
               <div className="pl-lg-4">
                 <Row>
-                  <Col lg="6">
+                  <Col lg="12">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="profileNameAr">
-                        اسم الملف بالعربية
+                        اسم  الصفة
                       </label>
                       <Input
                         className="form-control-alternative text-right"
-                        id="profileNameAr"
+                        id="profileName"
                         placeholder="اسم الملف بالعربية"
                         type="text"
-                        value={profileNameAr}
+                        value={profileName}
                         onChange={handleChange}
                       />
                     </FormGroup>
                   </Col>
-                  <Col lg="6">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="profileNameFr">
-                        Nom du profil en français
-                      </label>
-                      <Input
-                        className="form-control-alternative text-right"
-                        id="profileNameFr"
-                        placeholder="Nom du profil en français"
-                        type="text"
-                        value={profileNameFr}
-                        onChange={handleChange}
-                      />
-                    </FormGroup>
-                  </Col>
+                 
                 </Row>
               </div>
             </Form>

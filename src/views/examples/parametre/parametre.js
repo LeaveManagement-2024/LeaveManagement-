@@ -17,7 +17,7 @@ const Parametre = () => {
     { title: "الاقسام", body: "Here are the details of the card", link: "/admin/departments" },
     { title: "الشعب", body: "Here are the details of the card", link: "/admin/filieres" },
     { title: "المصالح", body: "Here are the details of the card", link: "/admin/services" },
-    { title: "العطل السنوية", body: "Here are the details of the card", link: "/admin/public-holiday" },
+    { title: "العطل الرسمية", body: "Here are the details of the card", link: "/admin/public-holiday" },
     { title: "الصفات", body: "Profile", link: "/admin/profiles" }
   ];
 

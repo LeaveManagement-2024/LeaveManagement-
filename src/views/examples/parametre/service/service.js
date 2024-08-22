@@ -50,18 +50,18 @@ const Services = () => {
     }
   };
 
-  const handleGetServiceById = async (id) => {
+  const handleGetServiceById = async (idService) => {
     try {
-      const data = await getServiceById(id);
+      const data = await getServiceById(idService);
       setService(data);
     } catch (error) {
       console.error('Error fetching service:', error);
     }
   };
 
-  const handleDeleteService = async (id) => {
+  const handleDeleteService = async (idService) => {
     try {
-      await deleteService(id);
+      await deleteService(idService);
       setMessage('تم حذف الخدمة بنجاح');
       fetchAllServices(); // Refresh the list
     } catch (error) {
@@ -84,27 +84,46 @@ const Services = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة خدمة
+                    إضافة مصلحة
                   </Button>
                   <AddServiceModal show={modalShow} onHide={() => setModalShow(false)}></AddServiceModal>
-                  <h3 className="mb-0">جدول الخدمات</h3>
+                  <h3 className="mb-0">جدول المصالح</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col">اسم الخدمة </th>
+                    <th scope="col">اسم المصلحة </th>
+                    <th scope="col"> المسؤول عن المصلحة</th>
                     <th scope="col">Nom de service  </th>
+                    <th scope="col">القسم   </th>
+                    <th scope="col">الإعدادات</th>
                     
                   </tr>
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((service) => (
-                    <tr key={service.id}>
-                      <td>{service.nameAr}</td>
-                      <td>{service.nameEn}</td>
-                      <td>{service.descriptionAr}</td>
-                      <td>{service.descriptionEn}</td>
+                    <tr key={service.idService}>
+                      <td>{service.serviceNameAr}</td>
+                      <td >
+
+                      <Media className="align-items-center">
+                          
+                            <img  className="avatar avatar-sm rounded-circle mr-0" 
+                              alt="..."
+                              src={service?.respService?.image}
+                            />
+                        
+                          <Media>
+                            <span className="mb-0 text-sm" style={{marginRight:'15px'}}>
+                              {service?.respService?.firstNameAr} {service?.respService?.lastNameAr}
+                            </span>
+                          </Media>
+                        </Media>
+                        
+                      </td>
+                      <td>{service.serviceNameFr}</td>
+                      <td>{service?.departement?.departementNameAr}</td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -119,7 +138,7 @@ const Services = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetServiceById(service.id)}
+                              onClick={() => handleGetServiceById(service.idService)}
                             >
                               عرض
                             </DropdownItem>
@@ -130,11 +149,11 @@ const Services = () => {
                             </DropdownItem>
                             <EditServiceModal 
                               show={editModalShow}
-                              service={editService} 
+                              serv={editService} 
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteService(service.id)}
+                              onClick={() => handleDeleteService(service.idService)}
                             >
                               حذف
                             </DropdownItem>

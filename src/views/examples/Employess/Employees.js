@@ -51,7 +51,7 @@ const Employees = () => {
 
   useEffect(() => {
     fetchAllEmployees();
-  }, [employee]);
+  }, [employees]);
 
   const fetchAllEmployees = async () => {
     try {
@@ -71,6 +71,10 @@ const Employees = () => {
     }
   };
   const handleGetEmployeeById = async (idE) => {
+    if (!idE) {
+      console.error('Error: Employee ID is undefined.');
+      return;
+    }
     try {
       const data = await getEmployeeById(idE);
       setEmployee(data);
@@ -115,29 +119,25 @@ const Employees = () => {
                   <tr>
                     <th scope="col">الاسم الكامل</th>
                     <th scope="col">الاطار</th>
-                    <th scope="col">الشعبة</th>
                     <th scope="col">رقم البطاقة الوطنية</th>
                     <th scope="col">البريد الإلكتروني</th>
                     <th scope="col">الهاتف</th>
                     <th scope="col">العنوان الشخصي</th>
-                    <th scope="col">الإجراءات</th>
+                    <th scope="col">الإعدادات</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  {currentItems.map((emp) => (
-                    <tr key={emp.idE}>
+                {currentItems.length > 0 ? (
+  currentItems.map((emp) => (
+    <tr key={emp.idE}>
                       <th scope="row">
                         <Media className="align-items-center">
-                          <a
-                            className="avatar rounded-circle mr-3"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
+                         
+                            <img  className="avatar rounded-circle mr-3"
                               alt="..."
                               src={emp.image}
                             />
-                          </a>
+                          
                           <Media>
                             <span className="mb-0 text-sm mx-3">
                               {emp.firstNameAr} {emp.lastNameAr}
@@ -146,7 +146,7 @@ const Employees = () => {
                         </Media>
                       </th>
                       <td>{emp?.grade?.gradeNameAr}</td>
-                      <td>{emp?.filiere?.filiereNameAr}</td>
+                    
                       <td>
                         {emp.cin}
                       </td>
@@ -204,7 +204,12 @@ const Employees = () => {
                         </UncontrolledDropdown>
                       </td>
                     </tr>
-                  ))}
+                   ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8">Loading...</td>
+                    </tr>
+                  )}
                 </tbody>
               </Table>
               <CardFooter className="py-4 text-right">

@@ -23,9 +23,9 @@ import {
   getManagerByIdEmp,
   getResponsibleByIdEmp
 } from './employeeApi'; 
-import {getAllGrades} from '../grades/gradeApi'
-import{getAllPosts} from'../posts/postsAPI'
-import{getAllFilieres} from '../filiere/filieresApi'
+import {getAllGrades} from '../parametre/grades/gradesApi'
+import{getAllPosts} from'../parametre/posts/postApi'
+import{getAllFilieres} from '../parametre/filiere/filiereApi'
 import { useNavigate } from "react-router-dom";
 
 
@@ -49,7 +49,7 @@ const AddEmployeeModal = (props) => {
   const [postId, setPostId] = useState('');
   const [gradeId, setGradeId] = useState('');
   const [profileId, setProfileId] = useState('');
-  const [filiereId, setFiliereId] = useState('');
+  const [filiereId, setFiliereId] = useState(0);
   const [grades, setGrades] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filieres, setFilieres] = useState([]);

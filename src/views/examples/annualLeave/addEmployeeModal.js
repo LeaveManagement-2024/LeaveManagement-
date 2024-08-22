@@ -13,7 +13,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { useNavigate } from "react-router-dom";
 import {
   loginEmployee,
   addEmployee,
@@ -27,9 +26,10 @@ import {
 import {getAllGrades} from '../parametre/grades/gradesApi'
 import{getAllPosts} from'../parametre/posts/postApi'
 import{getAllFilieres} from '../parametre/filiere/filiereApi'
+import { useNavigate } from "react-router-dom";
 
 
-const EditEmployeeModal = (props) => {
+const AddEmployeeModal = (props) => {
 
   const [firstNameFr, setFirstNameFr] = useState('');
   const [firstNameAr, setFirstNameAr] = useState('');
@@ -49,15 +49,14 @@ const EditEmployeeModal = (props) => {
   const [postId, setPostId] = useState('');
   const [gradeId, setGradeId] = useState('');
   const [profileId, setProfileId] = useState('');
-  const [managerId, setManagerId] = useState('');
-  const [responsibleId, setResponsibleId] = useState('');
-  const [filiereId, setFiliereId] = useState('');
+  const [filiereId, setFiliereId] = useState(0);
   const [grades, setGrades] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filieres, setFilieres] = useState([]);
 
-  const navigate = useNavigate();
 
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGrades = async () => {
@@ -87,19 +86,25 @@ const EditEmployeeModal = (props) => {
     fetchGrades();
     fetchPosts();
     fetchFilieres();
-    if (props.empl && props.empl.idE) {
-      fetchEmployee();
-    }
-  }, [props.empl.idE]);
+  }, []);
 
 
   const handleChange = (e) => {
-    
     const { id, value, type, files } = e.target;
     if (type === 'file') {
       setImage(files[0]);
     } else {
       switch (id) {
+        case 'postId':
+        case 'gradeId':
+        case 'profileId':
+        case 'filiereId':
+          const numberValue = value ? Number(value) : '';
+          if (id === 'postId') setPostId(numberValue);
+          if (id === 'gradeId') setGradeId(numberValue);
+          if (id === 'profileId') setProfileId(numberValue);
+          if (id === 'filiereId') setFiliereId(numberValue);
+          break;
         case 'firstNameFr':
           setFirstNameFr(value);
           break;
@@ -142,18 +147,6 @@ const EditEmployeeModal = (props) => {
         case 'workLocationAr':
           setWorkLocationAr(value);
           break;
-        case 'postId':
-          setPostId(value);
-          break;
-        case 'gradeId':
-          setGradeId(value);
-          break;
-        case 'profileId':
-          setProfileId(value);
-          break;
-        case 'filiereId':
-          setFiliereId(value);
-          break;
         default:
           break;
       }
@@ -186,10 +179,9 @@ const EditEmployeeModal = (props) => {
     }
 
     await axios({
-          method: 'put',
-          url: `http://localhost:8093/employee/update/${props.empl.idE}`,
-          data: formData,
-          headers: { 'Content-Type': 'multipart/form-data' }
+          method: 'post',
+          url: 'http://localhost:8093/employee/save',
+          data: formData
     }).then((response) => {
           console.log(response.data)
           window.location.reload();
@@ -199,36 +191,9 @@ const EditEmployeeModal = (props) => {
     }
   };
 
-  const [employee, setEmployee] = useState({});
 
-  
-  
-  const fetchEmployee = async () => {
-    try {
-      const data = await getEmployeeById(props.empl.idE);
-      setEmployee(data);
-      setFirstNameFr(data.firstNameFr)
-      setFirstNameAr(data.firstNameAr)
-      setLastNameFr(data.lastNameFr)
-      setLastNameAr(data.lastNameAr)
-      setEmail(data.email)
-      setPhone(data.phone)
-      setPpr(data.ppr)
-      setCin(data.cin)
-      setAddressFr(data.addressFr)
-      setAddressAr(data.addressAr)
-      setHireDate(data.hireDate)
-      setWorkLocationFr(data.workLocationFr)
-      setWorkLocationAr(data.workLocationAr)
-      setFiliereId(data?.filiere?.idFiliere)
-      setGradeId(data?.grade?.idGrade)
-      setPostId(data?.post?.idPost)
-      setImage("")
-     
-       } catch (error) {
-      console.error('Error fetching employee:', error);
-    }
-  };
+ 
+
 
     return (
       <Modal
@@ -240,7 +205,7 @@ const EditEmployeeModal = (props) => {
         <Modal.Body>
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
-              <h4 className='text-center text-xl'>تعديل بطاقة الموظف {props.empl.idE}</h4>
+              <h4 className='text-center text-xl'> بطاقة الموظف</h4>
               </CardHeader>
               <CardBody>
                 <Form>
@@ -665,7 +630,6 @@ const EditEmployeeModal = (props) => {
                 </Form>
               </CardBody>
             </Card>
-          
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-center">
           <Button onClick={props.onHide}>خروج</Button>
@@ -676,4 +640,4 @@ const EditEmployeeModal = (props) => {
       </Modal>
     );
   };
-  export default EditEmployeeModal;
+  export default AddEmployeeModal;
