@@ -45,19 +45,20 @@ const Leave = () => {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    const fetchLeaves = async () => {
-      try {
-        const response = await getAllLeavesByEmployee(userId);
-        setLeaves(response);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching leaves:", error);
-        setLoading(false);
-      }
-    };
+    
 
     fetchLeaves();
   }, [userId]);
+  const fetchLeaves = async () => {
+    try {
+      const response = await getAllLeavesByEmployee(userId);
+      setLeaves(response);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching leaves:", error);
+      setLoading(false);
+    }
+  };
   if (loading) {
     return <div>Loading...</div>; // Or a spinner component
   }
@@ -101,16 +102,16 @@ const Leave = () => {
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-center">
                 {currentItems.map((leave, index) => (
                     <tr key={index}>
-                      <th scope="row">{leave.type}</th>
+                      <th scope="row">{leave?.leaveType?.name}</th>
                       <td>{leave.startDate}</td>
                       <td>{leave.endDate}</td>
-                      <td>{leave.replacementName}</td>
-                      <td>{leave.departmentHeadName}</td>
-                      <td>{leave.sectionHeadName}</td>
-                      <td className="text-right">
+                      <td>{leave.replacement?.lastNameAr} {leave.replacement?.firstNameAr}</td>
+                      <td>{leave.lmanager?.lastNameAr} {leave.lmanager?.firstNameAr}</td>
+                      <td>{leave.responsible?.lastNameAr} {leave.responsible?.firstNameAr}</td>
+                      <td >
                         <UncontrolledDropdown>
                           <DropdownToggle className="btn-icon-only text-light" href="#pablo" role="button" size="sm" color="" onClick={(e) => e.preventDefault()}>
                             <i className="fas fa-ellipsis-v" />
