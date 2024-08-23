@@ -24,6 +24,7 @@ const AddDepartmentModal = (props) => {
   const [respDepartementId,setRespDepartementId] =useState(0);
   const [employees, setEmployees] = useState([]);
   const [headOfDepartment, setHeadOfDepartment] = useState('');
+  const [errors, setErrors] = useState({}); // State to track validation errors
 
   const navigate = useNavigate();
   useEffect(() => {  
@@ -102,6 +103,9 @@ const AddDepartmentModal = (props) => {
                         value={departementNameFr}
                         onChange={handleChange}
                       />
+                      {errors.departementNameFr && (
+                        <div className="text-danger">{errors.departementNameFr}</div>
+                      )}
                     </FormGroup>
                   </Col>
                   <Col lg="6">
@@ -117,6 +121,9 @@ const AddDepartmentModal = (props) => {
                         value={departementNameAr}
                         onChange={handleChange}
                       />
+                       {errors.departementNameAr && (
+                        <div className="text-danger">{errors.departementNameAr}</div>
+                      )}
                     </FormGroup>
                   </Col>
                 </Row>
@@ -140,6 +147,7 @@ const AddDepartmentModal = (props) => {
                             onChange={handleChange}
                         
                           >
+
                             
                           <option value="">اختر المسؤول عن القسم</option>
                           {employees.map((emp) => (
@@ -147,6 +155,9 @@ const AddDepartmentModal = (props) => {
                             {emp.lastNameAr} {emp.firstNameAr}
                           </option>
                         ))}</Input>
+                        {errors.respDepartementId && (
+                        <div className="text-danger">{errors.respDepartementId}</div>
+                      )}
                         </FormGroup>
                       </Col>
                     </Row>
