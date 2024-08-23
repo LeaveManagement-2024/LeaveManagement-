@@ -15,14 +15,9 @@ import {
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import {
-  loginEmployee,
-  addEmployee,
-  getAllEmployees,
+  getFilirerByEmployee,
   getEmployeeById,
-  updateEmployee,
-  deleteEmployee,
-  getManagerByIdEmp,
-  getResponsibleByIdEmp
+ 
 } from './employeeApi'; 
 import {getAllGrades} from '../parametre/grades/gradesApi'
 import{getAllPosts} from'../parametre/posts/postApi'
@@ -55,6 +50,7 @@ const EditEmployeeModal = (props) => {
   const [grades, setGrades] = useState([]);
   const [posts, setPosts] = useState([]);
   const [filieres, setFilieres] = useState([]);
+ 
 
   const navigate = useNavigate();
 
@@ -68,6 +64,7 @@ const EditEmployeeModal = (props) => {
         console.error('Erreur lors de la récupération des grades:', error);
       }
     };
+    
     const fetchPosts = async () => {
       try {
         const postsData = await getAllPosts();
@@ -89,9 +86,18 @@ const EditEmployeeModal = (props) => {
     fetchFilieres();
     if (props.empl && props.empl.idE) {
       fetchEmployee();
+      fetchFilierEmployee(props.empl.idE)
     }
   }, [props.empl.idE]);
 
+  const fetchFilierEmployee = async (id) => {
+    try {
+      const filiereEmData = await getFilirerByEmployee(id);
+     setFiliereId(filiereEmData.idFiliere);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des filier de lemployee', error);
+    }
+  };
 
   const handleChange = (e) => {
     
@@ -159,6 +165,9 @@ const EditEmployeeModal = (props) => {
       }
     }
   };
+
+ 
+
   const handleAddEmployee = async () => {
     try {
       const formData = new FormData();
@@ -251,7 +260,7 @@ const EditEmployeeModal = (props) => {
                       <Col lg="6">
                         <FormGroup className="text-right">
                           <label
-                            className="form-control-label"ك
+                            className="form-control-label"
                             htmlFor="input-first-name"
                           >
                             الاسم العائلي
@@ -614,7 +623,6 @@ const EditEmployeeModal = (props) => {
                             placeholder=" Votre lieu de travail "
                             type="text"
                             onChange={handleChange}
-
                           />
                         </FormGroup>
                       </Col>

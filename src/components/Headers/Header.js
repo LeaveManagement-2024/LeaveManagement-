@@ -6,8 +6,10 @@ import {
   getTotalEmployees,
   getUnconfirmedLeaves,
   getNumberOfEmployeesOnLeaveToday,
+  getNumberOfEmployeesOnLeaveTomorrow,
   getCountNewEmployees,
-  getCountOldEmployees
+  getCountOldEmployees,
+  numberLeaveEndYesterday,
 } from "../../services/statisticsApi";
 
 const Header = () => {
@@ -15,8 +17,11 @@ const Header = () => {
   const [totalEmployees, setTotalEmployees] = useState(0);
   const [unconfirmedLeaves, setUnconfirmedLeaves] = useState(0);
   const [employeesOnLeaveToday, setEmployeesOnLeaveToday] = useState(0);
+  const [employeesOnLeaveTomorrow, setEmployeesOnLeaveTomorrow] = useState(0);
   const [countNewEmployees, setCountNewEmployees] = useState(0);
   const [countOldEmployees, setCountOldEmployees] = useState(0);
+  const [LeaveEndYesterday, setLeaveEndYesterday] = useState(0);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,15 +30,18 @@ const Header = () => {
         const totalEmp = await getTotalEmployees();
         const unconfirmed = await getUnconfirmedLeaves();
         const leaveToday = await getNumberOfEmployeesOnLeaveToday();
+        const leaveTomorrow = await getNumberOfEmployeesOnLeaveTomorrow();
         const newEmp = await getCountNewEmployees();
         const oldEmp = await getCountOldEmployees();
-
+        const EndYesterday = await numberLeaveEndYesterday();
         setNewLeaveRequests(newLeave);
         setTotalEmployees(totalEmp);
         setUnconfirmedLeaves(unconfirmed);
         setEmployeesOnLeaveToday(leaveToday);
         setCountNewEmployees(newEmp);
         setCountOldEmployees(oldEmp);
+        setEmployeesOnLeaveTomorrow(leaveTomorrow);
+        setLeaveEndYesterday(EndYesterday);
       } catch (error) {
         console.error('Error fetching statistics:', error);
       }
@@ -59,9 +67,9 @@ const Header = () => {
                     <div className="col">
                       <CardTitle tag="h5" className="text-uppercase  mb-0 text-lg">
                        الموظفون في رخصة :  {employeesOnLeaveToday}
-                      </CardTitle>
-                      <span className="h2  mb-0">
-                      
+                      </CardTitle><br></br>
+                      <span className="h2  text-muted  text-sm   mb-7">
+                      اظغط لرؤية المزيد
                       </span>
                     </div>
                   </Row>
@@ -79,11 +87,12 @@ const Header = () => {
                       </div>
                     </Col>
                     <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                         رخص في الانتظار :
+                      <CardTitle tag="h5" className="text-uppercase  mb-0 text-lg">
+                         رخص في الانتظار :   {unconfirmedLeaves}
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">
-                        {unconfirmedLeaves}
+                      <br></br>
+                      <span className="h2  text-muted  text-sm   mb-7">
+                      اظغط لرؤية المزيد
                       </span>
                     </div>
                   </Row>
@@ -101,15 +110,14 @@ const Header = () => {
                       </div>
                     </Col>
                     <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                       رخص  يوم الغد :
+                      <CardTitle tag="h5" className="text-uppercase  mb-0 text-lg">
+                       رخص  يوم الغد : {employeesOnLeaveTomorrow}
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">
-                        الجدد: {countNewEmployees}
-                      </span><br />
-                      <span className="h2 font-weight-bold mb-0">
-                        القدامى: {countOldEmployees}
+                      <br></br>
+                      <span className="h2  text-muted  text-sm   mb-7">
+                      اظغط لرؤية المزيد
                       </span>
+                     
                     </div>
                   </Row>
                 </CardBody>
@@ -125,11 +133,12 @@ const Header = () => {
                       </div>
                     </Col>
                     <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted mb-0 text-lg">
-                         الملتحقون لهذا اليوم : 
+                      <CardTitle tag="h5" className="text-uppercase mb-0 text-lg">
+                         الملتحقون لهذا اليوم : {LeaveEndYesterday}
                       </CardTitle>
-                      <span className="h2 font-weight-bold mb-0">
-                        {newLeaveRequests} 
+                      <br></br>
+                      <span className="h2  text-muted  text-sm   mb-7">
+                      اظغط لرؤية المزيد
                       </span>
                     </div>
                   </Row>
