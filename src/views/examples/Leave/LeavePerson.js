@@ -35,6 +35,7 @@ import {
   getLeavesToConfirmByResponsible,
   getLeavesToConfirmByRemplacement,
 } from '../Employess/employeeApi';
+import { deleteLeave } from './LeaveApi';
 
 const Leave = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,7 +46,7 @@ const Leave = () => {
   const [filterOption, setFilterOption] = useState('all');
   const [editModalShow, setEditModalShow] = useState(false);
   const [modalShow, setModalShow] = useState(false);
-
+  const [editLeave,setEditLeave]  = useState([])
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = leaves.slice(indexOfFirstItem, indexOfLastItem);
@@ -94,6 +95,15 @@ const Leave = () => {
   if (loading) {
     return <div>Loading...</div>; // Or a spinner component
   }
+  const handleDeleteLeave = async (id) => {
+    try {
+      
+      await deleteLeave(id);
+      fetchLeaves();
+    } catch (error) {
+      console.error('Error deleting :', error);
+    }
+  };
 
   return (
     <>
@@ -161,10 +171,20 @@ const Leave = () => {
                             <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                               عرض
                             </DropdownItem>
-                            <DropdownItem href="#pablo" onClick={() => setEditModalShow(true)}>
+                            <DropdownItem href="#pablo" o onClick={() => {setEditModalShow(true)
+                                setEditLeave(leave)
+                              }}>
                               تعديل
                             </DropdownItem>
-                            <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                            <EditLeaveModal 
+                            show={editModalShow}
+                            leave={editLeave} 
+                            onHide={() => {setEditModalShow(false)}}
+
+                           
+                              >
+                            </EditLeaveModal>
+                            <DropdownItem href="#pablo" onClick={() => handleDeleteLeave(leave.leaveId)}>
                               حذف
                             </DropdownItem>
                           </DropdownMenu>
