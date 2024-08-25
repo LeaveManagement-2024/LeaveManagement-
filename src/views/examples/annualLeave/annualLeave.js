@@ -24,11 +24,14 @@ import {
 import Header from "components/Headers/Header.js";
 import '../style.css'
 import { Link } from 'react-router-dom';
-import{getAllAnnualLeave} from './annualLeaveAPI'
+import{getAllAnnualLeave} from './annualLeaveAPI';
+import AddAnnualLeaveModal from "./addAnnualLeave"
 
 
 const AnnualLeave= () => {
   const [annualLeaves, setAnnualLeaves] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+
   useEffect(() => {
     fetchAllAnnualLeaves();
   }, [annualLeaves]);
@@ -51,9 +54,13 @@ const AnnualLeave= () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <h3 className="mb-0 text-lg text-center"> العطل السنوية</h3>
-                  <Button color="primary" >
+                  <Button color="primary" onClick={() => setModalShow(true)} >
                     إضافة عطلة سنوية
                   </Button>
+                  <AddAnnualLeaveModal show={modalShow}  onHide={() => {
+    console.log('Hiding modal');
+    setModalShow(false);
+  }}></AddAnnualLeaveModal>
                 </div>
               </CardHeader>
               <div className="row side-row divstu" >

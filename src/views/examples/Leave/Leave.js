@@ -52,7 +52,7 @@ const data = [
       { name: 'Jessica Doe', img: require("../../../assets/img/theme/team-4-800x800.jpg") },
     ],
     completion: 60,
-    completionColor: 'danger',
+    completionColor: 'warning',
   },
   {
     project: 'Argon Design System',
