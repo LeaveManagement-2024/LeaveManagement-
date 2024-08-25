@@ -30,7 +30,7 @@ public class Leave {
     @JoinColumn(name = "employee_id")
     private Employees employee;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "annualLeaveId")
     private AnnualLeave annualLeave;

@@ -37,18 +37,15 @@ public class LeaveImp implements LeaveService {
         Leave leave = new Leave();
         leave.setStartDate(leaveDTO.getStartDate());
         leave.setEndDate(leaveDTO.getEndDate());
-        leave.setRemplecementVisa(leaveDTO.getRemplecementVisa());
-        leave.setRemplecementVisaDate(leaveDTO.getRemplecementVisaDate());
-        leave.setManagerVisa(leaveDTO.getManagerVisa());
-        leave.setManagerVisaDate(leaveDTO.getManagerVisaDate());
-        leave.setResponsibleVisa(leaveDTO.getResponsibleVisa());
-        leave.setResponsibleVisaDate(leaveDTO.getResponsibleVisaDate());
         leave.setEmployee(employee);
         leave.setAnnualLeave(annualLeave);
         leave.setLeaveType(leaveType);
         leave.setReplacement(replacement);
         leave.setResponsible(responsible);
         leave.setLmanager(lmanager);
+        leave.setManagerVisa("false");
+        leave.setRemplecementVisa("false");
+        leave.setResponsibleVisa("false");
         leaveRepo.save(leave);
         return leave.getLeaveId();
     }
@@ -74,11 +71,11 @@ public class LeaveImp implements LeaveService {
         Leave leaveToUpdate = leaveRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Leave not found"));
         leaveToUpdate.setStartDate(leaveDTO.getStartDate());
         leaveToUpdate.setEndDate(leaveDTO.getEndDate());
-        leaveToUpdate.setRemplecementVisa(leaveDTO.getRemplecementVisa());
+        leaveToUpdate.setRemplecementVisa("false");
         leaveToUpdate.setRemplecementVisaDate(leaveDTO.getRemplecementVisaDate());
-        leaveToUpdate.setManagerVisa(leaveDTO.getManagerVisa());
+        leaveToUpdate.setManagerVisa("false");
         leaveToUpdate.setManagerVisaDate(leaveDTO.getManagerVisaDate());
-        leaveToUpdate.setResponsibleVisa(leaveDTO.getResponsibleVisa());
+        leaveToUpdate.setResponsibleVisa("false");
         leaveToUpdate.setResponsibleVisaDate(leaveDTO.getResponsibleVisaDate());
         leaveToUpdate.setEmployee(employee);
         leaveToUpdate.setAnnualLeave(annualLeave);
