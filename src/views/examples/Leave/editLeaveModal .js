@@ -30,7 +30,7 @@ const EditLeaveModal = (props) => {
   const [lmanagerId, setLmanagerId] = useState('');
   const [responsible, setResponsible] = useState('');
   const userId = localStorage.getItem('userId');
-  const [employeeId, setEmployeeId] = useState(userId);
+  const [employeeId, setEmployeeId] = useState('');
   const [leave,setLeave] = useState('');
 
   // State to hold validation errors
@@ -83,7 +83,7 @@ const EditLeaveModal = (props) => {
       setEmployeeId(data?.employee?.idE);
       setResponsible(data?.responsible?.idE);
       setLmanagerId(data?.lmanager?.idE);
-      setAnnualLeaveId(data);
+      setAnnualLeaveId(data?.annualLeave?.annualLeaveId);
       setReplacementId(data?.replacement?.idE);
     } catch (error) {
       console.error('Error fetching annual leaves:', error);
@@ -95,8 +95,8 @@ const EditLeaveModal = (props) => {
     fetchAllEmployees();
     fetchAllAnnualLeave();
     fetchFiliere();
-    fetchLeaveById();
-  }, []);
+    fetchLeaveById(props.leave.leaveId);
+  }, [props.leave.leaveId]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -167,13 +167,13 @@ const EditLeaveModal = (props) => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleAddLeave = async () => {
+  const handleEditLeave = async () => {
     if (validate()) {
       try {
         const leavetData = {
           startDate,
           endDate,
-          employeeId,
+          employeeId : userId,
           annualLeaveId,
           leaveTypeId,
           replacementId,
@@ -181,11 +181,14 @@ const EditLeaveModal = (props) => {
           responsible: filiere?.service?.respService?.idE,
         };
 
-        console.log(leavetData);
-
-        const response = await axios.post('http://localhost:8093/leave/save', leavetData);
-        console.log(response.data);
-        window.location.reload();
+        await axios({
+          method: 'put',
+          url: `http://localhost:8093/leave/update/${props.leave.leaveId}`,
+          data: leavetData,
+        }).then((response) => {
+          console.log(response.data);
+          window.location.reload();
+        });
       } catch (error) {
         console.error('Error adding leave:', error);
       }
@@ -322,7 +325,7 @@ const EditLeaveModal = (props) => {
         <Modal.Footer className="d-flex justify-content-center" >
        
           <Button onClick={props.onHide}>خروج</Button>
-          <Button variant="primary" >
+          <Button variant="primary" onClick={handleEditLeave} >
           تعديل
           </Button>
           

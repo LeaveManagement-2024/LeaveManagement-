@@ -208,3 +208,10 @@ Input[type=file] {
   filter: blur(10px);
   transform: scale(0.9, 0.9);
 }
+.manager-visa-true {
+  background-color: #d4edda; /* Light green background for success */
+}
+
+.manager-visa-false {
+  background-color: #f8d7da; /* Light red background for failure */
+}

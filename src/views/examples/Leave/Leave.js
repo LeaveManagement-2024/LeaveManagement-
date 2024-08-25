@@ -206,12 +206,7 @@ const Leave = () => {
                             >
                                تعديل
                             </DropdownItem>
-                            <EditLeaveModal
-                            show={editModalShow} 
-                            onHide={() => {setEditModalShow(false)
-                              }}
-                              >
-                            </EditLeaveModal>
+                           
                             <DropdownItem
                               href="#pablo"
                               onClick={(e) => e.preventDefault()}
