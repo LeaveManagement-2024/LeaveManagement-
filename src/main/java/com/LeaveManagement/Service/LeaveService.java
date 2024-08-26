@@ -18,4 +18,9 @@ public interface LeaveService {
     List<Leave> getLeaveTomorrow();
     List<Leave> findEmployeesReturningToWorkTomorrow ();
     Long NumberfindEmployeesReturningToWorkTomorrow ();
+    List<Leave> ConfermedLeave();
+    List<Leave> UnconfermedLeave();
+    List<Leave> UnconfermedLeaveByManager();
+    List<Leave> UnconfermedLeaveByResponsible();
+    List<Leave> UnconfermedLeaveByRemplacment();
 }

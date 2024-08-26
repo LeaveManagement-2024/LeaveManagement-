@@ -53,5 +53,27 @@ public class LeaveController {
     public List<Leave> getLeavesById(@PathVariable Long id) {
         return leaveService.getLeavesById(id);
     }
+    @GetMapping(path = "/ConfermedLeave")
+    public List<Leave> ConfermedLeave() {
+        return leaveService.ConfermedLeave();
+    }
+    @GetMapping(path = "/UnconfermedLeave")
+    public List<Leave> UnconfermedLeave() {
+        return leaveService.UnconfermedLeave();
+    }
+    @GetMapping(path = "/UnconfermedLeaveByManager")
+    public List<Leave> UnconfermedLeaveByManager() {
+        return leaveService.UnconfermedLeaveByManager();
+    }
+    @GetMapping(path = "/UnconfermedLeaveByResponsible")
+    public List<Leave> UnconfermedLeaveByResponsible() {
+        return leaveService.UnconfermedLeaveByResponsible();
+    }
+    @GetMapping(path = "/UnconfermedLeaveByRemplacment")
+    public List<Leave> UnconfermedLeaveByRemplacment() {
+        return leaveService.UnconfermedLeaveByRemplacment();
+    }
+
+
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LeaveImp implements LeaveService {
@@ -140,6 +141,66 @@ public class LeaveImp implements LeaveService {
     public List<Leave> getLeavesById(Long id) {
         return leaveRepo.findLeavesById(id);
     }
+    @Override
+    public List<Leave> ConfermedLeave() {
+
+        List<Leave> leaves = leaveRepo.findAll();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> confirmedLeaves = leaves.stream()
+                .filter(leave -> "true".equals(leave.getManagerVisa()))
+                .collect(Collectors.toList());
+
+        return confirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeave() {
+        List<Leave> leaves = leaveRepo.findAll();
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave -> "false".equals(leave.getManagerVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveByManager() {
+        List<Leave> leaves = leaveRepo.findAll();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave -> "false".equals(leave.getManagerVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveByResponsible() {
+        List<Leave> leaves = leaveRepo.findAll();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave -> "false".equals(leave.getResponsibleVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
+    @Override
+    public List<Leave> UnconfermedLeaveByRemplacment() {
+        List<Leave> leaves = leaveRepo.findAll();
+
+        // Filtrer les congés qui ne sont pas encore confirmés (visa "false")
+        List<Leave> unconfirmedLeaves = leaves.stream()
+                .filter(leave ->  "false".equals(leave.getRemplecementVisa()))
+                .collect(Collectors.toList());
+
+        return unconfirmedLeaves;
+    }
+
 
 
 
