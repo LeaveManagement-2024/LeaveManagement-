@@ -13,6 +13,51 @@ export const getAllLeaves = async () => {
     throw error;
   }
 };
+export const ConfermedLeave = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/ConfermedLeave`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des leaves:', error);
+    throw error;
+  }
+};
+export const UnconfermedLeave = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/UnconfermedLeave`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des leaves:', error);
+    throw error;
+  }
+};
+export const UnconfermedLeaveByManager = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/UnconfermedLeaveByManager`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des leaves:', error);
+    throw error;
+  }
+};
+export const UnconfermedLeaveByResponsible = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/UnconfermedLeaveByResponsible`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des leaves:', error);
+    throw error;
+  }
+};
+export const UnconfermedLeaveByRemplacment = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/UnconfermedLeaveByRemplacment`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des leaves:', error);
+    throw error;
+  }
+};
 
 // Fonction pour obtenir un grade par ID
 export const getLeaveById = async (id) => {
@@ -57,3 +102,4 @@ export const deleteLeave = async (id) => {
     throw error;
   }
 };
+
