@@ -18,7 +18,7 @@ import { getAllAnnualLeave } from "../annualLeave/annualLeaveAPI";
 
 import { useEffect, useState } from 'react';
 
-const AddLeaveModal = (props) => {
+const AddLeavePersonModal = (props) => {
   const [leavetypes, setLeaveType] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [anuualLeaves, setAnuualLeaves] = useState([]);
@@ -31,8 +31,9 @@ const AddLeaveModal = (props) => {
   const [lmanagerId, setLmanagerId] = useState('');
   const [responsible, setResponsible] = useState('');
   const userId = localStorage.getItem('userId');
-  const [employeeId, setEmployeeId] = useState(userId);
 
+  
+  
   // State to hold validation errors
   const [errors, setErrors] = useState({});
 
@@ -153,7 +154,7 @@ const AddLeaveModal = (props) => {
   const handleAddLeave = async () => {
     if (validate()) {
       try {
-        const leavetData = {
+        const leaveData = {
           startDate,
           endDate,
           employeeId,
@@ -164,9 +165,9 @@ const AddLeaveModal = (props) => {
           responsible: filiere?.service?.respService?.idE,
         };
 
-        console.log(leavetData);
+        console.log(leaveData);
 
-        const response = await axios.post('http://localhost:8093/leave/save', leavetData);
+        const response = await axios.post('http://localhost:8093/leave/save', leaveData);
         console.log(response.data);
         window.location.reload();
       } catch (error) {
@@ -309,4 +310,4 @@ const AddLeaveModal = (props) => {
   );
 };
 
-export default AddLeaveModal;
+export default AddLeavePersonModal;
