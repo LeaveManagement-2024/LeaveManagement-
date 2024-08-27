@@ -210,5 +210,10 @@ public class EmployeeController {
         return employeeService.UnconfermedLeaveByRemplacmentE(Id);
     }
 
+    @PostMapping(path="/LeavesToConfirmE/{idE}/{idL}")
+    public void LeavesToConfirmE(@PathVariable Long idE,@PathVariable Long idL) {
+        employeeService.LeavesToConfirmE(idE,idL);
+
+    }
 
 }

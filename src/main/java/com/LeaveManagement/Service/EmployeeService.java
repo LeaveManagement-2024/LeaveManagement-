@@ -31,5 +31,6 @@ public interface EmployeeService {
     List<Leave> UnconfermedLeaveByResponsibleE(Long id);
     List<Leave> UnconfermedLeaveByRemplacmentE(Long id);
     List<Leave> getLeavesToConfirm(Long id);
+    void LeavesToConfirmE(Long id, Long idL);
 
 }

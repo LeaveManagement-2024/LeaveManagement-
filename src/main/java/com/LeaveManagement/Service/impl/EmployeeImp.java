@@ -5,6 +5,7 @@ import com.LeaveManagement.Dto.LogInDTO;
 import  com.LeaveManagement.Dto.UpdatePassword;
 import com.LeaveManagement.Entity.*;
 import com.LeaveManagement.Repo.*;
+import com.LeaveManagement.Service.AnnualLeaveLineService;
 import com.LeaveManagement.Service.EmployeeService;
 import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,63 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeImp implements EmployeeService {
+
+
+
+    public int calculateWorkingDays(LocalDate startDate, LocalDate endDate, List<PublicHoliday> publicHolidays) {
+        // Vérifier que la date de début n'est pas après la date de fin
+        if (startDate.isAfter(endDate)) {
+            return 0;
+        }
+
+        int workingDays = 0;
+
+        // Parcourir chaque jour entre startDate et endDate inclusivement
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+            DayOfWeek dayOfWeek = date.getDayOfWeek();
+
+            // Vérifier si le jour n'est ni un samedi ni un dimanche
+            if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY && !isPublicHoliday(date, publicHolidays)) {
+                workingDays++;
+            }
+        }
+
+        return workingDays;
+    }
+
+    private boolean isPublicHoliday(LocalDate date, List<PublicHoliday> publicHolidays) {
+        for (PublicHoliday holiday : publicHolidays) {
+            // Convertir les dates de PublicHoliday en LocalDate pour la comparaison
+            LocalDate holidayStart = new java.sql.Date(holiday.getStartDate().getTime()).toLocalDate();
+            LocalDate holidayEnd = new java.sql.Date(holiday.getEndDate().getTime()).toLocalDate();
+
+            // Vérifier si la date tombe pendant un jour férié
+            if (!date.isBefore(holidayStart) && !date.isAfter(holidayEnd)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Autowired
     private EmployeeRepo employeeRep;
+    @Autowired
+    private PublicHolidayRepo publicHolidayRepo;
+    @Autowired
+    private AnnualLeaveLineRepo annualLeaveLineRepo;
+
+    @Autowired
+    private AnnualLeaveLineService annualLeaveLineService;
+
     @Autowired
     private LeaveRepo leaveRepo;
 
@@ -314,6 +364,38 @@ public class EmployeeImp implements EmployeeService {
                 .collect(Collectors.toList());
 
         return leavesToConfirm;
+    }
+    @Override
+    public void LeavesToConfirmE(Long id, Long idL) {
+
+
+        Employees employee = employeeRep.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        Leave leavesToConfirm = leaveRepo.findById(idL).orElseThrow(() -> new IllegalArgumentException("Leave not found"));
+
+        Long idM=leavesToConfirm.getLmanager().getIdE();
+        Long idE= employee.getIdE();
+      if (idE == idM){
+
+          leavesToConfirm.setManagerVisa("true");
+          LocalDate today = LocalDate.now();
+          leavesToConfirm.setManagerVisaDate(today);
+          leaveRepo.save(leavesToConfirm);
+          System.out.println("1");
+          List<PublicHoliday> publicHolidays = publicHolidayRepo.findAll();
+          AnnualLeaveLine annualLeaveLine =  annualLeaveLineService.getAnnualLeaveLineById(employee.getIdE(),leavesToConfirm.getAnnualLeave().getAnnualLeaveId());
+            int rm = calculateWorkingDays(leavesToConfirm.getStartDate(),leavesToConfirm.getEndDate(),publicHolidays);
+            System.out.println(rm);
+            int nm = (annualLeaveLine.getRemainingDays())-(rm);
+            annualLeaveLine.setRemainingDays(nm);
+            annualLeaveLineRepo.save(annualLeaveLine);
+          System.out.println("1");
+
+      }
+
+
+
     }
 
 }
