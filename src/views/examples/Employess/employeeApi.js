@@ -97,12 +97,39 @@ const getLeavesToConfirmByResponsible = async (id) => {
     throw error;
   }
 };
+const getAnnualLeavesLines = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getAnnualLeavesLines/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching AnnualLeavesLines FOR EMPLOYEE ${id}:`, error);
+    throw error;
+  }
+};
 const getLeavesToConfirmByRemplacement = async (id) => {
   try {
     const response = await axios.get(`${BASE_URL}/UnconfermedLeaveByRemplacmentE/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching leaves to confirm for Remplacement ${id}:`, error);
+    throw error;
+  }
+};
+const getListesLeavesToConfirm = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getLeavesToConfirm/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching leaves to confirm ${id}:`, error);
+    throw error;
+  }
+};
+const getListesConfirmedLeaves = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getConfirmedLeaves/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching ConfirmedLeaves ${id}:`, error);
     throw error;
   }
 };
@@ -123,4 +150,7 @@ export {
   getUnconfirmedLeavesByEmployee,
   getLeavesToConfirmByResponsible,
   getLeavesToConfirmByRemplacement,
+  getAnnualLeavesLines,
+  getListesLeavesToConfirm,
+  getListesConfirmedLeaves,
 };

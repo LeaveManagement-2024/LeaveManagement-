@@ -13,7 +13,7 @@ import {
 import axios from 'axios';
 
 import { getAllLeaveTypes } from "../parametre/leave_type/leaveTypeApi";
-import { getAllEmployees, getFilirerByEmployee } from "../Employess/employeeApi";
+import { getAllEmployees, getFilirerByEmployee,getAnnualLeavesLines } from "../Employess/employeeApi";
 import { getAllAnnualLeave } from "../annualLeave/annualLeaveAPI";
 
 import { useEffect, useState } from 'react';
@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react';
 const AddLeavePersonModal = (props) => {
   const [leavetypes, setLeaveType] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const [anualline, setAnualline] = useState([]);
   const [anuualLeaves, setAnuualLeaves] = useState([]);
   const [filiere, setFiliere] = useState(null);
   const [annualLeaveId, setAnnualLeaveId] = useState('');
@@ -31,6 +32,7 @@ const AddLeavePersonModal = (props) => {
   const [lmanagerId, setLmanagerId] = useState('');
   const [responsible, setResponsible] = useState('');
   const userId = localStorage.getItem('userId');
+  const [employeeId,setEmployeeId]=useState(userId);
 
   
   
@@ -50,6 +52,14 @@ const AddLeavePersonModal = (props) => {
     try {
       const data = await getAllEmployees();
       setEmployees(data);
+    } catch (error) {
+      console.error('Error fetching employees:', error);
+    }
+  };
+  const fetchAnnualLeavesLinesByEmployee = async (id) => {
+    try {
+      const data = await getAnnualLeavesLines(id);
+      setAnualline(data);
     } catch (error) {
       console.error('Error fetching employees:', error);
     }
@@ -80,6 +90,7 @@ const AddLeavePersonModal = (props) => {
     fetchAllEmployees();
     fetchAllAnnualLeave();
     fetchFiliere();
+    fetchAnnualLeavesLinesByEmployee(userId);
   }, []);
 
   const handleChange = (e) => {
@@ -285,9 +296,9 @@ const AddLeavePersonModal = (props) => {
                         onChange={handleChange}
                       >
                         <option value="">اختر السنة الادارية</option>
-                        {anuualLeaves.length > 0 && anuualLeaves.map((al) => (
-                          <option key={al.annualLeaveId} value={al.annualLeaveId}>
-                            {al.label}
+                        {anualline.length > 0 && anualline.map((al) => (
+                          <option key={al?.annualLeave?.annualLeaveId} value={al?.annualLeave?.annualLeaveId}>
+                            {al?.annualLeave?.label}
                           </option>
                         ))}
                       </Input>

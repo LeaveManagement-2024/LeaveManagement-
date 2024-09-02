@@ -153,6 +153,7 @@ const Leave = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
+                    <th scope="col" > اسم الموظف</th>
                     <th scope="col">نوع الرخصة</th>
                     <th scope="col">تاريخ مغادرة المنصب</th>
                     <th scope="col">تاريخ استئناف العمل</th>
@@ -173,7 +174,8 @@ const Leave = () => {
       
      }
    >
-      <th scope="row">{leave?.leaveType?.name}</th>
+      <th>{leave.lmanager?.lastNameAr} {leave.lmanager?.firstNameAr}</th>
+      <td scope="row">{leave?.leaveType?.name}</td>
       <td>{leave.startDate}</td>
       <td>{leave.endDate}</td>
       
