@@ -3,6 +3,7 @@ package com.LeaveManagement.Service;
 import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Dto.UpdatePassword;
+import com.LeaveManagement.Entity.AnnualLeaveLine;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Entity.Filiere;
 import com.LeaveManagement.Entity.Leave;
@@ -32,5 +33,7 @@ public interface EmployeeService {
     List<Leave> UnconfermedLeaveByRemplacmentE(Long id);
     List<Leave> getLeavesToConfirm(Long id);
     void LeavesToConfirmE(Long id, Long idL);
-
+    List<AnnualLeaveLine> getAnnualLeavesLines(Long id);
+    List<Leave> getConfirmedLeaves(Long id);
+    void LeavesToUnconfirmE(Long id, Long idL);
 }

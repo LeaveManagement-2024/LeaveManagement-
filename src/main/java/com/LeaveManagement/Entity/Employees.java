@@ -55,7 +55,7 @@ public class Employees {
     @ManyToOne
     @JoinColumn(name = "IdFiliere")
     private Filiere filiere;
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee")
     private List<AnnualLeaveLine> annualLeaveLines;
     @JsonBackReference

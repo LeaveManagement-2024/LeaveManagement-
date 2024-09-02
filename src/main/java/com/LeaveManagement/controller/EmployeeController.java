@@ -3,6 +3,7 @@ package com.LeaveManagement.controller;
 import com.LeaveManagement.Dto.EmployeesDTO;
 import com.LeaveManagement.Dto.LogInDTO;
 import com.LeaveManagement.Dto.UpdatePassword;
+import com.LeaveManagement.Entity.AnnualLeaveLine;
 import com.LeaveManagement.Entity.Employees;
 import com.LeaveManagement.Entity.Filiere;
 import com.LeaveManagement.Entity.Leave;
@@ -193,6 +194,10 @@ public class EmployeeController {
     public List<Leave>getLeavesToConfirm(@PathVariable Long Id) {
         return employeeService.getLeavesToConfirm(Id);
     }
+    @GetMapping(path="/getConfirmedLeaves/{Id}")
+    public List<Leave>getConfirmedLeaves(@PathVariable Long Id) {
+        return employeeService.getConfirmedLeaves(Id);
+    }
     @GetMapping(path="/UnconfermedLeaveE/{Id}")
     public List<Leave>UnconfermedLeaveE(@PathVariable Long Id) {
         return employeeService.UnconfermedLeaveE(Id);
@@ -208,6 +213,10 @@ public class EmployeeController {
     @GetMapping(path="/UnconfermedLeaveByRemplacmentE/{Id}")
     public List<Leave>UnconfermedLeaveByRemplacmentE(@PathVariable Long Id) {
         return employeeService.UnconfermedLeaveByRemplacmentE(Id);
+    }
+    @GetMapping(path="/getAnnualLeavesLines/{Id}")
+    public List<AnnualLeaveLine>getAnnualLeavesLines(@PathVariable Long Id) {
+        return employeeService.getAnnualLeavesLines(Id);
     }
 
     @PostMapping(path="/LeavesToConfirmE/{idE}/{idL}")

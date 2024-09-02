@@ -366,36 +366,115 @@ public class EmployeeImp implements EmployeeService {
         return leavesToConfirm;
     }
     @Override
-    public void LeavesToConfirmE(Long id, Long idL) {
-
-
+    public List<Leave> getConfirmedLeaves(Long id) {
         Employees employee = employeeRep.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
 
+        // Récupérer tous les congés où cet employé est soit manager, soit responsable, soit remplaçant
+        List<Leave> leavesConfirmedLeaves = leaveRepo.findAll().stream()
+                .filter(leave -> (leave.getLmanager() != null && leave.getLmanager().getIdE().equals(id) && leave.getManagerVisa().equals("true"))
+                        || (leave.getResponsible() != null && leave.getResponsible().getIdE().equals(id) && leave.getResponsibleVisa() .equals("true"))
+                        || (leave.getReplacement() != null && leave.getReplacement().getIdE().equals(id) && leave.getRemplecementVisa().equals("true")))
+                .collect(Collectors.toList());
+
+        return leavesConfirmedLeaves;
+    }
+    @Override
+    public List<AnnualLeaveLine> getAnnualLeavesLines(Long id) {
+        Employees employee = employeeRep.findById(id).orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+       return employee.getAnnualLeaveLines();
+    }
+    @Override
+    public void LeavesToConfirmE(Long id, Long idL) {
+
+
+        Employees employee = employeeRep.findById(id).orElseThrow(() -> new IllegalArgumentException("Employee not found"));
         Leave leavesToConfirm = leaveRepo.findById(idL).orElseThrow(() -> new IllegalArgumentException("Leave not found"));
+        List<PublicHoliday> publicHolidays = publicHolidayRepo.findAll();
 
         Long idM=leavesToConfirm.getLmanager().getIdE();
         Long idE= employee.getIdE();
-      if (idE == idM){
+        Long idR=leavesToConfirm.getResponsible().getIdE();
+        Long idRe=leavesToConfirm.getReplacement().getIdE();
 
-          leavesToConfirm.setManagerVisa("true");
-          LocalDate today = LocalDate.now();
-          leavesToConfirm.setManagerVisaDate(today);
-          leaveRepo.save(leavesToConfirm);
-          System.out.println("1");
-          List<PublicHoliday> publicHolidays = publicHolidayRepo.findAll();
-          AnnualLeaveLine annualLeaveLine =  annualLeaveLineService.getAnnualLeaveLineById(employee.getIdE(),leavesToConfirm.getAnnualLeave().getAnnualLeaveId());
-            int rm = calculateWorkingDays(leavesToConfirm.getStartDate(),leavesToConfirm.getEndDate(),publicHolidays);
-            System.out.println(rm);
-            int nm = (annualLeaveLine.getRemainingDays())-(rm);
-            annualLeaveLine.setRemainingDays(nm);
-            annualLeaveLineRepo.save(annualLeaveLine);
-          System.out.println("1");
+      if (idE == idM){
+          AnnualLeaveLine annualLeaveLine =  annualLeaveLineService.getAnnualLeaveLineById(leavesToConfirm.getEmployee().getIdE(),leavesToConfirm.getAnnualLeave().getAnnualLeaveId());
+          int rm = calculateWorkingDays(leavesToConfirm.getStartDate(),leavesToConfirm.getEndDate(),publicHolidays);
+          if(annualLeaveLine.getRemainingDays()>rm){
+              leavesToConfirm.setManagerVisa("true");
+              LocalDate today = LocalDate.now();
+              leavesToConfirm.setManagerVisaDate(today);
+              leaveRepo.save(leavesToConfirm);
+              System.out.println("1");
+              System.out.println(rm);
+              int nm = (annualLeaveLine.getRemainingDays())-(rm);
+              annualLeaveLine.setRemainingDays(nm);
+              annualLeaveLineRepo.save(annualLeaveLine);
+              System.out.println("1");
+          }
 
       }
+      if (idE == idR){
+            leavesToConfirm.setResponsibleVisa("true");
+            LocalDate today = LocalDate.now();
+            leavesToConfirm.setResponsibleVisaDate(today);
+            leaveRepo.save(leavesToConfirm);
+            System.out.println("1");
+
+      }
+      if(idE == idRe){
+            leavesToConfirm.setRemplecementVisa("true");
+            LocalDate today = LocalDate.now();
+            leavesToConfirm.setRemplecementVisaDate(today);
+            leaveRepo.save(leavesToConfirm);
+            System.out.println("1");
+      }
+    }
+    @Override
+    public void LeavesToUnconfirmE(Long id, Long idL) {
 
 
+        Employees employee = employeeRep.findById(id).orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        Leave leavesToConfirm = leaveRepo.findById(idL).orElseThrow(() -> new IllegalArgumentException("Leave not found"));
+        List<PublicHoliday> publicHolidays = publicHolidayRepo.findAll();
 
+        Long idM=leavesToConfirm.getLmanager().getIdE();
+        Long idE= employee.getIdE();
+        Long idR=leavesToConfirm.getResponsible().getIdE();
+        Long idRe=leavesToConfirm.getReplacement().getIdE();
+
+        if (idE == idM){
+            AnnualLeaveLine annualLeaveLine =  annualLeaveLineService.getAnnualLeaveLineById(leavesToConfirm.getEmployee().getIdE(),leavesToConfirm.getAnnualLeave().getAnnualLeaveId());
+            int rm = calculateWorkingDays(leavesToConfirm.getStartDate(),leavesToConfirm.getEndDate(),publicHolidays);
+            if(annualLeaveLine.getRemainingDays()>rm){
+                leavesToConfirm.setManagerVisa("false");
+                LocalDate today = LocalDate.now();
+                leavesToConfirm.setManagerVisaDate(today);
+                leaveRepo.save(leavesToConfirm);
+                System.out.println("1");
+                System.out.println(rm);
+                int nm = (annualLeaveLine.getRemainingDays())-(rm);
+                annualLeaveLine.setRemainingDays(nm);
+                annualLeaveLineRepo.save(annualLeaveLine);
+                System.out.println("1");
+            }
+
+        }
+        if (idE == idR){
+            leavesToConfirm.setResponsibleVisa("false");
+            LocalDate today = LocalDate.now();
+            leavesToConfirm.setResponsibleVisaDate(today);
+            leaveRepo.save(leavesToConfirm);
+            System.out.println("1");
+
+        }
+        if(idE == idRe){
+            leavesToConfirm.setRemplecementVisa("false");
+            LocalDate today = LocalDate.now();
+            leavesToConfirm.setRemplecementVisaDate(today);
+            leaveRepo.save(leavesToConfirm);
+            System.out.println("1");
+        }
     }
 
 }
