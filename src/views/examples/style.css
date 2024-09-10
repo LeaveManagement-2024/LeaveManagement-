@@ -362,3 +362,20 @@ Input[type=file] {
       -32px 16px 0 -10px transparent, -32px -16px 0 -10px transparent;
   }
 }
+.password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.password input {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px rgb(85, 0, 255);
+  font-size: 1em;
+  color: rgb(0, 0, 0);
+  outline: none;
+}

@@ -2,11 +2,20 @@ import axios from 'axios';
 
 // Base URL de votre API
 const API_URL = 'http://localhost:8093/annualLeave';  // Remplacez par l'URL de votre API
-
+const API_URL1 = 'http://localhost:8093/annualLeaveLine'; 
 // Fonction pour obtenir tous les AnnualLeave
 export const getAllAnnualLeave= async () => {
   try {
     const response = await axios.get(`${API_URL}/getAll`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des AnnualLeave:', error);
+    throw error;
+  }
+};
+export const getAllAnnualLeaveLine= async () => {
+  try {
+    const response = await axios.get(`${API_URL1}/getAll`);
     return response.data;
   } catch (error) {
     console.error('Erreur lors de la récupération des AnnualLeave:', error);

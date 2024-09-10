@@ -23,14 +23,11 @@ import AddGradeModal from '../parametre/grades/addGradeModal';
 import EditGradeModal from '../parametre/grades/editGradeModal';
 import Header from "components/Headers/Header.js";
 import {
-  getAllGrades,
-  getGradeById,
-  deleteGrade,
-} from '../parametre/grades/gradesApi'; 
-
+  getAllAnnualLeaveLine
+} from './annualLeaveAPI'; 
+ import "../../examples/style.css"
 const AnnualLeaveDetial = () => {
-  const [grades, setGrades] = useState([]);
-  const [grade, setGrade] = useState({});
+  const [annualLeaveLines, setAnnualLeaveLines] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [message, setMessage] = useState('');
@@ -39,28 +36,21 @@ const AnnualLeaveDetial = () => {
   const [editGrade, setEditGrade] = useState([])
   const {idan}  = useParams();
   useEffect(() => {
-    fetchAllGrades();
-  }, [grade]);
+    fetchAllAnnualLeaveLine();
+  }, []);
 
-  const fetchAllGrades = async () => {
+  const fetchAllAnnualLeaveLine = async () => {
     try {
-      const data = await getAllGrades();
-      setGrades(data);
+      const data = await getAllAnnualLeaveLine();
+      setAnnualLeaveLines(data);
     } catch (error) {
-      console.error('Error fetching grades:', error);
+      console.error('Error fetching AnnualLeaveLines:', error);
     }
   };
 
-  const handleGetGradeById = async (idG) => {
-    try {
-      const data = await getGradeById(idG);
-      setGrade(data);
-    } catch (error) {
-      console.error('Error fetching grade:', error);
-    }
-  };
+  
 
-  const handleDeleteGrade = async (idG) => {
+ /* const handleDeleteGrade = async (idG) => {
     try {
       await deleteGrade(idG);
       setMessage('تم حذف الدرجة بنجاح');
@@ -68,11 +58,11 @@ const AnnualLeaveDetial = () => {
     } catch (error) {
       console.error('Error deleting grade:', error);
     }
-  };
+  };*/
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = grades.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = annualLeaveLines.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -88,22 +78,32 @@ const AnnualLeaveDetial = () => {
                     إضافة إطار
                   </Button>
                   <AddGradeModal show={modalShow} onHide={() => setModalShow(false)}></AddGradeModal>
-                  <h3 className="mb-0">جدول الأطر {idan}</h3>
+                  <h3 className="mb-0">جدول  {idan}</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center text-lg">
                   <tr className=''>
-                    <th scope="col" className='text-lg' >اسم الإطار  </th>
-                    <th scope="col"className="text-lg text-uppercase"> Nom de grade </th>
-                    <th scope="col" className='text-lg' > الإعدادات </th>
+                    <th scope="col" style={{color:'black',fontSize:'0.8em'}} >اسم الموظف  </th>
+                    <th scope="col" style={{color:'black',fontSize:'0.8em'}} > N jour declarer  </th>
+                    <th scope="col"  style={{color:'black',fontSize:'0.8em'}}> N jour restant  </th>
+                    <th scope="col"  style={{color:'black',fontSize:'0.8em'}}> الإعدادات </th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  {currentItems.map((grd) => (
-                    <tr key={grd.idGrade}>
-                      <td>{grd.gradeNameAr}</td>
-                      <td>{grd.gradeNameFr}</td>
+                  {currentItems.map((all) => (
+                    <tr key={all.idGrade}>
+                      <td  style={{color:'black',fontSize:'1em'}} >{all?.employee?.lastNameAr} {all?.employee?.firstNameAr}</td>
+                      <td>
+                        <div class="password">
+                          <input maxlength="1" value={all.declaredDays} class="input" name="text" type="text" />
+                        </div>
+                        </td>
+                      <td>
+                      <div class="password">
+                          <input maxlength="1" value={all.declaredDays} class="input" name="text" type="text" />
+                        </div>
+                        </td>
                       <td >
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -118,12 +118,12 @@ const AnnualLeaveDetial = () => {
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
                             <DropdownItem
-                              onClick={() => handleGetGradeById(grd.idG)}
+                            //  onClick={() => handleGetGradeById(all.idG)}
                             >
                               عرض
                             </DropdownItem>
                             <DropdownItem
-                              onClick={() => { setEditModalShow(true); setEditGrade(grd); }}
+                             // onClick={() => { setEditModalShow(true); setEditGrade(all); }}
                             >
                               تعديل
                             </DropdownItem>
@@ -133,7 +133,7 @@ const AnnualLeaveDetial = () => {
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                              onClick={() => handleDeleteGrade(grd.idGrade)}
+                             // onClick={() => handleDeleteGrade(all.idGrade)}
                             >
                               حذف
                             </DropdownItem>
@@ -160,7 +160,7 @@ const AnnualLeaveDetial = () => {
                         <span className="sr-only">السابق</span>
                       </PaginationLink>
                     </PaginationItem>
-                    {Array.from({ length: Math.ceil(grades.length / itemsPerPage) }, (_, i) => (
+                    {Array.from({ length: Math.ceil(annualLeaveLines.length / itemsPerPage) }, (_, i) => (
                       <PaginationItem key={i + 1} className={currentPage === i + 1 ? 'active' : ''}>
                         <PaginationLink
                           href="#pablo"
@@ -170,7 +170,7 @@ const AnnualLeaveDetial = () => {
                         </PaginationLink>
                       </PaginationItem>
                     ))}
-                    <PaginationItem className={currentPage === Math.ceil(grades.length / itemsPerPage) ? 'disabled' : ''}>
+                    <PaginationItem className={currentPage === Math.ceil(annualLeaveLines.length / itemsPerPage) ? 'disabled' : ''}>
                       <PaginationLink
                         href="#pablo"
                         onClick={(e) => { e.preventDefault(); paginate(currentPage + 1); }}
