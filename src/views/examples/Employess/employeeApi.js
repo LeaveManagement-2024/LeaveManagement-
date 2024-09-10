@@ -133,9 +133,24 @@ const getListesConfirmedLeaves = async (id) => {
     throw error;
   }
 };
-
-
-
+const postLeavesToConfirmE = async (ide,idl) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/LeavesToConfirmE/${ide}/${idl}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error  :`, error);
+    throw error;
+  }
+};
+const postLeavesToUnconfirmE = async (ide,idl) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/LeavesToUnconfirmE/${ide}/${idl}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error  :`, error);
+    throw error;
+  }
+};
 
 
 export {
@@ -153,4 +168,6 @@ export {
   getAnnualLeavesLines,
   getListesLeavesToConfirm,
   getListesConfirmedLeaves,
+  postLeavesToConfirmE,
+  postLeavesToUnconfirmE,
 };

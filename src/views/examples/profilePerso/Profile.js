@@ -11,6 +11,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import Header from "components/Headers/Header.js";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import React, { useState, useEffect } from 'react';
@@ -53,7 +54,7 @@ const Profile = () => {
   };
   return (
     <>
-      <UserHeader />
+      <Header />
       {/* Page content */}
       <Container className="mt--7" fluid >
         <Row>

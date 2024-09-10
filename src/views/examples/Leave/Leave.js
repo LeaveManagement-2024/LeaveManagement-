@@ -21,7 +21,7 @@ import {
 } from "reactstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-// core components
+
 import Header from "components/Headers/Header.js";
 import AddLeaveModal from './addLeaveModal';
 
@@ -65,7 +65,7 @@ const Leave = () => {
   }, [userId, filterOption]);
 
   const fetchLeaves = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     try {
       let response;
       switch (filterOption) {
@@ -112,7 +112,7 @@ const Leave = () => {
     }
   };
 
-  // Function to render badge based on visa status
+
 
   return (
     <>
@@ -176,8 +176,8 @@ const Leave = () => {
    >
       <th>{leave.lmanager?.lastNameAr} {leave.lmanager?.firstNameAr}</th>
       <td scope="row">{leave?.leaveType?.name}</td>
-      <td>{leave.startDate}</td>
-      <td>{leave.endDate}</td>
+      <td><i className="ni ni-calendar-grid-58" /> {leave.startDate}</td>
+      <td><i className="ni ni-calendar-grid-58" /> {leave.endDate}</td>
       
       
       <td>

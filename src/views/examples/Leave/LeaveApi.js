@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// Base URL de votre API
-const API_URL = 'http://localhost:8093/leave';  // Remplacez par l'URL de votre API
 
-// Fonction pour obtenir tous les grades
+const API_URL = 'http://localhost:8093/leave'; 
+
+
 export const getAllLeaves = async () => {
   try {
     const response = await axios.get(`${API_URL}/getAll`);
@@ -59,7 +59,7 @@ export const UnconfermedLeaveByRemplacment = async () => {
   }
 };
 
-// Fonction pour obtenir un grade par ID
+
 export const getLeaveById = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/getById/${id}`);
@@ -70,7 +70,7 @@ export const getLeaveById = async (id) => {
   }
 };
 
-// Fonction pour ajouter un nouveau grade
+
 export const addleave = async (gradeNameFr, gradeNameAr) => {
   try {
     const response = await axios.post(`${API_URL}/save`, { gradeNameFr, gradeNameAr });
@@ -81,7 +81,7 @@ export const addleave = async (gradeNameFr, gradeNameAr) => {
   }
 };
 
-// Fonction pour mettre à jour un grade
+
 export const updateLeave = async (id, gradeNameFr, gradeNameAr) => {
   try {
     const response = await axios.put(`${API_URL}/update/${id}`, { gradeNameFr, gradeNameAr });
@@ -92,7 +92,7 @@ export const updateLeave = async (id, gradeNameFr, gradeNameAr) => {
   }
 };
 
-// Fonction pour supprimer un grade
+
 export const deleteLeave = async (id) => {
   try {
     const response = await axios.delete(`${API_URL}/delete/${id}`);

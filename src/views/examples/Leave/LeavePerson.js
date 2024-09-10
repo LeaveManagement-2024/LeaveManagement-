@@ -35,6 +35,9 @@ import {
   getLeavesToConfirmByRemplacement,
   getListesLeavesToConfirm,
   getListesConfirmedLeaves,
+  postLeavesToConfirmE,
+  postLeavesToUnconfirmE,
+
 } from '../Employess/employeeApi';
 import { deleteLeave } from './LeaveApi';
 import "../style.css"
@@ -66,7 +69,7 @@ const Leave = () => {
   }, [userId, filterOption,filterOption1]);
 
   const fetchLeaves = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     try {
       let response;
       switch (filterOption) {
@@ -100,7 +103,7 @@ const Leave = () => {
     }
   };
   const fetchLeavesConfUnconf = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     try {
       let response;
       switch (filterOption1) {
@@ -123,7 +126,7 @@ const Leave = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Or a spinner component
+    return <div>Loading...</div>; 
   }
   
   const handleDeleteLeave = async (id) => {
@@ -134,9 +137,25 @@ const Leave = () => {
       console.error('Error deleting :', error);
     }
   };
+  const confirmLeave = async (ide,idl) => {
+    try {
+      await postLeavesToConfirmE(ide,idl);
+      fetchLeavesConfUnconf();
+    } catch (error) {
+      console.error('Error  :', error);
+    }
+  };
+  const unconfirmLeave = async (ide,idl) => {
+    try {
+      await postLeavesToUnconfirmE(ide,idl);
+      fetchLeavesConfUnconf();
+    } catch (error) {
+      console.error('Error  :', error);
+    }
+  };
   
 
-  // Function to render badge based on visa status
+ 
 
   return (
     <>
@@ -198,8 +217,8 @@ const Leave = () => {
      }
    >
       <th scope="row">{leave?.leaveType?.name}</th>
-      <td>{leave.startDate}</td>
-      <td>{leave.endDate}</td>
+      <td><i className="ni ni-calendar-grid-58" /> {leave.startDate}</td>
+      <td><i className="ni ni-calendar-grid-58" /> {leave.endDate}</td>
       
       
       <td>
@@ -341,8 +360,8 @@ const Leave = () => {
     
    >
       <th scope="row">{leave?.employee?.lastNameAr} {leave?.employee?.firstNameAr}</th>
-      <td>{leave.startDate}</td>
-      <td>{leave.endDate}</td>
+      <td><i className="ni ni-calendar-grid-58" />  {leave.startDate}</td>
+      <td><i className="ni ni-calendar-grid-58" />  {leave.endDate}</td>
       
       
       <td>
@@ -385,36 +404,18 @@ const Leave = () => {
         
       </td>
       <td>
-      
-<div class="checkbox-wrapper-12">
-  <div class="cbx">
-    <input id="cbx-12" type="checkbox" checked="" />
-    <label for="cbx-12"></label>
-    <svg width="15" height="14" viewBox="0 0 15 14" fill="none">
-      <path d="M2 8.36364L6.23077 12L13 2"></path>
-    </svg>
-  </div>
-
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-    <defs>
-      <filter id="goo-12">
-        <feGaussianBlur
-          in="SourceGraphic"
-          stdDeviation="4"
-          result="blur"
-        ></feGaussianBlur>
-        <feColorMatrix
-          in="blur"
-          mode="matrix"
-          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
-          result="goo-12"
-        ></feColorMatrix>
-        <feBlend in="SourceGraphic" in2="goo-12"></feBlend>
-      </filter>
-    </defs>
-  </svg>
-</div>
-
+        <Button style={{marginLeft:"10px"}}
+          color="primary"
+          onClick={() => confirmLeave(userId, leave.leaveId)}
+        >
+          موافق
+        </Button>
+        <Button
+          color="primary"
+          onClick={() => unconfirmLeave(userId, leave.leaveId)}
+        >
+          غير موافق
+        </Button>
       </td>
     </tr>
   ))}

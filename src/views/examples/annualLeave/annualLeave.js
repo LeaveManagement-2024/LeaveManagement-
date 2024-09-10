@@ -63,8 +63,10 @@ const AnnualLeave= () => {
   }}></AddAnnualLeaveModal>
                 </div>
               </CardHeader>
+              
               <div className="row side-row divstu" >
               {annualLeaves.map((anl) => (
+                <Link to={`/admin/annualLeaveDetial/${anl.annualLeaveId}`}>
                 <div className="card78 " key={anl.annualLeaveId}>
                   <h3 
                     className="card__title  text-center" 
@@ -97,8 +99,10 @@ const AnnualLeave= () => {
                       </svg>
                   </div>
                 </div>
+                </Link>
                  ))}
             </div>
+            
 
             </Card>
           </div>
