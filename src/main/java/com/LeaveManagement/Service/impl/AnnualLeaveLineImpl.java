@@ -17,11 +17,13 @@ import java.util.List;
 public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
     @Autowired
     private AnnualLeaveLineRepo annualLeaveLineRepo;
-
+    @Autowired
+    private StatistiqueImp statistiqueService;
     @Autowired
     private EmployeeRepo  employeeRepo;
     @Autowired
     private AnnualLeaveRepo annualLeaveRepo;
+
 
     @Override
     public void addAnnualLeaveLine(AnnualLeaveLineDTO annualLeaveLineDTO) {
@@ -35,6 +37,41 @@ public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
         annualLeaveLineRepo.save(annualLeaveLine);
         System.out.println("dsf");
     }
+    @Override
+    public AnnualLeaveLine getAnnualLeaveLineById47(Long idE, Long annualLeaveId) {
+        return annualLeaveLineRepo.findById(new AnnualLeaveLineId(idE, annualLeaveId)).orElse(null);
+    }
+    @Override
+    public void addAnnualLeaveLineForAllEmp(Long annualLeaveId, int declaredDays) {
+        // Récupérer tous les employés
+        List<Employees> employees = statistiqueService.oldEmployees();
+
+        // Récupérer le congé annuel correspondant
+        AnnualLeave annualLeave = annualLeaveRepo.findById(annualLeaveId)
+                .orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+
+        // Parcourir chaque employé
+        for (Employees employee : employees) {
+            // Vérifier si une ligne de congé existe déjà pour cet employé et ce congé annuel
+            AnnualLeaveLine existingAnnualLeaveLine = getAnnualLeaveLineById47(employee.getIdE(), annualLeaveId);
+
+            if (existingAnnualLeaveLine == null) {
+                // Si elle n'existe pas, créer une nouvelle ligne de congé
+                AnnualLeaveLine annualLeaveLine = new AnnualLeaveLine();
+                annualLeaveLine.setDeclaredDays(declaredDays);
+                annualLeaveLine.setRemainingDays(declaredDays);
+                annualLeaveLine.setEmployee(employee);
+                annualLeaveLine.setAnnualLeave(annualLeave);
+
+                // Enregistrer la ligne de congé
+                annualLeaveLineRepo.save(annualLeaveLine);
+            } else {
+                System.out.println("Employee " + employee.getIdE() + " already has an annual leave line.");
+            }
+        }
+
+        System.out.println("Annual leave lines have been added for all employees.");
+    }
 
     @Override
     public List<AnnualLeaveLine> getAllAnnualLeaveLines() {
@@ -46,6 +83,7 @@ public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
         return annualLeaveLineRepo.findById(new AnnualLeaveLineId(idE, annualLeaveId))
                 .orElseThrow(() -> new IllegalArgumentException("Annual Leave Line not found"));
     }
+
 
     @Override
     public void updateAnnualLeaveLine(Long idE, Long annualLeaveId, AnnualLeaveLineDTO annualLeaveLineDTO) {

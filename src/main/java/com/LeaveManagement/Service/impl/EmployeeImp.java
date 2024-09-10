@@ -414,7 +414,7 @@ public class EmployeeImp implements EmployeeService {
           }
 
       }
-      if (idE == idR){
+      if (idE == idR ){
             leavesToConfirm.setResponsibleVisa("true");
             LocalDate today = LocalDate.now();
             leavesToConfirm.setResponsibleVisaDate(today);
@@ -446,18 +446,17 @@ public class EmployeeImp implements EmployeeService {
         if (idE == idM){
             AnnualLeaveLine annualLeaveLine =  annualLeaveLineService.getAnnualLeaveLineById(leavesToConfirm.getEmployee().getIdE(),leavesToConfirm.getAnnualLeave().getAnnualLeaveId());
             int rm = calculateWorkingDays(leavesToConfirm.getStartDate(),leavesToConfirm.getEndDate(),publicHolidays);
-            if(annualLeaveLine.getRemainingDays()>rm){
+
                 leavesToConfirm.setManagerVisa("false");
                 LocalDate today = LocalDate.now();
                 leavesToConfirm.setManagerVisaDate(today);
                 leaveRepo.save(leavesToConfirm);
                 System.out.println("1");
                 System.out.println(rm);
-                int nm = (annualLeaveLine.getRemainingDays())-(rm);
+                int nm = (annualLeaveLine.getRemainingDays())+(rm);
                 annualLeaveLine.setRemainingDays(nm);
                 annualLeaveLineRepo.save(annualLeaveLine);
                 System.out.println("1");
-            }
 
         }
         if (idE == idR){

@@ -37,7 +37,6 @@ public class StatistiqueController {
         return statistiqueService.UnconfirmedLeavesByManager();
     }
 
-
     @GetMapping("/numberUnconfirmedLeavesByManager")
     public long nbrUnconfirmedLeavesByManager() {
         return statistiqueService.getUnconfirmedLeavesByManager();
@@ -89,7 +88,5 @@ public class StatistiqueController {
     public List<Employees> oldEmployees() {
         return statistiqueService.oldEmployees();
     }
-
-
 
 }
