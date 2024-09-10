@@ -22,9 +22,14 @@ public class AnnualLeaveLineController {
         annualLeaveLineService.addAnnualLeaveLine(annualLeaveLineDTO);
         return null;
     }
-    @PostMapping(path = "/save/{idal}/{nbr}")
-    public Long saveAnnualLeaveLineForEmp(@PathVariable Long idal,@PathVariable int nbr) {
-        annualLeaveLineService.addAnnualLeaveLineForAllEmp(idal,nbr);
+    @PostMapping(path = "/saveOld/{idal}/{nbr}")
+    public Long saveAnnualLeaveLineForOldEmp(@PathVariable Long idal,@PathVariable int nbr) {
+        annualLeaveLineService.addAnnualLeaveLineForAllOldEmp(idal,nbr);
+        return null;
+    }
+    @PostMapping(path = "/saveNew/{idal}")
+    public Long saveAnnualLeaveLineForNewEmp(@PathVariable Long idal) {
+        annualLeaveLineService.addAnnualLeaveLineForAllNewEmp(idal);
         return null;
     }
 

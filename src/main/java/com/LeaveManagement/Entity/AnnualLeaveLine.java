@@ -12,7 +12,7 @@ public class AnnualLeaveLine {
     private int declaredDays;
     private int remainingDays;
     @Id
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "idE")
     private Employees employee;

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 
 @Service
@@ -42,21 +44,55 @@ public class AnnualLeaveLineImpl implements AnnualLeaveLineService {
         return annualLeaveLineRepo.findById(new AnnualLeaveLineId(idE, annualLeaveId)).orElse(null);
     }
     @Override
-    public void addAnnualLeaveLineForAllEmp(Long annualLeaveId, int declaredDays) {
-        // Récupérer tous les employés
+    public void addAnnualLeaveLineForAllOldEmp(Long annualLeaveId, int declaredDays) {
+
         List<Employees> employees = statistiqueService.oldEmployees();
 
-        // Récupérer le congé annuel correspondant
         AnnualLeave annualLeave = annualLeaveRepo.findById(annualLeaveId)
                 .orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
 
-        // Parcourir chaque employé
         for (Employees employee : employees) {
-            // Vérifier si une ligne de congé existe déjà pour cet employé et ce congé annuel
+
             AnnualLeaveLine existingAnnualLeaveLine = getAnnualLeaveLineById47(employee.getIdE(), annualLeaveId);
 
             if (existingAnnualLeaveLine == null) {
-                // Si elle n'existe pas, créer une nouvelle ligne de congé
+
+                AnnualLeaveLine annualLeaveLine = new AnnualLeaveLine();
+                annualLeaveLine.setDeclaredDays(declaredDays);
+                annualLeaveLine.setRemainingDays(declaredDays);
+                annualLeaveLine.setEmployee(employee);
+                annualLeaveLine.setAnnualLeave(annualLeave);
+
+                annualLeaveLineRepo.save(annualLeaveLine);
+            } else {
+                System.out.println("Employee " + employee.getIdE() + " already has an annual leave line.");
+            }
+        }
+
+        System.out.println("Annual leave lines have been added for all employees.");
+    }
+    @Override
+    public void addAnnualLeaveLineForAllNewEmp(Long annualLeaveId) {
+
+        List<Employees> employees = statistiqueService.newEmployees();
+
+        AnnualLeave annualLeave = annualLeaveRepo.findById(annualLeaveId)
+                .orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+
+        for (Employees employee : employees) {
+
+            AnnualLeaveLine existingAnnualLeaveLine = getAnnualLeaveLineById47(employee.getIdE(), annualLeaveId);
+
+            if (existingAnnualLeaveLine == null) {
+
+                // Calculer le nombre de jours entre la date d'embauche et la date actuelle
+                LocalDate hireDate = employee.getHireDate(); // Supposons que vous avez un champ hireDate dans Employees
+                LocalDate currentDate = LocalDate.now();
+                long daysBetween = ChronoUnit.DAYS.between(hireDate, currentDate);
+
+                // Calculer le nombre de jours de congé
+                int declaredDays = (int) ((daysBetween / 30.0) * 1.5); // Diviser par 30 et multiplier par 1.5
+
                 AnnualLeaveLine annualLeaveLine = new AnnualLeaveLine();
                 annualLeaveLine.setDeclaredDays(declaredDays);
                 annualLeaveLine.setRemainingDays(declaredDays);
