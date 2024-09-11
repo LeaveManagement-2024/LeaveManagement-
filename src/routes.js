@@ -21,7 +21,7 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Leave from "views/examples/Leave/Leave";
 import Employees from "views/examples/Employess/Employees";
-import Icons from "views/examples/Icons.js";
+
 import Parametre from "views/examples/parametre/parametre";
 import AnnualLeave from "views/examples/annualLeave/annualLeave"
 import LeavePerson from "views/examples/Leave/LeavePerson";
@@ -34,14 +34,7 @@ var routes = [
     component: <Index />,
     layout: "/admin",
   },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
-    component: <Icons />,
-    layout: "/admin",
-  },
-  
+ 
   {
     path: "/user-profile",
     name: "الملف الشخصي للمستخدم",
@@ -86,7 +79,7 @@ var routes = [
   },
   {
     path: "/login",
-    name: "Login",
+    name: "تسجيل الدخول",
     icon: "ni ni-key-25 text-info",
     component: <Login />,
     layout: "/auth",

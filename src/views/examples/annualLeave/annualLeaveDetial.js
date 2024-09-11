@@ -19,11 +19,11 @@ import {
   CardBody,
 } from "reactstrap";
 import { useParams } from 'react-router-dom';
-import AddGradeModal from '../parametre/grades/addGradeModal';
+import AddGradeModal from './addEmpInAL';
 import EditGradeModal from '../parametre/grades/editGradeModal';
 import Header from "components/Headers/Header.js";
 import {
-  getAllAnnualLeaveLine
+  getAnnualLeaveLineById
 } from './annualLeaveAPI'; 
  import "../../examples/style.css"
 const AnnualLeaveDetial = () => {
@@ -34,14 +34,15 @@ const AnnualLeaveDetial = () => {
   const [modalShow, setModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editGrade, setEditGrade] = useState([])
+  const [editIdan, setIdan] = useState('')
   const {idan}  = useParams();
   useEffect(() => {
-    fetchAllAnnualLeaveLine();
+    fetchAllAnnualLeaveLine(idan);
   }, []);
 
-  const fetchAllAnnualLeaveLine = async () => {
+  const fetchAllAnnualLeaveLine = async (id) => {
     try {
-      const data = await getAllAnnualLeaveLine();
+      const data = await getAnnualLeaveLineById(id);
       setAnnualLeaveLines(data);
     } catch (error) {
       console.error('Error fetching AnnualLeaveLines:', error);
@@ -74,11 +75,11 @@ const AnnualLeaveDetial = () => {
             <Card className="shadow">
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
-                  <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة إطار
+                  <Button color="primary" onClick={() => {setModalShow(true); setIdan(idan)}} >
+                    إضافة الموظفون للعطلة
                   </Button>
-                  <AddGradeModal show={modalShow} onHide={() => setModalShow(false)}></AddGradeModal>
-                  <h3 className="mb-0">جدول  {idan}</h3>
+                  <AddGradeModal idan={editIdan}  show={modalShow} onHide={() => setModalShow(false)}></AddGradeModal>
+                  <h3 className="mb-0">  {idan}</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>

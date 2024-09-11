@@ -35,9 +35,10 @@ const AdminNavbar = () => {
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            <img
+          <img
               alt="..."
-              src={require("../../assets/img/brand/logo.png")}
+              src={require("../../assets/img/brand/image15.png")}
+              style={{ width: '150px', height: '70px',borderRadius:"10px" }} 
             />
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
@@ -46,14 +47,7 @@ const AdminNavbar = () => {
           <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
             <div className="navbar-collapse-header d-md-none">
               <Row>
-                <Col className="collapse-brand" xs="6">
-                  <Link to="/">
-                    <img
-                      alt="..."
-                      src={require("../../assets/img/brand/argon-react.png")}
-                    />
-                  </Link>
-                </Col>
+                
                 <Col className="collapse-close" xs="6">
                   <button className="navbar-toggler" id="navbar-collapse-main">
                     <span />
@@ -63,12 +57,7 @@ const AdminNavbar = () => {
               </Row>
             </div>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink className="nav-link-icon" to="/" tag={Link}>
-                  <i className="ni ni-planet" />
-                  <span className="nav-link-inner--text">الواجهة</span>
-                </NavLink>
-              </NavItem>
+              
               <NavItem>
                 <NavLink
                   className="nav-link-icon"
@@ -85,16 +74,7 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">دخول </span>
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                  className="nav-link-icon"
-                  to="/admin/user-profile"
-                  tag={Link}
-                >
-                  <i className="ni ni-single-02" />
-                  <span className="nav-link-inner--text">الملف الشخصي </span>
-                </NavLink>
-              </NavItem>
+              
             </Nav>
           </UncontrolledCollapse>
         </Container>

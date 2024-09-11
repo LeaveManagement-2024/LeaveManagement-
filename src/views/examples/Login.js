@@ -80,6 +80,7 @@ const Login = () => {
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
+          
             <div className="text-muted text-center mt-1 mb-1">
               <h1>تسجيل الدخول</h1>
             </div>

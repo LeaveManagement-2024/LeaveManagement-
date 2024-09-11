@@ -22,7 +22,15 @@ export const getAllAnnualLeaveLine= async () => {
     throw error;
   }
 };
-
+export const getAnnualLeaveLineById= async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/getAnnualLeaveLineById/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des AnnualLeave:', error);
+    throw error;
+  }
+};
 // Fonction pour obtenir un AnnualLeave par ID
 export const getAnnualLeaveById = async (id) => {
   try {
