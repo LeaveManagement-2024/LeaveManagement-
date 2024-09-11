@@ -3,6 +3,7 @@ package com.LeaveManagement.controller;
 
 import com.LeaveManagement.Dto.AnnualLeaveDTO;
 import com.LeaveManagement.Entity.AnnualLeave;
+import com.LeaveManagement.Entity.AnnualLeaveLine;
 import com.LeaveManagement.Service.AnnualLeaveService;
 import com.LeaveManagement.Service.impl.AnnualLeaveImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,10 @@ public class AnnualLeaveController {
     public ResponseEntity<String> deleteannualLeave(@PathVariable Long id) {
         annualLeaveService.deleteAnnualLeave(id);
         return ResponseEntity.ok("annualLeave deleted successfully");
+    }
+    @GetMapping(path="/getAnnualLeaveLineById/{Id}")
+    public List<AnnualLeaveLine> getAnnualLeaveLineByid(@PathVariable Long Id){
+        return annualLeaveService.getAnnualLeaveLineByid(Id);
     }
 
 

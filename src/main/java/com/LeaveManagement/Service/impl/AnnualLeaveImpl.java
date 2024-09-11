@@ -2,6 +2,7 @@ package com.LeaveManagement.Service.impl;
 
 import com.LeaveManagement.Dto.AnnualLeaveDTO;
 import com.LeaveManagement.Entity.AnnualLeave;
+import com.LeaveManagement.Entity.AnnualLeaveLine;
 import com.LeaveManagement.Repo.AnnualLeaveRepo;
 import com.LeaveManagement.Service.AnnualLeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class AnnualLeaveImpl implements AnnualLeaveService {
     public void deleteAnnualLeave(Long id) {
 
         annualLeaveRepo.deleteById(id);
+    }
+    @Override
+    public List<AnnualLeaveLine> getAnnualLeaveLineByid(Long id ){
+        AnnualLeave annualLeave = annualLeaveRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+        return annualLeave.getAnnualLeaveLines();
     }
 }
