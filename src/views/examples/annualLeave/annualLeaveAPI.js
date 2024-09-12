@@ -74,3 +74,12 @@ export const deleteAnnualLeave = async (id) => {
     throw error;
   }
 };
+export const deleteAnnualLeaveLine = async (ide,idal) => {
+  try {
+    const response = await axios.delete(`${API_URL1}/delete/${ide}/${idal}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Erreur lors de la suppression du AnnualLeaveLine avec l'ID ${ide}:`, error);
+    throw error;
+  }
+};

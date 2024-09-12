@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2024 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -28,26 +11,16 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import '../../views/examples/style.css'; // Importez le fichier CSS
 
 const AdminNavbar = () => {
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
-          <NavbarBrand to="/" tag={Link}>
-          <img
-              alt="..."
-              src={require("../../assets/img/brand/image15.png")}
-              style={{ width: '150px', height: '70px',borderRadius:"10px" }} 
-            />
-          </NavbarBrand>
-          <button className="navbar-toggler" id="navbar-collapse-main">
-            <span className="navbar-toggler-icon" />
-          </button>
-          <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
+          <UncontrolledCollapse navbar toggler="#navbar-collapse-main" style={{ marginRight: "480px" }}>
             <div className="navbar-collapse-header d-md-none">
               <Row>
-                
                 <Col className="collapse-close" xs="6">
                   <button className="navbar-toggler" id="navbar-collapse-main">
                     <span />
@@ -56,27 +29,39 @@ const AdminNavbar = () => {
                 </Col>
               </Row>
             </div>
-            <Nav className="ml-auto" navbar>
-              
+            <Nav className="ml-auto card-blur" navbar>
               <NavItem>
                 <NavLink
-                  className="nav-link-icon"
+                  className="nav-link-icon  " // Ajoutez la classe nav-link-blur ici
                   to="/auth/register"
                   tag={Link}
                 >
-                  <i className="ni ni-circle-08" />
-                  <span className="nav-link-inner--text">تسجيل</span>
+                  <i className="ni ni-circle-08 text-dark text-lg" />
+                  <span className="nav-link-inner--text text-dark text-lg">تسجيل</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
-                  <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">دخول </span>
+                <NavLink
+                  className="nav-link-icon " // Ajoutez la classe nav-link-blur ici
+                  to="/auth/login"
+                  tag={Link}
+                >
+                  <i className="ni ni-key-25 text-dark text-lg" />
+                  <span className="nav-link-inner--text text-dark text-lg">دخول</span>
                 </NavLink>
               </NavItem>
-              
             </Nav>
           </UncontrolledCollapse>
+          <NavbarBrand className="card-blur">
+            <img
+              alt="..."
+              src={require("../../assets/img/brand/image17.png")}
+              style={{ width: '250px', height: '80px', borderRadius: "15px" }} 
+            />
+          </NavbarBrand>
+          <button className="navbar-toggler" id="navbar-collapse-main">
+            <span className="navbar-toggler-icon" />
+          </button>
         </Container>
       </Navbar>
     </>

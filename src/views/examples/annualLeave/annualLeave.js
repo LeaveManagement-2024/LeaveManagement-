@@ -34,7 +34,8 @@ const AnnualLeave= () => {
 
   useEffect(() => {
     fetchAllAnnualLeaves();
-  }, [annualLeaves]);
+  }, []);
+  
   const fetchAllAnnualLeaves = async () => {
     try {
       const data = await getAllAnnualLeave();
@@ -43,7 +44,10 @@ const AnnualLeave= () => {
       console.error('Error fetching AnnualLeaves:', error);
     }
   };
- 
+  const handleCloseModal = () => {
+    console.log('Hiding modal');
+    setModalShow(false);
+  };
   return (
     <>
       <Header />
@@ -57,17 +61,14 @@ const AnnualLeave= () => {
                   <Button color="primary" onClick={() => setModalShow(true)} >
                     إضافة عطلة سنوية
                   </Button>
-                  <AddAnnualLeaveModal show={modalShow}  onHide={() => {
-    console.log('Hiding modal');
-    setModalShow(false);
-  }}></AddAnnualLeaveModal>
+                  <AddAnnualLeaveModal show={modalShow} onHide={handleCloseModal} />
                 </div>
               </CardHeader>
               
               <div className="row side-row divstu" >
               {annualLeaves.map((anl) => (
-                <Link to={`/admin/annualLeaveDetial/${anl.annualLeaveId}`}>
-                <div className="card78 " key={anl.annualLeaveId}>
+                <Link to={`/admin/annualLeaveDetial/${anl.annualLeaveId}`} key={anl.annualLeaveId}>
+                <div className="card78 " >
                   <h3 
                     className="card__title  text-center" 
                     style={{margin:'10px'}}

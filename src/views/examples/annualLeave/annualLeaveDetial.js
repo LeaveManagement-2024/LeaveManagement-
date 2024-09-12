@@ -19,11 +19,12 @@ import {
   CardBody,
 } from "reactstrap";
 import { useParams } from 'react-router-dom';
-import AddGradeModal from './addEmpInAL';
-import EditGradeModal from '../parametre/grades/editGradeModal';
+import AddModal from './addEmpInAL';
+import EditModal from './editModal';
 import Header from "components/Headers/Header.js";
 import {
-  getAnnualLeaveLineById
+  getAnnualLeaveLineById,
+  deleteAnnualLeaveLine,
 } from './annualLeaveAPI'; 
  import "../../examples/style.css"
 const AnnualLeaveDetial = () => {
@@ -49,17 +50,19 @@ const AnnualLeaveDetial = () => {
     }
   };
 
-  
-
- /* const handleDeleteGrade = async (idG) => {
-    try {
-      await deleteGrade(idG);
-      setMessage('تم حذف الدرجة بنجاح');
-      fetchAllGrades(); // Refresh the list
-    } catch (error) {
-      console.error('Error deleting grade:', error);
+  const handleDeleteAnnualLeaveLine = async (ide, idal) => {
+    if (!ide || !idal) {
+      console.error('Invalid IDs:', ide, idal);
+      return;
     }
-  };*/
+    try {
+      await deleteAnnualLeaveLine(ide, idal);
+      setMessage('تم حذف  بنجاح');
+      fetchAllAnnualLeaveLine(idan); // Refresh the list
+    } catch (error) {
+      console.error('Error deleting:', error);
+    }
+  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -78,7 +81,7 @@ const AnnualLeaveDetial = () => {
                   <Button color="primary" onClick={() => {setModalShow(true); setIdan(idan)}} >
                     إضافة الموظفون للعطلة
                   </Button>
-                  <AddGradeModal idan={editIdan}  show={modalShow} onHide={() => setModalShow(false)}></AddGradeModal>
+                  <AddModal idan={idan}  show={modalShow} onHide={() => setModalShow(false)}></AddModal>
                   <h3 className="mb-0">  {idan}</h3>
                 </div>
               </CardHeader>
@@ -93,16 +96,17 @@ const AnnualLeaveDetial = () => {
                 </thead>
                 <tbody className="text-center">
                   {currentItems.map((all) => (
-                    <tr key={all.idGrade}>
+                    <tr key={all.employee.idE}>
                       <td  style={{color:'black',fontSize:'1em'}} >{all?.employee?.lastNameAr} {all?.employee?.firstNameAr}</td>
+
                       <td>
-                        <div class="password">
-                          <input maxlength="1" value={all.declaredDays} class="input" name="text" type="text" />
+                        <div className="password">
+                          <input  defaultValue={all.declaredDays} className="input" name="text" type="text" readOnly />
                         </div>
                         </td>
                       <td>
-                      <div class="password">
-                          <input maxlength="1" value={all.declaredDays} class="input" name="text" type="text" />
+                      <div className="password">
+                          <input  defaultValue={all.declaredDays} className="input" name="text" type="text" readOnly />
                         </div>
                         </td>
                       <td >
@@ -124,17 +128,17 @@ const AnnualLeaveDetial = () => {
                               عرض
                             </DropdownItem>
                             <DropdownItem
-                             // onClick={() => { setEditModalShow(true); setEditGrade(all); }}
+                              onClick={() => { setEditModalShow(true); setEditGrade(all); }}
                             >
                               تعديل
                             </DropdownItem>
-                            <EditGradeModal 
+                            <EditModal 
                               show={editModalShow}
                               grade={editGrade} 
                               onHide={() => setEditModalShow(false)}
                             />
                             <DropdownItem
-                             // onClick={() => handleDeleteGrade(all.idGrade)}
+                              onClick={() => handleDeleteAnnualLeaveLine(all?.employee?.idE,all?.annualLeave?.annualLeaveId)}
                             >
                               حذف
                             </DropdownItem>

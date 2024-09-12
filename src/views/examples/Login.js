@@ -15,6 +15,8 @@ import {
 } from "reactstrap";
 import { useNavigate } from "react-router-dom"; // For navigation
 import axios from "axios"; // To make API calls
+import './style.css'; // Importez le fichier CSS
+import { HiLogin } from "react-icons/hi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -46,55 +48,46 @@ const Login = () => {
       await axios.post("http://localhost:8093/employee/login", {
         email: email,
         password: password,
-        }).then((res) => 
-        {
-         console.log(res.data);
-         
-         if (res.data.message === "Email Not Exist") 
-         {
-           alert("Email not exits");
-         } 
-         else if(res.data.message === "login Success")
-         { 
-             
-             localStorage.setItem('userId', res.data.id); // Stockage de l'ID de l'utilisateur
-             navigate('/admin/index');
-         } 
-          else 
-         { 
-            alert("Incorrect Email and Password not match");
-         }
+      }).then((res) => {
+        console.log(res.data);
+        
+        if (res.data.message === "Email Not Exist") {
+          alert("Email not exists");
+        } else if (res.data.message === "login Success") {
+          localStorage.setItem('userId', res.data.id); // Stockage de l'ID de l'utilisateur
+          navigate('/admin/index');
+        } else {
+          alert("Incorrect Email or Password");
+        }
       }, fail => {
-       console.error(fail); // Error!
-});
-    }
-
-     catch (err) {
+        console.error(fail); // Error!
+      });
+    } catch (err) {
       alert(err);
     }
-  
   }
 
   return (
     <>
       <Col lg="5" md="7">
-        <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent pb-5">
-          
+        <Card className="card-blur shadow border-0">
+          <CardHeader className="bg-transparent pb-3">
             <div className="text-muted text-center mt-1 mb-1">
-              <h1>تسجيل الدخول</h1>
+           
+              <span className="text-white" style={{fontSize:'3em'}}>تسجيل الدخول</span> 
+             
             </div>
           </CardHeader>
-          <CardBody className="px-lg-5 py-lg-5">
+          <CardBody className="px-lg-5 py-lg-4">
             <Form role="form" onSubmit={handleSubmit}>
-              <FormGroup className="mb-3">
-                <InputGroup className="input-group-alternative">
+              <FormGroup className="mb-3 ">
+                <InputGroup className="input-group-alternative card-blur">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i className="ni ni-email-83" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input
+                  <Input 
                     placeholder="البريد الإلكتروني"
                     type="email"
                     value={email}
@@ -104,13 +97,14 @@ const Login = () => {
                 </InputGroup>
               </FormGroup>
               <FormGroup>
-                <InputGroup className="input-group-alternative">
+                <InputGroup className="input-group-alternative card-blur">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i className="ni ni-lock-circle-open" />
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                  
                     placeholder="كلمة المرور"
                     type="password"
                     value={password}
@@ -119,20 +113,11 @@ const Login = () => {
                   />
                 </InputGroup>
               </FormGroup>
-              <div className="custom-control custom-control-alternative custom-checkbox">
-                <input
-                  className="custom-control-input"
-                  id="customCheckLogin"
-                  type="checkbox"
-                />
-                <label className="custom-control-label" htmlFor="customCheckLogin">
-                  <span className="text-muted">تذكير</span>
-                </label>
-              </div>
+              
               {error && <div className="text-danger text-center mt-3">{error}</div>}
               <div className="text-center">
-                <Button className="my-4" color="primary" type="submit">
-                  دخول
+                <Button className="my-4 text-lg" color="primary" type="submit" style={{width:"250px"}}>
+                <HiLogin  className="text-white" style={{fontSize:'2em'}} /> دخول
                 </Button>
               </div>
             </Form>

@@ -11,6 +11,7 @@ import {
   getCountOldEmployees,
   numberLeaveEndYesterday,
 } from "../../services/statisticsApi";
+import "../../views/examples/style.css"
 
 const Header = () => {
   const [newLeaveRequests, setNewLeaveRequests] = useState(0);
@@ -56,7 +57,7 @@ const Header = () => {
         <div className="header-body">
           <Row>
             <Col lg="6" xl="3">
-              <Card className="card-stats mb-4 mb-xl-0">
+              <Card className="card-stats mb-4 mb-xl-0 card-blurHeader">
                 <CardBody className="text-right">
                   <Row>
                     <Col className="col-auto">
@@ -78,7 +79,7 @@ const Header = () => {
               </Card>
             </Col>
             <Col lg="6" xl="3">
-              <Card className="card-stats mb-4 mb-xl-0">
+              <Card className="card-stats mb-4 mb-xl-0 card-blurHeader">
                 <CardBody className="text-right">
                   <Row>
                     <Col className="col-auto">
@@ -101,7 +102,7 @@ const Header = () => {
               </Card>
             </Col>
             <Col lg="6" xl="3">
-              <Card className="card-stats mb-4 mb-xl-0">
+              <Card className="card-stats mb-4 mb-xl-0 card-blurHeader">
                 <CardBody className="text-right">
                   <Row>
                     <Col className="col-auto">
@@ -124,7 +125,7 @@ const Header = () => {
               </Card>
             </Col>
             <Col lg="6" xl="3">
-              <Card className="card-stats mb-4 mb-xl-0">
+              <Card className="card-stats mb-4 mb-xl-0 card-blurHeader">
                 <CardBody className="text-right">
                   <Row>
                     <Col className="col-auto">
