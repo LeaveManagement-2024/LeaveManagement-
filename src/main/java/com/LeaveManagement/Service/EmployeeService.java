@@ -10,6 +10,7 @@ import com.LeaveManagement.Entity.Leave;
 import com.LeaveManagement.response.LogInResponse;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -36,4 +37,5 @@ public interface EmployeeService {
     List<AnnualLeaveLine> getAnnualLeavesLines(Long id);
     List<Leave> getConfirmedLeaves(Long id);
     void LeavesToUnconfirmE(Long id, Long idL);
+    public List<Employees> getEmployeesWithoutLeave(LocalDate startDate, LocalDate endDate);
 }

@@ -56,4 +56,16 @@ public class AnnualLeaveImpl implements AnnualLeaveService {
         AnnualLeave annualLeave = annualLeaveRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
         return annualLeave.getAnnualLeaveLines();
     }
+    @Override
+    public void setOnStatus(Long id){
+        AnnualLeave annualLeave = annualLeaveRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+        annualLeave.setStatus("enabled");
+        annualLeaveRepo.save(annualLeave);
+    }
+    @Override
+    public void setOfStatus(Long id){
+        AnnualLeave annualLeave = annualLeaveRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Annual Leave not found"));
+        annualLeave.setStatus("disabled");
+        annualLeaveRepo.save(annualLeave);
+    }
 }

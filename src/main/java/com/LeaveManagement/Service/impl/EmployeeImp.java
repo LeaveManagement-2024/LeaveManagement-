@@ -476,5 +476,9 @@ public class EmployeeImp implements EmployeeService {
         }
     }
 
+    @Override
+    public List<Employees> getEmployeesWithoutLeave(LocalDate startDate, LocalDate endDate) {
+        return employeeRep.findEmployeesWithoutLeave(startDate, endDate);
+    }
 }
 

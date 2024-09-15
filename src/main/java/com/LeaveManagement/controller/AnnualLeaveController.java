@@ -29,6 +29,16 @@ public class AnnualLeaveController {
         return id;
 
     }
+    @PostMapping(path = "/setOfStatus/{id}")
+    public  void setOfStatus(@PathVariable Long id){
+        annualLeaveService.setOfStatus(id);
+
+    }
+    @PostMapping(path = "/setOnStatus/{id}")
+    public  void setOnStatus(@PathVariable Long id){
+        annualLeaveService.setOnStatus(id);
+
+    }
     @GetMapping(path="/getAll")
     public List<AnnualLeave> getAllannualLeave(){
         return  annualLeaveService.getAllAnnualLeaves();

@@ -24,4 +24,8 @@ public interface EmployeeRepo extends JpaRepository<Employees, Long> {
 
     @Query("SELECT e FROM Employees e WHERE e.hireDate < :startDate")
     List<Employees> findOldEmployees(@Param("startDate") LocalDate startDate);
+    @Query("SELECT e FROM Employees e WHERE e.idE NOT IN " +
+            "(SELECT l.employee.idE FROM Leave l WHERE l.startDate <= :endDate AND l.endDate >= :startDate)")
+    List<Employees> findEmployeesWithoutLeave(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
 }

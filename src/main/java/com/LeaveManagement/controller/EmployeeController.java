@@ -10,6 +10,7 @@ import com.LeaveManagement.Entity.Leave;
 import com.LeaveManagement.Service.EmployeeService;
 import com.LeaveManagement.response.LogInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -228,6 +229,11 @@ public class EmployeeController {
     public void LeavesToUnconfirmE(@PathVariable Long idE,@PathVariable Long idL) {
         employeeService.LeavesToUnconfirmE(idE,idL);
 
+    }
+    @GetMapping("/without-leave")
+    public List<Employees> getEmployeesWithoutLeave(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                    @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return employeeService.getEmployeesWithoutLeave(startDate, endDate);
     }
 
 }

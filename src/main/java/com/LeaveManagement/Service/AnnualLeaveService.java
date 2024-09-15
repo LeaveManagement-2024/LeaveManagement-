@@ -14,5 +14,6 @@ public interface AnnualLeaveService {
     void updateAnnualLeave(Long id, AnnualLeaveDTO annualLeave);
     void deleteAnnualLeave(Long id);
     List<AnnualLeaveLine> getAnnualLeaveLineByid(Long id );
-
+    public void setOfStatus(Long id);
+    public void setOnStatus(Long id);
 }
