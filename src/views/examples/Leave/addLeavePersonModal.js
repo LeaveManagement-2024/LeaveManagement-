@@ -48,14 +48,14 @@ const AddLeavePersonModal = (props) => {
     }
   };
 
-  const fetchAllEmployees = async () => {
+ /* const fetchAllEmployees = async () => {
     try {
       const data = await getAllEmployees();
       setEmployees(data);
     } catch (error) {
       console.error('Error fetching employees:', error);
     }
-  };
+  };*/
   const fetchAnnualLeavesLinesByEmployee = async (id) => {
     try {
       const data = await getAnnualLeavesLines(id);
@@ -87,7 +87,7 @@ const AddLeavePersonModal = (props) => {
 
   useEffect(() => {
     fetchAllLeaveTypes();
-    fetchAllEmployees();
+    
     fetchAllAnnualLeave();
     fetchFiliere();
     fetchAnnualLeavesLinesByEmployee(userId);
@@ -186,6 +186,24 @@ const AddLeavePersonModal = (props) => {
       }
     }
   };
+  // Function to fetch employees without leave between startDate and endDate
+const fetchEmployeesWithoutLeave = async (startDate, endDate) => {
+  if (startDate && endDate) {
+    try {
+      const response = await axios.get(`http://localhost:8093/employee/without-leave`, {
+        params: { startDate, endDate },
+      });
+      setEmployees(response.data); // Update the list of employees
+    } catch (error) {
+      console.error('Error fetching employees without leave:', error);
+    }
+  }
+};
+useEffect(() => {
+  if (startDate && endDate) {
+    fetchEmployeesWithoutLeave(startDate, endDate);
+  }
+}, [startDate, endDate]);
 
   return (
     <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
@@ -200,29 +218,29 @@ const AddLeavePersonModal = (props) => {
             <Form>
               <div className="pl-lg-4">
                 <Row>
-                  <Col lg="6">
-                    <FormGroup className="text-right">
-                      <label className="form-control-label" htmlFor="input-first-name">
-                        اسم النائب
-                      </label>
-                      <Input
-                        className="form-control-alternative text-right"
-                        id="replacementId"
-                        placeholder="اسم النائب"
-                        type="select"
-                        value={replacementId}
-                        onChange={handleChange}
-                      >
-                        <option value="">اختر اسم النائب</option>
-                        {employees.length > 0 && employees.map((emp) => (
-                          <option key={emp.idE} value={emp.idE}>
-                            {emp.lastNameAr} {emp.firstNameAr}
-                          </option>
-                        ))}
-                      </Input>
-                      {errors.replacementId && <div className="text-danger">{errors.replacementId}</div>}
-                    </FormGroup>
-                  </Col>
+                <Col lg="6">
+  <FormGroup className="text-right">
+    <label className="form-control-label" htmlFor="input-first-name">
+      اسم النائب
+    </label>
+    <Input
+      className="form-control-alternative text-right"
+      id="replacementId"
+      placeholder="اسم النائب"
+      type="select"
+      value={replacementId}
+      onChange={handleChange}
+    >
+      <option value="">اختر اسم النائب</option>
+      {employees.length > 0 && employees.map((emp) => (
+        <option key={emp.idE} value={emp.idE}>
+          {emp.lastNameAr} {emp.firstNameAr}
+        </option>
+      ))}
+    </Input>
+    {errors.replacementId && <div className="text-danger">{errors.replacementId}</div>}
+  </FormGroup>
+</Col>
                   <Col lg="6">
                     <FormGroup className="text-right">
                       <label className="form-control-label" htmlFor="input-last-name">

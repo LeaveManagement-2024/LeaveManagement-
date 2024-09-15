@@ -13,14 +13,37 @@ import {
   Col,
 } from "reactstrap"; 
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'wicg-inert';
-const AddAnnualLeaveModal = (props) => {
-  
+
+const UpdateAnnualLeaveModal = (props) => {
+  const { leaveId, show, onHide } = props;
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [label, setLabel] = useState('');
   const [status, setStatus] = useState('');
+
+  // Fetch existing leave data for the selected leaveId when the modal is opened
+  useEffect(() => {
+    const fetchAnnualLeave = async () => {
+      if (props.annualLeaveData.annualLeaveId) {
+        try {
+          const response = await axios.get(`http://localhost:8093/annualLeave/getById/${props.annualLeaveData.annualLeaveId}`);
+          const { startDate, endDate, label, status } = response.data;
+          setStartDate(startDate);
+          setEndDate(endDate);
+          setLabel(label);
+          setStatus(status);
+        } catch (error) {
+          console.error('Error fetching leave data:', error);
+        }
+      }
+    };
+
+    if (show) {
+      fetchAnnualLeave();
+    }
+  }, [leaveId, show]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -42,55 +65,36 @@ const AddAnnualLeaveModal = (props) => {
     }
   };
 
-  const handleAddAnnualLeave = async () => {
+  const handleUpdateAnnualLeave = async () => {
     try {
-      const annualLeaveData = {
+      const updatedAnnualLeaveData = {
         startDate,
         endDate,
         label,
         status,
       };
 
-      const response = await axios.post('http://localhost:8093/annualLeave/save', annualLeaveData);
+      const response = await axios.put(`http://localhost:8093/annualLeave/update/${props.annualLeaveData.annualLeaveId}`, updatedAnnualLeaveData);
       console.log(response.data);
-      
-      // Display success alert using SweetAlert2
-      swal.fire({
-        title: 'تمت الإضافة!',
-        text: 'تمت إضافة العطلة السنوية بنجاح.',
-        icon: 'success',
-        confirmButtonText: 'موافق'
-      }).then(() => {
         window.location.reload(); // Reload page after confirmation
-      });
-      
     } catch (error) {
-      console.error('Error adding leave:', error);
-      
-      // Display error alert using SweetAlert2
-      swal.fire({
-        title: 'خطأ!',
-        text: 'حدث خطأ أثناء إضافة العطلة السنوية.',
-        icon: 'error',
-        confirmButtonText: 'موافق'
-      });
+      console.error('Error updating leave:', error);
     }
   };
 
   return (
     <Modal
-      {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      show={props.show}
-      onHide={props.onHide}
-      aria-hidden={!props.show} 
+      show={show}
+      onHide={onHide}
+      aria-hidden={!show}
     >  
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className="text-center text-xl">العطلة السنوية</h4>
+            <h4 className="text-center text-xl">تعديل العطلة السنوية  {props.annualLeaveData.annualLeaveId}</h4>
           </CardHeader>
           <CardBody>
             <Form>
@@ -104,7 +108,7 @@ const AddAnnualLeaveModal = (props) => {
                       <Input 
                         className="form-control-alternative text-right"
                         id="status"
-                        type="select" // Change to select type
+                        type="select"
                         value={status}
                         onChange={handleChange}
                       >
@@ -168,11 +172,11 @@ const AddAnnualLeaveModal = (props) => {
         </Card>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
-        <Button onClick={props.onHide}>خروج</Button>
-        <Button color="primary" onClick={(handleAddAnnualLeave)} >حفظ</Button>
+        <Button onClick={onHide}>خروج</Button>
+        <Button color="primary" onClick={handleUpdateAnnualLeave}>تحديث</Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddAnnualLeaveModal;
+export default UpdateAnnualLeaveModal;

@@ -43,12 +43,21 @@ export const getAnnualLeaveById = async (id) => {
 };
 
 // Fonction pour ajouter un nouveau AnnualLeave
-export const addAnnualLeave = async (AnnualLeaveNameFr, AnnualLeaveNameAr) => {
+export const setOfStatus = async (id) => {
   try {
-    const response = await axios.post(`${API_URL}/save`, { AnnualLeaveNameFr, AnnualLeaveNameAr });
+    const response = await axios.post(`${API_URL}/setOfStatus/${id}`);
     return response.data;
   } catch (error) {
-    console.error('Erreur lors de l\'ajout du AnnualLeave:', error);
+    console.error('Erreur :', error);
+    throw error;
+  }
+};
+export const setOnStatus = async (id) => {
+  try {
+    const response = await axios.post(`${API_URL}/setOnStatus/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur :', error);
     throw error;
   }
 };

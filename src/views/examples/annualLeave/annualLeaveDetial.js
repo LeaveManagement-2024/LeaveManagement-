@@ -18,6 +18,13 @@ import {
   Button,
   CardBody,
 } from "reactstrap";
+import { useNavigate } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { MdDelete } from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
+import { BsCalendar2XFill } from "react-icons/bs";
+import { BsCalendar2CheckFill } from "react-icons/bs";
 import { useParams } from 'react-router-dom';
 import AddModal from './addEmpInAL';
 import EditModal from './editModal';
@@ -25,10 +32,16 @@ import Header from "components/Headers/Header.js";
 import {
   getAnnualLeaveLineById,
   deleteAnnualLeaveLine,
+  deleteAnnualLeave,
+  setOfStatus,
+  setOnStatus,
+  getAnnualLeaveById,
 } from './annualLeaveAPI'; 
  import "../../examples/style.css"
+ import UpdateAnnualLeaveModal from './updateAnnualLeave ';
 const AnnualLeaveDetial = () => {
   const [annualLeaveLines, setAnnualLeaveLines] = useState([]);
+  const [annualLeave, setAnnualLeave] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [message, setMessage] = useState('');
@@ -37,8 +50,13 @@ const AnnualLeaveDetial = () => {
   const [editGrade, setEditGrade] = useState([])
   const [editIdan, setIdan] = useState('')
   const {idan}  = useParams();
+  const navigate = useNavigate();
+  const [isError, setIsError] = useState(false);
+  const [editModalShow2, setEditModalShow2] = useState(false);
+
   useEffect(() => {
     fetchAllAnnualLeaveLine(idan);
+    fetchAllAnnualLeave(idan);
   }, []);
 
   const fetchAllAnnualLeaveLine = async (id) => {
@@ -49,19 +67,107 @@ const AnnualLeaveDetial = () => {
       console.error('Error fetching AnnualLeaveLines:', error);
     }
   };
+  const fetchAllAnnualLeave = async (id) => {
+    try {
+      const data = await getAnnualLeaveById(id);
+      setAnnualLeave(data);
+    } catch (error) {
+      console.error('Error fetching AnnualLeave:', error);
+    }
+  };
+  const hundelsetOfStatus = async (id) => {
+    try {
+       await setOfStatus(id);
+       setIsError(false);
+       setMessage('تم تعطيل العطلة السنوية بنجاح');
+       fetchAllAnnualLeave(idan);
+    } catch (error) {
+      console.error('Error fetching AnnualLeave:', error);
+      setIsError(true);
+      setMessage('لم يتم  تعطيل العطلة السنوية بنجاح');
+      fetchAllAnnualLeave(idan);
+    }
+  };
+  const hundelsetOnStatus = async (id) => {
+    try {
+       await setOnStatus(id);
+       setIsError(false);
+       setMessage('تم تفعيل العطلة السنوية بنجاح');
+       fetchAllAnnualLeave(idan);
+       
+  
+    } catch (error) {
+      console.error('Error fetching AnnualLeave:', error);
+      setIsError(true);
+      setMessage('لم يتم  تفعيل العطلة السنوية بنجاح');
+      fetchAllAnnualLeave(idan);
+    }
+  };
+  
 
   const handleDeleteAnnualLeaveLine = async (ide, idal) => {
     if (!ide || !idal) {
       console.error('Invalid IDs:', ide, idal);
       return;
     }
+    const confirmDelete = window.confirm('هل أنت متأكد من أنك تريد حذف هذا العنصر ؟');
+    if (!confirmDelete) {
+      // Si l'utilisateur annule, arrêter la fonction
+      return;
+    }
     try {
       await deleteAnnualLeaveLine(ide, idal);
+      setIsError(false);
       setMessage('تم حذف  بنجاح');
       fetchAllAnnualLeaveLine(idan); // Refresh the list
     } catch (error) {
       console.error('Error deleting:', error);
+      setMessage('لا يمكن الحذف هذا العنصر   ');
+      setIsError(true);
     }
+  };
+  const handleDeleteAnnualLeave = async (id) => {
+    if (!id) {
+      console.error('Invalid ID:', id);
+      return;
+    }
+
+    // Afficher une boîte de confirmation avant la suppression
+    const confirmDelete = window.confirm('هل أنت متأكد من أنك تريد حذف هذا العنصر ؟');
+
+    if (!confirmDelete) {
+      // Si l'utilisateur annule, arrêter la fonction
+      return;
+    }
+
+    try {
+      await deleteAnnualLeave(id);
+      setMessage('تم الحذف بنجاح');
+      
+      // Naviguer vers une autre page après suppression, par exemple la page d'accueil
+      navigate('/admin/annualLeave');  // Changez '/annual-leaves' selon vos besoins
+     
+    } catch (error) {
+      console.error('Error deleting:', error);
+      setMessage(`  لا يمكن حذف العطلة السنوية ` );
+      setIsError(true);
+    }
+  };
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(''); // Clear the message after 3 seconds
+      }, 3000);
+
+      return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+    }
+  }, [message]); 
+  const handleEditClick = () => {
+    setEditModalShow(true);  // Show the edit modal
+  };
+
+  const handleUpdate = () => {
+    fetchAllAnnualLeave(idan); // Refresh data after update
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -76,13 +182,44 @@ const AnnualLeaveDetial = () => {
         <Row>
           <div className="col">
             <Card className="shadow">
+           
               <CardHeader className="border-0">
+                <div style={{marginBottom:"15px",marginLeft:"680px"}}>
+                    {message && (
+                      <p 
+                        style={{ color: isError ? 'red' : 'green',fontSize:"1.1em" }}>
+                        {message}
+                      </p>
+                    )}
+                  </div>
                 <div className="d-flex justify-content-between align-items-center">
+                  
+
+
+                <DropdownButton id="dropdown-item-button " className="top-right-button" title="إجراءات" style={{ direction: 'rtl' }}>
+                  <Dropdown.Item as="button" style={{fontSize:"1.1em"}} onClick={handleEditClick}> تعديل المعلومات <AiFillEdit /></Dropdown.Item>
+                  <UpdateAnnualLeaveModal
+                      show={editModalShow}
+                      onHide={() => setEditModalShow(false)}
+                      annualLeaveData={annualLeave} // Pass current annual leave data
+                      onUpdate={handleUpdate}       // Function to refresh the data
+                    />
+                  <Dropdown.Item as="button" style={{fontSize:"1.1em"}} onClick={() => handleDeleteAnnualLeave(idan) }>حذف العطلة السنوية  <MdDelete /></Dropdown.Item>
+                  <Dropdown.Item as="button" style={{fontSize:"1.1em"}} onClick={() => hundelsetOfStatus(idan) } >تعطيل العطلة السنوية <BsCalendar2XFill /></Dropdown.Item>
+                  <Dropdown.Item as="button" style={{fontSize:"1.1em"}}onClick={() => hundelsetOnStatus(idan) }>تفعيل العطلة السنوية <BsCalendar2CheckFill /></Dropdown.Item>
+                </DropdownButton>
+                <h1 className="mb-0">العطلة السنوية : {annualLeave.label }
+                   {/* Display status next to the label */}
+      <span style={{ color: annualLeave.status === 'enabled' ? 'green' : 'red', marginLeft: '10px' }}>
+        {annualLeave.status === 'enabled' ? 'مفعلة' : ' معطلة' }
+      </span>
+                </h1>
+
                   <Button color="primary" onClick={() => {setModalShow(true); setIdan(idan)}} >
                     إضافة الموظفون للعطلة
                   </Button>
                   <AddModal idan={idan}  show={modalShow} onHide={() => setModalShow(false)}></AddModal>
-                  <h3 className="mb-0">  {idan}</h3>
+                
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
@@ -122,25 +259,21 @@ const AnnualLeaveDetial = () => {
                             <i className="fas fa-ellipsis-v" />
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                            //  onClick={() => handleGetGradeById(all.idG)}
-                            >
-                              عرض
-                            </DropdownItem>
-                            <DropdownItem
+                           
+                            <DropdownItem style={{fontSize:"1.1em"}}
                               onClick={() => { setEditModalShow(true); setEditGrade(all); }}
                             >
-                              تعديل
+                              تعديل<AiFillEdit />
                             </DropdownItem>
                             <EditModal 
                               show={editModalShow}
                               grade={editGrade} 
                               onHide={() => setEditModalShow(false)}
                             />
-                            <DropdownItem
+                            <DropdownItem style={{fontSize:"1.1em"}}
                               onClick={() => handleDeleteAnnualLeaveLine(all?.employee?.idE,all?.annualLeave?.annualLeaveId)}
                             >
-                              حذف
+                              حذف<MdDelete />
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
