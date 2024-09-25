@@ -84,16 +84,16 @@ const PublicHolidays = () => {
               <CardHeader className="border-0">
                 <div className="d-flex justify-content-between align-items-center">
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    إضافة عطلة رسمية
+                    إضافة العطلة الوطنية و الدينية
                   </Button>
                   <AddPublicHolidayModal show={modalShow} onHide={() => setModalShow(false)}></AddPublicHolidayModal>
-                  <h3 className="mb-0">جدول العطل الرسمية</h3>
+                  <h3 className="mb-0">لائحة العطل الوطنية و الدينية</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light text-center">
                   <tr>
-                    <th scope="col"> اسم العطلة الرسمية</th>
+                    <th scope="col"> اسم العطلة </th>
                     <th scope="col">    بداية العطلة</th>
                     <th scope="col">نهاية العطلة</th>
                     <th scope="col">  وصف   </th>

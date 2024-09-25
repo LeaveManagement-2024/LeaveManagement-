@@ -11,7 +11,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import Header from "components/Headers/Header.js";
+import Header2 from "components/Headers/Header2.js";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import React, { useState, useEffect } from 'react';
@@ -54,7 +54,7 @@ const Profile = () => {
   };
   return (
     <>
-      <Header />
+      <Header2 />
       {/* Page content */}
       <Container className="mt--7" fluid >
         <Row>
@@ -239,12 +239,12 @@ const Profile = () => {
                             className="form-control-label"
                             htmlFor="input-first-name"
                           >
-                            الاسم الأول
+                            الاسم الشخصي
                           </label>
                           <Input
                             className="form-control-alternative text-right"                           
                             id="input-first-name"
-                            placeholder="الاسم الأول"
+                            placeholder="الاسم الشخصي"
                             type="text"
                             defaultValue={employee.firstNameAr}
                             disabled
@@ -257,7 +257,7 @@ const Profile = () => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >
-                            اسم العائلة
+                            الاسم العائلي
                           </label>
                           <Input
                             className="form-control-alternative text-right"

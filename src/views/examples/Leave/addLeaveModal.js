@@ -209,7 +209,7 @@ const AddLeavePersonModal = (props) => {
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
             <h4 className='text-center text-xl'>
-              الرخصة الادارية للموظفين  {employeeId}--{filiere?.service?.departement?.respDepartement?.idE}--{filiere?.service?.respService?.idE}
+              الرخصة الادارية للموظفين  
             </h4>
           </CardHeader>
           <CardBody>

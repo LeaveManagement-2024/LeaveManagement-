@@ -22,7 +22,7 @@ import {
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 // core components
-import Header from "components/Headers/Header.js";
+import Header2 from "components/Headers/Header2.js";
 import AddLeaveModal from './addLeaveModal';
 import AddLeavePersonModal from './addLeavePersonModal';
 import EditLeaveModal from './editLeaveModal ';
@@ -159,7 +159,7 @@ const Leave = () => {
 
   return (
     <>
-      <Header />
+      <Header2 />
       <Container className="mt--7" fluid style={{ direction: 'rtl' }}>
         <Row>
           <div className="col">

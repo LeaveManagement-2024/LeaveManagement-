@@ -115,7 +115,7 @@ const EditServiceModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>Modifier le service {props.serv.idService}</h4>
+            <h4 className='text-center text-xl'>Modifier le service </h4>
           </CardHeader>
           <CardBody>
           <Form>

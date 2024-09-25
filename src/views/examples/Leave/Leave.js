@@ -144,10 +144,10 @@ const Leave = () => {
                     </Dropdown.Item>
                   </DropdownButton>
                   <Button color="primary" onClick={() => setModalShow(true)}>
-                    طلب رخصة
+                     طلب رخصة للملوظف
                   </Button>
                   <AddLeaveModal show={modalShow} onHide={() => setModalShow(false)} />
-                  <h3 className="mb-0">جدول الرخص</h3>
+                  <h3 className="mb-0">جدول الرخص العامة</h3>
                 </div>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>

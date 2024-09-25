@@ -75,7 +75,12 @@ const AnnualLeave= () => {
                   >
                     العطلة السنوية {anl.label} 
                   </h3>
-                  <p className="card__content text-center text-lg">الحالة : {anl.status}</p>
+                  
+                  <p 
+                  className="card__content text-center " 
+                  style={{ color: anl.status === 'enabled' ? 'green' : 'red', marginLeft: '10px',fontSize:"1.5em" }}>
+                  الحالة : {anl.status === 'enabled' ? 'مفعلة' : ' معطلة' }      
+                  </p>
                     <div className='d-flex justify-content-between align-items-center '>
                     <i className="ni ni-calendar-grid-58" />
                         <div className="text-right" >

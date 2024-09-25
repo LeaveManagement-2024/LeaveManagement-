@@ -90,7 +90,7 @@ const EditPublicHolidayModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل يوم العطلة {props.publicHoliday.id}</h4>
+            <h4 className='text-center text-xl'>تعديل يوم العطلة </h4>
           </CardHeader>
           <CardBody>
             <Form>

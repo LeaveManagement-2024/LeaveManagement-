@@ -99,7 +99,7 @@ const EditFiliereModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل شعبة {props.fil.idFiliere}</h4>
+            <h4 className='text-center text-xl'>تعديل شعبة </h4>
           </CardHeader>
           <CardBody>
             <Form>

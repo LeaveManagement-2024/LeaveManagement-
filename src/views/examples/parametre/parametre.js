@@ -12,13 +12,13 @@ import '../style.css';
 const Parametre = () => {
   // Array of card details with navigation paths
   const cardDetails = [
-    { title: "الرتب", body: "Here are the details of the card", link: "/admin/grades" },
-    { title: "المهام", body: "Here are the details of the card", link: "/admin/posts" },
-    { title: "الاقسام", body: "Here are the details of the card", link: "/admin/departments" },
-    { title: "الشعب", body: "Here are the details of the card", link: "/admin/filieres" },
-    { title: "المصالح", body: "Here are the details of the card", link: "/admin/services" },
-    { title: "العطل الرسمية", body: "Here are the details of the card", link: "/admin/public-holiday" },
-    { title: "انواع الرخص ", body: "Here are the details of the card", link: "/admin/leaveType" },
+    { title: "الاطار  ", body: "Grades", link: "/admin/grades" },
+    { title: "المهام", body: "missions", link: "/admin/posts" },
+    { title: "الاقسام", body: "Departements", link: "/admin/departments" },
+    { title: "الشعب", body: "Filiere", link: "/admin/filieres" },
+    { title: "المصالح", body: "Services", link: "/admin/services" },
+    { title: "العطل الوطنية و الدينية", body: "Liste des jours fériés", link: "/admin/public-holiday" },
+    { title: "انواع الرخص ", body: "Types des Congés", link: "/admin/leaveType" },
     { title: "الصفات", body: "Profile", link: "/admin/profiles" }
   ];
 

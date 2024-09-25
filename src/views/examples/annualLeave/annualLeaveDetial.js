@@ -226,8 +226,8 @@ const AnnualLeaveDetial = () => {
                 <thead className="thead-light text-center text-lg">
                   <tr className=''>
                     <th scope="col" style={{color:'black',fontSize:'0.8em'}} >اسم الموظف  </th>
-                    <th scope="col" style={{color:'black',fontSize:'0.8em'}} > N jour declarer  </th>
-                    <th scope="col"  style={{color:'black',fontSize:'0.8em'}}> N jour restant  </th>
+                    <th scope="col" style={{color:'black',fontSize:'0.8em'}} > عدد الايام الاصلية  </th>
+                    <th scope="col"  style={{color:'black',fontSize:'0.8em'}}> عدد الايام المتبقية  </th>
                     <th scope="col"  style={{color:'black',fontSize:'0.8em'}}> الإعدادات </th>
                   </tr>
                 </thead>
@@ -243,7 +243,7 @@ const AnnualLeaveDetial = () => {
                         </td>
                       <td>
                       <div className="password">
-                          <input  defaultValue={all.declaredDays} className="input" name="text" type="text" readOnly />
+                          <input  defaultValue={all.remainingDays} className="input" name="text" type="text" readOnly />
                         </div>
                         </td>
                       <td >

@@ -80,7 +80,7 @@ const EditPostModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل المهمة {props.post.idPost}</h4>
+            <h4 className='text-center text-xl'>تعديل المهمة </h4>
           </CardHeader>
           <CardBody>
             <Form>

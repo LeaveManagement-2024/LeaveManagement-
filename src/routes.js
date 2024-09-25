@@ -44,7 +44,7 @@ var routes = [
   },
   {
     path: "/Leave",
-    name: "الرخص",
+    name: " الرخص العامة",
     icon: "ni ni-bullet-list-67 text-red",
     component: <Leave/>,
     layout: "/admin",

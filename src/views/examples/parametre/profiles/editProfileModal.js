@@ -73,7 +73,7 @@ const EditProfileModal = (props) => {
       <Modal.Body>
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-0">
-            <h4 className='text-center text-xl'>تعديل الملف {props.profile.idProfile}</h4>
+            <h4 className='text-center text-xl'>تعديل الملف </h4>
           </CardHeader>
           <CardBody>
             <Form>
