@@ -36,7 +36,7 @@ const AddProfileModal = (props) => {
        
       };
 
-      await axios.post('http://localhost:8093/profiles/save', profileData)
+      await axios.post('http://192.168.1.10:8093/profiles/save', profileData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

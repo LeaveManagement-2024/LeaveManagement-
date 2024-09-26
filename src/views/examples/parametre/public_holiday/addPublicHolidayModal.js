@@ -50,7 +50,7 @@ const AddPublicHolidayModal = (props) => {
         description,
       };
 
-      await axios.post('http://localhost:8093/publicHoliday/save', publicHoliday)
+      await axios.post('http://192.168.1.10:8093/publicHoliday/save', publicHoliday)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

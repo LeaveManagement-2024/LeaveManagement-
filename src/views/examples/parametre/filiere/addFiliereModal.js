@@ -60,7 +60,7 @@ const AddFiliereModal = (props) => {
         idService
       };
 
-      await axios.post('http://localhost:8093/filieres/save', filiereData)
+      await axios.post('http://192.168.1.10:8093/filieres/save', filiereData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

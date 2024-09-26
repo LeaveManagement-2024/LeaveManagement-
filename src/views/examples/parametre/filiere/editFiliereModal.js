@@ -78,7 +78,7 @@ const EditFiliereModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/filieres/update/${props.fil.idFiliere}`,
+        url: `http://192.168.1.10:8093/filieres/update/${props.fil.idFiliere}`,
         data: updatedFiliere,
       }).then((response) => {
         console.log(response.data);

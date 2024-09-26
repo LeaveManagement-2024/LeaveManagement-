@@ -59,7 +59,7 @@ const EditPostModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/posts/update/${props.post.idPost}`,
+        url: `http://192.168.1.10:8093/posts/update/${props.post.idPost}`,
         data: updatedPost,
       }).then((response) => {
         console.log(response.data);

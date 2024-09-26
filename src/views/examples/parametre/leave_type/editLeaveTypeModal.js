@@ -58,7 +58,7 @@ const EditLeaveTypeModal = (props) => {
        name
       };
 
-      await axios.put(`http://localhost:8093/leaveTypes/update/${props.leaveType.leaveTypeId}`, leaveTypeData)
+      await axios.put(`http://192.168.1.10:8093/leaveTypes/update/${props.leaveType.leaveTypeId}`, leaveTypeData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

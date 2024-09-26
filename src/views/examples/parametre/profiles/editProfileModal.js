@@ -52,7 +52,7 @@ const EditProfileModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/profiles/update/${props.profile.idProfile}`,
+        url: `http://192.168.1.10:8093/profiles/update/${props.profile.idProfile}`,
         data: updatedProfile,
       }).then((response) => {
         console.log(response.data);

@@ -56,7 +56,7 @@ const AddGradeModal = (props) => {
        
       };
 
-      await axios.post('http://localhost:8093/grades/save', gradeData)
+      await axios.post('http://192.168.1.10:8093/grades/save', gradeData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

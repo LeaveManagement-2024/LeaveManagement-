@@ -210,7 +210,7 @@ const AddEmployeeModal = (props) => {
 
     await axios({
           method: 'post',
-          url: 'http://localhost:8093/employee/save',
+          url: 'http://192.168.1.10:8093/employee/save',
           data: formData
     }).then((response) => {
           console.log(response.data)

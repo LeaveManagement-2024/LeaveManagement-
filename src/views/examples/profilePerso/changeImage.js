@@ -33,7 +33,7 @@ const ChangeImage = (props) => {
       const formData = new FormData();
       formData.append('image', image);
 
-      const response = await axios.post(`http://localhost:8093/employee/image/${userId}`, formData, {
+      const response = await axios.post(`http://192.168.1.10:8093/employee/image/${userId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

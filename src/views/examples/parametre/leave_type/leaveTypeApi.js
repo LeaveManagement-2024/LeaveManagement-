@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL for your API
-const API_URL = 'http://localhost:8093/leaveTypes';  // Replace with your actual API URL
+const API_URL = 'http://192.168.1.10:8093/leaveTypes';  // Replace with your actual API URL
 
 // Function to get all leave types
 export const getAllLeaveTypes = async () => {

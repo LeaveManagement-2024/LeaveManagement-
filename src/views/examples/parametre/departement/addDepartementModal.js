@@ -63,7 +63,7 @@ const AddDepartmentModal = (props) => {
         respDepartementId,
       };
 
-      await axios.post('http://localhost:8093/departments/save', departmentData)
+      await axios.post('http://192.168.1.10:8093/departments/save', departmentData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

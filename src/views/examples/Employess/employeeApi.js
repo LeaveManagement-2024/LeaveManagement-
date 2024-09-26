@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8093/employee';
+const BASE_URL = 'http://192.168.1.10:8093/employee';
 
 const loginEmployee = async (logInDTO) => {
   try {

@@ -28,7 +28,7 @@ const UpdateAnnualLeaveModal = (props) => {
     const fetchAnnualLeave = async () => {
       if (props.annualLeaveData.annualLeaveId) {
         try {
-          const response = await axios.get(`http://localhost:8093/annualLeave/getById/${props.annualLeaveData.annualLeaveId}`);
+          const response = await axios.get(`http://192.168.1.10:8093/annualLeave/getById/${props.annualLeaveData.annualLeaveId}`);
           const { startDate, endDate, label, status } = response.data;
           setStartDate(startDate);
           setEndDate(endDate);
@@ -74,7 +74,7 @@ const UpdateAnnualLeaveModal = (props) => {
         status,
       };
 
-      const response = await axios.put(`http://localhost:8093/annualLeave/update/${props.annualLeaveData.annualLeaveId}`, updatedAnnualLeaveData);
+      const response = await axios.put(`http://192.168.1.10:8093/annualLeave/update/${props.annualLeaveData.annualLeaveId}`, updatedAnnualLeaveData);
       console.log(response.data);
         window.location.reload(); // Reload page after confirmation
     } catch (error) {

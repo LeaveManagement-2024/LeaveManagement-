@@ -40,7 +40,7 @@ const AddPostModal = (props) => {
         postNameAr,
       };
 
-      await axios.post('http://localhost:8093/posts/save', postData)
+      await axios.post('http://192.168.1.10:8093/posts/save', postData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

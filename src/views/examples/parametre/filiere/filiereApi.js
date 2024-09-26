@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL de votre API
-const API_URL = 'http://localhost:8093/filieres';  // Remplacez par l'URL de votre API
+const API_URL = 'http://192.168.1.10:8093/filieres';  // Remplacez par l'URL de votre API
 
 // Fonction pour obtenir tous les filieres
 export const getAllFilieres = async () => {

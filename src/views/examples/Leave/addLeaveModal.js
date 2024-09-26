@@ -194,7 +194,7 @@ const AddLeavePersonModal = (props) => {
 
         console.log(leaveData);
 
-        const response = await axios.post('http://localhost:8093/leave/save', leaveData);
+        const response = await axios.post('http://192.168.1.10:8093/leave/save', leaveData);
         console.log(response.data);
         window.location.reload();
       } catch (error) {

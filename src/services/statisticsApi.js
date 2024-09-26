@@ -1,7 +1,7 @@
 // src/services/statistiqueService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8093/api/statistics'; // Replace with your actual API URL
+const API_URL = 'http://192.168.1.10:8093/api/statistics'; // Replace with your actual API URL
 
 export const getNewLeaveRequests = async () => {
   const response = await axios.get(`${API_URL}/newLeaveRequests`);

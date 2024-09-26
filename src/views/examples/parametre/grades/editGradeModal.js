@@ -58,7 +58,7 @@ const EditGradeModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/grades/update/${props.grade.idGrade}`,
+        url: `http://192.168.1.10:8093/grades/update/${props.grade.idGrade}`,
         data: gradeData,
       }).then((response) => {
         console.log(response.data);

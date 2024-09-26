@@ -183,7 +183,7 @@ const EditLeaveModal = (props) => {
 
         await axios({
           method: 'put',
-          url: `http://localhost:8093/leave/update/${props.leave.leaveId}`,
+          url: `http://192.168.1.10:8093/leave/update/${props.leave.leaveId}`,
           data: leavetData,
         }).then((response) => {
           console.log(response.data);

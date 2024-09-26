@@ -69,7 +69,7 @@ const EditPublicHolidayModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/publicHoliday/update/${props.publicHoliday.id}`,
+        url: `http://192.168.1.10:8093/publicHoliday/update/${props.publicHoliday.id}`,
         data: updatedPublicHoliday,
       }).then((response) => {
         console.log(response.data);

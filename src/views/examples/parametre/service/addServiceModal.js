@@ -80,7 +80,7 @@ const AddServiceModal = (props) => {
         respServiceId
       };
 
-      await axios.post('http://localhost:8093/services/save', service)
+      await axios.post('http://192.168.1.10:8093/services/save', service)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

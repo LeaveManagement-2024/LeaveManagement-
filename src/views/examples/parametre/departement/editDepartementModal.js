@@ -78,7 +78,7 @@ const EditDepartmentModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/departments/update/${props.dep.idDepartement}`,
+        url: `http://192.168.1.10:8093/departments/update/${props.dep.idDepartement}`,
         data: updatedDepartment,
       }).then((response) => {
         console.log(response.data);

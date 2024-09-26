@@ -94,7 +94,7 @@ const EditServiceModal = (props) => {
 
       await axios({
         method: 'put',
-        url: `http://localhost:8093/services/update/${props.serv.idService}`,
+        url: `http://192.168.1.10:8093/services/update/${props.serv.idService}`,
         data: updatedService,
       }).then((response) => {
         console.log(response.data);

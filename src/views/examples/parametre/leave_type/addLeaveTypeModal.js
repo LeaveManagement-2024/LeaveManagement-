@@ -36,7 +36,7 @@ const AddLeaveTypeModal = (props) => {
         name,
       };
 
-      await axios.post('http://localhost:8093/leaveTypes/save', leaveTypeData)
+      await axios.post('http://192.168.1.10:8093/leaveTypes/save', leaveTypeData)
         .then((response) => {
           console.log(response.data);
           window.location.reload();

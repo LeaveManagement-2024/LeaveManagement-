@@ -29,7 +29,7 @@ const Login = () => {
     setError(""); // Clear any previous errors
 
     try {
-      const response = await axios.post("http://localhost:8093/employee/login", { email, password });
+      const response = await axios.post("http://192.168.1.10:8093/employee/login", { email, password });
       
       if (response.data.success) {
         // Redirect to dashboard on successful login
@@ -45,7 +45,7 @@ const Login = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8093/employee/login", {
+      await axios.post("http://192.168.1.10:8093/employee/login", {
         email: email,
         password: password,
       }).then((res) => {

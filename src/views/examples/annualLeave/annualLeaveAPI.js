@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Base URL de votre API
-const API_URL = 'http://localhost:8093/annualLeave';  // Remplacez par l'URL de votre API
-const API_URL1 = 'http://localhost:8093/annualLeaveLine'; 
+const API_URL = 'http://192.168.1.10:8093/annualLeave';  // Remplacez par l'URL de votre API
+const API_URL1 = 'http://192.168.1.10:8093/annualLeaveLine'; 
 // Fonction pour obtenir tous les AnnualLeave
 export const getAllAnnualLeave= async () => {
   try {

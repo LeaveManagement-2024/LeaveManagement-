@@ -51,7 +51,7 @@ const AddAnnualLeaveModal = (props) => {
         status,
       };
 
-      const response = await axios.post('http://localhost:8093/annualLeave/save', annualLeaveData);
+      const response = await axios.post('http://192.168.1.10:8093/annualLeave/save', annualLeaveData);
       console.log(response.data);
       
       // Display success alert using SweetAlert2

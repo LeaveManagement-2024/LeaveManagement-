@@ -28,7 +28,7 @@ const ChangePass = (props) => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8093/employee/updatePassword/${userId}`, {
+      const response = await axios.post(`http://192.168.1.10:8093/employee/updatePassword/${userId}`, {
         oldPassword,
         newPassword
       });

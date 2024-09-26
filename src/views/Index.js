@@ -57,7 +57,7 @@ const Index = (props) => {
   useEffect(() => {
     const fetchLeaves = async () => {
       try {
-        const response = await axios.get("http://localhost:8093/leave/getAll");
+        const response = await axios.get("http://192.168.1.10:8093/leave/getAll");
         const leaveData = response.data.map(leave => ({
           title: `إجازة لـ ${leave.employee.firstNameAr} ${leave.employee.lastNameAr}`,
           start: new Date(leave.startDate),

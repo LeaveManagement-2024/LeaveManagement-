@@ -196,7 +196,7 @@ const EditEmployeeModal = (props) => {
 
     await axios({
           method: 'put',
-          url: `http://localhost:8093/employee/update/${props.empl.idE}`,
+          url: `http://192.168.1.10:8093/employee/update/${props.empl.idE}`,
           data: formData,
           headers: { 'Content-Type': 'multipart/form-data' }
     }).then((response) => {

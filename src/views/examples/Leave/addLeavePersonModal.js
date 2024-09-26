@@ -178,7 +178,7 @@ const AddLeavePersonModal = (props) => {
 
         console.log(leaveData);
 
-        const response = await axios.post('http://localhost:8093/leave/save', leaveData);
+        const response = await axios.post('http://192.168.1.10:8093/leave/save', leaveData);
         console.log(response.data);
         window.location.reload();
       } catch (error) {
@@ -190,7 +190,7 @@ const AddLeavePersonModal = (props) => {
 const fetchEmployeesWithoutLeave = async (startDate, endDate) => {
   if (startDate && endDate) {
     try {
-      const response = await axios.get(`http://localhost:8093/employee/without-leave`, {
+      const response = await axios.get(`http://192.168.1.10:8093/employee/without-leave`, {
         params: { startDate, endDate },
       });
       setEmployees(response.data); // Update the list of employees
